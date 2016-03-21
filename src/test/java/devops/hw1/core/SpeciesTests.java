@@ -50,4 +50,13 @@ public class SpeciesTests {
         s.decreasePopulation();
         assertEquals(2, s.getPopulation());
     }
+
+    @Test
+    public void testIncreaseBodySize() {
+        Species s = new Species();
+        s.increaseBodySize();
+        assertEquals(2, s.getBodySize());
+    }
+
+
 }
