@@ -66,7 +66,12 @@ public class SpeciesTests {
         assertEquals(3, s.getBodySize());
     }
 
-
+    @Test
+    public void testDecreaseBodySize() {
+        Species s = new Species();
+        s.decreaseBodySize();
+        assertEquals(0, s.getBodySize());
+    }
 
 
 }
