@@ -13,4 +13,10 @@ public class SpeciesTests {
         Species s = new Species();
         assertEquals(1, s.getBodySize());
     }
+
+    @Test
+    public void testPopulation() {
+        Species s = new Species();
+        assertEquals(1, s.getPopulation());
+    }
 }

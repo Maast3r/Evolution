@@ -10,6 +10,10 @@ public class Species {
         bodySize = 1;
     }
 
+    /**
+     * Returns the current body size of the species
+     * @return bodySize
+     */
     public int getBodySize() {
         return 1;
     }
