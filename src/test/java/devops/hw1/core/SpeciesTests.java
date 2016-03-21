@@ -73,5 +73,12 @@ public class SpeciesTests {
         assertEquals(0, s.getBodySize());
     }
 
-
+    @Test
+    public void testMultiIncreaseDecreaseBodySize() {
+        Species s = new Species();
+        s.increaseBodySize();
+        s.increaseBodySize();
+        s.decreaseBodySize();
+        assertEquals(2, s.getBodySize());
+    }
 }
