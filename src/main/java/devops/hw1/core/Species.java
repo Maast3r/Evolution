@@ -45,6 +45,6 @@ public class Species {
      * Needs Error Handling
      */
     public void decreasePopulation() {
-        isDecreased = true;
+        population--;
     }
 }

@@ -48,6 +48,6 @@ public class SpeciesTests {
         s.increasePopulation();
         s.increasePopulation();
         s.decreasePopulation();
-        assertEquals(1, s.getPopulation());
+        assertEquals(2, s.getPopulation());
     }
 }
