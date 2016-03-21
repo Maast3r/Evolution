@@ -1,6 +1,7 @@
 package devops.hw1.core;
 
 /**
+ * Class for handling gameplay cards
  * Created by burchtm on 3/21/2016.
  */
 public class Card {
