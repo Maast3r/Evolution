@@ -11,7 +11,7 @@ public class CardTests {
 
     @Test
     public void testName(){
-        Card testCard = new Card("Carnivore", "Turns a species into a carnivore", "./carnivore.jpg", 3, 0);
+        Card testCard = new Card("Carnivore");
         assertTrue("Carnivore".equals(testCard.getName()));
     }
 }
