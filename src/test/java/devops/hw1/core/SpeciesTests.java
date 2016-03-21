@@ -11,6 +11,6 @@ public class SpeciesTests {
     @Test
     public void testBodySize() {
         Species s = new Species();
-        assertEquals(1, s.getSize());
+        assertEquals(1, s.getBodySize());
     }
 }
