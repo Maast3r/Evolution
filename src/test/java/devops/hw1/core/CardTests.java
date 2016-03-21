@@ -2,6 +2,7 @@ package devops.hw1.core;
 
 import org.junit.Test;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -12,19 +13,25 @@ public class CardTests {
 
     @Test
     public void testName(){
-        Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg");
+        Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3);
         assertTrue("Carnivore".equals(testCard.getName()));
     }
 
     @Test
     public void testDesc(){
-        Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg");
+        Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3);
         assertTrue("Makes a species a carnivore".equals(testCard.getDesc()));
     }
 
     @Test
     public void testImgPath(){
-        Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg");
+        Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3);
         assertTrue("./carnivore.jpg".equals(testCard.getImgPath()));
+    }
+
+    @Test
+    public void testFood(){
+        Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3);
+        assertEquals(testCard.getFood, 3);
     }
 }
