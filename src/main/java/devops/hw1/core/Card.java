@@ -8,11 +8,13 @@ public class Card {
     private String name;
     private String desc;
     private String imgPath;
+    private int food;
 
-    public Card(String name, String desc, String imgPath){
+    public Card(String name, String desc, String imgPath, int food){
         this.name = name;
         this.desc = desc;
         this.imgPath = imgPath;
+        this.food = food;
     }
 
     /**
@@ -37,5 +39,9 @@ public class Card {
      */
     public String getImgPath() {
         return imgPath;
+    }
+
+    public int getFood() {
+        return food;
     }
 }
