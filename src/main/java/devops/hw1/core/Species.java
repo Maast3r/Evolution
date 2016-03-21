@@ -7,8 +7,6 @@ public class Species {
     private int bodySize;
     private int population;
 
-    private boolean popIncrease = false;
-
     public Species() {
         bodySize = 1;
         population = 1;
@@ -27,10 +25,10 @@ public class Species {
      * @return population
      */
     public int getPopulation() {
-        return popIncrease ? 2 : 1;
+        return population;
     }
 
     public void increasePopulation() {
-        popIncrease = true;
+        population++;
     }
 }
