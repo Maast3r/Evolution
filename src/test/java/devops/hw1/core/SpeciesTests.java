@@ -19,4 +19,11 @@ public class SpeciesTests {
         Species s = new Species();
         assertEquals(1, s.getPopulation());
     }
+
+    @Test
+    public void testIncreasePopulation() {
+        Species s = new Species();
+        s.increasePopulation();
+        assertEquals(2, s.getPopulation());
+    }
 }
