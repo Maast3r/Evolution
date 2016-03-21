@@ -31,4 +31,15 @@ public class DeckTests {
         testDeck.add(testCard);
         assertEquals(testCard, testDeck.draw());
     }
+
+    @Test
+    public void testDrawMultiple(){
+        Deck<Card> testDeck = new Deck<>();
+        Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
+        Card testCard2 = new Card("Angry", "Makes a species angry", "./angry.jpg", 10, 4);
+        testDeck.add(testCard);
+        testDeck.add(testCard2);
+        assertEquals(testCard2, testDeck.draw());
+        assertEquals(testCard, testDeck.draw());
+    }
 }
