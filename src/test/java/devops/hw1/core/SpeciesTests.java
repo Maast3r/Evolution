@@ -34,4 +34,11 @@ public class SpeciesTests {
         s.increasePopulation();
         assertEquals(3, s.getPopulation());
     }
+
+    @Test
+    public void testDecreasePopulation() {
+        Species s = new Species();
+        s.decreasePopulation();
+        assertEquals(0, s.getPopulation());
+    }
 }

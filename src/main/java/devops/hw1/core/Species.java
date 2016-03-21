@@ -28,6 +28,9 @@ public class Species {
         return population;
     }
 
+    /**
+     * Increases the population size of the species up to a maximum of 6
+     */
     public void increasePopulation() {
         population++;
     }
