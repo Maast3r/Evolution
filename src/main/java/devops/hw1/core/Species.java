@@ -61,4 +61,8 @@ public class Species {
     public void decreaseBodySize() {
         this.bodySize--;
     }
+
+    public boolean isDead() {
+        return false;
+    }
 }

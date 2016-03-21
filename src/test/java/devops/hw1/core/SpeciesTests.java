@@ -83,8 +83,15 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testIsDead() {
+    public void testIsDeadWithPopulationAndBody() {
         Species s = new Species();
         assertFalse(s.isDead());
+    }
+
+    @Test
+    public void testIsDeadWOPopulation() {
+        Species s = new Species();
+        s.decreasePopulation();
+        assertTrue(s.isDead());
     }
 }
