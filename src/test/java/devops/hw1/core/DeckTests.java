@@ -17,7 +17,8 @@ public class DeckTests {
         assertTrue(0 == testDeck.getSize());
     }
 
-    @Test void testSizeOver0(){
+    @Test
+    public void testSizeOver0(){
         Deck<Card> testDeck = new Deck<>();
         testDeck.add(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
         assertTrue(1 == testDeck.getSize());

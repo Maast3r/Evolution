@@ -16,7 +16,7 @@ public class Deck<T> extends Stack<T> {
      * @return The number of cards in the deck
      */
     public int getSize(){
-        return 0;
+        return this.size();
     }
 
 }
