@@ -7,11 +7,9 @@ public class Species {
     private int bodySize;
     private int population;
 
-    boolean bodyIncreased = false;
-
     public Species() {
-        bodySize = 1;
-        population = 1;
+        this.bodySize = 1;
+        this.population = 1;
     }
 
     /**
@@ -20,7 +18,7 @@ public class Species {
      * @return bodySize
      */
     public int getBodySize() {
-        return bodyIncreased ? 2 : 1;
+        return this.bodySize;
     }
 
     /**
@@ -29,7 +27,7 @@ public class Species {
      * @return population
      */
     public int getPopulation() {
-        return population;
+        return this.population;
     }
 
     /**
@@ -37,7 +35,7 @@ public class Species {
      * Needs Error Handling
      */
     public void increasePopulation() {
-        population++;
+        this.population++;
     }
 
     /**
@@ -45,10 +43,10 @@ public class Species {
      * Needs Error Handling
      */
     public void decreasePopulation() {
-        population--;
+        this.population--;
     }
 
     public void increaseBodySize() {
-        bodyIncreased = true;
+        this.bodySize++;
     }
 }

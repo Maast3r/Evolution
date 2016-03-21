@@ -58,5 +58,15 @@ public class SpeciesTests {
         assertEquals(2, s.getBodySize());
     }
 
+    @Test
+    public void testIncreaseBodySizeMulti() {
+        Species s = new Species();
+        s.increaseBodySize();
+        s.increaseBodySize();
+        assertEquals(3, s.getBodySize());
+    }
+
+
+
 
 }
