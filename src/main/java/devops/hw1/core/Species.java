@@ -7,6 +7,8 @@ public class Species {
     private int bodySize;
     private int population;
 
+    boolean isDecreased = false;
+
     public Species() {
         bodySize = 1;
         population = 1;
@@ -14,6 +16,7 @@ public class Species {
 
     /**
      * Returns the current body size of the species
+     *
      * @return bodySize
      */
     public int getBodySize() {
@@ -22,16 +25,22 @@ public class Species {
 
     /**
      * Returns the current population of the species
+     *
      * @return population
      */
     public int getPopulation() {
-        return population;
+        return isDecreased ? 0 : population;
     }
 
     /**
      * Increases the population size of the species up to a maximum of 6
+     * Needs Error Handling
      */
     public void increasePopulation() {
         population++;
+    }
+
+    public void decreasePopulation() {
+        isDecreased = true;
     }
 }
