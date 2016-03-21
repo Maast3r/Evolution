@@ -46,7 +46,19 @@ public class Species {
         this.population--;
     }
 
+    /**
+     * Increases the body size of the species up to a maximum of 6
+     * Needs Error Handling
+     */
     public void increaseBodySize() {
         this.bodySize++;
+    }
+
+    /**
+     * Decreases the body size of the species down to a minimum of 0
+     * Needs Error Handling
+     */
+    public void decreaseBodySize() {
+        this.bodySize--;
     }
 }
