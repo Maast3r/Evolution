@@ -26,4 +26,12 @@ public class SpeciesTests {
         s.increasePopulation();
         assertEquals(2, s.getPopulation());
     }
+
+    @Test
+    public void testIncreasePopulationMulti() {
+        Species s = new Species();
+        s.increasePopulation();
+        s.increasePopulation();
+        assertEquals(3, s.getPopulation());
+    }
 }
