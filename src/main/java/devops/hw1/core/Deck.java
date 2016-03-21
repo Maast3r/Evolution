@@ -19,4 +19,7 @@ public class Deck<T> extends Stack<T> {
         return this.size();
     }
 
+    public T draw() {
+        return this.pop();
+    }
 }
