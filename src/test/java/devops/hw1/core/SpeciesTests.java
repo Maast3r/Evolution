@@ -81,4 +81,10 @@ public class SpeciesTests {
         s.decreaseBodySize();
         assertEquals(2, s.getBodySize());
     }
+
+    @Test
+    public void testIsDead() {
+        Species s = new Species();
+        assertFalse(s.isDead());
+    }
 }
