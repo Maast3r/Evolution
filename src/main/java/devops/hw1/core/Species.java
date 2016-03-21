@@ -40,6 +40,10 @@ public class Species {
         population++;
     }
 
+    /**
+     * Decreases the population size of the species down to a minimum of 0
+     * Needs Error Handling
+     */
     public void decreasePopulation() {
         isDecreased = true;
     }

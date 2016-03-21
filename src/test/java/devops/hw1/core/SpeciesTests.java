@@ -41,4 +41,13 @@ public class SpeciesTests {
         s.decreasePopulation();
         assertEquals(0, s.getPopulation());
     }
+
+    @Test
+    public void testMultiIncreaseDecreasePopulation() {
+        Species s = new Species();
+        s.increasePopulation();
+        s.increasePopulation();
+        s.decreasePopulation();
+        assertEquals(1, s.getPopulation());
+    }
 }
