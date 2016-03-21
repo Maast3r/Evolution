@@ -32,6 +32,6 @@ public class CardTests {
     @Test
     public void testFood(){
         Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3);
-        assertEquals(testCard.getFood, 3);
+        assertEquals(testCard.getFood(), 3);
     }
 }
