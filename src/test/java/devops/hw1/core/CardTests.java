@@ -5,6 +5,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
 /**
+ * Unit tests for the Card class
  * Created by burchtm on 3/21/2016.
  */
 public class CardTests {

@@ -5,12 +5,14 @@ package devops.hw1.core;
  */
 public class Card {
 
-    String name;
-    String desc;
+    private String name;
+    private String desc;
+    private String imgPath;
 
-    public Card(String name, String desc){
+    public Card(String name, String desc, String imgPath){
         this.name = name;
         this.desc = desc;
+        this.imgPath = imgPath;
     }
 
     /**
@@ -27,5 +29,13 @@ public class Card {
      */
     public String getDesc() {
         return desc;
+    }
+
+    /**
+     * Returns the card's image path
+     * @return The card's image path
+     */
+    public String getImgPath() {
+        return imgPath;
     }
 }
