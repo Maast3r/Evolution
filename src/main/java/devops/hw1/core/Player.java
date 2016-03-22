@@ -15,4 +15,8 @@ public class Player {
     public ArrayList<ISpecies> getSpecies() {
         return this.speciesList;
     }
+
+    public void removeSpecies(int i) {
+        this.speciesList.remove(0);
+    }
 }
