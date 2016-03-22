@@ -2,6 +2,8 @@ package devops.hw1.core;
 
 import org.junit.Test;
 
+import java.util.Collections;
+
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
@@ -41,5 +43,23 @@ public class DeckTests {
         testDeck.add(testCard2);
         assertEquals(testCard2, testDeck.draw());
         assertEquals(testCard, testDeck.draw());
+    }
+
+    @Test
+    public void testShuffle(){
+        Deck<Card> testDeck = new Deck<>();
+        for(int i = 0; i < 128; i++){
+            Card testCard = new Card(String.valueOf(i),String.valueOf(i), String.valueOf(i), 3, 0);
+            testDeck.add(testCard);
+        }
+        float countPasses = 0;
+        for(int j = 0; j < 1000; j++) {
+            Card original = testDeck.get(32);
+            testDeck.shuffle();
+            if(!original.equals(testDeck.get(32))){
+                countPasses++;
+            }
+        }
+        assertTrue((countPasses/1000) > .97);
     }
 }
