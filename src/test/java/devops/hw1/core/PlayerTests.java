@@ -20,4 +20,13 @@ public class PlayerTests {
         p.addSpecies();
         assertTrue(p.getSpecies().size() == 1);
     }
+
+    @Test
+    public void testPlayerAddMultiSpecies() {
+        Player p = new Player();
+        p.addSpecies();
+        p.addSpecies();
+        p.addSpecies();
+        assertTrue(p.getSpecies().size() == 3);
+    }
 }
