@@ -62,6 +62,11 @@ public class Species {
         this.bodySize--;
     }
 
+    /**
+     * Returns whether or not this species has at least 1 population and body size
+     *
+     * @return isDead
+     */
     public boolean isDead() {
         return this.population == 0 || this.bodySize == 0;
     }
