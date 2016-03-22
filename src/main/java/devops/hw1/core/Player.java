@@ -17,6 +17,6 @@ public class Player {
     }
 
     public void removeSpecies(int i) {
-        this.speciesList.remove(0);
+        this.speciesList.remove(i);
     }
 }
