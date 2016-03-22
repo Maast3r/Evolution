@@ -5,18 +5,19 @@ import java.util.ArrayList;
 /**
  * Created by goistjt on 3/22/2016.
  */
-public class Player implements IPlayer {
-    private ArrayList<ISpecies> speciesList = new ArrayList<>();
-
+public class TestPlayer implements IPlayer {
+    @Override
     public void addSpecies(ISpecies species) {
-        this.speciesList.add(species);
+
     }
 
+    @Override
     public ArrayList<ISpecies> getSpecies() {
-        return this.speciesList;
+        return null;
     }
 
+    @Override
     public void removeSpecies(int i) {
-        this.speciesList.remove(i);
+
     }
 }
