@@ -1,6 +1,7 @@
 package devops.hw1.core;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 /**
@@ -28,5 +29,13 @@ public class PlayerTests {
         p.addSpecies();
         p.addSpecies();
         assertTrue(p.getSpecies().size() == 3);
+    }
+
+    @Test
+    public void testPlayerRemSpecies() {
+        Player p = new Player();
+        p.addSpecies();
+        p.removeSpecies(0);
+        assertTrue(p.getSpecies().size() == 0);
     }
 }
