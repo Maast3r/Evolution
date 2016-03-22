@@ -1,5 +1,6 @@
 package devops.hw1.core;
 
+import java.util.Collections;
 import java.util.Stack;
 
 /**
@@ -21,5 +22,9 @@ public class Deck<T> extends Stack<T> {
 
     public T draw() {
         return this.pop();
+    }
+
+    public void shuffle() {
+        Collections.shuffle(this);
     }
 }
