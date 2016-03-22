@@ -8,8 +8,8 @@ import java.util.ArrayList;
 public class Player {
     private ArrayList<ISpecies> speciesList = new ArrayList<>();
 
-    public void addSpecies() {
-        this.speciesList.add(new TestSpecies());
+    public void addSpecies(ISpecies species) {
+        this.speciesList.add(species);
     }
 
     public ArrayList<ISpecies> getSpecies() {
