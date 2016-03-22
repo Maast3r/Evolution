@@ -38,4 +38,16 @@ public class PlayerTests {
         p.removeSpecies(0);
         assertTrue(p.getSpecies().size() == 0);
     }
+
+    @Test
+    public void testPlayerRemMultiSpecies() {
+        Player p = new Player();
+        for (int i = 0; i < 3; i++) {
+            p.addSpecies();
+        }
+        TestSpecies ts = (TestSpecies) p.getSpecies().get(0);
+        p.removeSpecies(2);
+        p.removeSpecies(1);
+        assertTrue(p.getSpecies().get(0).equals(ts));
+    }
 }
