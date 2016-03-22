@@ -12,37 +12,37 @@ public class Species implements ISpecies {
         this.population = 1;
     }
 
-
+    @Override
     public int getBodySize() {
         return this.bodySize;
     }
 
-
+    @Override
     public int getPopulation() {
         return this.population;
     }
 
-
+    @Override
     public void increasePopulation() {
         this.population++;
     }
 
-
+    @Override
     public void decreasePopulation() {
         this.population--;
     }
 
-
+    @Override
     public void increaseBodySize() {
         this.bodySize++;
     }
 
-
+    @Override
     public void decreaseBodySize() {
         this.bodySize--;
     }
 
-
+    @Override
     public boolean isDead() {
         return this.population == 0 || this.bodySize == 0;
     }
