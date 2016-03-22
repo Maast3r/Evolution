@@ -14,9 +14,10 @@ public class PlayerTests {
         assertNotNull(p);
     }
 
+    @Test
     public void testPlayerAddSpecies() {
         Player p = new Player();
         p.addSpecies();
-        assertTrue(p.getSpecies().getSize() == 1);
+        assertTrue(p.getSpecies().size() == 1);
     }
 }
