@@ -94,4 +94,11 @@ public class SpeciesTests {
         s.decreasePopulation();
         assertTrue(s.isDead());
     }
+
+    @Test
+    public void testIsDeadWOBody() {
+        Species s = new Species();
+        s.decreaseBodySize();
+        assertTrue(s.isDead());
+    }
 }

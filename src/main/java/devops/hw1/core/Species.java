@@ -63,6 +63,6 @@ public class Species {
     }
 
     public boolean isDead() {
-        return false;
+        return population == 0;
     }
 }
