@@ -22,4 +22,6 @@ public interface IWateringHole {
      * TODO: Needs Error Handling
      */
     void removeFood();
+
+    void removeFood(int i);
 }
