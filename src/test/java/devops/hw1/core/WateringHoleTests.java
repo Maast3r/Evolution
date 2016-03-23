@@ -18,4 +18,11 @@ public class WateringHoleTests {
         WateringHole wateringHole = new WateringHole();
         assertTrue(wateringHole.getFoodCount() == 0);
     }
+
+    @Test
+    public void testAddSingleFood() {
+        WateringHole wateringHole = new WateringHole();
+        wateringHole.addFood();
+        assertEquals(1, wateringHole.getFoodCount());
+    }
 }
