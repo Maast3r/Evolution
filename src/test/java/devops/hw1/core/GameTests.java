@@ -2,6 +2,8 @@ package devops.hw1.core;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 /**
@@ -33,7 +35,11 @@ public class GameTests {
 
     @Test
     public void testConstructWNumPlayers() {
-        Game g = new Game(4);
+        ArrayList<IPlayer> players = new ArrayList<>();
+        for (int i = 0; i < 4; i++) {
+            players.add(new TestPlayer());
+        }
+        Game g = new Game(players);
         assertEquals(4, g.getPlayers().size());
     }
 
