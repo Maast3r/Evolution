@@ -2,6 +2,8 @@ package devops.hw1.core;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -33,6 +35,16 @@ public class GameTests {
     @Test(expected = IllegalNumberOfPlayers.class)
     public void testValidNumberOfPlayersGre6() throws IllegalNumberOfPlayers {
         Game g = new Game(7);
+    }
+
+    @Test
+    public void createPlayers1(){
+        Game g = new Game(4);
+        ArrayList<Player> players = new ArrayList<Player>();
+        for(int i=0; i<4; i++){
+            players.add(new Player(new Species()));
+        }
+        assertEquals(players, g.getPlayerObjects());
     }
 
     @Test
