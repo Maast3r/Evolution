@@ -41,4 +41,17 @@ public class WateringHoleTests {
         wateringHole.addFood(5);
         assertEquals(5, wateringHole.getFoodCount());
     }
+
+    @Test
+    public void testAddNFood() {
+        WateringHole wateringHole = new WateringHole();
+        wateringHole.addFood(5);
+        assertEquals(5, wateringHole.getFoodCount());
+        wateringHole = new WateringHole();
+        wateringHole.addFood(12);
+        assertEquals(12, wateringHole.getFoodCount());
+        wateringHole = new WateringHole();
+        wateringHole.addFood(7);
+        assertEquals(7, wateringHole.getFoodCount());
+    }
 }
