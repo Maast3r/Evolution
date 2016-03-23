@@ -14,7 +14,7 @@ import static org.junit.Assert.assertTrue;
 public class WateringHoleTests {
 
     @Test
-    public void testGetSize0(){
+    public void testGetFoodCount0(){
         WateringHole wateringHole = new WateringHole();
         assertTrue(wateringHole.getFoodCount() == 0);
     }
