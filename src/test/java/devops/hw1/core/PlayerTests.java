@@ -11,30 +11,41 @@ public class PlayerTests {
 
     @Test
     public void testPlayerInit() {
-        Player p = new Player();
+        TestSpecies s = new TestSpecies();
+        Player p = new Player(s);
         assertNotNull(p);
     }
 
     @Test
+    public void testPlayerInitWSpecies() {
+        TestSpecies s = new TestSpecies();
+        Player p = new Player(s);
+        assertEquals(1, p.getSpecies().size());
+    }
+
+    @Test
     public void testPlayerAddSpeciesRight() {
-        Player p = new Player();
-        p.addSpeciesRight(new TestSpecies());
-        assertTrue(p.getSpecies().size() == 1);
+        TestSpecies s = new TestSpecies();
+        Player p = new Player(s);
+        TestSpecies s2 = new TestSpecies();
+        p.addSpeciesRight(s2);
+        assertEquals(s2, p.getSpecies().get(1));
     }
 
     @Test
     public void testPlayerAddSpeciesLeft() {
-        Player p = new Player();
+        TestSpecies s = new TestSpecies();
+        Player p = new Player(s);
         p.addSpeciesRight(new TestSpecies());
-        ISpecies s = new TestSpecies();
-        p.addSpeciesLeft(s);
-        assertEquals(s, p.getSpecies().get(0));
+        TestSpecies s2 = new TestSpecies();
+        p.addSpeciesLeft(s2);
+        assertEquals(s2, p.getSpecies().get(0));
     }
 
     @Test
     public void testPlayerAddMultiSpecies() {
-        Player p = new Player();
-        p.addSpeciesRight(new TestSpecies());
+        TestSpecies s = new TestSpecies();
+        Player p = new Player(s);
         p.addSpeciesRight(new TestSpecies());
         p.addSpeciesRight(new TestSpecies());
         assertTrue(p.getSpecies().size() == 3);
@@ -42,15 +53,17 @@ public class PlayerTests {
 
     @Test
     public void testPlayerRemSpecies() {
-        Player p = new Player();
+        TestSpecies s = new TestSpecies();
+        Player p = new Player(s);
         p.addSpeciesRight(new TestSpecies());
         p.removeSpecies(0);
-        assertTrue(p.getSpecies().size() == 0);
+        assertTrue(p.getSpecies().size() == 1);
     }
 
     @Test
     public void testPlayerRemMultiSpecies() {
-        Player p = new Player();
+        TestSpecies s = new TestSpecies();
+        Player p = new Player(s);
         for (int i = 0; i < 3; i++) {
             p.addSpeciesRight(new TestSpecies());
         }
