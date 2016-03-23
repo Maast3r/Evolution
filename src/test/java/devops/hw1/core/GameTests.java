@@ -14,4 +14,11 @@ public class GameTests {
         Game g = new Game();
         assertEquals(1, g.getRound());
     }
+
+    @Test
+    public void testIncreaseRound() {
+        Game g = new Game();
+        g.increaseRound();
+        assertEquals(2, g.getRound());
+    }
 }
