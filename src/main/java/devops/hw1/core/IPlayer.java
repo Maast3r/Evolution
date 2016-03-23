@@ -34,7 +34,6 @@ public interface IPlayer {
     /**
      * Removes the species at the specified index from the player's
      * species list
-     * TODO: Needs Error Handling
      * @param i
      */
     void removeSpecies(int i);

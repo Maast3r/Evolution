@@ -59,4 +59,10 @@ public class PlayerTests {
         p.removeSpecies(1);
         assertTrue(p.getSpecies().get(0).equals(ts));
     }
+
+    @Test(expected = InvalidPlayerSpeciesRemovalException.class)
+    public void testInvalidRemovalIndex(){
+        Player p = new Player();
+        p.removeSpecies(0);
+    }
 }

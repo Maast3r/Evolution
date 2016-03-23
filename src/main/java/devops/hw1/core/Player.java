@@ -22,6 +22,6 @@ public class Player implements IPlayer {
     }
 
     public void removeSpecies(int i) {
-        this.speciesList.remove(i);
+            this.speciesList.remove(i);
     }
 }
