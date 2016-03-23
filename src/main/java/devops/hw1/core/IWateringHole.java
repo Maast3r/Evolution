@@ -13,8 +13,16 @@ public interface IWateringHole {
      */
     int getFoodCount();
 
+    /**
+     * Adds a single piece of food to the watering hole
+     */
     void addFood();
 
+    /**
+     * Adds i pieces of food to the watering hole
+     *
+     * @param i
+     */
     void addFood(int i);
 
     /**
@@ -23,5 +31,9 @@ public interface IWateringHole {
      */
     void removeFood();
 
+    /**
+     * Removes i pieces of food from the watering hole
+     * TODO: Needs Error Handling
+     */
     void removeFood(int i);
 }
