@@ -56,6 +56,12 @@ public class GameTests {
     }
 
     @Test
+    public void getDrawPile() throws IllegalNumberOfPlayers {
+        Game g = new Game(4);
+        assertEquals(50, g.getDrawPile());
+    }
+
+    @Test
     public void testGetCurrentRound() throws IllegalNumberOfPlayers {
         Game g = new Game(4);
         assertEquals(1, g.getRound());
