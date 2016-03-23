@@ -44,6 +44,18 @@ public class GameTests {
     }
 
     @Test
+    public void getPlayers2() throws IllegalNumberOfPlayers {
+        Game g = new Game(5);
+        assertEquals(5, g.getPlayerObjects().size());
+    }
+
+    @Test
+    public void getPlayers3() throws IllegalNumberOfPlayers {
+        Game g = new Game(6);
+        assertEquals(6, g.getPlayerObjects().size());
+    }
+
+    @Test
     public void testGetCurrentRound() throws IllegalNumberOfPlayers {
         Game g = new Game(4);
         assertEquals(1, g.getRound());

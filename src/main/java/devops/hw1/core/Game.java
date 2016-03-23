@@ -8,12 +8,17 @@ import java.util.ArrayList;
 public class Game {
     private int round = 1;
     private int numberOfPlayers;
+    private ArrayList<Player> players;
 
     public Game(int numberOfPlayers) throws IllegalNumberOfPlayers {
         if(numberOfPlayers < 3 || numberOfPlayers > 6){
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
         }
         this.numberOfPlayers = numberOfPlayers;
+        this.players = new ArrayList<>();
+        for(int i=0; i<this.numberOfPlayers; i++){
+            this.players.add(new Player(new Species()));
+        }
     }
 
     public int getNumPlayers(){
@@ -29,10 +34,6 @@ public class Game {
     }
 
     public ArrayList<Player> getPlayerObjects() {
-        ArrayList<Player> players = new ArrayList<Player>();
-        for(int i=0; i<4; i++){
-            players.add(new Player(new Species()));
-        }
-        return players;
+        return this.players;
     }
 }
