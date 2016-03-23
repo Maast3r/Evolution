@@ -4,7 +4,7 @@ package devops.hw1.core;
  * Class for handling gameplay cards
  * Created by burchtm on 3/21/2016.
  */
-public class Card {
+public class Card implements ICard {
 
     private String name;
     private String desc;
@@ -20,47 +20,30 @@ public class Card {
         this.direction = direction;
     }
 
-    /**
-     * Returns the card's name
-     * @return The card's name
-     */
+
+    @Override
     public String getName(){
         return name;
     }
 
-    /**
-     * Returns the card's description
-     * @return The card's description
-     */
+
+    @Override
     public String getDesc() {
         return desc;
     }
 
-    /**
-     * Returns the card's image path
-     * @return The card's image path
-     */
+
+    @Override
     public String getImgPath() {
         return imgPath;
     }
 
-    /**
-     * Returns the amount of food the card is worth
-     * @return The card's worth
-     */
+    @Override
     public int getFood() {
         return food;
     }
 
-    /**
-     * Returns the direction on the board that the card effects
-     * 0 - The card effects the species that the card is played on
-     * 1 - The card effects the species that is left of the species the card is played on
-     * 2 - The card effects the species that is right of the species the card is played on
-     * Others - Invalid
-     * @return The direction on the board that the card effects
-     * Needs Error Handling
-     */
+    @Override
     public int getDirection() {
         return direction;
     }
