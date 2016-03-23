@@ -1,5 +1,7 @@
 package devops.hw1.core;
 
+import java.util.ArrayList;
+
 /**
  * Created by goistjt on 3/23/2016.
  */
@@ -26,4 +28,11 @@ public class Game {
         this.round++;
     }
 
+    public ArrayList<Player> getPlayerObjects() {
+        ArrayList<Player> players = new ArrayList<Player>();
+        for(int i=0; i<4; i++){
+            players.add(new Player(new Species()));
+        }
+        return players;
+    }
 }

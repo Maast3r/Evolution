@@ -38,13 +38,9 @@ public class GameTests {
     }
 
     @Test
-    public void createPlayers1(){
+    public void getPlayers1() throws IllegalNumberOfPlayers {
         Game g = new Game(4);
-        ArrayList<Player> players = new ArrayList<Player>();
-        for(int i=0; i<4; i++){
-            players.add(new Player(new Species()));
-        }
-        assertEquals(players, g.getPlayerObjects());
+        assertEquals(4, g.getPlayerObjects().size());
     }
 
     @Test
