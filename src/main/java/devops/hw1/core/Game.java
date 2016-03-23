@@ -12,7 +12,7 @@ public class Game {
     }
 
     public int getNumPlayers(){
-        return 4;
+        return this.numberOfPlayers;
     }
 
     public int getRound() {

@@ -10,9 +10,24 @@ import static org.junit.Assert.assertEquals;
 public class GameTests {
 
     @Test
-    public void testCreateNewGame() {
+    public void testCreateNewGame1() {
+        Game g = new Game(3);
+        assertEquals(4, g.getNumPlayers());
+    }
+    @Test
+    public void testCreateNewGame2() {
         Game g = new Game(4);
         assertEquals(4, g.getNumPlayers());
+    }
+    @Test
+    public void testCreateNewGame3() {
+        Game g = new Game(5);
+        assertEquals(4, g.getNumPlayers());
+    }
+
+    @Test(expected = IllegalNumberOfPlayers.class)
+    public void testValidNumberOfPlayers1(){
+        Game g = new Game(0);
     }
 
     @Test
