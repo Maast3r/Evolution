@@ -21,25 +21,25 @@ public interface ISpecies {
 
     /**
      * Increases the population size of the species up to a maximum of 6
-     * Needs Error Handling
+     * TODO: Needs Error Handling
      */
     void increasePopulation();
 
     /**
      * Increases the body size of the species up to a maximum of 6
-     * Needs Error Handling
+     * TODO: Needs Error Handling
      */
     void increaseBodySize();
 
     /**
      * Decreases the population size of the species down to a minimum of 0
-     * Needs Error Handling
+     * TODO: Needs Error Handling
      */
     void decreasePopulation();
 
     /**
      * Decreases the body size of the species down to a minimum of 0
-     * Needs Error Handling
+     * TODO: Needs Error Handling
      */
     void decreaseBodySize();
 

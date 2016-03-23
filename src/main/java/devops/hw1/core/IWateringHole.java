@@ -16,4 +16,10 @@ public interface IWateringHole {
     void addFood();
 
     void addFood(int i);
+
+    /**
+     * Removes a single piece of food from the watering hole
+     * TODO: Needs Error Handling
+     */
+    void removeFood();
 }
