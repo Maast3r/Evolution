@@ -125,4 +125,10 @@ public class SpeciesTests {
         s.increaseBodySize();
         s.increaseBodySize();
     }
+
+    @Test(expected = SpeciesPopulationException.class)
+    public void testTooSmallPop() throws SpeciesPopulationException {
+        Species s = new Species();
+        s.decreasePopulation();
+    }
 }

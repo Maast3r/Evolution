@@ -26,7 +26,6 @@ public interface ISpecies {
 
     /**
      * Increases the body size of the species up to a maximum of 6
-     * TODO: Needs Error Handling
      */
     void increaseBodySize() throws SpeciesBodySizeException;
 
