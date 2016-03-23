@@ -9,6 +9,7 @@ public class Game {
     private int round = 1;
     private int numberOfPlayers;
     private ArrayList<Player> players;
+    private Deck drawPile;
 
     public Game(int numberOfPlayers) throws IllegalNumberOfPlayers {
         if(numberOfPlayers < 3 || numberOfPlayers > 6){
@@ -18,6 +19,12 @@ public class Game {
         this.players = new ArrayList<>();
         for(int i=0; i<this.numberOfPlayers; i++){
             this.players.add(new Player(new Species()));
+        }
+
+        this.drawPile = new Deck();
+        for(int i=0; i<50; i++){
+            drawPile.add(new Card("Carnivore",
+                    "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
         }
     }
 
@@ -38,10 +45,6 @@ public class Game {
     }
 
     public Deck getDrawPile(){
-        Deck drawPile = new Deck();
-        for(int i=0; i<50; i++){
-            drawPile.add(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
-        }
-        return drawPile;
+        return this.drawPile;
     }
 }
