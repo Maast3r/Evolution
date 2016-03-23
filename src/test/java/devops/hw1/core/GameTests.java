@@ -10,6 +10,12 @@ import static org.junit.Assert.assertEquals;
 public class GameTests {
 
     @Test
+    public void testCreateNewGame() {
+        Game g = new Game(4);
+        assertEquals(4, g.numberOfPlayers());
+    }
+
+    @Test
     public void testGetCurrentRound() {
         Game g = new Game();
         assertEquals(1, g.getRound());
