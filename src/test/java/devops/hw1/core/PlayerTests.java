@@ -23,6 +23,15 @@ public class PlayerTests {
     }
 
     @Test
+    public void testPlayerAddSpeciesLeft() {
+        Player p = new Player();
+        p.addSpeciesRight(new TestSpecies());
+        ISpecies s = new TestSpecies();
+        p.addSpeciesLeft(s);
+        assertEquals(s, p.getSpecies().get(0));
+    }
+
+    @Test
     public void testPlayerAddMultiSpecies() {
         Player p = new Player();
         p.addSpeciesRight(new TestSpecies());
