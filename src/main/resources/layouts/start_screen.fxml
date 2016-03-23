@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -12,25 +10,19 @@
 
 <Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0"
       prefWidth="500.0" stylesheets="@../styles/start_screen.css" xmlns="http://javafx.com/javafx/null"
-      xmlns:fx="http://javafx.com/fxml/1">
-    <ImageView fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="devops.hw1.core.StartScreenController">
+    <ImageView fx:id="startImage" fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../images/start_screen.jpg"/>
     </ImageView>
-    <Label alignment="CENTER" layoutX="126.0" layoutY="500.0" stylesheets="@../styles/start_screen.css"
+    <Label id="startLabel" alignment="CENTER" layoutX="126.0" layoutY="500.0" stylesheets="@../styles/start_screen.css"
            text="Select Number Of Players" textAlignment="CENTER">
         <font>
             <Font size="22.0"/>
         </font>
     </Label>
-    <ChoiceBox id="numPlayersChoiceBox" layoutX="175.0" layoutY="532.0" pickOnBounds="false" prefWidth="150.0"
-               stylesheets="@../styles/start_screen.css">
-        <FXCollections fx:factory="observableArrayList">
-            <String fx:value="Three"/>
-            <String fx:value="Four"/>
-            <String fx:value="Five"/>
-        </FXCollections>
-    </ChoiceBox>
-    <Button layoutX="200.0" layoutY="574.0" mnemonicParsing="false" stylesheets="@../styles/start_screen.css"
+    <ChoiceBox fx:id="numPlayersChoiceBox" layoutX="175.0" layoutY="532.0" pickOnBounds="false" prefWidth="150.0"
+               stylesheets="@../styles/start_screen.css"/>
+    <Button fx:id="playGameButton" layoutX="200.0" layoutY="574.0" mnemonicParsing="false" stylesheets="@../styles/start_screen.css"
             text="Play Game!">
         <font>
             <Font size="16.0"/>
