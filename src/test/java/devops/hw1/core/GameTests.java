@@ -10,41 +10,41 @@ import static org.junit.Assert.assertEquals;
 public class GameTests {
 
     @Test
-    public void testCreateNewGame1() {
+    public void testCreateNewGame1() throws IllegalNumberOfPlayers {
         Game g = new Game(3);
-        assertEquals(4, g.getNumPlayers());
+        assertEquals(3, g.getNumPlayers());
     }
     @Test
-    public void testCreateNewGame2() {
+    public void testCreateNewGame2() throws IllegalNumberOfPlayers {
         Game g = new Game(4);
         assertEquals(4, g.getNumPlayers());
     }
     @Test
-    public void testCreateNewGame3() {
+    public void testCreateNewGame3() throws IllegalNumberOfPlayers {
         Game g = new Game(5);
-        assertEquals(4, g.getNumPlayers());
+        assertEquals(5, g.getNumPlayers());
     }
 
     @Test(expected = IllegalNumberOfPlayers.class)
-    public void testValidNumberOfPlayers1(){
+    public void testValidNumberOfPlayersSub3() throws IllegalNumberOfPlayers {
         Game g = new Game(0);
     }
 
     @Test
-    public void testGetCurrentRound() {
+    public void testGetCurrentRound() throws IllegalNumberOfPlayers {
         Game g = new Game(4);
         assertEquals(1, g.getRound());
     }
 
     @Test
-    public void testIncreaseRound() {
+    public void testIncreaseRound() throws IllegalNumberOfPlayers {
         Game g = new Game(6);
         g.increaseRound();
         assertEquals(2, g.getRound());
     }
 
     @Test
-    public void testIncreaseMultiRound() {
+    public void testIncreaseMultiRound() throws IllegalNumberOfPlayers {
         Game g = new Game(5);
         for (int i = 0; i < 4; i++) {
             g.increaseRound();
