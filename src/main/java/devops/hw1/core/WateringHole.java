@@ -12,4 +12,9 @@ public class WateringHole implements IWateringHole {
     public int getFoodCount() {
         return this.foodCount;
     }
+
+    @Override
+    public void addFood() {
+        this.foodCount = 1;
+    }
 }

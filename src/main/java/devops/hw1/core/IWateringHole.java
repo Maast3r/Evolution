@@ -12,4 +12,6 @@ public interface IWateringHole {
      * @return size
      */
     int getFoodCount();
+
+    void addFood();
 }
