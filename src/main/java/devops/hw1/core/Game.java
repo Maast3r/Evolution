@@ -36,4 +36,12 @@ public class Game {
     public ArrayList<Player> getPlayerObjects() {
         return this.players;
     }
+
+    public Deck getDrawPile(){
+        Deck drawPile = new Deck();
+        for(int i=0; i<50; i++){
+            drawPile.add(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+        }
+        return drawPile;
+    }
 }

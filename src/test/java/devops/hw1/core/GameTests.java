@@ -56,9 +56,9 @@ public class GameTests {
     }
 
     @Test
-    public void getDrawPile() throws IllegalNumberOfPlayers {
+    public void getDrawPile1() throws IllegalNumberOfPlayers {
         Game g = new Game(4);
-        assertEquals(50, g.getDrawPile());
+        assertEquals(50, g.getDrawPile().size());
     }
 
     @Test
