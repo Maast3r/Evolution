@@ -11,10 +11,10 @@ public class TestPlayer implements IPlayer {
 
     }
 
-//    @Override
-//    public void addSpeciesLeft(ISpecies species) {
-//
-//    }
+    @Override
+    public void addSpeciesLeft(ISpecies species) {
+
+    }
 
     @Override
     public ArrayList<ISpecies> getSpecies() {

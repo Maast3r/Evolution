@@ -12,6 +12,11 @@ public class Player implements IPlayer {
         this.speciesList.add(species);
     }
 
+    @Override
+    public void addSpeciesLeft(ISpecies species) {
+        this.speciesList.add(0, species);
+    }
+
     public ArrayList<ISpecies> getSpecies() {
         return this.speciesList;
     }
