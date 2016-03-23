@@ -8,7 +8,7 @@ public class Game {
     private int numberOfPlayers;
 
     public Game(int numberOfPlayers) throws IllegalNumberOfPlayers {
-        if(numberOfPlayers < 3){
+        if(numberOfPlayers < 3 || numberOfPlayers > 6){
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
         }
         this.numberOfPlayers = numberOfPlayers;
