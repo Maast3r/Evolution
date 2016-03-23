@@ -11,6 +11,6 @@ public class Game {
     }
 
     public void increaseRound() {
-        this.round = 2;
+        this.round++;
     }
 }
