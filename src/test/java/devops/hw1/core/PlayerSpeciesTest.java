@@ -73,7 +73,7 @@ public class PlayerSpeciesTest {
 	}
 	
 	@Test
-	public void testRemoveOneSpecies(){
+	public void testRemoveOneSpecies() throws InvalidPlayerSpeciesRemovalException {
 		Player test = new Player();
 		Species s = new Species();
 		test.addSpeciesLeft(s);
@@ -82,7 +82,7 @@ public class PlayerSpeciesTest {
 	}
 	
 	@Test
-	public void testRemoveTwoSpecies(){
+	public void testRemoveTwoSpecies() throws InvalidPlayerSpeciesRemovalException {
 		Player test = new Player();
 		Species s = new Species();
 		test.addSpeciesLeft(s);
@@ -94,7 +94,7 @@ public class PlayerSpeciesTest {
 	}
 	
 	@Test
-	public void testRemoveManySpecies(){
+	public void testRemoveManySpecies() throws InvalidPlayerSpeciesRemovalException {
 		Player test = new Player();
 		Species s = new Species();
 		int testAmount = 1023;

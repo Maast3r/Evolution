@@ -41,7 +41,7 @@ public class PlayerTests {
     }
 
     @Test
-    public void testPlayerRemSpecies() {
+    public void testPlayerRemSpecies() throws InvalidPlayerSpeciesRemovalException {
         Player p = new Player();
         p.addSpeciesRight(new TestSpecies());
         p.removeSpecies(0);
@@ -49,7 +49,7 @@ public class PlayerTests {
     }
 
     @Test
-    public void testPlayerRemMultiSpecies() {
+    public void testPlayerRemMultiSpecies() throws InvalidPlayerSpeciesRemovalException {
         Player p = new Player();
         for (int i = 0; i < 3; i++) {
             p.addSpeciesRight(new TestSpecies());
@@ -61,7 +61,7 @@ public class PlayerTests {
     }
 
     @Test(expected = InvalidPlayerSpeciesRemovalException.class)
-    public void testInvalidRemovalIndex(){
+    public void testInvalidRemovalIndex() throws InvalidPlayerSpeciesRemovalException {
         Player p = new Player();
         p.removeSpecies(0);
     }

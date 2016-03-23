@@ -36,6 +36,6 @@ public interface IPlayer {
      * species list
      * @param i
      */
-    void removeSpecies(int i);
+    void removeSpecies(int i) throws InvalidPlayerSpeciesRemovalException;
 
 }
