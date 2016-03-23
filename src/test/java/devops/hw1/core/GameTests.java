@@ -21,4 +21,13 @@ public class GameTests {
         g.increaseRound();
         assertEquals(2, g.getRound());
     }
+
+    @Test
+    public void testIncreaseMultiRound() {
+        Game g = new Game();
+        for (int i = 0; i < 4; i++) {
+            g.increaseRound();
+            assertEquals(i + 2, g.getRound());
+        }
+    }
 }
