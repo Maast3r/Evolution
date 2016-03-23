@@ -25,6 +25,6 @@ public class WateringHole implements IWateringHole {
 
     @Override
     public void removeFood() {
-        this.foodCount = 6;
+        this.foodCount--;
     }
 }
