@@ -24,8 +24,9 @@ public class Species implements ISpecies {
 
     @Override
     public void increasePopulation() throws SpeciesPopulationException {
-        if(this.population == 6)
-            throw new SpeciesPopulationException("Your species alraedy has 6.\n");
+        if(this.population == 6) {
+            throw new SpeciesPopulationException("Your species population is 6.\n");
+        }
         this.population++;
     }
 
@@ -35,7 +36,10 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public void increaseBodySize() {
+    public void increaseBodySize() throws SpeciesBodySizeException {
+        if(this.bodySize == 6){
+            throw new SpeciesBodySizeException("Your species body size is 6.\n");
+        }
         this.bodySize++;
     }
 

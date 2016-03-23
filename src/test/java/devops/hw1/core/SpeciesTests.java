@@ -52,14 +52,14 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testIncreaseBodySize() {
+    public void testIncreaseBodySize() throws SpeciesBodySizeException {
         Species s = new Species();
         s.increaseBodySize();
         assertEquals(2, s.getBodySize());
     }
 
     @Test
-    public void testIncreaseBodySizeMulti() {
+    public void testIncreaseBodySizeMulti() throws SpeciesBodySizeException {
         Species s = new Species();
         s.increaseBodySize();
         s.increaseBodySize();
@@ -74,7 +74,7 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testMultiIncreaseDecreaseBodySize() {
+    public void testMultiIncreaseDecreaseBodySize() throws SpeciesBodySizeException {
         Species s = new Species();
         s.increaseBodySize();
         s.increaseBodySize();
@@ -115,7 +115,7 @@ public class SpeciesTests {
     }
 
     @Test(expected = SpeciesBodySizeException.class)
-    public void testTooBigSize() throws SpeciesPopulationException {
+    public void testTooBigSize() throws SpeciesBodySizeException {
         Species s = new Species();
         s.increaseBodySize();
         s.increaseBodySize();
