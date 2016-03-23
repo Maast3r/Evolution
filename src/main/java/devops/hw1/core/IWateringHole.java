@@ -16,4 +16,6 @@ public interface IWateringHole {
     void addFood();
 
     void addFood(int i);
+
+    void removeFood();
 }

@@ -22,4 +22,9 @@ public class WateringHole implements IWateringHole {
     public void addFood(int i) {
         this.foodCount+=i;
     }
+
+    @Override
+    public void removeFood() {
+        this.foodCount = 6;
+    }
 }
