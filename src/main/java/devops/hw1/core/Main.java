@@ -1,5 +1,8 @@
 package devops.hw1.core;
 
+/**
+ * Created by brownba1 on 3/21/2016.
+ */
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,11 +14,12 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage stage) throws Exception{
+    public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/layouts/start_screen.fxml"));
         stage.setTitle("Evolution!");
-        stage.getIcons().add(new Image("/images/start_screen.jpg"));
-        stage.setScene(new Scene(root, 500, 625, Color.BLACK));
+        stage.getIcons().add(new Image("/images/icon.png"));
+        stage.setScene(new Scene(root, Color.BLACK));
+        stage.sizeToScene();
         stage.show();
     }
 

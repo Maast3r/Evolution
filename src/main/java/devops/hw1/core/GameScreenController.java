@@ -1,38 +1,30 @@
 package devops.hw1.core;
 
-import javafx.collections.FXCollections;
-import javafx.fxml.FXML;
+/**
+ * Created by brownba1 on 3/22/2016.
+ */
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.image.ImageView;
-
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.fxml.FXML;
 
 public class GameScreenController implements Initializable {
 
-    @FXML
-    private ImageView startImage;
+    private int numPlayers = 0;
 
-    @FXML
-    private ChoiceBox<Integer> numPlayersChoiceBox;
-
-    @FXML
-    private Button playGameButton;
+    public GameScreenController(int numPlayers) {
+        this.numPlayers = numPlayers;
+    }
 
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-        assert startImage != null : "fx:id=\"startImage\" was not injected: check your FXML file 'start_screen.fxml'.";
-        assert numPlayersChoiceBox != null : "fx:id=\"numPlayerChoiceBox\" was not injected: check your FXML file 'start_screen.fxml'.";
-        assert playGameButton != null : "fx:id=\"playGameButton\" was not injected: check your FXML file 'start_screen.fxml'.";
+        // Initialize scene objects
 
-        numPlayersChoiceBox.setItems(FXCollections.observableArrayList(3, 4, 5));
-        numPlayersChoiceBox.getSelectionModel().selectFirst();
+        // Call method to initialize game
 
-        playGameButton.setOnMouseClicked(event -> {
-            int players = numPlayersChoiceBox.getSelectionModel().getSelectedItem();
-            // System.out.println("Number of players: " + players);
-            // TODO: make call to begin game function with 'players'
-        });
+        // Generate scene from return
+
+        // Resize Stage/Window to fit scene & show
+
     }
 }
