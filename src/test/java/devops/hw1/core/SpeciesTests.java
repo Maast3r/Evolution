@@ -101,4 +101,16 @@ public class SpeciesTests {
         s.decreaseBodySize();
         assertTrue(s.isDead());
     }
+
+    @Test(expected = SpeciesPopulationException.class)
+    public void testTooBigPop   () throws InvalidPlayerSpeciesRemovalException {
+        Species s = new Species();
+        s.increasePopulation();
+        s.increasePopulation();
+        s.increasePopulation();
+        s.increasePopulation();
+        s.increasePopulation();
+        s.increasePopulation();
+        s.increasePopulation();
+    }
 }
