@@ -31,7 +31,10 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public void decreasePopulation() {
+    public void decreasePopulation() throws SpeciesPopulationException {
+        if(this.population == 0){
+            throw new SpeciesPopulationException("Your species population is 0.\n");
+        }
         this.population--;
     }
 

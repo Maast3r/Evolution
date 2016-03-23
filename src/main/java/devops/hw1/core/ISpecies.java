@@ -33,7 +33,7 @@ public interface ISpecies {
      * Decreases the population size of the species down to a minimum of 0
      * TODO: Needs Error Handling
      */
-    void decreasePopulation();
+    void decreasePopulation() throws SpeciesPopulationException;
 
     /**
      * Decreases the body size of the species down to a minimum of 0

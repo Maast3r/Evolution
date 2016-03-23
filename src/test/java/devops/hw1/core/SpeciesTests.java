@@ -36,7 +36,7 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testDecreasePopulation() {
+    public void testDecreasePopulation() throws SpeciesPopulationException {
         Species s = new Species();
         s.decreasePopulation();
         assertEquals(0, s.getPopulation());
@@ -89,7 +89,7 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testIsDeadWOPopulation() {
+    public void testIsDeadWOPopulation() throws SpeciesPopulationException {
         Species s = new Species();
         s.decreasePopulation();
         assertTrue(s.isDead());
@@ -129,6 +129,7 @@ public class SpeciesTests {
     @Test(expected = SpeciesPopulationException.class)
     public void testTooSmallPop() throws SpeciesPopulationException {
         Species s = new Species();
+        s.decreasePopulation();
         s.decreasePopulation();
     }
 }
