@@ -30,4 +30,11 @@ public class GameTests {
             assertEquals(i + 2, g.getRound());
         }
     }
+
+    @Test
+    public void testConstructWNumPlayers() {
+        Game g = new Game(4);
+        assertEquals(4, g.getPlayers().size());
+    }
+
 }
