@@ -20,6 +20,6 @@ public class WateringHole implements IWateringHole {
 
     @Override
     public void addFood(int i) {
-        this.foodCount = 5;
+        this.foodCount+=i;
     }
 }
