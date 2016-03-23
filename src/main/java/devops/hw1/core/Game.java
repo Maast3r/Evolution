@@ -49,4 +49,7 @@ public class Game {
         return this.drawPile;
     }
 
+    public Deck getDiscardPile() {
+        return new Deck();
+    }
 }
