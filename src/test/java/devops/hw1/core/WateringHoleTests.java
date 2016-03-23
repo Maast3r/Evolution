@@ -62,4 +62,14 @@ public class WateringHoleTests {
         wateringHole.removeFood();
         assertEquals(6, wateringHole.getFoodCount());
     }
+
+    @Test
+    public void testRemoveSeveralSingleFood() {
+        WateringHole wateringHole = new WateringHole();
+        wateringHole.addFood(7);
+        for (int i = 0; i < 4; i++) {
+            wateringHole.removeFood();
+        }
+        assertEquals(3, wateringHole.getFoodCount());
+    }
 }
