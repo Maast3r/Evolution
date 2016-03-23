@@ -8,11 +8,20 @@ import java.util.ArrayList;
 public interface IPlayer {
 
     /**
-     * Add the provided species to the list of species held by the player
+     * Add the provided species to the right of the list of species
+     * held by the player
      *
      * @param species
      */
-    void addSpecies(ISpecies species);
+    void addSpeciesRight(ISpecies species);
+
+    /**
+     * Add the provided species to the left of the list of species
+     * held by the player
+     *
+     * @param species
+     */
+    void addSpeciesLeft(ISpecies species);
 
     /**
      * Returns the list of all species currently held by the player
@@ -29,4 +38,5 @@ public interface IPlayer {
      * @param i
      */
     void removeSpecies(int i);
+
 }

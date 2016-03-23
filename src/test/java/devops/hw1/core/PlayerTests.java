@@ -16,25 +16,34 @@ public class PlayerTests {
     }
 
     @Test
-    public void testPlayerAddSpecies() {
+    public void testPlayerAddSpeciesRight() {
         Player p = new Player();
-        p.addSpecies(new TestSpecies());
+        p.addSpeciesRight(new TestSpecies());
         assertTrue(p.getSpecies().size() == 1);
+    }
+
+    @Test
+    public void testPlayerAddSpeciesLeft() {
+        Player p = new Player();
+        p.addSpeciesRight(new TestSpecies());
+        ISpecies s = new TestSpecies();
+        p.addSpeciesLeft(s);
+        assertEquals(s, p.getSpecies().get(0));
     }
 
     @Test
     public void testPlayerAddMultiSpecies() {
         Player p = new Player();
-        p.addSpecies(new TestSpecies());
-        p.addSpecies(new TestSpecies());
-        p.addSpecies(new TestSpecies());
+        p.addSpeciesRight(new TestSpecies());
+        p.addSpeciesRight(new TestSpecies());
+        p.addSpeciesRight(new TestSpecies());
         assertTrue(p.getSpecies().size() == 3);
     }
 
     @Test
     public void testPlayerRemSpecies() {
         Player p = new Player();
-        p.addSpecies(new TestSpecies());
+        p.addSpeciesRight(new TestSpecies());
         p.removeSpecies(0);
         assertTrue(p.getSpecies().size() == 0);
     }
@@ -43,7 +52,7 @@ public class PlayerTests {
     public void testPlayerRemMultiSpecies() {
         Player p = new Player();
         for (int i = 0; i < 3; i++) {
-            p.addSpecies(new TestSpecies());
+            p.addSpeciesRight(new TestSpecies());
         }
         TestSpecies ts = (TestSpecies) p.getSpecies().get(0);
         p.removeSpecies(2);
