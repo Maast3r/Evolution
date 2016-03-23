@@ -30,6 +30,11 @@ public class GameTests {
         Game g = new Game(0);
     }
 
+    @Test(expected = IllegalNumberOfPlayers.class)
+    public void testValidNumberOfPlayersGre6() throws IllegalNumberOfPlayers {
+        Game g = new Game(7);
+    }
+
     @Test
     public void testGetCurrentRound() throws IllegalNumberOfPlayers {
         Game g = new Game(4);
