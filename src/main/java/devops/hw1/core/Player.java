@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Player implements IPlayer {
     private ArrayList<ISpecies> speciesList = new ArrayList<>();
 
-    public void addSpecies(ISpecies species) {
+    public void addSpeciesRight(ISpecies species) {
         this.speciesList.add(species);
     }
 

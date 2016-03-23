@@ -7,7 +7,12 @@ import java.util.ArrayList;
  */
 public class TestPlayer implements IPlayer {
     @Override
-    public void addSpecies(ISpecies species) {
+    public void addSpeciesRight(ISpecies species) {
+
+    }
+
+    @Override
+    public void addSpeciesLeft(ISpecies species) {
 
     }
 
