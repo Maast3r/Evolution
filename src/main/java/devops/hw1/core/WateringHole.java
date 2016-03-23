@@ -6,7 +6,7 @@ package devops.hw1.core;
  */
 public class WateringHole implements IWateringHole {
 
-    int foodCount = 0;
+    private int foodCount = 0;
 
     @Override
     public int getFoodCount() {
