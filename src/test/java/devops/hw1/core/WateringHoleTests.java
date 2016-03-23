@@ -16,6 +16,6 @@ public class WateringHoleTests {
     @Test
     public void testGetSize0(){
         WateringHole wateringHole = new WateringHole();
-        assertTrue(wateringHole.getSize() == 0);
+        assertTrue(wateringHole.getFoodCount() == 0);
     }
 }
