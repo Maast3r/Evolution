@@ -47,7 +47,10 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public void decreaseBodySize() {
+    public void decreaseBodySize() throws SpeciesBodySizeException {
+        if(this.bodySize == 0){
+            throw new SpeciesBodySizeException("Your species body size is 0.\n");
+        }
         this.bodySize--;
     }
 

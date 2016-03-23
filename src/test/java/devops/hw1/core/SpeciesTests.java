@@ -67,7 +67,7 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testDecreaseBodySize() {
+    public void testDecreaseBodySize() throws SpeciesBodySizeException {
         Species s = new Species();
         s.decreaseBodySize();
         assertEquals(0, s.getBodySize());
@@ -96,7 +96,7 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testIsDeadWOBody() {
+    public void testIsDeadWOBody() throws SpeciesBodySizeException {
         Species s = new Species();
         s.decreaseBodySize();
         assertTrue(s.isDead());

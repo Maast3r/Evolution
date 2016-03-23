@@ -39,7 +39,7 @@ public interface ISpecies {
      * Decreases the body size of the species down to a minimum of 0
      * TODO: Needs Error Handling
      */
-    void decreaseBodySize();
+    void decreaseBodySize() throws SpeciesBodySizeException;
 
     /**
      * Returns whether or not this species has at least 1 population and body size
