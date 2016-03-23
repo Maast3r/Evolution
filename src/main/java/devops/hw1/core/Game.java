@@ -5,6 +5,15 @@ package devops.hw1.core;
  */
 public class Game {
     private int round = 1;
+    private int numberOfPlayers;
+
+    public Game(int numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
+    }
+
+    public int getNumPlayers(){
+        return 4;
+    }
 
     public int getRound() {
         return this.round;
