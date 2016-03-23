@@ -132,4 +132,11 @@ public class SpeciesTests {
         s.decreasePopulation();
         s.decreasePopulation();
     }
+
+    @Test(expected = SpeciesBodySizeException.class)
+    public void testTooSmallSize() throws SpeciesBodySizeException {
+        Species s = new Species();
+        s.decreaseBodySize();
+        s.decreaseBodySize();
+    }
 }
