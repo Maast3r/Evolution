@@ -52,7 +52,7 @@ public class PlayerTests {
     }
 
     @Test
-    public void testPlayerRemSpecies() {
+    public void testPlayerRemSpecies() throws InvalidPlayerSpeciesRemovalException {
         TestSpecies s = new TestSpecies();
         Player p = new Player(s);
         p.addSpeciesRight(new TestSpecies());
@@ -61,7 +61,7 @@ public class PlayerTests {
     }
 
     @Test
-    public void testPlayerRemMultiSpecies() {
+    public void testPlayerRemMultiSpecies() throws InvalidPlayerSpeciesRemovalException {
         TestSpecies s = new TestSpecies();
         Player p = new Player(s);
         for (int i = 0; i < 3; i++) {
@@ -71,5 +71,49 @@ public class PlayerTests {
         p.removeSpecies(2);
         p.removeSpecies(1);
         assertTrue(p.getSpecies().get(0).equals(ts));
+    }
+
+    @Test(expected = InvalidPlayerSpeciesRemovalException.class)
+    public void testInvalidRemovalIndexNone() throws InvalidPlayerSpeciesRemovalException {
+        Player p = new Player(new TestSpecies());
+        p.removeSpecies(0);
+        p.removeSpecies(0);
+    }
+
+    @Test(expected = InvalidPlayerSpeciesRemovalException.class)
+    public void testInvalidRemovalIndexNegative() throws InvalidPlayerSpeciesRemovalException {
+        Player p = new Player(new TestSpecies());
+        p.removeSpecies(-1);
+    }
+
+    @Test(expected = InvalidPlayerSpeciesRemovalException.class)
+    public void testInvalidRemovalIndexNegative2() throws InvalidPlayerSpeciesRemovalException {
+        Player p = new Player(new TestSpecies());
+        p.removeSpecies(-45);
+    }
+
+    @Test(expected = InvalidPlayerSpeciesRemovalException.class)
+    public void testInvalidRemovalIndexHigh() throws InvalidPlayerSpeciesRemovalException {
+        Player p = new Player(new TestSpecies());
+        p.removeSpecies(2);
+    }
+
+    @Test(expected = InvalidPlayerSpeciesRemovalException.class)
+    public void testInvalidRemovalIndexHigh2() throws InvalidPlayerSpeciesRemovalException {
+        Player p = new Player(new TestSpecies());
+        p.removeSpecies(2990);
+    }
+
+    @Test(expected = InvalidPlayerSpeciesRemovalException.class)
+    public void testInvalidRemovalIndexWithOne() throws InvalidPlayerSpeciesRemovalException {
+        Player p = new Player(new TestSpecies());
+        p.removeSpecies(1);
+    }
+
+    @Test(expected = InvalidPlayerSpeciesRemovalException.class)
+    public void testInvalidRemovalIndexWithOne2() throws InvalidPlayerSpeciesRemovalException {
+        Player p = new Player(new TestSpecies());
+        p.removeSpecies(0);
+        p.removeSpecies(0);
     }
 }

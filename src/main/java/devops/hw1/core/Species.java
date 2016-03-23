@@ -23,22 +23,34 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public void increasePopulation() {
+    public void increasePopulation() throws SpeciesPopulationException {
+        if(this.population == 6) {
+            throw new SpeciesPopulationException("Your species population is 6.\n");
+        }
         this.population++;
     }
 
     @Override
-    public void decreasePopulation() {
+    public void decreasePopulation() throws SpeciesPopulationException {
+        if(this.population == 0){
+            throw new SpeciesPopulationException("Your species population is 0.\n");
+        }
         this.population--;
     }
 
     @Override
-    public void increaseBodySize() {
+    public void increaseBodySize() throws SpeciesBodySizeException {
+        if(this.bodySize == 6){
+            throw new SpeciesBodySizeException("Your species body size is 6.\n");
+        }
         this.bodySize++;
     }
 
     @Override
-    public void decreaseBodySize() {
+    public void decreaseBodySize() throws SpeciesBodySizeException {
+        if(this.bodySize == 0){
+            throw new SpeciesBodySizeException("Your species body size is 0.\n");
+        }
         this.bodySize--;
     }
 

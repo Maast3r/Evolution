@@ -21,14 +21,14 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testIncreasePopulation() {
+    public void testIncreasePopulation() throws SpeciesPopulationException {
         Species s = new Species();
         s.increasePopulation();
         assertEquals(2, s.getPopulation());
     }
 
     @Test
-    public void testIncreasePopulationMulti() {
+    public void testIncreasePopulationMulti() throws SpeciesPopulationException {
         Species s = new Species();
         s.increasePopulation();
         s.increasePopulation();
@@ -36,14 +36,14 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testDecreasePopulation() {
+    public void testDecreasePopulation() throws SpeciesPopulationException {
         Species s = new Species();
         s.decreasePopulation();
         assertEquals(0, s.getPopulation());
     }
 
     @Test
-    public void testMultiIncreaseDecreasePopulation() {
+    public void testMultiIncreaseDecreasePopulation() throws SpeciesPopulationException {
         Species s = new Species();
         s.increasePopulation();
         s.increasePopulation();
@@ -52,14 +52,14 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testIncreaseBodySize() {
+    public void testIncreaseBodySize() throws SpeciesBodySizeException {
         Species s = new Species();
         s.increaseBodySize();
         assertEquals(2, s.getBodySize());
     }
 
     @Test
-    public void testIncreaseBodySizeMulti() {
+    public void testIncreaseBodySizeMulti() throws SpeciesBodySizeException {
         Species s = new Species();
         s.increaseBodySize();
         s.increaseBodySize();
@@ -67,14 +67,14 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testDecreaseBodySize() {
+    public void testDecreaseBodySize() throws SpeciesBodySizeException {
         Species s = new Species();
         s.decreaseBodySize();
         assertEquals(0, s.getBodySize());
     }
 
     @Test
-    public void testMultiIncreaseDecreaseBodySize() {
+    public void testMultiIncreaseDecreaseBodySize() throws SpeciesBodySizeException {
         Species s = new Species();
         s.increaseBodySize();
         s.increaseBodySize();
@@ -89,16 +89,54 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testIsDeadWOPopulation() {
+    public void testIsDeadWOPopulation() throws SpeciesPopulationException {
         Species s = new Species();
         s.decreasePopulation();
         assertTrue(s.isDead());
     }
 
     @Test
-    public void testIsDeadWOBody() {
+    public void testIsDeadWOBody() throws SpeciesBodySizeException {
         Species s = new Species();
         s.decreaseBodySize();
         assertTrue(s.isDead());
+    }
+
+    @Test(expected = SpeciesPopulationException.class)
+    public void testTooBigPop() throws SpeciesPopulationException {
+        Species s = new Species();
+        s.increasePopulation();
+        s.increasePopulation();
+        s.increasePopulation();
+        s.increasePopulation();
+        s.increasePopulation();
+        s.increasePopulation();
+        s.increasePopulation();
+    }
+
+    @Test(expected = SpeciesBodySizeException.class)
+    public void testTooBigSize() throws SpeciesBodySizeException {
+        Species s = new Species();
+        s.increaseBodySize();
+        s.increaseBodySize();
+        s.increaseBodySize();
+        s.increaseBodySize();
+        s.increaseBodySize();
+        s.increaseBodySize();
+        s.increaseBodySize();
+    }
+
+    @Test(expected = SpeciesPopulationException.class)
+    public void testTooSmallPop() throws SpeciesPopulationException {
+        Species s = new Species();
+        s.decreasePopulation();
+        s.decreasePopulation();
+    }
+
+    @Test(expected = SpeciesBodySizeException.class)
+    public void testTooSmallSize() throws SpeciesBodySizeException {
+        Species s = new Species();
+        s.decreaseBodySize();
+        s.decreaseBodySize();
     }
 }
