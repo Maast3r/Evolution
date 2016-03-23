@@ -2,9 +2,7 @@ package devops.hw1.core;
 
 import org.junit.Test;
 
-import java.util.Collections;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -61,5 +59,41 @@ public class WateringHoleTests {
         wateringHole.addFood(7);
         wateringHole.removeFood();
         assertEquals(6, wateringHole.getFoodCount());
+    }
+
+    @Test
+    public void testRemoveSeveralSingleFood() {
+        WateringHole wateringHole = new WateringHole();
+        wateringHole.addFood(7);
+        for (int i = 0; i < 4; i++) {
+            wateringHole.removeFood();
+        }
+        assertEquals(3, wateringHole.getFoodCount());
+    }
+
+    @Test
+    public void testRemove5Food() {
+        WateringHole wateringHole = new WateringHole();
+        wateringHole.addFood(10);
+        wateringHole.removeFood(5);
+        assertEquals(5, wateringHole.getFoodCount());
+    }
+
+    @Test
+    public void testRemoveNFood() {
+        WateringHole wateringHole = new WateringHole();
+        wateringHole.addFood(10);
+        wateringHole.removeFood(5);
+        assertEquals(5, wateringHole.getFoodCount());
+
+        wateringHole = new WateringHole();
+        wateringHole.addFood(10);
+        wateringHole.removeFood(3);
+        assertEquals(7, wateringHole.getFoodCount());
+
+        wateringHole = new WateringHole();
+        wateringHole.addFood(10);
+        wateringHole.removeFood(1);
+        assertEquals(9, wateringHole.getFoodCount());
     }
 }

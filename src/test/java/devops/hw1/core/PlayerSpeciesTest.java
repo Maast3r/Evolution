@@ -12,80 +12,72 @@ import org.junit.Test;
 public class PlayerSpeciesTest {
 	
 	@Test
-	public void testNoSpecies(){
-		Player test = new Player();
-		assertEquals(0, test.getSpecies().size());
-	}
-	
-	@Test
 	public void testAddOneSpeciesLeft(){
-		Player test = new Player();
+		Player test = new Player(new Species());
 		Species s = new Species();
 		test.addSpeciesLeft(s);
-		assertEquals(1, test.getSpecies().size());
+		assertEquals(2, test.getSpecies().size());
 	}
 
 	public void testAddOneSpeciesRight(){
-		Player test = new Player();
+		Player test = new Player(new Species());
 		Species s = new Species();
 		test.addSpeciesLeft(s);
-		assertEquals(1, test.getSpecies().size());
+		assertEquals(2, test.getSpecies().size());
 	}
 	
 	@Test
 	public void testAddTwoSpeciesLeft(){
-		Player test = new Player();
+		Player test = new Player(new Species());
 		Species s = new Species();
 		test.addSpeciesLeft(s);
 		test.addSpeciesLeft(s);
-		assertEquals(2, test.getSpecies().size());
+		assertEquals(3, test.getSpecies().size());
 	}
 
 	@Test
 	public void testAddTwoSpeciesRight(){
-		Player test = new Player();
+		Player test = new Player(new Species());
 		Species s = new Species();
 		test.addSpeciesRight(s);
 		test.addSpeciesRight(s);
-		assertEquals(2, test.getSpecies().size());
+		assertEquals(3, test.getSpecies().size());
 	}
 	
 	@Test
 	public void testAddManySpeciesLeft(){
-		Player test = new Player();
+		Player test = new Player(new Species());
 		Species s = new Species();
 		int testAmount = 1023;
 		for(int i=0; i<testAmount; i++){
 			test.addSpeciesLeft(s);
 		}
-		assertEquals(testAmount, test.getSpecies().size());
+		assertEquals(testAmount+1, test.getSpecies().size());
 	}
 
 	@Test
 	public void testAddManySpeciesRight(){
-		Player test = new Player();
+		Player test = new Player(new Species());
 		Species s = new Species();
 		int testAmount = 1023;
 		for(int i=0; i<testAmount; i++){
 			test.addSpeciesRight(s);
 		}
-		assertEquals(testAmount, test.getSpecies().size());
+		assertEquals(testAmount+1, test.getSpecies().size());
 	}
 	
 	@Test
 	public void testRemoveOneSpecies() throws InvalidPlayerSpeciesRemovalException {
-		Player test = new Player();
+		Player test = new Player(new Species());
 		Species s = new Species();
-		test.addSpeciesLeft(s);
 		test.removeSpecies(0);
 		assertEquals(0, test.getSpecies().size());
 	}
 	
 	@Test
 	public void testRemoveTwoSpecies() throws InvalidPlayerSpeciesRemovalException {
-		Player test = new Player();
+		Player test = new Player(new Species());
 		Species s = new Species();
-		test.addSpeciesLeft(s);
 		test.addSpeciesLeft(s);
 		test.addSpeciesLeft(s);
 		test.removeSpecies(0);
@@ -95,7 +87,7 @@ public class PlayerSpeciesTest {
 	
 	@Test
 	public void testRemoveManySpecies() throws InvalidPlayerSpeciesRemovalException {
-		Player test = new Player();
+		Player test = new Player(new Species());
 		Species s = new Species();
 		int testAmount = 1023;
 		int removeAmount = 59;
@@ -105,6 +97,6 @@ public class PlayerSpeciesTest {
 		for(int j=0;j<removeAmount; j++){
 			test.removeSpecies(0);
 		}
-		assertEquals(testAmount-removeAmount, test.getSpecies().size());
+		assertEquals(testAmount-removeAmount+1, test.getSpecies().size());
 	}
 }
