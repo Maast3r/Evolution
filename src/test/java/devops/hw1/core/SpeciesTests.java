@@ -21,14 +21,14 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testIncreasePopulation() {
+    public void testIncreasePopulation() throws SpeciesPopulationException {
         Species s = new Species();
         s.increasePopulation();
         assertEquals(2, s.getPopulation());
     }
 
     @Test
-    public void testIncreasePopulationMulti() {
+    public void testIncreasePopulationMulti() throws SpeciesPopulationException {
         Species s = new Species();
         s.increasePopulation();
         s.increasePopulation();
@@ -43,7 +43,7 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testMultiIncreaseDecreasePopulation() {
+    public void testMultiIncreaseDecreasePopulation() throws SpeciesPopulationException {
         Species s = new Species();
         s.increasePopulation();
         s.increasePopulation();
@@ -103,7 +103,7 @@ public class SpeciesTests {
     }
 
     @Test(expected = SpeciesPopulationException.class)
-    public void testTooBigPop   () throws InvalidPlayerSpeciesRemovalException {
+    public void testTooBigPop() throws SpeciesPopulationException {
         Species s = new Species();
         s.increasePopulation();
         s.increasePopulation();
@@ -112,5 +112,17 @@ public class SpeciesTests {
         s.increasePopulation();
         s.increasePopulation();
         s.increasePopulation();
+    }
+
+    @Test(expected = SpeciesBodySizeException.class)
+    public void testTooBigSize() throws SpeciesPopulationException {
+        Species s = new Species();
+        s.increaseBodySize();
+        s.increaseBodySize();
+        s.increaseBodySize();
+        s.increaseBodySize();
+        s.increaseBodySize();
+        s.increaseBodySize();
+        s.increaseBodySize();
     }
 }

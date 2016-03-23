@@ -23,7 +23,9 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public void increasePopulation() {
+    public void increasePopulation() throws SpeciesPopulationException {
+        if(this.population == 6)
+            throw new SpeciesPopulationException("Your species alraedy has 6.\n");
         this.population++;
     }
 
