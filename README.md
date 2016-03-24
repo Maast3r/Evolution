@@ -29,3 +29,10 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 * Brooke Brown
 * Trevor Burch
 * Andrew Ma
+    * IllegalNumberOfPlayers + Game + GameTests
+    * InvalidPlayerSpeciesRemovalException + Player + PlayerTests
+    * SpeciesBodySizeException + SpeciesPopulationException + Species + SpeciesTest
+    * PlayerSpeciesTest
+    * CardTests + Card
+    * 100+ LOC
+    * No GUI calls
