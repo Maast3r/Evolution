@@ -18,4 +18,4 @@ Git
    - Merge master onto your branch. Handle conflicts on your own branch
    - Write meaningful commit messages
    - Use feature branching
-   - Never work on master
+   - Never work on master (unless necessary)
