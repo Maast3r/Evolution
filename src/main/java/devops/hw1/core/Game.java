@@ -1,5 +1,6 @@
 package devops.hw1.core;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -9,6 +10,8 @@ public class Game {
     private int round = 1;
     private int numberOfPlayers;
     private ArrayList<Player> players;
+    private Deck drawPile;
+    private Deck discardPile;
 
     public Game(int numberOfPlayers) throws IllegalNumberOfPlayers {
         if(numberOfPlayers < 3 || numberOfPlayers > 6){
@@ -19,6 +22,13 @@ public class Game {
         for(int i=0; i<this.numberOfPlayers; i++){
             this.players.add(new Player(new Species()));
         }
+
+        this.drawPile = new Deck();
+        for(int i=0; i<50; i++){
+            drawPile.add(new Card("Carnivore",
+                    "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+        }
+        this.discardPile = new Deck();
     }
 
     public int getNumPlayers(){
@@ -35,5 +45,13 @@ public class Game {
 
     public ArrayList<Player> getPlayerObjects() {
         return this.players;
+    }
+
+    public Deck getDrawPile(){
+        return this.drawPile;
+    }
+
+    public Deck getDiscardPile() {
+        return this.discardPile;
     }
 }
