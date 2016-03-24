@@ -36,7 +36,7 @@ public class DeckTests {
     public void testDrawMultiple() throws IllegalCardDirectionException{
         Deck<Card> testDeck = new Deck<>();
         Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
-        Card testCard2 = new Card("Angry", "Makes a species angry", "./angry.jpg", 10, 4);
+        Card testCard2 = new Card("Angry", "Makes a species angry", "./angry.jpg", 10, 2);
         testDeck.add(testCard);
         testDeck.add(testCard2);
         assertEquals(testCard2, testDeck.draw());

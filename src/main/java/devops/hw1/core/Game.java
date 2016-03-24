@@ -13,7 +13,7 @@ public class Game {
     private Deck drawPile;
     private Deck discardPile;
 
-    public Game(int numberOfPlayers) throws IllegalNumberOfPlayers {
+    public Game(int numberOfPlayers) throws IllegalNumberOfPlayers, IllegalCardDirectionException {
         if(numberOfPlayers < 3 || numberOfPlayers > 6){
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
         }
