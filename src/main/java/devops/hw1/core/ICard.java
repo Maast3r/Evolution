@@ -37,7 +37,6 @@ public interface ICard {
      * 2 - The card effects the species that is right of the species the card is played on
      * Others - Invalid
      * @return The direction on the board that the card effects
-     * Needs Error Handling
      */
     int getDirection();
 }
