@@ -12,7 +12,11 @@ public class Card implements ICard {
     private int food;
     private int direction;
 
-    public Card(String name, String desc, String imgPath, int food, int direction){
+    public Card(String name, String desc, String imgPath, 
+    		int food, int direction) throws IllegalCardDirectionException{
+    	if(direction != 0 && direction != 1 && direction != 2){
+    		throw new IllegalCardDirectionException("The direction is not 0, 1, or 2.\n");
+    	}
         this.name = name;
         this.desc = desc;
         this.imgPath = imgPath;
