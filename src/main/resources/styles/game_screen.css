@@ -1,0 +1,9 @@
+#gamePane {
+    -fx-background-color: black;
+}
+
+.label {
+    -fx-text-fill: darkorange;
+    -fx-alignment: center;
+}
+

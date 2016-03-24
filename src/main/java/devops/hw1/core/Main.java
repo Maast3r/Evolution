@@ -19,7 +19,7 @@ public class Main extends Application {
         stage.setTitle("Evolution!");
         stage.getIcons().add(new Image("/images/icon.png"));
         stage.setScene(new Scene(root, Color.BLACK));
-        stage.sizeToScene();
+
         stage.show();
     }
 

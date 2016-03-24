@@ -8,8 +8,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,12 +44,12 @@ public class StartScreenController implements Initializable {
             GameScreenController controller = new GameScreenController(players);
             loader.setController(controller);
             Parent p = loader.load();
-            numPlayersChoiceBox.getScene().setRoot(p);
+            Stage s = (Stage) numPlayersChoiceBox.getScene().getWindow();
+            s.setScene(new Scene(p, Color.BLACK));
+            s.show();
+            s.setMaximized(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
-
     }
 }
