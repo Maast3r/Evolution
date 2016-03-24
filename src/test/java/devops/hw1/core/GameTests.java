@@ -68,7 +68,7 @@ public class GameTests {
     }
 
     @Test
-    public void getDiscardPile2() throws IllegalNumberOfPlayers {
+    public void getDiscardPile2() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
         Game g = new Game(5);
         g.getDiscardPile().add(new Card("Carnivore", "Makes a species a carnivore",
                 "./carnivore.jpg", 3, 0));
