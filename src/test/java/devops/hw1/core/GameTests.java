@@ -62,9 +62,17 @@ public class GameTests {
     }
 
     @Test
-    public void getDiscardPile() throws IllegalNumberOfPlayers {
+    public void getDiscardPile1() throws IllegalNumberOfPlayers {
         Game g = new Game(5);
         assertEquals(0, g.getDiscardPile().size());
+    }
+
+    @Test
+    public void getDiscardPile2() throws IllegalNumberOfPlayers {
+        Game g = new Game(5);
+        g.getDiscardPile().add(new Card("Carnivore", "Makes a species a carnivore",
+                "./carnivore.jpg", 3, 0));
+        assertEquals(1, g.getDiscardPile().size());
     }
 
     @Test
