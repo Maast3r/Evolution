@@ -11,6 +11,7 @@ public class Game {
     private int numberOfPlayers;
     private ArrayList<Player> players;
     private Deck drawPile;
+    private Deck discardPile;
 
     public Game(int numberOfPlayers) throws IllegalNumberOfPlayers {
         if(numberOfPlayers < 3 || numberOfPlayers > 6){
@@ -27,6 +28,7 @@ public class Game {
             drawPile.add(new Card("Carnivore",
                     "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
         }
+        this.discardPile = new Deck();
     }
 
     public int getNumPlayers(){
@@ -50,6 +52,6 @@ public class Game {
     }
 
     public Deck getDiscardPile() {
-        return new Deck();
+        return this.discardPile;
     }
 }
