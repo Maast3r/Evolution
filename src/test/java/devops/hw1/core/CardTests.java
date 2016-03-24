@@ -3,7 +3,6 @@ package devops.hw1.core;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertTrue;
 
 /**
  * Unit tests for the Card class
@@ -40,4 +39,10 @@ public class CardTests {
         Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
         assertEquals(testCard.getDirection(), 0);
     }
+    
+    @Test(expected = IllegalCardDirectionException.class)
+    public void testValidCardDirection1(){
+    	Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, -1);
+    }
+    
 }
