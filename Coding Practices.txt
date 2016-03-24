@@ -1,0 +1,21 @@
+Classes
+   - Always use "this" when referencing a field
+   - No internal classes
+   - If a class gets too long, think about splitting it into 2 classes
+
+Methods
+   - Can't be longer than 25 lines
+   - Must not violate PLK
+
+Coding Styles
+   - Must code using TDD
+   - Split code onto 2 or more lines when it exceeds 80 characters
+   - Remove all unnecessary comments
+   - Name all packages, classes, fields, variables, and methods with meaningful names
+
+Git
+   - Pull before Push
+   - Merge master onto your branch. Handle conflicts on your own branch
+   - Write meaningful commit messages
+   - Use feature branching
+   - Never work on master
