@@ -45,4 +45,19 @@ public class CardTests {
     	Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, -1);
     }
     
+    @Test(expected = IllegalCardDirectionException.class)
+    public void testValidCardDirection2() throws IllegalCardDirectionException{
+    	Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, -1234);
+    }
+    
+    @Test(expected = IllegalCardDirectionException.class)
+    public void testValidCardDirection3() throws IllegalCardDirectionException{
+    	Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 3);
+    }
+    
+    @Test(expected = IllegalCardDirectionException.class)
+    public void testValidCardDirection4() throws IllegalCardDirectionException{
+    	Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 234);
+    }
+    
 }
