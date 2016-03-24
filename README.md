@@ -19,6 +19,20 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 
 # Sprint 1
 * Jeremiah Goist
+    * IPlayer + Player/TestPlayer + PlayerTests
+    * ISpecies + Species/TestSpecies + SpeciesTests
+    * IWateringHole + WateringHole/TestWateringHole + WateringHoleTests
+    * JavaDocs contained in relevant Interfaces/Classes
+    * Testing above classes based on correct values/inputs
+    * 100+ LOC
+    * No GUI calls
 * Brooke Brown
 * Trevor Burch
 * Andrew Ma
+    * IllegalNumberOfPlayers + Game + GameTests
+    * InvalidPlayerSpeciesRemovalException + Player + PlayerTests
+    * SpeciesBodySizeException + SpeciesPopulationException + Species + SpeciesTest
+    * PlayerSpeciesTest
+    * CardTests + Card
+    * 100+ LOC
+    * No GUI calls
