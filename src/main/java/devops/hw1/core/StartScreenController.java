@@ -11,7 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -19,6 +18,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller for the start screen
+ */
 public class StartScreenController implements Initializable {
 
     @FXML
@@ -27,6 +29,11 @@ public class StartScreenController implements Initializable {
     @FXML
     private Button playGameButton;
 
+    /**
+     * Initialize the start screen
+     * @param fxmlFileLocation fxml file location for the screen (start_screen.fxml)
+     * @param resources resources available to the screen
+     */
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
         assert numPlayersChoiceBox != null : "fx:id=\"numPlayerChoiceBox\" was not injected: check your FXML file 'start_screen.fxml'.";
         assert playGameButton != null : "fx:id=\"playGameButton\" was not injected: check your FXML file 'start_screen.fxml'.";
@@ -37,6 +44,9 @@ public class StartScreenController implements Initializable {
         playGameButton.setOnMouseClicked(event -> goToGameScene());
     }
 
+    /**
+     * Navigate to the game screen after passing along the selected number of players
+     */
     private void goToGameScene() {
         int players = numPlayersChoiceBox.getValue();
         try {
