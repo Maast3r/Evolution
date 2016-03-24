@@ -1,22 +1,30 @@
 package devops.hw1.core;
 
+import java.util.Collections;
 import java.util.Stack;
 
 /**
+ * Deck for dealing cards
  * Created by burchtm on 3/21/2016.
  */
-public class Deck<T> extends Stack<T> {
+public class Deck<T> extends Stack<T> implements IDeck<T> {
 
     public Deck(){
         super();
     }
 
-    /**
-     * Gets the amount of cards in the deck
-     * @return The number of cards in the deck
-     */
+    @Override
     public int getSize(){
-        return 0;
+        return this.size();
     }
 
+    @Override
+    public T draw() {
+        return this.pop();
+    }
+
+    @Override
+    public void shuffle() {
+        Collections.shuffle(this);
+    }
 }

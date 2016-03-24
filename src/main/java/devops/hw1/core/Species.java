@@ -3,48 +3,59 @@ package devops.hw1.core;
 /**
  * Created by goistjt on 3/21/2016.
  */
-public class Species {
+public class Species implements ISpecies {
     private int bodySize;
     private int population;
 
-    boolean isDecreased = false;
-
     public Species() {
-        bodySize = 1;
-        population = 1;
+        this.bodySize = 1;
+        this.population = 1;
     }
 
-    /**
-     * Returns the current body size of the species
-     *
-     * @return bodySize
-     */
+    @Override
     public int getBodySize() {
-        return 1;
+        return this.bodySize;
     }
 
-    /**
-     * Returns the current population of the species
-     *
-     * @return population
-     */
+    @Override
     public int getPopulation() {
-        return isDecreased ? 0 : population;
+        return this.population;
     }
 
-    /**
-     * Increases the population size of the species up to a maximum of 6
-     * Needs Error Handling
-     */
-    public void increasePopulation() {
-        population++;
+    @Override
+    public void increasePopulation() throws SpeciesPopulationException {
+        if(this.population == 6) {
+            throw new SpeciesPopulationException("Your species population is 6.\n");
+        }
+        this.population++;
     }
 
-    /**
-     * Decreases the population size of the species down to a minimum of 0
-     * Needs Error Handling
-     */
-    public void decreasePopulation() {
-        population--;
+    @Override
+    public void decreasePopulation() throws SpeciesPopulationException {
+        if(this.population == 0){
+            throw new SpeciesPopulationException("Your species population is 0.\n");
+        }
+        this.population--;
+    }
+
+    @Override
+    public void increaseBodySize() throws SpeciesBodySizeException {
+        if(this.bodySize == 6){
+            throw new SpeciesBodySizeException("Your species body size is 6.\n");
+        }
+        this.bodySize++;
+    }
+
+    @Override
+    public void decreaseBodySize() throws SpeciesBodySizeException {
+        if(this.bodySize == 0){
+            throw new SpeciesBodySizeException("Your species body size is 0.\n");
+        }
+        this.bodySize--;
+    }
+
+    @Override
+    public boolean isDead() {
+        return this.population == 0 || this.bodySize == 0;
     }
 }
