@@ -24,14 +24,14 @@ public class DeckTests {
     @Test
     public void testSizeOver0() throws IllegalCardDirectionException {
         Deck<ICard> testDeck = new Deck<>();
-        testDeck.add(new TestCard("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
-        assertTrue(1 == testDeck.getSize());
+        testDeck.add(new TestCard());
+        assertTrue(1 == testDeck.getSize());p
     }
 
     @Test
     public void testDraw() throws IllegalCardDirectionException{
         Deck<ICard> testDeck = new Deck<>();
-        ICard testCard = new TestCard("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
+        ICard testCard = new TestCard();
         testDeck.add(testCard);
         assertEquals(testCard, testDeck.draw());
     }
@@ -39,8 +39,8 @@ public class DeckTests {
     @Test
     public void testDrawMultiple() throws IllegalCardDirectionException{
         Deck<ICard> testDeck = new Deck<>();
-        ICard testCard = new TestCard("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
-        ICard testCard2 = new TestCard("Angry", "Makes a species angry", "./angry.jpg", 10, 2);
+        ICard testCard = new TestCard();
+        ICard testCard2 = new TestCard();
         testDeck.add(testCard);
         testDeck.add(testCard2);
         assertEquals(testCard2, testDeck.draw());
@@ -51,7 +51,7 @@ public class DeckTests {
     public void testShuffle() throws IllegalCardDirectionException{
         Deck<ICard> testDeck = new Deck<>();
         for(int i = 0; i < 128; i++){
-            ICard testCard = new TestCard(String.valueOf(i),String.valueOf(i), String.valueOf(i), 3, 0);
+            ICard testCard = new TestCard();
             testDeck.add(testCard);
         }
         float countPasses = 0;
