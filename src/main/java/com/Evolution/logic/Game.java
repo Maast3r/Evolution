@@ -51,11 +51,11 @@ public class Game {
         return this.players;
     }
 
-    public Deck<Card> getDrawPile(){
+    public Deck<ICard> getDrawPile(){
         return this.drawPile;
     }
 
-    public Deck<Card> getDiscardPile() {
+    public Deck<ICard> getDiscardPile() {
         return this.discardPile;
     }
 }
