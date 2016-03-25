@@ -27,6 +27,13 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * 100+ LOC
     * No GUI calls
 * Brooke Brown
+	* Everything in resources folder (images, fxml screen layouts)
+	* StartScreenController + event listener
+	* GameScreenController
+	* JavaDocs for controllers
+	* Testing correct screen setup based on selected number of players
+	* 100+ LOC
+	* No control logic
 * Trevor Burch
 * Andrew Ma
     * IllegalNumberOfPlayers + Game + GameTests
