@@ -2,6 +2,8 @@ package com.Evolution.logic;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
+import com.Evolution.interfaces.ICard;
+import com.Evolution.interfaces.IPlayer;
 
 import java.util.ArrayList;
 
@@ -11,9 +13,9 @@ import java.util.ArrayList;
 public class Game {
     private int round = 1;
     private int numberOfPlayers;
-    private ArrayList<Player> players;
-    private Deck<Card> drawPile;
-    private Deck<Card> discardPile;
+    private ArrayList<IPlayer> players;
+    private Deck<ICard> drawPile;
+    private Deck<ICard> discardPile;
 
     public Game(int numberOfPlayers) throws IllegalNumberOfPlayers, IllegalCardDirectionException {
         if(numberOfPlayers < 3 || numberOfPlayers > 6){
@@ -25,12 +27,12 @@ public class Game {
             this.players.add(new Player(new Species()));
         }
 
-        this.drawPile = new Deck<>();
+        this.drawPile = new Deck<ICard>();
         for(int i=0; i<50; i++){
             drawPile.add(new Card("Carnivore",
                     "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
         }
-        this.discardPile = new Deck<>();
+        this.discardPile = new Deck<ICard>();
     }
 
     public int getNumPlayers(){
@@ -45,7 +47,7 @@ public class Game {
         this.round++;
     }
 
-    public ArrayList<Player> getPlayerObjects() {
+    public ArrayList<IPlayer> getPlayerObjects() {
         return this.players;
     }
 
