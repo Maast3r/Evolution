@@ -25,7 +25,7 @@ public class DeckTests {
     public void testSizeOver0() throws IllegalCardDirectionException {
         Deck<ICard> testDeck = new Deck<>();
         testDeck.add(new TestCard());
-        assertTrue(1 == testDeck.getSize());p
+        assertTrue(1 == testDeck.getSize());
     }
 
     @Test
