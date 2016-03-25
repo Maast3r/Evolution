@@ -8,7 +8,7 @@ import com.Evolution.interfaces.IPlayer;
 import java.util.ArrayList;
 
 /**
- * Created by goistjt on 3/23/2016.
+ * Game logic controller class. Handles most interaction between related game objects.
  */
 public class Game {
     private int round = 1;
