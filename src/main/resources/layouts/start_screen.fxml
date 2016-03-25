@@ -10,7 +10,7 @@
 
 <Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0"
       prefWidth="500.0" stylesheets="@../styles/start_screen.css" xmlns="http://javafx.com/javafx/null"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="devops.hw1.core.StartScreenController">
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.Evolution.gui.StartScreenController">
     <ImageView id="startImage" fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
         <Image url="@../images/start_screen.jpg"/>
     </ImageView>
