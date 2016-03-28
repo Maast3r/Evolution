@@ -100,7 +100,7 @@ public class Game {
      * Starts the game with Phase 1.
      * Calls PhaseOne.execute()
      */
-    public void startPhase(IPhases phase) {
+    public void startGame(IPhases phase) {
         phase.execute();
     }
 }
