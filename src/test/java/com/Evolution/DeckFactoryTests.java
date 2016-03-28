@@ -40,12 +40,34 @@ public class DeckFactoryTests {
     }
 
     @Test
-    public void testReadFile() throws IllegalCardDirectionException {
+    public void testReadFile1() throws IllegalCardDirectionException {
         DeckFactory df = new DeckFactory();
         ArrayList<ICard> c = df.readFile("../../../src/resources/cardTest.txt");
         assertTrue(c.get(0).getName().equals("Random"));
         assertTrue(c.get(0).getDesc().equals("Does random stuff"));
         assertTrue(c.get(0).getImgPath().equals("./random.jpg"));
+        assertTrue(c.get(0).getFood() == 2);
+        assertTrue(c.get(0).getDirection() == 1);
+    }
+
+    @Test
+    public void testReadFile2() throws IllegalCardDirectionException {
+        DeckFactory df = new DeckFactory();
+        ArrayList<ICard> c = df.readFile("../../../src/resources/cardTest2.txt");
+        assertTrue(c.get(0).getName().equals("asdf"));
+        assertTrue(c.get(0).getDesc().equals("asdf random stuff"));
+        assertTrue(c.get(0).getImgPath().equals("./asdf.jpg"));
+        assertTrue(c.get(0).getFood() == 2);
+        assertTrue(c.get(0).getDirection() == 1);
+    }
+
+    @Test
+    public void testReadFile3() throws IllegalCardDirectionException {
+        DeckFactory df = new DeckFactory();
+        ArrayList<ICard> c = df.readFile("../../../src/resources/cardTest3.txt");
+        assertTrue(c.get(0).getName().equals("asdf2"));
+        assertTrue(c.get(0).getDesc().equals("asdf2 random stuff"));
+        assertTrue(c.get(0).getImgPath().equals("./asdf2.jpg"));
         assertTrue(c.get(0).getFood() == 2);
         assertTrue(c.get(0).getDirection() == 1);
     }
