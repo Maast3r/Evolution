@@ -21,19 +21,15 @@ public class Game {
     /**
      * Evolution Game constructor which contains main logic to interact with players, species, and cards
      *
-     * @param numberOfPlayers playing game
+     * @param players playing game
      * @throws IllegalNumberOfPlayers
      * @throws IllegalCardDirectionException
      */
-    public Game(int numberOfPlayers) throws IllegalNumberOfPlayers, IllegalCardDirectionException {
-        if (numberOfPlayers < 3 || numberOfPlayers > 6) {
+    public Game(ArrayList<IPlayer> players) throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        if (players.size() < 3 || players.size() > 6) {
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
         }
-        this.numberOfPlayers = numberOfPlayers;
-        this.players = new ArrayList<>();
-        for (int i = 0; i < this.numberOfPlayers; i++) {
-            this.players.add(new Player(new Species()));
-        }
+        this.players = players;
 
         this.drawPile = new Deck<>();
         for (int i = 0; i < 50; i++) {
