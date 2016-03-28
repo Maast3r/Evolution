@@ -200,4 +200,16 @@ public class GameTests {
         assertTrue(g.getTurn() == 1);
     }
 
+    @Test
+    public void testGetTurn3() throws IllegalNumberOfPlayers, IllegalCardDirectionException{
+        ArrayList<IPlayer> players = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            players.add(new TestPlayer(new TestSpecies()));
+        }
+        Game g = new Game(players);
+        g.nextTurn();
+        g.nextTurn();
+        assertTrue(g.getTurn() == 3);
+    }
+
 }
