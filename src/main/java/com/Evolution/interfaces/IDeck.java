@@ -19,6 +19,7 @@ public interface IDeck<T> {
 
     /**
      * Discards an object onto the deck
+     * @param object The object to discard onto the deck
      */
     void discard(T object);
 
