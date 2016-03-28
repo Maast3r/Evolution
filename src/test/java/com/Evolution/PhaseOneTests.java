@@ -3,6 +3,7 @@ package com.Evolution;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.interfaces.IPlayer;
 import com.Evolution.logic.*;
+import org.easymock.EasyMock;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -47,5 +48,21 @@ public class PhaseOneTests {
         assertEquals(random, p.getPlayers().size());
         assertEquals(random, p.getDrawPile().size());
         assertEquals(random, p.getDiscardPile().size());
+    }
+
+    @Test
+    public void testNextPhase(){
+        IPhases fakePhaseTwo = EasyMock.niceMock(PhaseTwo.class);
+        fakePhaseTwo.execute();
+        EasyMock.replay(fakePhaseTwo);
+
+        ArrayList<IPlayer> players = new ArrayList<IPlayer>();
+        players.add(new Player(new Species()));
+        Deck<Card> drawPile = new Deck();
+        Deck<Card> discardPile = new Deck();
+        PhaseOne p = new PhaseOne(players, drawPile, discardPile);
+        p.nextPhase();
+
+        EasyMock.verify(fakePhaseTwo);
     }
 }

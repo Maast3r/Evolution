@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * Created by maas on 3/28/2016.
  */
 public class PhaseOne implements IPhases{
-    private ArrayList<IPlayer> players = new ArrayList();
-    private Deck<Card> drawPile = new Deck();
-    private Deck<Card> discardPile = new Deck();
+    private ArrayList<IPlayer> players;
+    private Deck<Card> drawPile;
+    private Deck<Card> discardPile;
 
     public PhaseOne(ArrayList<IPlayer> players,
                     Deck<Card> drawPile, Deck<Card> discardPile) {
