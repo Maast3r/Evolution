@@ -5,4 +5,5 @@ package com.Evolution.interfaces;
  */
 public interface IPhases {
     public void execute();
+    public void nextPhase(IPhases nextPhase);
 }

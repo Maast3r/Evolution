@@ -1,6 +1,7 @@
 package com.Evolution;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
+import com.Evolution.interfaces.IPhases;
 import com.Evolution.interfaces.IPlayer;
 import com.Evolution.logic.*;
 import org.easymock.EasyMock;
@@ -61,7 +62,7 @@ public class PhaseOneTests {
         Deck<Card> drawPile = new Deck();
         Deck<Card> discardPile = new Deck();
         PhaseOne p = new PhaseOne(players, drawPile, discardPile);
-        p.nextPhase();
+        p.nextPhase(fakePhaseTwo);
 
         EasyMock.verify(fakePhaseTwo);
     }

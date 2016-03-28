@@ -26,6 +26,11 @@ public class PhaseOne implements IPhases{
 
     }
 
+    @Override
+    public void nextPhase(IPhases nextPhase) {
+        nextPhase.execute();
+    }
+
     public ArrayList<IPlayer> getPlayers() {
         return players;
     }
