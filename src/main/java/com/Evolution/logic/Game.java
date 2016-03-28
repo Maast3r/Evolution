@@ -90,4 +90,8 @@ public class Game {
     public void startGame(IPhases phase) {
         phase.execute();
     }
+
+    public int getTurn() {
+        return 1;
+    }
 }
