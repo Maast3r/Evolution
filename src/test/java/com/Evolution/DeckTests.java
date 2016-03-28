@@ -1,9 +1,10 @@
 package com.Evolution;
 
+
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.interfaces.ICard;
-import com.Evolution.testClasses.TestCard;
 import com.Evolution.logic.Deck;
+import com.Evolution.testClasses.TestCard;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
