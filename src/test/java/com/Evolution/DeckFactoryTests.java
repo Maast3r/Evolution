@@ -40,7 +40,7 @@ public class DeckFactoryTests {
     }
 
     @Test
-    public void testReadFile(){
+    public void testReadFile() throws IllegalCardDirectionException {
         DeckFactory df = new DeckFactory();
         ArrayList<ICard> c = df.readFile("../../../src/resources/cardTest.txt");
         assertTrue(c.get(0).getName().equals("Random"));
