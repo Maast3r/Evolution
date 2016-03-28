@@ -41,4 +41,7 @@ public class TestPlayer implements IPlayer {
     public ArrayList<ICard> getCards() {
         return null;
     }
+
+    @Override
+    public void addCardToHand(ICard card) {}
 }

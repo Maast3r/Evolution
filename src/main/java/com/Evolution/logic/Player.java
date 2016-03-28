@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class Player implements IPlayer {
     private ArrayList<ISpecies> speciesList = new ArrayList<>();
+    private ArrayList<ICard> cardList = new ArrayList<>();
 
     public Player(ISpecies species) {
         speciesList.add(species);
@@ -41,6 +42,11 @@ public class Player implements IPlayer {
     }
 
     public ArrayList<ICard> getCards() {
-        return new ArrayList<>();
+        return cardList;
+    }
+
+    @Override
+    public void addCardToHand(ICard card) {
+        cardList.add(card);
     }
 }

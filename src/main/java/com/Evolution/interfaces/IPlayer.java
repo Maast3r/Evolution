@@ -46,4 +46,10 @@ public interface IPlayer {
      * @return The list of cards in the player's hand
      */
     ArrayList<ICard> getCards();
+
+    /**
+     * Adds a card to a player's hand
+     * @param card The card to add
+     */
+    void addCardToHand(ICard card);
 }
