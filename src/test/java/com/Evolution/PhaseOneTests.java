@@ -30,12 +30,12 @@ public class PhaseOneTests {
     @Test
     public void testInitRandom() throws IllegalCardDirectionException {
         ArrayList<IPlayer> players = new ArrayList<IPlayer>();
-        players.add(new Player(new Species()));
         Random rn = new Random();
         int random = rn.nextInt(1000 - 0 + 1) + 0;
         Deck<Card> drawPile = new Deck();
         Deck<Card> discardPile = new Deck();
         for(int i=0; i<random; i++){
+            players.add(new Player(new Species()));
             drawPile.add(new Card("Carnivore", "Makes a species a carnivore",
                     "./carnivore.jpg", 3, 0));
             discardPile.add(new Card("Carnivore", "Makes a species a carnivore",
@@ -44,7 +44,7 @@ public class PhaseOneTests {
 
 
         PhaseOne p = new PhaseOne(players, drawPile, discardPile);
-        assertEquals(1, p.getPlayers().size());
+        assertEquals(random, p.getPlayers().size());
         assertEquals(random, p.getDrawPile().size());
         assertEquals(random, p.getDiscardPile().size());
     }
