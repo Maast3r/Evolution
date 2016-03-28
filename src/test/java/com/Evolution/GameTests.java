@@ -3,11 +3,16 @@ package com.Evolution;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
 import com.Evolution.interfaces.IPhases;
+import com.Evolution.interfaces.IPlayer;
 import com.Evolution.logic.Card;
 import com.Evolution.logic.Game;
 import com.Evolution.logic.PhaseOne;
+import com.Evolution.testClasses.TestPlayer;
+import com.Evolution.testClasses.TestSpecies;
 import org.junit.Test;
 import org.easymock.EasyMock;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,8 +24,12 @@ public class GameTests {
     @Test
     public void testCreateNewGame1() throws IllegalNumberOfPlayers,
             IllegalCardDirectionException {
-        Game g = new Game(3);
-        assertEquals(3, g.getNumPlayers());
+        ArrayList<IPlayer> players = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            players.add(new TestPlayer(new TestSpecies()));
+        }
+        Game g = new Game(players);
+        assertEquals(3, g.getPlayerObjects().size());
     }
     @Test
     public void testCreateNewGame2() throws IllegalNumberOfPlayers,
