@@ -3,6 +3,7 @@ package com.Evolution.logic;
 import com.Evolution.interfaces.IPhases;
 import com.Evolution.interfaces.IPlayer;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -11,8 +12,28 @@ import java.util.ArrayList;
 public class PhaseOne implements IPhases{
 
 
+    public PhaseOne(ArrayList<IPlayer> players,
+                    Deck<Card> drawPile, Deck<Card> discardPile) {
+    }
+
     @Override
     public void execute() {
 
+    }
+
+    public ArrayList<IPlayer> getPlayers() {
+        ArrayList<IPlayer> players = new ArrayList();
+        players.add(new Player(new Species()));
+        return players;
+    }
+
+    public Deck<Card> getDrawPile() {
+        Deck<Card> drawPile = new Deck();
+        return drawPile;
+    }
+
+    public Deck<Card> getDiscardPile() {
+        Deck<Card> discardPile = new Deck();
+        return discardPile;
     }
 }
