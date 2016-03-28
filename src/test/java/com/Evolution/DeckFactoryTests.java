@@ -39,4 +39,15 @@ public class DeckFactoryTests {
         assertTrue(c.getDirection() == 1);
     }
 
+    @Test
+    public void testReadFile(){
+        DeckFactory df = new DeckFactory();
+        ArrayList<ICard> c = df.readFile("../../../src/resources/cardTest.txt");
+        assertTrue(c.get(0).getName().equals("Random"));
+        assertTrue(c.get(0).getDesc().equals("Does random stuff"));
+        assertTrue(c.get(0).getImgPath().equals("./random.jpg"));
+        assertTrue(c.get(0).getFood() == 2);
+        assertTrue(c.get(0).getDirection() == 1);
+    }
+
 }
