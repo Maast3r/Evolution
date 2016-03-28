@@ -7,13 +7,12 @@ import com.Evolution.logic.DeckFactory;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by goistjt on 3/28/2016.
- */
 public class DeckFactoryTests {
 
     @Test
