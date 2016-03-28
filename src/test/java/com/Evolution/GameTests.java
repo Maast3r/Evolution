@@ -2,8 +2,10 @@ package com.Evolution;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
+import com.Evolution.interfaces.IPhases;
 import com.Evolution.logic.Card;
 import com.Evolution.logic.Game;
+import com.Evolution.logic.PhaseOne;
 import org.junit.Test;
 import org.easymock.EasyMock;
 
@@ -117,11 +119,11 @@ public class GameTests {
     @Test
     public void testStartGame() throws IllegalNumberOfPlayers,
             IllegalCardDirectionException {
-        PhaseOne fakePhaseOne = EasyMock.createNiceMock(IPhases.class);
+        PhaseOne fakePhaseOne = EasyMock.niceMock(PhaseOne.class);
         fakePhaseOne.execute();
-        EasyMock.replay(fakePhaesOne);
+        EasyMock.replay(fakePhaseOne);
         Game g = new Game(4);
-        g.startGame();
+        g.startPhase(fakePhaseOne);
         EasyMock.verify(fakePhaseOne);
     }
 }

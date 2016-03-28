@@ -3,6 +3,7 @@ package com.Evolution.logic;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
 import com.Evolution.interfaces.ICard;
+import com.Evolution.interfaces.IPhases;
 import com.Evolution.interfaces.IPlayer;
 
 import java.util.ArrayList;
@@ -92,5 +93,14 @@ public class Game {
      */
     public Deck<ICard> getDiscardPile() {
         return this.discardPile;
+    }
+
+    /**
+     * @param phase (1-4) of the game
+     * Starts the game with Phase 1.
+     * Calls PhaseOne.execute()
+     */
+    public void startPhase(IPhases phase) {
+        phase.execute();
     }
 }
