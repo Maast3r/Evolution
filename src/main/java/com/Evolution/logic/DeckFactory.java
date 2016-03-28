@@ -3,15 +3,13 @@ package com.Evolution.logic;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.interfaces.ICard;
 
-import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Created by goistjt on 3/28/2016.
- */
 public class DeckFactory {
 
-    public ICard readLineToCard(ByteArrayInputStream input) throws IllegalCardDirectionException {
+    public ICard readLineToCard(InputStream input) throws IllegalCardDirectionException, IOException {
         int n = input.available();
         byte[] bytes = new byte[n];
         input.read(bytes, 0, n);

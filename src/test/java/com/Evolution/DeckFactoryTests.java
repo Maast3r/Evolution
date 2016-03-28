@@ -7,6 +7,7 @@ import com.Evolution.logic.DeckFactory;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -16,7 +17,7 @@ import static org.junit.Assert.*;
 public class DeckFactoryTests {
 
     @Test
-    public void testReadLineToCard() throws IllegalCardDirectionException {
+    public void testReadLineToCard() throws IllegalCardDirectionException, IOException {
         DeckFactory df = new DeckFactory();
         ICard c = df.readLineToCard(
                 new ByteArrayInputStream("Carnivore;Makes a species a carnivore;./carnivore.jpg;3;0".getBytes()));
@@ -28,7 +29,7 @@ public class DeckFactoryTests {
     }
 
     @Test
-    public void testReadLineToCard2() throws IllegalCardDirectionException {
+    public void testReadLineToCard2() throws IllegalCardDirectionException, IOException {
         DeckFactory df = new DeckFactory();
         ICard c = df.readLineToCard(
                 new ByteArrayInputStream("Random;Does random stuff;./random.jpg;2;1".getBytes()));
