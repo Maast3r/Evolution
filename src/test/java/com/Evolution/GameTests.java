@@ -3,9 +3,7 @@ package com.Evolution;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
 import com.Evolution.interfaces.IPhases;
-import com.Evolution.logic.Card;
-import com.Evolution.logic.Game;
-import com.Evolution.logic.PhaseOne;
+import com.Evolution.logic.*;
 import org.junit.Test;
 import org.easymock.EasyMock;
 
@@ -130,34 +128,34 @@ public class GameTests {
     @Test
     public void testPhase2() throws IllegalNumberOfPlayers,
             IllegalCardDirectionException {
-        IPhases fakePhaseOne = EasyMock.niceMock(PhaseTwo.class);
-        fakePhaseOne.execute();
-        EasyMock.replay(fakePhaseOne);
+        IPhases fakePhaseTwo = EasyMock.niceMock(PhaseTwo.class);
+        fakePhaseTwo.execute();
+        EasyMock.replay(fakePhaseTwo);
         Game g = new Game(4);
-        g.startPhase(fakePhaseOne);
-        EasyMock.verify(fakePhaseOne);
+        g.startPhase(fakePhaseTwo);
+        EasyMock.verify(fakePhaseTwo);
     }
 
     @Test
     public void testPhase3() throws IllegalNumberOfPlayers,
             IllegalCardDirectionException {
-        IPhases fakePhaseOne = EasyMock.niceMock(PhaseThree.class);
-        fakePhaseOne.execute();
-        EasyMock.replay(fakePhaseOne);
+        IPhases fakePhaseThree = EasyMock.niceMock(PhaseThree.class);
+        fakePhaseThree.execute();
+        EasyMock.replay(fakePhaseThree);
         Game g = new Game(4);
-        g.startPhase(fakePhaseOne);
-        EasyMock.verify(fakePhaseOne);
+        g.startPhase(fakePhaseThree);
+        EasyMock.verify(fakePhaseThree);
     }
 
 
     @Test
     public void testPhase4() throws IllegalNumberOfPlayers,
             IllegalCardDirectionException {
-        IPhases fakePhaseOne = EasyMock.niceMock(PhaseFour.class);
-        fakePhaseOne.execute();
-        EasyMock.replay(fakePhaseOne);
+        IPhases fakePhaseFour = EasyMock.niceMock(PhaseFour.class);
+        fakePhaseFour.execute();
+        EasyMock.replay(fakePhaseFour);
         Game g = new Game(4);
-        g.startPhase(fakePhaseOne);
-        EasyMock.verify(fakePhaseOne);
+        g.startPhase(fakePhaseFour);
+        EasyMock.verify(fakePhaseFour);
     }
 }
