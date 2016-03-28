@@ -18,6 +18,11 @@ public interface IDeck<T> {
     T draw();
 
     /**
+     * Discards an object onto the deck
+     */
+    void discard(T object);
+
+    /**
      * Shuffles the contents of the deck into a new order
      */
     void shuffle();
