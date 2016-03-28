@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Game {
     private int round = 1;
-    private int numberOfPlayers;
+    private int turn = 1;
     private ArrayList<IPlayer> players;
     private Deck<ICard> drawPile;
     private Deck<ICard> discardPile;
@@ -91,7 +91,22 @@ public class Game {
         phase.execute();
     }
 
+    /**
+     * The turn that the game is currently on
+     * @return The number of the player whose turn it is
+     */
     public int getTurn() {
-        return 1;
+        return this.turn;
+    }
+
+    /**
+     * Increments which player number's turn it is
+     */
+    public void nextTurn() {
+        if(this.turn == this.players.size()){
+            this.turn = 1;
+        } else {
+            this.turn++;
+        }
     }
 }
