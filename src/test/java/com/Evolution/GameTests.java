@@ -119,7 +119,7 @@ public class GameTests {
     @Test
     public void testStartGame() throws IllegalNumberOfPlayers,
             IllegalCardDirectionException {
-        PhaseOne fakePhaseOne = EasyMock.niceMock(PhaseOne.class);
+        IPhases fakePhaseOne = EasyMock.niceMock(PhaseOne.class);
         fakePhaseOne.execute();
         EasyMock.replay(fakePhaseOne);
         Game g = new Game(4);
