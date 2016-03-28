@@ -5,6 +5,7 @@ import com.Evolution.exceptions.IllegalNumberOfPlayers;
 import com.Evolution.logic.Card;
 import com.Evolution.logic.Game;
 import org.junit.Test;
+import org.easymock.EasyMock;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,67 +22,67 @@ public class GameTests {
     }
     @Test
     public void testCreateNewGame2() throws IllegalNumberOfPlayers,
-    	IllegalCardDirectionException {
+    	    IllegalCardDirectionException {
         Game g = new Game(4);
         assertEquals(4, g.getNumPlayers());
     }
     @Test
     public void testCreateNewGame3() throws IllegalNumberOfPlayers,
-    	IllegalCardDirectionException {
+    	    IllegalCardDirectionException {
         Game g = new Game(5);
         assertEquals(5, g.getNumPlayers());
     }
 
     @Test(expected = IllegalNumberOfPlayers.class)
     public void testValidNumberOfPlayersSub3() throws IllegalNumberOfPlayers, 
-		IllegalCardDirectionException {
+		    IllegalCardDirectionException {
         Game g = new Game(0);
     }
 
     @Test(expected = IllegalNumberOfPlayers.class)
     public void testValidNumberOfPlayersGre6() throws IllegalNumberOfPlayers, 
-		IllegalCardDirectionException {
+		    IllegalCardDirectionException {
         Game g = new Game(7);
     }
 
     @Test
     public void getPlayers1() throws IllegalNumberOfPlayers, 
-		IllegalCardDirectionException {
+		    IllegalCardDirectionException {
         Game g = new Game(4);
         assertEquals(4, g.getPlayerObjects().size());
     }
 
     @Test
     public void getPlayers2() throws IllegalNumberOfPlayers, 
-		IllegalCardDirectionException {
+            IllegalCardDirectionException {
         Game g = new Game(5);
         assertEquals(5, g.getPlayerObjects().size());
     }
 
     @Test
     public void getPlayers3() throws IllegalNumberOfPlayers, 
-		IllegalCardDirectionException {
+		    IllegalCardDirectionException {
         Game g = new Game(6);
         assertEquals(6, g.getPlayerObjects().size());
     }
 
     @Test
     public void getDrawPile() throws IllegalNumberOfPlayers, 
-		IllegalCardDirectionException {
+		    IllegalCardDirectionException {
         Game g = new Game(4);
         assertEquals(50, g.getDrawPile().size());
     }
 
     @Test
     public void getDiscardPile1() throws IllegalNumberOfPlayers, 
-		IllegalCardDirectionException {
+		    IllegalCardDirectionException {
         Game g = new Game(5);
         assertEquals(0, g.getDiscardPile().size());
     }
 
     @Test
     public void getDiscardPile2() throws IllegalNumberOfPlayers,
-    	IllegalCardDirectionException {
+    	    IllegalCardDirectionException {
         Game g = new Game(5);
         g.getDiscardPile().add(new Card("Carnivore", "Makes a species a carnivore",
                 "./carnivore.jpg", 3, 0));
@@ -90,14 +91,14 @@ public class GameTests {
 
     @Test
     public void testGetCurrentRound() throws IllegalNumberOfPlayers,
-    	IllegalCardDirectionException {
+    	    IllegalCardDirectionException {
         Game g = new Game(4);
         assertEquals(1, g.getRound());
     }
 
     @Test
     public void testIncreaseRound() throws IllegalNumberOfPlayers,
-    	IllegalCardDirectionException {
+    	    IllegalCardDirectionException {
         Game g = new Game(6);
         g.increaseRound();
         assertEquals(2, g.getRound());
@@ -105,7 +106,7 @@ public class GameTests {
 
     @Test
     public void testIncreaseMultiRound() throws IllegalNumberOfPlayers,
-    	IllegalCardDirectionException {
+    	    IllegalCardDirectionException {
         Game g = new Game(5);
         for (int i = 0; i < 4; i++) {
             g.increaseRound();
@@ -113,4 +114,13 @@ public class GameTests {
         }
     }
 
+    @Test
+    public void testStartGame() throws IllegalNumberOfPlayers,
+            IllegalCardDirectionException {
+        fakePhaseOne.execute();
+        EasyMock.replay(fakePhaesOne);
+        Game g = new Game(4);
+        g.startGame();
+        EasyMock.verify(fakePhaseOne);
+    }
 }
