@@ -130,4 +130,20 @@ public class PlayerTests {
         Player p = new Player(new TestSpecies());
         assertTrue(p.getCards().size() == 0);
     }
+
+    @Test
+    public void testGetAllPlayerCards(){
+        Player p = new Player(new TestSpecies());
+        ArrayList<ICard> expected = new ArrayList<>();
+        ICard card1 = new TestCard();
+        ICard card2 = new TestCard();
+        ICard card3 = new TestCard();
+        expected.add(card1);
+        expected.add(card2);
+        expected.add(card3);
+        p.addCardToHand(card1);
+        p.addCardToHand(card2);
+        p.addCardToHand(card3);
+        assertTrue(Arrays.equals(p.getCards().toArray(), expected.toArray()));
+    }
 }
