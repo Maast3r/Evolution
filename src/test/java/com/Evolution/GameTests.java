@@ -117,7 +117,7 @@ public class GameTests {
     }
 
     @Test
-    public void testStartGame() throws IllegalNumberOfPlayers,
+    public void testStartPhase1() throws IllegalNumberOfPlayers,
             IllegalCardDirectionException {
         PhaseOne fakePhaseOne = EasyMock.niceMock(PhaseOne.class);
         fakePhaseOne.execute();
@@ -127,37 +127,4 @@ public class GameTests {
         EasyMock.verify(fakePhaseOne);
     }
 
-    @Test
-    public void testPhase2() throws IllegalNumberOfPlayers,
-            IllegalCardDirectionException {
-        IPhases fakePhaseOne = EasyMock.niceMock(PhaseTwo.class);
-        fakePhaseOne.execute();
-        EasyMock.replay(fakePhaseOne);
-        Game g = new Game(4);
-        g.startPhase(fakePhaseOne);
-        EasyMock.verify(fakePhaseOne);
-    }
-
-    @Test
-    public void testPhase3() throws IllegalNumberOfPlayers,
-            IllegalCardDirectionException {
-        IPhases fakePhaseOne = EasyMock.niceMock(PhaseThree.class);
-        fakePhaseOne.execute();
-        EasyMock.replay(fakePhaseOne);
-        Game g = new Game(4);
-        g.startPhase(fakePhaseOne);
-        EasyMock.verify(fakePhaseOne);
-    }
-
-
-    @Test
-    public void testPhase4() throws IllegalNumberOfPlayers,
-            IllegalCardDirectionException {
-        IPhases fakePhaseOne = EasyMock.niceMock(PhaseFour.class);
-        fakePhaseOne.execute();
-        EasyMock.replay(fakePhaseOne);
-        Game g = new Game(4);
-        g.startPhase(fakePhaseOne);
-        EasyMock.verify(fakePhaseOne);
-    }
 }
