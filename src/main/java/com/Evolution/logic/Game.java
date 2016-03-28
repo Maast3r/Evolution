@@ -96,7 +96,7 @@ public class Game {
     }
 
     /**
-     * @param phase (1-4) of the game
+     * @param phase 1 of the game
      * Starts the game with Phase 1.
      * Calls PhaseOne.execute()
      */
