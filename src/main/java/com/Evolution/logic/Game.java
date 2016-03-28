@@ -40,15 +40,6 @@ public class Game {
     }
 
     /**
-     * Returns the number of players in the Game instance
-     *
-     * @return numberOfPlayers
-     */
-    public int getNumPlayers() {
-        return this.numberOfPlayers;
-    }
-
-    /**
      * Returns the current round of the Game
      *
      * @return round
