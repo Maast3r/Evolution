@@ -1,9 +1,11 @@
 package com.Evolution.logic;
 
 import com.Evolution.exceptions.InvalidPlayerSpeciesRemovalException;
+import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IPlayer;
 import com.Evolution.interfaces.ISpecies;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -36,5 +38,9 @@ public class Player implements IPlayer {
         } else {
             this.speciesList.remove(i);
         }
+    }
+
+    public ArrayList<ICard> getCards() {
+        return new ArrayList<>();
     }
 }

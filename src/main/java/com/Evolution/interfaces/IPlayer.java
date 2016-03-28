@@ -2,6 +2,7 @@ package com.Evolution.interfaces;
 
 import com.Evolution.exceptions.InvalidPlayerSpeciesRemovalException;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -40,4 +41,9 @@ public interface IPlayer {
      */
     void removeSpecies(int i) throws InvalidPlayerSpeciesRemovalException;
 
+    /**
+     * Returns the list of cards in the player's hand
+     * @return The list of cards in the player's hand
+     */
+    ArrayList<ICard> getCards();
 }
