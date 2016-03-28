@@ -1,5 +1,6 @@
 package com.Evolution;
 
+import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Deck;
 import com.Evolution.logic.DeckFactory;
@@ -15,7 +16,7 @@ import static org.junit.Assert.*;
 public class DeckFactoryTests {
 
     @Test
-    public void testReadLineToCard() {
+    public void testReadLineToCard() throws IllegalCardDirectionException {
         DeckFactory df = new DeckFactory();
         ICard c = df.readLineToCard(
                 new ByteArrayInputStream("Carnivore;Makes a species a carnivore;./carnivore.jpg;3;0".getBytes()));
