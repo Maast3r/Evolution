@@ -2,6 +2,7 @@ package com.Evolution;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.interfaces.ICard;
+import com.Evolution.interfaces.IDeck;
 import com.Evolution.logic.Deck;
 import com.Evolution.logic.DeckFactory;
 import org.junit.Test;
@@ -86,5 +87,4 @@ public class DeckFactoryTests {
         assertTrue(c.get(1).getFood() == 6);
         assertTrue(c.get(1).getDirection() == 2);
     }
-
 }
