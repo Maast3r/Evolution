@@ -9,80 +9,96 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/game_screen.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
-   <right>
-      <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="650.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox id="vboxStatic" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0" stylesheets="@../styles/game_screen.css">
-               <children>
-                  <ImageView fitHeight="300.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/watering_hole.jpg" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="wateringHoleLabel" alignment="CENTER" text="Label" textAlignment="CENTER" wrapText="true" />
-                  <Label fx:id="playerTurnLabel" alignment="CENTER" minWidth="50.0" text="Label" textAlignment="CENTER" wrapText="true">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets top="15.0" />
-                     </padding></Label>
-                  <Label fx:id="phaseLabel" alignment="CENTER" minWidth="50.0" text="Label" textAlignment="CENTER" wrapText="true">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets top="15.0" />
-                     </padding></Label>
-               </children>
-            </VBox>
-            <VBox id="vboxStatic" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="200.0" stylesheets="@../styles/game_screen.css">
-               <children>
-                  <Label fx:id="foodBankLabel" alignment="CENTER" minWidth="-Infinity" prefWidth="200.0" text="Label" textAlignment="CENTER" wrapText="true">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                     <padding>
-                        <Insets top="15.0" />
-                     </padding>
-                  </Label>
-                  <HBox prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" stylesheets="@../styles/game_screen.css">
-                           <children>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/card_back.PNG" />
-                                 </image>
-                              </ImageView>
-                              <Label fx:id="drawLabel" alignment="CENTER" text="Label" textAlignment="CENTER" wrapText="true" />
-                           </children>
-                        </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                           <children>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/card_back.PNG" />
-                                 </image>
-                              </ImageView>
-                              <Label fx:id="discardLabel" alignment="CENTER" text="Label" textAlignment="CENTER" wrapText="true" />
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-   </right>
-   <top>
-      <HBox fx:id="topPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </top>
-   <left>
-      <HBox fx:id="leftPane" alignment="CENTER" prefHeight="300.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
-   </left>
-   <bottom>
-      <HBox fx:id="bottomPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </bottom>
+<BorderPane fx:id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/game_screen.css"
+            xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+    <right>
+        <HBox minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="650.0"
+              BorderPane.alignment="CENTER">
+            <children>
+                <VBox id="vboxStatic" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0"
+                      prefWidth="400.0" stylesheets="@../styles/game_screen.css">
+                    <children>
+                        <ImageView fitHeight="300.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../images/watering_hole.jpg"/>
+                            </image>
+                        </ImageView>
+                        <Label fx:id="wateringHoleLabel" alignment="CENTER" text="Label" textAlignment="CENTER"
+                               wrapText="true"/>
+                        <Label fx:id="playerTurnLabel" alignment="CENTER" minWidth="50.0" text="Label"
+                               textAlignment="CENTER" wrapText="true">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                            <padding>
+                                <Insets top="15.0"/>
+                            </padding>
+                        </Label>
+                        <Label fx:id="phaseLabel" alignment="CENTER" minWidth="50.0" text="Label" textAlignment="CENTER"
+                               wrapText="true">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                            <padding>
+                                <Insets top="15.0"/>
+                            </padding>
+                        </Label>
+                    </children>
+                </VBox>
+                <VBox id="vboxStatic" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0"
+                      prefWidth="200.0" stylesheets="@../styles/game_screen.css">
+                    <children>
+                        <Label fx:id="foodBankLabel" alignment="CENTER" minWidth="-Infinity" prefWidth="200.0"
+                               text="Label" textAlignment="CENTER" wrapText="true">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                            <padding>
+                                <Insets top="15.0"/>
+                            </padding>
+                        </Label>
+                        <HBox prefHeight="400.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0"
+                                      stylesheets="@../styles/game_screen.css">
+                                    <children>
+                                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true"
+                                                   preserveRatio="true">
+                                            <image>
+                                                <Image url="@../images/card_back.PNG"/>
+                                            </image>
+                                        </ImageView>
+                                        <Label fx:id="drawLabel" alignment="CENTER" text="Label" textAlignment="CENTER"
+                                               wrapText="true"/>
+                                    </children>
+                                </VBox>
+                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                    <children>
+                                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true"
+                                                   preserveRatio="true">
+                                            <image>
+                                                <Image url="@../images/card_back.PNG"/>
+                                            </image>
+                                        </ImageView>
+                                        <Label fx:id="discardLabel" alignment="CENTER" text="Label"
+                                               textAlignment="CENTER" wrapText="true"/>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </right>
+    <top>
+        <HBox fx:id="topPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
+    </top>
+    <left>
+        <HBox fx:id="leftPane" alignment="CENTER" prefHeight="300.0" prefWidth="600.0" BorderPane.alignment="CENTER"/>
+    </left>
+    <bottom>
+        <HBox fx:id="bottomPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER"/>
+    </bottom>
 </BorderPane>
