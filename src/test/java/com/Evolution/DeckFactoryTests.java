@@ -70,4 +70,21 @@ public class DeckFactoryTests {
         assertTrue(c.get(0).getDirection() == 1);
     }
 
+    @Test
+    public void testReadFileMultipleLines() throws IOException, IllegalCardDirectionException {
+        DeckFactory df = new DeckFactory();
+        ArrayList<ICard> c = df.readFile("src/main/resources/cardFiles/cardTestMultiple.txt");
+        assertTrue(c.get(0).getName().equals("asdf2"));
+        assertTrue(c.get(0).getDesc().equals("asdf2 random stuff"));
+        assertTrue(c.get(0).getImgPath().equals("./asdf2.jpg"));
+        assertTrue(c.get(0).getFood() == 2);
+        assertTrue(c.get(0).getDirection() == 1);
+
+        assertTrue(c.get(1).getName().equals("Random"));
+        assertTrue(c.get(1).getDesc().equals("Does random stuff"));
+        assertTrue(c.get(1).getImgPath().equals("./random.jpg"));
+        assertTrue(c.get(1).getFood() == 6);
+        assertTrue(c.get(1).getDirection() == 2);
+    }
+
 }
