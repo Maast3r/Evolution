@@ -20,4 +20,11 @@ public class DeckFactoryDeckTests {
         assertNotNull(drawPile.draw());
         // TODO: Add exception handling to prevent drawing from empty deck
     }
+
+    @Test
+    public void testGenerateDiscardPile() {
+        DeckFactory df = new DeckFactory();
+        IDeck<ICard> discardPile = df.generateDiscardPile();
+        assertTrue(discardPile.getSize() == 0);
+    }
 }
