@@ -1,6 +1,9 @@
 package com.Evolution.gui;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -19,6 +22,30 @@ public class SpeciesBoard extends VBox{
     private Label traitLabel1;
     private Label traitLabel2;
     private Label traitLabel3;
+
+    /**
+     * Enum for the actions in the choiceBox
+     * Action, String to show in drop down
+     * New actions are automatically added to drop down, but must the execution
+     * needs added to performAction
+     */
+    private enum Actions {
+        ACTIONS("Actions"),
+        VIEW_CARDS("View Cards"),
+        ADD_TRAIT("Add Trait"),
+        ADD_SPECIES_LEFT("Add Species (Left)"),
+        ADD_SPECIES_RIGHT("Add Species (Right)"),
+        INCREASE_POPULATION("Increase Population"),
+        INCREASE_BODY_SIZE("Increase Body Size");
+
+        private String name;
+        Actions(String name) {
+            this.name = name;
+        }
+        public String getName() {
+            return name;
+        }
+    }
 
     /**
      * Constructor for the species board
@@ -49,13 +76,54 @@ public class SpeciesBoard extends VBox{
                 " -fx-min-height: 150; -fx-background-color: burlywood; -fx-alignment: center;");
 
         actionChoiceBox = new ChoiceBox<>();
-        actionChoiceBox.setItems(FXCollections.observableArrayList("Actions", "Add Trait", "Add Species (Left)",
-                "Add Species (Right)", "Increase Population", "Increase Body Size"));
+        ObservableList<String> options = FXCollections.observableArrayList();
+        for (Actions a : Actions.values()) {
+            options.add(a.getName());
+        }
+        actionChoiceBox.setItems(options);
         actionChoiceBox.getSelectionModel().selectFirst();
+        actionChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                performAction(Actions.values()[newValue.intValue()]);
+            }
+        });
 
         board.getChildren().addAll(traitLabel1, traitLabel2, traitLabel3, speciesBoard, actionChoiceBox);
         board.setStyle("-fx-padding: 20, 20, 20, 20;");
         return board;
+    }
+
+    /**
+     * Performs the action that the user selected from the action choiceBox for this species
+     * @param action the selected action
+     */
+    private void performAction(Actions action) {
+        // perform selected action
+        switch (action) {
+            case ACTIONS:
+                // do nothing
+                break;
+            case VIEW_CARDS:
+                // bring up player's cards
+                break;
+            case ADD_TRAIT:
+                // bring up player's cards to select one to add as trait
+                break;
+            case ADD_SPECIES_LEFT:
+                // bring up player's cards to select one to discard to add species to left
+                break;
+            case ADD_SPECIES_RIGHT:
+                // same as before but adds to right
+                break;
+            case INCREASE_POPULATION:
+                // bring up player's cards to select one to discard to increase population
+                break;
+            case INCREASE_BODY_SIZE:
+                // bring up player's cards to select one to discard to increase body size
+                break;
+        }
+
     }
 
     /**

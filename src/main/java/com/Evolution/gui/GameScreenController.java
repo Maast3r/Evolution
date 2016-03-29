@@ -4,6 +4,9 @@ package com.Evolution.gui;
  * Created by brownba1 on 3/22/2016.
  */
 
+import com.Evolution.exceptions.IllegalCardDirectionException;
+import com.Evolution.exceptions.IllegalNumberOfPlayers;
+import com.Evolution.interfaces.IPlayer;
 import com.Evolution.logic.Game;
 import com.Evolution.logic.Player;
 import com.Evolution.logic.Species;
@@ -24,7 +27,7 @@ import javafx.scene.layout.*;
 public class GameScreenController implements Initializable {
 
     private int numPlayers = 0;
-    private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<IPlayer> players = new ArrayList<>();
     private ArrayList<HBox> playerPanes = new ArrayList<>();
     private Game game;
 
@@ -73,9 +76,18 @@ public class GameScreenController implements Initializable {
         assert phaseLabel != null : "fx:id=\"phaseLabel\" was not injected: check your FXML file 'game_screen.fxml'.";
         assert foodBankLabel != null : "fx:id=\"foodBankLabel\" was not injected: check your FXML file 'game_screen.fxml'.";
 
-        // TODO: initialize game
         for (int i = 0; i < numPlayers; i++) {
             players.add(new Player(new Species()));
+        }
+
+        // TODO: ANDREW - edit the exceptions here
+        try {
+            Game game = new Game(players);
+            System.out.println("game initialized");
+        } catch (IllegalNumberOfPlayers illegalNumberOfPlayers) {
+            illegalNumberOfPlayers.printStackTrace();
+        } catch (IllegalCardDirectionException e) {
+            e.printStackTrace();
         }
 
         staticElementsUpdate();
@@ -88,8 +100,6 @@ public class GameScreenController implements Initializable {
         } else {
             fivePlayerSetup();
         }
-
-        // TODO: add listeners to ChoiceBoxes
     }
 
     /**
@@ -97,8 +107,8 @@ public class GameScreenController implements Initializable {
      */
     private void staticElementsUpdate() {
         // TODO: update to fit actual data
-        drawLabel.setText("Draw Pile:\n" + 0 + " cards");
-        discardLabel.setText("Discard Pile:\n" + 0 + " cards");
+        drawLabel.setText("Draw Pile:\n" + game.getDrawPile().getSize() + " cards");
+        discardLabel.setText("Discard Pile:\n" + game.getDiscardPile().getSize() + " cards");
         wateringHoleLabel.setText("Food: " + 0 + " pieces");
         phaseLabel.setText("Phase: " + "Deal Cards");
         playerTurnLabel.setText("Player " + 1 + " Turn");
