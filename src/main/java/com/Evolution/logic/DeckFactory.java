@@ -16,12 +16,10 @@ public class DeckFactory {
                 Integer.parseInt(cardParams[4]));
     }
 
-    public ArrayList<ICard> readFile(String s) throws IllegalCardDirectionException,
+    public ArrayList<ICard> readFile(InputStream input) throws IllegalCardDirectionException,
             IOException {
         ArrayList<ICard> cards = new ArrayList<>();
-
-        FileInputStream fstream = new FileInputStream(s);
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+        BufferedReader br = new BufferedReader(new InputStreamReader(input));
 
         String strLine;
 
@@ -32,7 +30,7 @@ public class DeckFactory {
         return cards;
     }
 
-    public IDeck<ICard> generateDrawPile(String s) throws IOException, IllegalCardDirectionException {
+    public IDeck<ICard> generateDrawPile(InputStream s) throws IOException, IllegalCardDirectionException {
         Deck<ICard> drawPile = new Deck<>();
         drawPile.addAll(readFile(s));
         return drawPile;

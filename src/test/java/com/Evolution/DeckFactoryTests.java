@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -41,7 +42,8 @@ public class DeckFactoryTests {
     @Test
     public void testReadFile1() throws IllegalCardDirectionException, IOException {
         DeckFactory df = new DeckFactory();
-        ArrayList<ICard> c = df.readFile("src/main/resources/cardFiles/cardTest.txt");
+        InputStream input = new ByteArrayInputStream("Random;Does random stuff;./random.jpg;2;1".getBytes());
+        ArrayList<ICard> c = df.readFile(input);
         assertTrue(c.get(0).getName().equals("Random"));
         assertTrue(c.get(0).getDesc().equals("Does random stuff"));
         assertTrue(c.get(0).getImgPath().equals("./random.jpg"));
@@ -52,7 +54,8 @@ public class DeckFactoryTests {
     @Test
     public void testReadFile2() throws IllegalCardDirectionException, IOException {
         DeckFactory df = new DeckFactory();
-        ArrayList<ICard> c = df.readFile("src/main/resources/cardFiles/cardTest2.txt");
+        InputStream input = new ByteArrayInputStream("asdf;asdf random stuff;./asdf.jpg;2;1".getBytes());
+        ArrayList<ICard> c = df.readFile(input);
         assertTrue(c.get(0).getName().equals("asdf"));
         assertTrue(c.get(0).getDesc().equals("asdf random stuff"));
         assertTrue(c.get(0).getImgPath().equals("./asdf.jpg"));
@@ -63,7 +66,8 @@ public class DeckFactoryTests {
     @Test
     public void testReadFile3() throws IllegalCardDirectionException, IOException {
         DeckFactory df = new DeckFactory();
-        ArrayList<ICard> c = df.readFile("src/main/resources/cardFiles/cardTest3.txt");
+        InputStream input = new ByteArrayInputStream("asdf2;asdf2 random stuff;./asdf2.jpg;2;1".getBytes());
+        ArrayList<ICard> c = df.readFile(input);
         assertTrue(c.get(0).getName().equals("asdf2"));
         assertTrue(c.get(0).getDesc().equals("asdf2 random stuff"));
         assertTrue(c.get(0).getImgPath().equals("./asdf2.jpg"));
@@ -74,7 +78,9 @@ public class DeckFactoryTests {
     @Test
     public void testReadFileMultipleLines() throws IOException, IllegalCardDirectionException {
         DeckFactory df = new DeckFactory();
-        ArrayList<ICard> c = df.readFile("src/main/resources/cardFiles/cardTestMultiple.txt");
+        InputStream input = new ByteArrayInputStream(("asdf2;asdf2 random stuff;./asdf2.jpg;2;1\n" +
+                "Random;Does random stuff;./random.jpg;6;2").getBytes());
+        ArrayList<ICard> c = df.readFile(input);
         assertTrue(c.get(0).getName().equals("asdf2"));
         assertTrue(c.get(0).getDesc().equals("asdf2 random stuff"));
         assertTrue(c.get(0).getImgPath().equals("./asdf2.jpg"));
