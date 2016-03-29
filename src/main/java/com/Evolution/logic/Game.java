@@ -3,6 +3,7 @@ package com.Evolution.logic;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
 import com.Evolution.interfaces.ICard;
+import com.Evolution.interfaces.IDeck;
 import com.Evolution.interfaces.IPhases;
 import com.Evolution.interfaces.IPlayer;
 
@@ -15,8 +16,8 @@ public class Game {
     private int round = 1;
     private int turn = 1;
     private ArrayList<IPlayer> players;
-    private Deck<ICard> drawPile;
-    private Deck<ICard> discardPile;
+    private IDeck<ICard> drawPile;
+    private IDeck<ICard> discardPile;
 
     /**
      * Evolution Game constructor which contains main logic to interact with players, species, and cards
@@ -26,6 +27,7 @@ public class Game {
      * @throws IllegalCardDirectionException
      */
     public Game(ArrayList<IPlayer> players) throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        // TODO: Refactor this to fulfill dependency injection by having the Decks and WateringHole passed in
         if (players.size() < 3 || players.size() > 6) {
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
         }
@@ -33,7 +35,7 @@ public class Game {
 
         this.drawPile = new Deck<>();
         for (int i = 0; i < 50; i++) {
-            drawPile.add(new Card("Carnivore",
+            drawPile.discard(new Card("Carnivore",
                     "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
         }
         this.discardPile = new Deck<>();
@@ -69,7 +71,7 @@ public class Game {
      *
      * @return drawPile
      */
-    public Deck<ICard> getDrawPile() {
+    public IDeck<ICard> getDrawPile() {
         return this.drawPile;
     }
 
@@ -78,7 +80,7 @@ public class Game {
      *
      * @return discardPile
      */
-    public Deck<ICard> getDiscardPile() {
+    public IDeck<ICard> getDiscardPile() {
         return this.discardPile;
     }
 

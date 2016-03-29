@@ -82,7 +82,7 @@ public class GameScreenController implements Initializable {
 
         // TODO: ANDREW - edit the exceptions here
         try {
-            Game game = new Game(players);
+            game = new Game(players);
             System.out.println("game initialized");
         } catch (IllegalNumberOfPlayers illegalNumberOfPlayers) {
             illegalNumberOfPlayers.printStackTrace();

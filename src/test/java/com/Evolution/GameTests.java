@@ -17,9 +17,6 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by goistjt on 3/23/2016.
- */
 public class GameTests {
 
     @Test
@@ -111,7 +108,7 @@ public class GameTests {
             players.add(new TestPlayer(new TestSpecies()));
         }
         Game g = new Game(players);
-        assertEquals(50, g.getDrawPile().size());
+        assertEquals(50, g.getDrawPile().getSize());
     }
 
     @Test
@@ -122,7 +119,7 @@ public class GameTests {
             players.add(new TestPlayer(new TestSpecies()));
         }
         Game g = new Game(players);
-        assertEquals(0, g.getDiscardPile().size());
+        assertEquals(0, g.getDiscardPile().getSize());
     }
 
     @Test
@@ -133,9 +130,9 @@ public class GameTests {
             players.add(new TestPlayer(new TestSpecies()));
         }
         Game g = new Game(players);
-        g.getDiscardPile().add(new Card("Carnivore", "Makes a species a carnivore",
+        g.getDiscardPile().discard(new Card("Carnivore", "Makes a species a carnivore",
                 "./carnivore.jpg", 3, 0));
-        assertEquals(1, g.getDiscardPile().size());
+        assertEquals(1, g.getDiscardPile().getSize());
     }
 
     @Test
