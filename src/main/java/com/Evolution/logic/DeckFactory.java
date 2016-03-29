@@ -37,4 +37,8 @@ public class DeckFactory {
         drawPile.addAll(readFile(s));
         return drawPile;
     }
+
+    public IDeck<ICard> generateDiscardPile() {
+        return new Deck<>();
+    }
 }
