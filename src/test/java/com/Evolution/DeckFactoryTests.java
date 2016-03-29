@@ -18,8 +18,7 @@ public class DeckFactoryTests {
     @Test
     public void testReadLineToCard() throws IllegalCardDirectionException, IOException {
         DeckFactory df = new DeckFactory();
-        ICard c = df.readLineToCard(
-                new ByteArrayInputStream("Carnivore;Makes a species a carnivore;./carnivore.jpg;3;0".getBytes()));
+        ICard c = df.readLineToCard("Carnivore;Makes a species a carnivore;./carnivore.jpg;3;0");
         assertTrue(c.getName().equals("Carnivore"));
         assertTrue(c.getDesc().equals("Makes a species a carnivore"));
         assertTrue(c.getImgPath().equals("./carnivore.jpg"));
@@ -30,8 +29,7 @@ public class DeckFactoryTests {
     @Test
     public void testReadLineToCard2() throws IllegalCardDirectionException, IOException {
         DeckFactory df = new DeckFactory();
-        ICard c = df.readLineToCard(
-                new ByteArrayInputStream("Random;Does random stuff;./random.jpg;2;1".getBytes()));
+        ICard c = df.readLineToCard("Random;Does random stuff;./random.jpg;2;1");
         assertTrue(c.getName().equals("Random"));
         assertTrue(c.getDesc().equals("Does random stuff"));
         assertTrue(c.getImgPath().equals("./random.jpg"));
@@ -40,9 +38,9 @@ public class DeckFactoryTests {
     }
 
     @Test
-    public void testReadFile1() throws IllegalCardDirectionException {
+    public void testReadFile1() throws IllegalCardDirectionException, IOException {
         DeckFactory df = new DeckFactory();
-        ArrayList<ICard> c = df.readFile("../../../src/resources/cardTest.txt");
+        ArrayList<ICard> c = df.readFile("src/main/resources/cardFiles/cardTest.txt");
         assertTrue(c.get(0).getName().equals("Random"));
         assertTrue(c.get(0).getDesc().equals("Does random stuff"));
         assertTrue(c.get(0).getImgPath().equals("./random.jpg"));
@@ -51,9 +49,9 @@ public class DeckFactoryTests {
     }
 
     @Test
-    public void testReadFile2() throws IllegalCardDirectionException {
+    public void testReadFile2() throws IllegalCardDirectionException, IOException {
         DeckFactory df = new DeckFactory();
-        ArrayList<ICard> c = df.readFile("../../../src/resources/cardTest2.txt");
+        ArrayList<ICard> c = df.readFile("src/main/resources/cardFiles/cardTest2.txt");
         assertTrue(c.get(0).getName().equals("asdf"));
         assertTrue(c.get(0).getDesc().equals("asdf random stuff"));
         assertTrue(c.get(0).getImgPath().equals("./asdf.jpg"));
@@ -62,9 +60,9 @@ public class DeckFactoryTests {
     }
 
     @Test
-    public void testReadFile3() throws IllegalCardDirectionException {
+    public void testReadFile3() throws IllegalCardDirectionException, IOException {
         DeckFactory df = new DeckFactory();
-        ArrayList<ICard> c = df.readFile("../../../src/resources/cardTest3.txt");
+        ArrayList<ICard> c = df.readFile("src/main/resources/cardFiles/cardTest3.txt");
         assertTrue(c.get(0).getName().equals("asdf2"));
         assertTrue(c.get(0).getDesc().equals("asdf2 random stuff"));
         assertTrue(c.get(0).getImgPath().equals("./asdf2.jpg"));
