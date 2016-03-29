@@ -12,7 +12,8 @@
 }
 
 .choice-box {
-    -fx-min-width: 150;
+    -fx-min-width: 100;
+    -fx-max-width: 125;
     -fx-text-fill: darkorange;
     -fx-background-color: #333333;
     -fx-alignment: center;
@@ -22,6 +23,5 @@
     -fx-background-color: #333333;
     -fx-text-alignment: center;
     -fx-text-fill: darkorange;
-    -fx-pref-width: 146;
 }
 

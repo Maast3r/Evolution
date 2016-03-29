@@ -15,6 +15,7 @@ import org.easymock.EasyMock;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by goistjt on 3/23/2016.
@@ -187,6 +188,41 @@ public class GameTests {
         Game g = new Game(players);
         g.startGame(fakePhaseOne);
         EasyMock.verify(fakePhaseOne);
+    }
+
+    @Test
+    public void testGetTurn1() throws IllegalNumberOfPlayers, IllegalCardDirectionException{
+        ArrayList<IPlayer> players = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            players.add(new TestPlayer(new TestSpecies()));
+        }
+        Game g = new Game(players);
+        assertTrue(g.getTurn() == 1);
+    }
+
+    @Test
+    public void testGetTurn3() throws IllegalNumberOfPlayers, IllegalCardDirectionException{
+        ArrayList<IPlayer> players = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            players.add(new TestPlayer(new TestSpecies()));
+        }
+        Game g = new Game(players);
+        g.nextTurn();
+        g.nextTurn();
+        assertTrue(g.getTurn() == 3);
+    }
+
+    @Test
+    public void testGetTurn6() throws IllegalNumberOfPlayers, IllegalCardDirectionException{
+        ArrayList<IPlayer> players = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            players.add(new TestPlayer(new TestSpecies()));
+        }
+        Game g = new Game(players);
+        for (int j = 0; j < 5; j++) {
+            g.nextTurn();
+        }
+        assertTrue(g.getTurn() == 1);
     }
 
 }
