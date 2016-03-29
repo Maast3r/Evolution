@@ -2,6 +2,7 @@ package com.Evolution.logic;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.interfaces.ICard;
+import com.Evolution.interfaces.IDeck;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -29,5 +30,11 @@ public class DeckFactory {
         }
 
         return cards;
+    }
+
+    public IDeck<ICard> generateDrawPile(String s) throws IOException, IllegalCardDirectionException {
+        Deck<ICard> drawPile = new Deck<>();
+        drawPile.addAll(readFile(s));
+        return drawPile;
     }
 }
