@@ -1,5 +1,6 @@
 package com.Evolution.testClasses;
 
+import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IPlayer;
 import com.Evolution.interfaces.ISpecies;
 
@@ -35,4 +36,12 @@ public class TestPlayer implements IPlayer {
     public void removeSpecies(int i) {
 
     }
+
+    @Override
+    public ArrayList<ICard> getCards() {
+        return null;
+    }
+
+    @Override
+    public void addCardToHand(ICard card) {}
 }

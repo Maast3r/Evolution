@@ -3,6 +3,7 @@ package com.Evolution.logic;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
 import com.Evolution.interfaces.ICard;
+import com.Evolution.interfaces.IPhases;
 import com.Evolution.interfaces.IPlayer;
 
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Game {
     private int round = 1;
-    private int numberOfPlayers;
+    private int turn = 1;
     private ArrayList<IPlayer> players;
     private Deck<ICard> drawPile;
     private Deck<ICard> discardPile;
@@ -20,19 +21,15 @@ public class Game {
     /**
      * Evolution Game constructor which contains main logic to interact with players, species, and cards
      *
-     * @param numberOfPlayers playing game
+     * @param players playing game
      * @throws IllegalNumberOfPlayers
      * @throws IllegalCardDirectionException
      */
-    public Game(int numberOfPlayers) throws IllegalNumberOfPlayers, IllegalCardDirectionException {
-        if (numberOfPlayers < 3 || numberOfPlayers > 6) {
+    public Game(ArrayList<IPlayer> players) throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        if (players.size() < 3 || players.size() > 6) {
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
         }
-        this.numberOfPlayers = numberOfPlayers;
-        this.players = new ArrayList<>();
-        for (int i = 0; i < this.numberOfPlayers; i++) {
-            this.players.add(new Player(new Species()));
-        }
+        this.players = players;
 
         this.drawPile = new Deck<>();
         for (int i = 0; i < 50; i++) {
@@ -40,15 +37,6 @@ public class Game {
                     "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
         }
         this.discardPile = new Deck<>();
-    }
-
-    /**
-     * Returns the number of players in the Game instance
-     *
-     * @return numberOfPlayers
-     */
-    public int getNumPlayers() {
-        return this.numberOfPlayers;
     }
 
     /**
@@ -92,5 +80,33 @@ public class Game {
      */
     public Deck<ICard> getDiscardPile() {
         return this.discardPile;
+    }
+
+    /**
+     * @param phase 1 of the game
+     * Starts the game with Phase 1.
+     * Calls PhaseOne.execute()
+     */
+    public void startGame(IPhases phase) {
+        phase.execute();
+    }
+
+    /**
+     * The turn that the game is currently on
+     * @return The number of the player whose turn it is
+     */
+    public int getTurn() {
+        return this.turn;
+    }
+
+    /**
+     * Increments which player number's turn it is
+     */
+    public void nextTurn() {
+        if(this.turn == this.players.size()){
+            this.turn = 1;
+        } else {
+            this.turn++;
+        }
     }
 }

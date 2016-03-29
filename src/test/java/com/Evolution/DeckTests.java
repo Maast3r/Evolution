@@ -1,12 +1,14 @@
 package com.Evolution;
 
+
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.interfaces.ICard;
-import com.Evolution.testClasses.TestCard;
 import com.Evolution.logic.Deck;
+import com.Evolution.testClasses.TestCard;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -34,6 +36,15 @@ public class DeckTests {
         ICard testCard = new TestCard();
         testDeck.add(testCard);
         assertEquals(testCard, testDeck.draw());
+    }
+
+    @Test
+    public void testDiscard() throws IllegalCardDirectionException{
+        Deck<ICard> testDeck = new Deck<>();
+        ICard testCard = new TestCard();
+        assertFalse(testDeck.contains(testCard));
+        testDeck.discard(testCard);
+        assertTrue(testDeck.contains(testCard));
     }
 
     @Test
