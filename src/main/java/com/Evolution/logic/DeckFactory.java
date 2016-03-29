@@ -24,11 +24,9 @@ public class DeckFactory {
 
         String strLine;
 
-//        while ((strLine = br.readLine()) != null){
-//            cards.add(readLineToCard(strLine));
-//        }
-        strLine = br.readLine();
-        cards.add(readLineToCard(strLine));
+        while ((strLine = br.readLine()) != null){
+            cards.add(readLineToCard(strLine));
+        }
 
         return cards;
     }
