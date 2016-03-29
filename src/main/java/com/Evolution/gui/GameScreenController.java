@@ -7,19 +7,15 @@ package com.Evolution.gui;
 import com.Evolution.logic.Game;
 import com.Evolution.logic.Player;
 import com.Evolution.logic.Species;
-import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 
-import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 /**
