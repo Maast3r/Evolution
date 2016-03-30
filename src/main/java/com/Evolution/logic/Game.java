@@ -20,12 +20,14 @@ public class Game {
     /**
      * Evolution Game constructor which contains main logic to interact with players, species, and cards
      *
-     * @param players playing game
+     * @param players      playing game
      * @param wateringHole
+     * @param drawPile
      * @throws IllegalNumberOfPlayers
      * @throws IllegalCardDirectionException
      */
-    public Game(ArrayList<IPlayer> players, IWateringHole wateringHole) throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+    public Game(ArrayList<IPlayer> players, IWateringHole wateringHole, IDeck<ICard> drawPile) throws
+            IllegalNumberOfPlayers, IllegalCardDirectionException {
         // TODO: Refactor this to fulfill dependency injection by having the Decks and WateringHole passed in
         if (players.size() < 3 || players.size() > 6) {
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
@@ -33,11 +35,7 @@ public class Game {
         this.players = players;
         this.wateringHole = wateringHole;
 
-        this.drawPile = new Deck<>();
-        for (int i = 0; i < 50; i++) {
-            drawPile.discard(new Card("Carnivore",
-                    "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
-        }
+        this.drawPile = drawPile;
         this.discardPile = new Deck<>();
     }
 
@@ -86,8 +84,8 @@ public class Game {
 
     /**
      * @param phase 1 of the game
-     * Starts the game with Phase 1.
-     * Calls PhaseOne.execute()
+     *              Starts the game with Phase 1.
+     *              Calls PhaseOne.execute()
      */
     public void startGame(IPhases phase) {
         phase.execute();
@@ -95,6 +93,7 @@ public class Game {
 
     /**
      * The turn that the game is currently on
+     *
      * @return The number of the player whose turn it is
      */
     public int getTurn() {
@@ -105,7 +104,7 @@ public class Game {
      * Increments which player number's turn it is
      */
     public void nextTurn() {
-        if(this.turn == this.players.size()){
+        if (this.turn == this.players.size()) {
             this.turn = 1;
         } else {
             this.turn++;
@@ -114,6 +113,7 @@ public class Game {
 
     /**
      * Gets the IWateringHole associated with this Game
+     *
      * @return IWateringHole
      */
     public IWateringHole getWateringHole() {

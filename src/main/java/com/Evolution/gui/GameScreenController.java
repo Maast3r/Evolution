@@ -6,14 +6,18 @@ package com.Evolution.gui;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
+import com.Evolution.interfaces.ICard;
+import com.Evolution.interfaces.IDeck;
 import com.Evolution.interfaces.IPlayer;
 import com.Evolution.interfaces.IWateringHole;
-import com.Evolution.logic.Game;
-import com.Evolution.logic.Player;
-import com.Evolution.logic.Species;
+import com.Evolution.logic.*;
 import com.Evolution.testClasses.TestWateringHole;
 import javafx.fxml.Initializable;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -82,14 +86,21 @@ public class GameScreenController implements Initializable {
             players.add(new Player(new Species()));
         }
 
+
         // TODO: ANDREW - edit the exceptions here
         try {
-            IWateringHole wateringHole = new TestWateringHole();
-            game = new Game(players, wateringHole);
+            IWateringHole wateringHole = new WateringHole();
+            DeckFactory df = new DeckFactory();
+            IDeck<ICard> drawPile = df.generateDrawPile(new FileInputStream(new File("/cardFiles/CardTestMultiple.txt")));
+            game = new Game(players, wateringHole, drawPile);
             System.out.println("game initialized");
         } catch (IllegalNumberOfPlayers illegalNumberOfPlayers) {
             illegalNumberOfPlayers.printStackTrace();
         } catch (IllegalCardDirectionException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
