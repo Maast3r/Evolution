@@ -97,4 +97,10 @@ public class WateringHoleTests {
         wateringHole.removeFood(1);
         assertEquals(9, wateringHole.getFoodCount());
     }
+
+    @Test(expected = WateringHoleEmptyException.class)
+    public void testWateringHoleEmpty () {
+        WateringHole w = new WateringHole();
+        w.removeFood();
+    }
 }
