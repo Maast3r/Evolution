@@ -1,6 +1,7 @@
 package com.Evolution.logic;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
+import com.Evolution.exceptions.WrongFileException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IDeck;
 
@@ -22,8 +23,11 @@ public class DeckFactory {
      * @throws IllegalCardDirectionException
      * @throws IOException
      */
-    public ICard readLineToCard(String input) throws IllegalCardDirectionException, IOException {
-        // TODO: Needs error checking for incorrect string format
+    public ICard readLineToCard(String input) throws IllegalCardDirectionException, IOException, WrongFileException {
+        String pattern = "^.{0,150};.{0,150};.{0,150}png;[0-9]+;[0-9]+$";
+        if(!input.matches(pattern)){
+            throw new WrongFileException("You are reading from a bad file.");
+        }
         String[] cardParams = input.split(";");
         return new Card(cardParams[0], cardParams[1], cardParams[2], Integer.parseInt(cardParams[3]),
                 Integer.parseInt(cardParams[4]));
@@ -37,7 +41,7 @@ public class DeckFactory {
      * @throws IOException
      */
     public ArrayList<ICard> readFile(InputStream input) throws IllegalCardDirectionException,
-            IOException {
+            IOException, WrongFileException {
         ArrayList<ICard> cards = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(input));
 
@@ -57,7 +61,7 @@ public class DeckFactory {
      * @throws IOException
      * @throws IllegalCardDirectionException
      */
-    public IDeck<ICard> generateDrawPile(InputStream s) throws IOException, IllegalCardDirectionException {
+    public IDeck<ICard> generateDrawPile(InputStream s) throws IOException, IllegalCardDirectionException, WrongFileException {
         Deck<ICard> drawPile = new Deck<>();
         drawPile.addAll(readFile(s));
         return drawPile;

@@ -1,5 +1,6 @@
 package com.Evolution;
 
+import com.Evolution.exceptions.FoodBankEmptyException;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
 import com.Evolution.interfaces.*;
@@ -92,8 +93,8 @@ public class GameTests {
     @Test
     public void getPlayers3() throws IllegalNumberOfPlayers,
             IllegalCardDirectionException {
-        Game g = new Game(generateNumPlayers(6), wateringHole, this.drawPile, this.discardPile);
-        assertEquals(6, g.getPlayerObjects().size());
+        Game g = new Game(generateNumPlayers(3), wateringHole, this.drawPile, this.discardPile);
+        assertEquals(3, g.getPlayerObjects().size());
     }
 
     @Test
@@ -131,7 +132,7 @@ public class GameTests {
     @Test
     public void testIncreaseRound() throws IllegalNumberOfPlayers,
             IllegalCardDirectionException {
-        Game g = new Game(generateNumPlayers(6), wateringHole, this.drawPile, this.discardPile);
+        Game g = new Game(generateNumPlayers(5), wateringHole, this.drawPile, this.discardPile);
         g.increaseRound();
         assertEquals(2, g.getRound());
     }
@@ -193,7 +194,7 @@ public class GameTests {
     }
 
     @Test
-    public void testDecrementFoodBank() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+    public void testDecrementFoodBank() throws IllegalNumberOfPlayers, IllegalCardDirectionException, FoodBankEmptyException {
         Game g = new Game(generateNumPlayers(4), this.wateringHole, this.drawPile, this.discardPile);
         for (int i = 1; i < 50; i++) {
             g.decrementFoodBank();
@@ -202,7 +203,7 @@ public class GameTests {
     }
 
     @Test
-    public void testDecrementNFoodBank() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+    public void testDecrementNFoodBank() throws IllegalNumberOfPlayers, IllegalCardDirectionException, FoodBankEmptyException {
         Game g = new Game(generateNumPlayers(4), this.wateringHole, this.drawPile, this.discardPile);
         for (int i = 1; i < 10; i++) {
             g.decrementFoodBank(5);
@@ -211,7 +212,7 @@ public class GameTests {
     }
 
     @Test
-    public void testMoveFoodFromBankToHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+    public void testMoveFoodFromBankToHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException, FoodBankEmptyException {
         IWateringHole wateringHole = new WateringHole();
         Game g = new Game(generateNumPlayers(4), wateringHole, this.drawPile, this.discardPile);
         g.moveFoodFromBankToHole(1);
@@ -220,7 +221,7 @@ public class GameTests {
     }
 
     @Test
-    public void testMoveNFoodFromBankToHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+    public void testMoveNFoodFromBankToHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException, FoodBankEmptyException {
         IWateringHole wateringHole = new WateringHole();
         Game g = new Game(generateNumPlayers(4), wateringHole, this.drawPile, this.discardPile);
         for (int i = 1; i < 50; i++) {
@@ -231,7 +232,7 @@ public class GameTests {
     }
 
     @Test
-    public void testMoveNFoodFromBankToHole2() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+    public void testMoveNFoodFromBankToHole2() throws IllegalNumberOfPlayers, IllegalCardDirectionException, FoodBankEmptyException {
         IWateringHole wateringHole = new WateringHole();
         Game g = new Game(generateNumPlayers(4), wateringHole, this.drawPile, this.discardPile);
         for (int i = 1; i < 10; i++) {
@@ -241,6 +242,28 @@ public class GameTests {
         }
     }
 
+    @Test(expected = FoodBankEmptyException.class)
+    public void testFoodBankOneEmpty() throws IllegalNumberOfPlayers, IllegalCardDirectionException, FoodBankEmptyException {
+        IWateringHole wateringHole = new WateringHole();
+        Game g = new Game(generateNumPlayers(4), wateringHole, this.drawPile, this.discardPile);
+        for(int i=0; i<241; i++){
+            g.decrementFoodBank();
+        }
+    }
+
+    @Test(expected = FoodBankEmptyException.class)
+    public void testFoodBankIEmpty1() throws IllegalNumberOfPlayers, IllegalCardDirectionException, FoodBankEmptyException {
+        IWateringHole wateringHole = new WateringHole();
+        Game g = new Game(generateNumPlayers(4), wateringHole, this.drawPile, this.discardPile);
+        g.decrementFoodBank(241);
+    }
+
+    @Test(expected = FoodBankEmptyException.class)
+    public void testFoodBankIEmpty2() throws IllegalNumberOfPlayers, IllegalCardDirectionException, FoodBankEmptyException {
+        IWateringHole wateringHole = new WateringHole();
+        Game g = new Game(generateNumPlayers(4), wateringHole, this.drawPile, this.discardPile);
+        g.decrementFoodBank(-241);
+    }
     @Test
     public void testDealToPlayerValid() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
         Game g = new Game(generateNumPlayers(4), this.wateringHole, this.drawPile, this.discardPile);

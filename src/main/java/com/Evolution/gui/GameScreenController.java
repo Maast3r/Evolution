@@ -6,6 +6,7 @@ package com.Evolution.gui;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
+import com.Evolution.exceptions.WrongFileException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IDeck;
 import com.Evolution.interfaces.IPlayer;
@@ -94,7 +95,10 @@ public class GameScreenController implements Initializable {
             }
 
             game = new Game(players, wateringHole, drawPile, discardPile);
-        } catch (IllegalNumberOfPlayers | IllegalCardDirectionException | IOException exception) {
+
+            System.out.println("game initialized");
+        } catch (IllegalNumberOfPlayers | IllegalCardDirectionException |
+                IOException | WrongFileException exception) {
             exception.printStackTrace();
         }
 

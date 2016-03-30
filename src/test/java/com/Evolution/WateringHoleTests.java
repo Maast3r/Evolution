@@ -1,5 +1,6 @@
 package com.Evolution;
 
+import com.Evolution.exceptions.WateringHoleEmptyException;
 import com.Evolution.logic.WateringHole;
 import org.junit.Test;
 
@@ -55,7 +56,7 @@ public class WateringHoleTests {
     }
 
     @Test
-    public void testRemove1Food() {
+    public void testRemove1Food() throws WateringHoleEmptyException {
         WateringHole wateringHole = new WateringHole();
         wateringHole.addFood(7);
         wateringHole.removeFood();
@@ -63,7 +64,7 @@ public class WateringHoleTests {
     }
 
     @Test
-    public void testRemoveSeveralSingleFood() {
+    public void testRemoveSeveralSingleFood() throws WateringHoleEmptyException {
         WateringHole wateringHole = new WateringHole();
         wateringHole.addFood(7);
         for (int i = 0; i < 4; i++) {
@@ -73,7 +74,7 @@ public class WateringHoleTests {
     }
 
     @Test
-    public void testRemove5Food() {
+    public void testRemove5Food() throws WateringHoleEmptyException {
         WateringHole wateringHole = new WateringHole();
         wateringHole.addFood(10);
         wateringHole.removeFood(5);
@@ -81,7 +82,7 @@ public class WateringHoleTests {
     }
 
     @Test
-    public void testRemoveNFood() {
+    public void testRemoveNFood() throws WateringHoleEmptyException {
         WateringHole wateringHole = new WateringHole();
         wateringHole.addFood(10);
         wateringHole.removeFood(5);
@@ -96,5 +97,23 @@ public class WateringHoleTests {
         wateringHole.addFood(10);
         wateringHole.removeFood(1);
         assertEquals(9, wateringHole.getFoodCount());
+    }
+
+    @Test(expected = WateringHoleEmptyException.class)
+    public void testWateringHoleEmpty () throws WateringHoleEmptyException {
+        WateringHole w = new WateringHole();
+        w.removeFood();
+    }
+
+    @Test(expected = WateringHoleEmptyException.class)
+    public void testWateringHoleIEmpty1 () throws WateringHoleEmptyException {
+        WateringHole w = new WateringHole();
+        w.removeFood(1);
+    }
+
+    @Test(expected = WateringHoleEmptyException.class)
+    public void testWateringHoleIEmpty2 () throws WateringHoleEmptyException {
+        WateringHole w = new WateringHole();
+        w.removeFood(-1);
     }
 }
