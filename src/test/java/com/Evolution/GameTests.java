@@ -4,17 +4,20 @@ import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
 import com.Evolution.interfaces.IPhases;
 import com.Evolution.interfaces.IPlayer;
+import com.Evolution.interfaces.IWateringHole;
 import com.Evolution.logic.Card;
 import com.Evolution.logic.Game;
 import com.Evolution.logic.PhaseOne;
 import com.Evolution.testClasses.TestPlayer;
 import com.Evolution.testClasses.TestSpecies;
+import com.Evolution.testClasses.TestWateringHole;
 import org.junit.Test;
 import org.easymock.EasyMock;
 
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class GameTests {
@@ -220,6 +223,14 @@ public class GameTests {
             g.nextTurn();
         }
         assertTrue(g.getTurn() == 1);
+    }
+
+    @Test
+    public void testGetWateringHole() {
+        ArrayList<IPlayer> players = new ArrayList<>();
+        IWateringHole wateringHole = new TestWateringHole();
+        Game g = new Game(players, wateringHole);
+        assertNotNull(g.getWateringHole());
     }
 
 }
