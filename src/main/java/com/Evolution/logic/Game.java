@@ -31,7 +31,6 @@ public class Game {
      */
     public Game(ArrayList<IPlayer> players, IWateringHole wateringHole, IDeck<ICard> drawPile, IDeck<ICard> discardPile)
             throws IllegalNumberOfPlayers, IllegalCardDirectionException {
-        // TODO: Refactor this to fulfill dependency injection by having the Decks and WateringHole passed in
         if (players.size() < 3 || players.size() > 5) {
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
         }
