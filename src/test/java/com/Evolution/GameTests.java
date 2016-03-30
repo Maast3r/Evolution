@@ -284,7 +284,6 @@ public class GameTests {
         }
         Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
         g.dealToPlayer(0);
-        System.out.println(player.getCards());
         assertTrue(player.getCards().get(0).equals(card));
         assertTrue(!drawPile.contains(card));
 
@@ -313,6 +312,24 @@ public class GameTests {
         EasyMock.verify(this.discardPile);
         EasyMock.verify(fakePlayer);
         EasyMock.verify(fakeCard);
+    }
+
+    @Test
+    public void testRemoveFromPlayerResults() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        Deck<ICard> discardPile = new Deck<>();
+        ICard card = new TestCard();
+        assertTrue(!discardPile.contains(card));
+        Player player = new Player(new TestSpecies());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, discardPile);
+        player.addCardToHand(card);
+        assertTrue(player.getCards().get(0).equals(card));
+        assertTrue(g.discardFromPlayer(0, card));
+        assertTrue(discardPile.contains(card));
+
     }
 
 }
