@@ -205,35 +205,4 @@ public class GameTests {
             assertEquals(240 - (i * 5), g.getFoodBankCount());
         }
     }
-
-    @Test
-    public void testMoveFoodFromBankToHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
-        IWateringHole wateringHole = new WateringHole();
-        Game g = new Game(generateNumPlayers(4), wateringHole, this.drawPile, this.discardPile);
-        g.moveFoodFromBankToHole(1);
-        assertEquals(239, g.getFoodBankCount());
-        assertEquals(1, g.getWateringHole().getFoodCount());
-    }
-
-    @Test
-    public void testMoveNFoodFromBankToHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
-        IWateringHole wateringHole = new WateringHole();
-        Game g = new Game(generateNumPlayers(4), wateringHole, this.drawPile, this.discardPile);
-        for (int i = 1; i < 50; i++) {
-            g.moveFoodFromBankToHole(1);
-            assertEquals(240 - i, g.getFoodBankCount());
-            assertEquals(i, g.getWateringHole().getFoodCount());
-        }
-    }
-
-    @Test
-    public void testMoveNFoodFromBankToHole2() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
-        IWateringHole wateringHole = new WateringHole();
-        Game g = new Game(generateNumPlayers(4), wateringHole, this.drawPile, this.discardPile);
-        for (int i = 1; i < 10; i++) {
-            g.moveFoodFromBankToHole(5);
-            assertEquals(240 - (i * 5), g.getFoodBankCount());
-            assertEquals(i * 5, g.getWateringHole().getFoodCount());
-        }
-    }
 }

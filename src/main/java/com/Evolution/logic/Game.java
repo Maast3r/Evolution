@@ -24,7 +24,7 @@ public class Game {
      * @param players      playing game
      * @param wateringHole
      * @param drawPile
-     * @param discardPile
+     * @param discardPileK
      * @throws IllegalNumberOfPlayers
      * @throws IllegalCardDirectionException
      */
@@ -132,10 +132,5 @@ public class Game {
 
     public void decrementFoodBank(int i) {
         this.foodBank -= i;
-    }
-
-    public void moveFoodFromBankToHole(int i) {
-        decrementFoodBank(i);
-        this.wateringHole.addFood(i);
     }
 }
