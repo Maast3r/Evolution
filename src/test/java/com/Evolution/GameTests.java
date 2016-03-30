@@ -180,4 +180,10 @@ public class GameTests {
         assertTrue(g.getWateringHole() == wateringHole);
     }
 
+    @Test
+    public void testGetFoodBankCount() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        Game g = new Game(generateNumPlayers(4), this.wateringHole, this.drawPile, this.discardPile);
+        assertEquals(240, g.getFoodBankCount());
+    }
+
 }
