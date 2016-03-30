@@ -6,10 +6,12 @@ import com.Evolution.interfaces.*;
 import com.Evolution.logic.*;
 import com.Evolution.testClasses.*;
 import com.sun.xml.internal.bind.v2.model.core.ID;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.easymock.EasyMock;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
@@ -213,10 +215,27 @@ public class GameTests {
         ICard fakeCard = EasyMock.niceMock(Card.class);
         IDeck fakeDeck = EasyMock.niceMock(Deck.class);
 
-        fakeDeck.draw();
+        try {
+            Field draw = g.getClass().getDeclaredField("drawPile");
+            draw.setAccessible(true);
+            draw.set(g, fakeDeck);
+            Field playerList = g.getClass().getDeclaredField("players");
+            playerList.setAccessible(true);
+            ArrayList<IPlayer> fakePlayerList = new ArrayList<>();
+            fakePlayerList.add(fakePlayer);
+            playerList.set(g, fakePlayerList);
+        }catch (Exception e){
+            Assert.fail();
+        }
+
+        EasyMock.expect(fakeDeck.draw()).andReturn(fakeCard);
         fakePlayer.addCardToHand(fakeCard);
 
-        g.dealToPlayer(3);
+        EasyMock.replay(fakeDeck);
+        EasyMock.replay(fakePlayer);
+        EasyMock.replay(fakeCard);
+
+        g.dealToPlayer(0);
 
         EasyMock.verify(fakeDeck);
         EasyMock.verify(fakePlayer);
