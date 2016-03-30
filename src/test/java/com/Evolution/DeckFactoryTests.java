@@ -100,4 +100,22 @@ public class DeckFactoryTests {
         DeckFactory df = new DeckFactory();
         df.readLineToCard("asdf");
     }
+
+    @Test(expected = WrongFileException.class)
+    public void testIllegalStringFormat2() throws IOException, IllegalCardDirectionException, WrongFileException {
+        DeckFactory df = new DeckFactory();
+        df.readLineToCard("asdf,asdf,asdf,asdf,asdf,");
+    }
+
+    @Test(expected = WrongFileException.class)
+    public void testIllegalStringFormat3() throws IOException, IllegalCardDirectionException, WrongFileException {
+        DeckFactory df = new DeckFactory();
+        df.readLineToCard("asdf.asdf.asdf.asdf.2");
+    }
+
+    @Test(expected = WrongFileException.class)
+    public void testIllegalStringFormat4() throws IOException, IllegalCardDirectionException, WrongFileException {
+        DeckFactory df = new DeckFactory();
+        df.readLineToCard("asdf;adsf;asdf;asdf;asdf;adff");
+    }
 }
