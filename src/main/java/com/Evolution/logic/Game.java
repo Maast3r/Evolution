@@ -1,5 +1,6 @@
 package com.Evolution.logic;
 
+import com.Evolution.exceptions.FoodBankEmptyException;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
 import com.Evolution.interfaces.*;
@@ -134,7 +135,10 @@ public class Game {
     /**
      * Decrements the food bank by one
      */
-    public void decrementFoodBank() {
+    public void decrementFoodBank() throws FoodBankEmptyException {
+        if(this.foodBank == 0){
+            throw new FoodBankEmptyException("The food bank is empty");
+        }
         this.foodBank--;
     }
 
@@ -143,7 +147,7 @@ public class Game {
      *
      * @param i food
      */
-    public void decrementFoodBank(int i) {
+    public void decrementFoodBank(int i){
         this.foodBank -= i;
     }
 
@@ -152,7 +156,7 @@ public class Game {
      *
      * @param i food
      */
-    public void moveFoodFromBankToHole(int i) {
+    public void moveFoodFromBankToHole(int i) throws FoodBankEmptyException {
         decrementFoodBank(i);
         this.wateringHole.addFood(i);
     }
