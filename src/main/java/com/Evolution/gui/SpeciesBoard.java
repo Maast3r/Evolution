@@ -1,5 +1,7 @@
 package com.Evolution.gui;
 
+import com.Evolution.interfaces.ICard;
+import com.Evolution.interfaces.IPlayer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -21,16 +23,20 @@ import java.io.IOException;
  * Creates a new SpeciesBoard to add to a player's list of species
  * when they add a species
  */
-public class SpeciesBoard extends VBox{
+public class SpeciesBoard extends VBox {
 
     private VBox board;
+    private MyHBox playerPane;
     private Label populationSize;
     private Label bodySize;
+    private Label foodOnBoard;
     private ChoiceBox<String> actionChoiceBox;
     private Label traitLabel1;
     private Label traitLabel2;
     private Label traitLabel3;
-    private int playerNum;
+    private IPlayer player;
+    private ICard selectedCard;
+    private String traitSelection;
 
     /**
      * Enum for the actions in the choiceBox
@@ -38,9 +44,10 @@ public class SpeciesBoard extends VBox{
      * New actions are automatically added to drop down, but must the execution
      * needs added to performAction
      */
-    private enum Actions {
+    public enum Actions {
         ACTIONS("Actions"),
         VIEW_CARDS("View Cards"),
+        DRAW_CARD("Draw Card"),
         ADD_TRAIT("Add Trait"),
         ADD_SPECIES_LEFT("Add Species (Left)"),
         ADD_SPECIES_RIGHT("Add Species (Right)"),
@@ -48,9 +55,11 @@ public class SpeciesBoard extends VBox{
         INCREASE_BODY_SIZE("Increase Body Size");
 
         private String name;
+
         Actions(String name) {
             this.name = name;
         }
+
         public String getName() {
             return name;
         }
@@ -59,9 +68,10 @@ public class SpeciesBoard extends VBox{
     /**
      * Constructor for the species board
      */
-    public SpeciesBoard(int playerNum) {
+    public SpeciesBoard(IPlayer player, MyHBox playerPane) {
         this.board = new VBox();
-        this.playerNum = playerNum;
+        this.player = player;
+        this.playerPane = playerPane;
     }
 
     /**
@@ -80,8 +90,10 @@ public class SpeciesBoard extends VBox{
         populationSize.setStyle("-fx-text-fill: black;");
         bodySize = new Label("Body Size: " + 1);
         bodySize.setStyle("-fx-text-fill: black;");
+        foodOnBoard = new Label("Food: " + 0);
+        foodOnBoard.setStyle("-fx-text-fill: black;");
 
-        speciesBoard.getChildren().addAll(populationSize, bodySize);
+        speciesBoard.getChildren().addAll(populationSize, bodySize, foodOnBoard);
         speciesBoard.setStyle("-fx-padding: 20, 0, 20, 0; -fx-min-width: 75;" +
                 " -fx-min-height: 150; -fx-background-color: burlywood; -fx-alignment: center;");
 
@@ -92,11 +104,9 @@ public class SpeciesBoard extends VBox{
         }
         actionChoiceBox.setItems(options);
         actionChoiceBox.getSelectionModel().selectFirst();
-        actionChoiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                performAction(Actions.values()[newValue.intValue()]);
-            }
+        actionChoiceBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+            performAction(Actions.values()[newValue.intValue()]);
+            this.actionChoiceBox.getSelectionModel().selectFirst();
         });
 
         board.getChildren().addAll(traitLabel1, traitLabel2, traitLabel3, speciesBoard, actionChoiceBox);
@@ -106,6 +116,7 @@ public class SpeciesBoard extends VBox{
 
     /**
      * Performs the action that the user selected from the action choiceBox for this species
+     *
      * @param action the selected action
      */
     private void performAction(Actions action) {
@@ -114,79 +125,159 @@ public class SpeciesBoard extends VBox{
             case ACTIONS:
                 // do nothing
                 break;
+            case DRAW_CARD:
+                // TODO draw a card into player hand
+                break;
             case VIEW_CARDS:
-                // bring up player's cards
-                openCardWindow();
+                openCardWindow(Actions.VIEW_CARDS);
                 break;
             case ADD_TRAIT:
-                // bring up player's cards to select one to add as trait
+                openCardWindow(Actions.ADD_TRAIT);
+                player.removeCardFromHand(this.selectedCard);
                 break;
             case ADD_SPECIES_LEFT:
-                // bring up player's cards to select one to discard to add species to left
+                openCardWindow(Actions.ADD_SPECIES_LEFT);
+                this.player.removeCardFromHand(this.selectedCard);
+                this.playerPane.addSpecies(0);
                 break;
             case ADD_SPECIES_RIGHT:
-                // same as before but adds to right
+                openCardWindow(Actions.ADD_SPECIES_RIGHT);
+                player.removeCardFromHand(this.selectedCard);
+                this.playerPane.addSpecies(1);
                 break;
             case INCREASE_POPULATION:
-                // bring up player's cards to select one to discard to increase population
+                openCardWindow(Actions.INCREASE_POPULATION);
+                player.removeCardFromHand(this.selectedCard);
+                setPopulationSize(1);
                 break;
             case INCREASE_BODY_SIZE:
-                // bring up player's cards to select one to discard to increase body size
+                openCardWindow(Actions.INCREASE_BODY_SIZE);
+                player.removeCardFromHand(this.selectedCard);
+                setBodySize(1);
                 break;
         }
 
     }
 
-    private void openCardWindow() {
+    /**
+     * Opens up the card window for the player to view their hand
+     */
+    private void openCardWindow(Actions action) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/card_popup.fxml"));
-            CardPopupController controller = new CardPopupController(playerNum);
+            CardPopupController controller = new CardPopupController(this.player.getCards(), this);
+            if (action == Actions.ADD_TRAIT) {
+                controller.setAddTrait(true);
+            }
             loader.setController(controller);
             Parent p = loader.load();
             Stage s = new Stage();
             s.setTitle("Evolution!");
             s.getIcons().add(new Image("/images/icon.png"));
             s.setScene(new Scene(p, Color.BLACK));
-            s.show();
+            s.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Get the population size label for this species
-     * @return population size label
+     * Sets the card that the user selects from the card popup
+     *
+     * @param c the card that was selected
      */
-    public Label getPopulationSize() {
-        return this.populationSize;
+    public void setSelectedCard(ICard c) {
+        this.selectedCard = c;
+    }
+
+    /**
+     * Sets the trait that the user selects from the card popup
+     *
+     * @param trait which trait to set
+     */
+    public void setTraitSelection(int trait) {
+        switch (trait) {
+            case 0:
+                setTrait1(this.selectedCard.getName());
+                break;
+            case 1:
+                setTrait2(this.selectedCard.getName());
+                break;
+            case 2:
+                setTrait3(this.selectedCard.getName());
+                break;
+        }
+    }
+
+    /**
+     * Get the population size for this species
+     *
+     * @return population size
+     */
+    public int getPopulationSize() {
+        String[] split = this.populationSize.getText().split(": ");
+        return Integer.parseInt(split[1]);
     }
 
     /**
      * Sets the value of the population size label for this species
-     * @param populationSize the new population size of the species
+     *
+     * @param amount amount to increase/decrease the population by
      */
-    public void setPopulationSize(Label populationSize) {
-        this.populationSize = populationSize;
+    public void setPopulationSize(int amount) {
+        String[] split = this.populationSize.getText().split(": ");
+        int size = Integer.parseInt(split[1]);
+        size += amount;
+        this.populationSize.setText("Population: " + size);
     }
 
     /**
-     * Get the body size label of the current species
-     * @return the body size label
+     * Get the body size of the current species
+     *
+     * @return the body size
      */
-    public Label getBodySize() {
-        return this.bodySize;
+    public int getBodySize() {
+        String[] split = this.bodySize.getText().split(": ");
+        return Integer.parseInt(split[1]);
     }
 
     /**
      * Sets the values of the body size label for this species
-     * @param bodySize the new body size for this species
+     *
+     * @param amount amount to increase/decrease the population by
      */
-    public void setBodySize(Label bodySize) {
-        this.bodySize = bodySize;
+    public void setBodySize(int amount) {
+        String[] split = this.bodySize.getText().split(": ");
+        int size = Integer.parseInt(split[1]);
+        size += amount;
+        this.bodySize.setText("Body Size: " + size);
+    }
+
+    /**
+     * Get the amount on food for this species
+     *
+     * @return amount of food
+     */
+    public int getFoodOnBoard() {
+        String[] split = this.foodOnBoard.getText().split(": ");
+        return Integer.parseInt(split[1]);
+    }
+
+    /**
+     * Sets the value of the food label for this species
+     *
+     * @param amount amount to increase/decrease the food count by
+     */
+    public void setFoodOnBoard(int amount) {
+        String[] split = this.foodOnBoard.getText().split(": ");
+        int food = Integer.parseInt(split[1]);
+        food += amount;
+        this.foodOnBoard.setText("Food: " + food);
     }
 
     /**
      * Gets the actions choiceBox for this species
+     *
      * @return the ChoiceBox of the species
      */
     public ChoiceBox<String> getActionChoiceBox() {
@@ -194,50 +285,59 @@ public class SpeciesBoard extends VBox{
     }
 
     /**
-     * gets the first trait label for this species
-     * @return trait label # 1
+     * gets the first trait for this species
+     *
+     * @return trait # 1
      */
-    public Label getTraitLabel1() {
-        return this.traitLabel1;
+    public String getTrait1() {
+        String[] split = this.traitLabel1.getText().split(": ");
+        return split[1];
     }
 
     /**
      * Sets the first trait for this species
-     * @param traitLabel1 the new trait to set for trait 1
+     *
+     * @param trait the new trait to set for trait 1
      */
-    public void setTraitLabel1(Label traitLabel1) {
-        this.traitLabel1 = traitLabel1;
+    public void setTrait1(String trait) {
+        this.traitLabel1.setText("Trait 1: " + trait);
     }
 
     /**
-     * gets the second trait label for this species
-     * @return trait label # 2
+     * gets the second trait for this species
+     *
+     * @return trait # 2
      */
-    public Label getTraitLabel2() {
-        return this.traitLabel2;
+    public String getTrait2() {
+        String[] split = this.traitLabel2.getText().split(": ");
+        return split[1];
     }
 
     /**
      * Sets the second trait for this species
-     * @param traitLabel2 the new trait to set for trait 2
+     *
+     * @param trait the new trait to set for trait 2
      */
-    public void setTraitLabel2(Label traitLabel2) {
-        this.traitLabel2 = traitLabel2;
+    public void setTrait2(String trait) {
+        this.traitLabel2.setText("Trait 1: " + trait);
     }
 
     /**
-     * gets the third trait label for this species
-     * @return trait label # 3
+     * gets the third trait for this species
+     *
+     * @return trait # 3
      */
-    public Label getTraitLabel3() {
-        return this.traitLabel3;
+    public String getTrait3() {
+        String[] split = this.traitLabel1.getText().split(": ");
+        return split[1];
     }
 
     /**
      * Sets the third trait for this species
-     * @param traitLabel3 the new trait to set for trait 3
+     *
+     * @param trait the new trait to set for trait 3
      */
-    public void setTraitLabel3(Label traitLabel3) {
-        this.traitLabel3 = traitLabel3;
+    public void setTrait3(String trait) {
+        this.traitLabel3.setText("Trait 1: " + trait);
     }
 }
