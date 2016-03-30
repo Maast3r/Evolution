@@ -18,8 +18,8 @@ public class DeckFactoryDeckTests {
     @Test
     public void testGenerateDrawPile() throws IOException, IllegalCardDirectionException, WrongFileException {
         DeckFactory df = new DeckFactory();
-        InputStream input = new ByteArrayInputStream(("asdf2;asdf2 random stuff;./asdf2.jpg;2;1\n" +
-                "Random;Does random stuff;./random.jpg;6;2").getBytes());
+        InputStream input = new ByteArrayInputStream(("asdf2;asdf2 random stuff;./asdf2.png;2;1\n" +
+                "Random;Does random stuff;./random.png;6;2").getBytes());
         IDeck<ICard> drawPile = df.generateDrawPile(input);
         assertNotNull(drawPile.draw());
         assertNotNull(drawPile.draw());
