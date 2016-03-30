@@ -246,4 +246,11 @@ public class GameTests {
             g.decrementFoodBank();
         }
     }
+
+    @Test(expected = FoodBankEmptyException.class)
+    public void testFoodBankIEmpty1() throws IllegalNumberOfPlayers, IllegalCardDirectionException, FoodBankEmptyException {
+        IWateringHole wateringHole = new WateringHole();
+        Game g = new Game(generateNumPlayers(4), wateringHole, this.drawPile, this.discardPile);
+        g.decrementFoodBank(241);
+    }
 }
