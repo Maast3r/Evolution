@@ -20,6 +20,7 @@ public class MyHBox extends HBox {
     private Label foodLabel;
     private ImageView firstPlayerMarker;
     private ArrayList<VBox> playerSpecies = new ArrayList<>();
+    private int playerNum;
 
     /**
      * Constructor for our HBox that stores children
@@ -41,13 +42,14 @@ public class MyHBox extends HBox {
             this.firstPlayerMarker = new ImageView("/images/first_player_marker.png");
         }
         this.foodLabel = new Label("Food bag: " + 0);
-        Label playerNumLabel = new Label("Player " + playerNum);
+        this.playerNum = playerNum;
+        Label playerNumLabel = new Label("Player " + this.playerNum);
 
         VBox playerInfo = new VBox();
         playerInfo.setAlignment(Pos.CENTER);
         playerInfo.getChildren().addAll(this.firstPlayerMarker, playerNumLabel, foodLabel);
 
-        SpeciesBoard speciesBoard = new SpeciesBoard();
+        SpeciesBoard speciesBoard = new SpeciesBoard(playerNum);
         VBox speciesPane = speciesBoard.createSpeciesBoard();
         this.playerSpecies.add(speciesPane);
         this.playerPane.getChildren().addAll(playerInfo, speciesPane);
@@ -98,7 +100,7 @@ public class MyHBox extends HBox {
      * @param side "left" or "right" - the side to add the new species to
      */
     public void addSpecies(String side) {
-        SpeciesBoard speciesBoard = new SpeciesBoard();
+        SpeciesBoard speciesBoard = new SpeciesBoard(this.playerNum);
         VBox speciesPane = speciesBoard.createSpeciesBoard();
         if (side.equals("left")) {
             this.playerSpecies.add(0, speciesPane);

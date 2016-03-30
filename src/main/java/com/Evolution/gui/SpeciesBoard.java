@@ -4,9 +4,17 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * Created by brownba1 on 3/28/2016.
@@ -22,6 +30,7 @@ public class SpeciesBoard extends VBox{
     private Label traitLabel1;
     private Label traitLabel2;
     private Label traitLabel3;
+    private int playerNum;
 
     /**
      * Enum for the actions in the choiceBox
@@ -50,8 +59,9 @@ public class SpeciesBoard extends VBox{
     /**
      * Constructor for the species board
      */
-    public SpeciesBoard() {
+    public SpeciesBoard(int playerNum) {
         this.board = new VBox();
+        this.playerNum = playerNum;
     }
 
     /**
@@ -106,6 +116,7 @@ public class SpeciesBoard extends VBox{
                 break;
             case VIEW_CARDS:
                 // bring up player's cards
+                openCardWindow();
                 break;
             case ADD_TRAIT:
                 // bring up player's cards to select one to add as trait
@@ -124,6 +135,22 @@ public class SpeciesBoard extends VBox{
                 break;
         }
 
+    }
+
+    private void openCardWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/card_popup.fxml"));
+            CardPopupController controller = new CardPopupController(playerNum);
+            loader.setController(controller);
+            Parent p = loader.load();
+            Stage s = new Stage();
+            s.setTitle("Evolution!");
+            s.getIcons().add(new Image("/images/icon.png"));
+            s.setScene(new Scene(p, Color.BLACK));
+            s.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

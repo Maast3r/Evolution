@@ -6,12 +6,13 @@ package com.Evolution.gui;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
+import com.Evolution.interfaces.ICard;
+import com.Evolution.interfaces.IDeck;
 import com.Evolution.interfaces.IPlayer;
-import com.Evolution.logic.Game;
-import com.Evolution.logic.Player;
-import com.Evolution.logic.Species;
+import com.Evolution.logic.*;
 import javafx.fxml.Initializable;
 
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -81,14 +82,24 @@ public class GameScreenController implements Initializable {
         }
 
         // TODO: ANDREW - edit the exceptions here
-        try {
-            Game game = new Game(players);
-            System.out.println("game initialized");
-        } catch (IllegalNumberOfPlayers illegalNumberOfPlayers) {
-            illegalNumberOfPlayers.printStackTrace();
-        } catch (IllegalCardDirectionException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            InputStream s = new FileInputStream(new File("/cardFiles/cardTestMultiple.txt"));
+//            DeckFactory df = new DeckFactory();
+//            IDeck<ICard> drawPile = df.generateDrawPile(s);
+//            IDeck<ICard> discardPile = df.generateDiscardPile();
+//            WateringHole wateringHole = new WateringHole();
+//
+//            game = new Game(players);
+//            System.out.println("game initialized");
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IllegalCardDirectionException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } catch (IllegalNumberOfPlayers illegalNumberOfPlayers) {
+//            illegalNumberOfPlayers.printStackTrace();
+//        }
 
         staticElementsUpdate();
 
@@ -107,11 +118,17 @@ public class GameScreenController implements Initializable {
      */
     private void staticElementsUpdate() {
         // TODO: update to fit actual data
-        drawLabel.setText("Draw Pile:\n" + game.getDrawPile().getSize() + " cards");
-        discardLabel.setText("Discard Pile:\n" + game.getDiscardPile().getSize() + " cards");
+//        drawLabel.setText("Draw Pile:\n" + game.getDrawPile().getSize() + " cards");
+//        discardLabel.setText("Discard Pile:\n" + game.getDiscardPile().getSize() + " cards");
+//        wateringHoleLabel.setText("Food: " + 0 + " pieces");
+//        phaseLabel.setText("Phase: " + "Deal Cards");
+//        playerTurnLabel.setText("Player " + game.getTurn() + " Turn");
+//        foodBankLabel.setText("Food Bank: " + 0 + " pieces left");
+        drawLabel.setText("Draw Pile:\n" + 0 + " cards");
+        discardLabel.setText("Discard Pile:\n" + 0 + " cards");
         wateringHoleLabel.setText("Food: " + 0 + " pieces");
         phaseLabel.setText("Phase: " + "Deal Cards");
-        playerTurnLabel.setText("Player " + 1 + " Turn");
+        playerTurnLabel.setText("Player " + 0 + " Turn");
         foodBankLabel.setText("Food Bank: " + 0 + " pieces left");
     }
 
