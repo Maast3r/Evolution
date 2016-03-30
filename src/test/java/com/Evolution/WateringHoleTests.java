@@ -1,5 +1,6 @@
 package com.Evolution;
 
+import com.Evolution.exceptions.WateringHoleEmptyException;
 import com.Evolution.logic.WateringHole;
 import org.junit.Test;
 
@@ -55,7 +56,7 @@ public class WateringHoleTests {
     }
 
     @Test
-    public void testRemove1Food() {
+    public void testRemove1Food() throws WateringHoleEmptyException {
         WateringHole wateringHole = new WateringHole();
         wateringHole.addFood(7);
         wateringHole.removeFood();
@@ -63,7 +64,7 @@ public class WateringHoleTests {
     }
 
     @Test
-    public void testRemoveSeveralSingleFood() {
+    public void testRemoveSeveralSingleFood() throws WateringHoleEmptyException {
         WateringHole wateringHole = new WateringHole();
         wateringHole.addFood(7);
         for (int i = 0; i < 4; i++) {
@@ -99,7 +100,7 @@ public class WateringHoleTests {
     }
 
     @Test(expected = WateringHoleEmptyException.class)
-    public void testWateringHoleEmpty () {
+    public void testWateringHoleEmpty () throws WateringHoleEmptyException {
         WateringHole w = new WateringHole();
         w.removeFood();
     }

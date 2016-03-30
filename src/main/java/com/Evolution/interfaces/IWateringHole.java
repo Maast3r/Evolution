@@ -1,5 +1,7 @@
 package com.Evolution.interfaces;
 
+import com.Evolution.exceptions.WateringHoleEmptyException;
+
 /**
  * Created by goistjt on 3/23/2016.
  */
@@ -29,7 +31,7 @@ public interface IWateringHole {
      * Removes a single piece of food from the watering hole
      * TODO: Needs Error Handling
      */
-    void removeFood();
+    void removeFood() throws WateringHoleEmptyException;
 
     /**
      * Removes i pieces of food from the watering hole
