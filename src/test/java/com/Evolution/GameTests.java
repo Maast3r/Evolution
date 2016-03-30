@@ -205,4 +205,21 @@ public class GameTests {
             assertEquals(240-(i*5), g.getFoodBankCount());
         }
     }
+
+    @Test
+    public void testDealToPlayerValid() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        Game g = new Game(generateNumPlayers(4), this.wateringHole, this.drawPile, this.discardPile);
+        IPlayer fakePlayer = EasyMock.niceMock(Player.class);
+        ICard fakeCard = EasyMock.niceMock(Card.class);
+        IDeck fakeDeck = EasyMock.niceMock(Deck.class);
+
+        fakeDeck.draw();
+        fakePlayer.addCardToHand(fakeCard);
+
+        g.dealToPlayer(3);
+
+        EasyMock.verify(fakeDeck);
+        EasyMock.verify(fakePlayer);
+        EasyMock.verify(fakeCard);
+    }
 }
