@@ -52,4 +52,11 @@ public interface IPlayer {
      * @param card The card to add
      */
     void addCardToHand(ICard card);
+
+    /**
+     * Removes the given card from the players hand
+     * @param card the card to remove
+     * @return If the removal was successful
+     */
+    boolean removeCardFromHand(ICard card);
 }
