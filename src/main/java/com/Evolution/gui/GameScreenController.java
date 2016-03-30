@@ -11,7 +11,6 @@ import com.Evolution.interfaces.IDeck;
 import com.Evolution.interfaces.IPlayer;
 import com.Evolution.interfaces.IWateringHole;
 import com.Evolution.logic.*;
-import com.Evolution.testClasses.TestWateringHole;
 import javafx.fxml.Initializable;
 
 import java.io.File;
@@ -92,7 +91,8 @@ public class GameScreenController implements Initializable {
             IWateringHole wateringHole = new WateringHole();
             DeckFactory df = new DeckFactory();
             IDeck<ICard> drawPile = df.generateDrawPile(new FileInputStream(new File("/cardFiles/CardTestMultiple.txt")));
-            game = new Game(players, wateringHole, drawPile);
+            IDeck<ICard> discardPile = df.generateDiscardPile();
+            game = new Game(players, wateringHole, drawPile, discardPile);
             System.out.println("game initialized");
         } catch (IllegalNumberOfPlayers illegalNumberOfPlayers) {
             illegalNumberOfPlayers.printStackTrace();

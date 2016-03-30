@@ -23,10 +23,11 @@ public class Game {
      * @param players      playing game
      * @param wateringHole
      * @param drawPile
+     * @param discardPile
      * @throws IllegalNumberOfPlayers
      * @throws IllegalCardDirectionException
      */
-    public Game(ArrayList<IPlayer> players, IWateringHole wateringHole, IDeck<ICard> drawPile) throws
+    public Game(ArrayList<IPlayer> players, IWateringHole wateringHole, IDeck<ICard> drawPile, IDeck<ICard> discardPile) throws
             IllegalNumberOfPlayers, IllegalCardDirectionException {
         // TODO: Refactor this to fulfill dependency injection by having the Decks and WateringHole passed in
         if (players.size() < 3 || players.size() > 6) {
@@ -36,7 +37,7 @@ public class Game {
         this.wateringHole = wateringHole;
 
         this.drawPile = drawPile;
-        this.discardPile = new Deck<>();
+        this.discardPile = discardPile;
     }
 
     /**
