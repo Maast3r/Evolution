@@ -6,11 +6,13 @@ import com.Evolution.interfaces.*;
 import com.Evolution.logic.*;
 import com.Evolution.testClasses.*;
 import com.sun.xml.internal.bind.v2.model.core.ID;
+import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.easymock.EasyMock;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
@@ -213,12 +215,8 @@ public class GameTests {
         Game g = new Game(generateNumPlayers(4), this.wateringHole, this.drawPile, this.discardPile);
         IPlayer fakePlayer = EasyMock.niceMock(Player.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
-        IDeck fakeDeck = EasyMock.niceMock(Deck.class);
 
         try {
-            Field draw = g.getClass().getDeclaredField("drawPile");
-            draw.setAccessible(true);
-            draw.set(g, fakeDeck);
             Field playerList = g.getClass().getDeclaredField("players");
             playerList.setAccessible(true);
             ArrayList<IPlayer> fakePlayerList = new ArrayList<>();
@@ -228,17 +226,37 @@ public class GameTests {
             Assert.fail();
         }
 
-        EasyMock.expect(fakeDeck.draw()).andReturn(fakeCard);
+        EasyMock.expect(this.drawPile.draw()).andReturn(fakeCard);
         fakePlayer.addCardToHand(fakeCard);
 
-        EasyMock.replay(fakeDeck);
+        EasyMock.replay(this.drawPile);
         EasyMock.replay(fakePlayer);
         EasyMock.replay(fakeCard);
 
         g.dealToPlayer(0);
 
-        EasyMock.verify(fakeDeck);
+        EasyMock.verify(this.drawPile);
         EasyMock.verify(fakePlayer);
         EasyMock.verify(fakeCard);
     }
+
+    @Test
+    public void testDealToPlayerResults() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        Deck<ICard> drawPile = new Deck<>();
+        ICard card = new TestCard();
+        drawPile.discard(card);
+        drawPile.contains(card);
+        Player player = new Player(new TestSpecies());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for(int i = 0; i < 3; i++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
+        g.dealToPlayer(0);
+        System.out.println(player.getCards());
+        assertTrue(player.getCards().get(0).equals(card));
+        assertTrue(!drawPile.contains(card));
+
+    }
+
 }
