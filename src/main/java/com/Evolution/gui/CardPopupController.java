@@ -4,13 +4,22 @@ package com.Evolution.gui;
  * Created by brownba1 on 3/27/2016.
  */
 
+import com.Evolution.interfaces.ICard;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -18,20 +27,35 @@ import java.util.ResourceBundle;
  */
 public class CardPopupController implements Initializable {
 
-    private int player = 0;
+    private ArrayList<ICard> hand;
     private int numCards = 0;
+    private SpeciesBoard board;
+    private boolean addTrait = false;
 
+    @FXML
+    private Label infoLabel;
     @FXML
     private GridPane gridPane;
 
     /**
-     * Set the current player number after initializing the controller
+     * Set the current player hand after initializing the controller
      *
-     * @param playerNum the number of the player whose hand is being shown
+     * @param playerHand the hand that is being shown
      */
-    CardPopupController(int playerNum) {
-        this.player = playerNum;
-        //this.numCards = player.getNumCards();
+    CardPopupController(ArrayList<ICard> playerHand, SpeciesBoard board) {
+        this.hand = playerHand;
+        this.numCards = this.hand.size();
+        this.board = board;
+    }
+
+    /**
+     * Sets the boolean to true if the action that opened this window was
+     * the ADD_TRAIT action
+     *
+     * @param addTrait boolean value
+     */
+    public void setAddTrait(boolean addTrait) {
+        this.addTrait = addTrait;
     }
 
     /**
@@ -42,8 +66,62 @@ public class CardPopupController implements Initializable {
      */
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
         assert gridPane != null : "fx:id=\"gridPane\" was not injected: check your FXML file 'card_popup.fxml'.";
+        assert infoLabel != null : "fx:id=\"infoLabel\" was not injected: check your FXML file 'card_popup.fxml'.";
 
         gridSetup();
+
+        displayCards();
+    }
+
+    /**
+     * Add the cards in the player's hand to the window
+     */
+    private void displayCards() {
+        int index = 0;
+        if (hand.size() == 0) {
+            infoLabel.setText("No cards in your hand");
+            return;
+        }
+        for (ICard card : hand) {
+            ImageView cardView = new ImageView("/images/card_images/" + (card.getImgPath()));
+            cardView.setOnMouseClicked(event -> {
+                if (event.getButton() == MouseButton.SECONDARY) {
+                    infoLabel.setText(card.getName() + ": " + card.getDesc());
+                } else {
+                    this.board.setSelectedCard(card);
+                    if (this.addTrait) {
+                        // TODO show this box to let player choose
+                        ChoiceBox<String> choices = new ChoiceBox<>();
+                        choices.setItems(FXCollections.observableArrayList("Trait 1", "Trait 2",
+                                "Trait 3"));
+                        choices.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+                            this.board.setTraitSelection(newValue.intValue());
+                        });
+                    }
+                    this.gridPane.getScene().getWindow().hide();
+                }
+            });
+            addToGrid(cardView, index);
+            index++;
+        }
+    }
+
+    /**
+     * Adds the provided image to the grid pane at the correct position
+     * based on the card index
+     *
+     * @param image   the image to add
+     * @param cardNum the card index within the hand
+     */
+    private void addToGrid(ImageView image, int cardNum) {
+        int row = (int) Math.ceil(cardNum / 3);
+        int col;
+        if (cardNum < 3) {
+            col = cardNum;
+        } else {
+            col = cardNum % 3;
+        }
+        this.gridPane.add(image, col, row);
     }
 
     /**
@@ -53,13 +131,13 @@ public class CardPopupController implements Initializable {
      */
     private void gridSetup() {
         int numRows = 0;
-        if (numCards > 3) {
-            numRows = (int) Math.ceil(numCards / 3);
+        if (this.numCards > 3) {
+            numRows = (int) Math.ceil(this.numCards / 3);
         }
         for (int i = 0; i < numRows - 1; i++) {
             RowConstraints rowConst = new RowConstraints();
             rowConst.setPercentHeight(100.0 / numRows);
-            gridPane.getRowConstraints().add(rowConst);
+            this.gridPane.getRowConstraints().add(rowConst);
         }
     }
 }

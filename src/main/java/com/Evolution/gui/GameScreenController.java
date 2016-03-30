@@ -11,7 +11,6 @@ import com.Evolution.interfaces.IDeck;
 import com.Evolution.interfaces.IPlayer;
 import com.Evolution.logic.*;
 import com.Evolution.interfaces.IWateringHole;
-import com.Evolution.logic.*;
 import javafx.fxml.Initializable;
 
 import java.io.*;
@@ -83,29 +82,26 @@ public class GameScreenController implements Initializable {
             players.add(new Player(new Species()));
         }
 
-        // TODO: ANDREW - edit the exceptions here
         try {
             IWateringHole wateringHole = new WateringHole();
             DeckFactory df = new DeckFactory();
-            IDeck<ICard> drawPile = df.generateDrawPile(new FileInputStream(new File("/cardFiles/CardTestMultiple.txt")));
+            IDeck<ICard> drawPile = df.generateDrawPile(new FileInputStream(
+                    new File("src/main/resources/cardFiles/cardInformation.txt")));
             IDeck<ICard> discardPile = df.generateDiscardPile();
+
+            for (int i = 0; i < 5; i++) {
+                players.get(0).addCardToHand(drawPile.draw());
+            }
+
             game = new Game(players, wateringHole, drawPile, discardPile);
-            System.out.println("game initialized");
-        } catch (IllegalNumberOfPlayers illegalNumberOfPlayers) {
-            illegalNumberOfPlayers.printStackTrace();
-        } catch (IllegalCardDirectionException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IllegalNumberOfPlayers | IllegalCardDirectionException | IOException exception) {
+            exception.printStackTrace();
         }
 
         staticElementsUpdate();
 
         if (numPlayers == 3) {
             threePlayerSetup();
-
         } else if (numPlayers == 4) {
             fourPlayerSetup();
         } else {
@@ -117,19 +113,12 @@ public class GameScreenController implements Initializable {
      * Set up the 'static' elements on the screen (i.e. watering hole, cards, etc.)
      */
     private void staticElementsUpdate() {
-        // TODO: update to fit actual data
-//        drawLabel.setText("Draw Pile:\n" + game.getDrawPile().getSize() + " cards");
-//        discardLabel.setText("Discard Pile:\n" + game.getDiscardPile().getSize() + " cards");
-//        wateringHoleLabel.setText("Food: " + 0 + " pieces");
-//        phaseLabel.setText("Phase: " + "Deal Cards");
-//        playerTurnLabel.setText("Player " + game.getTurn() + " Turn");
-//        foodBankLabel.setText("Food Bank: " + 0 + " pieces left");
-        drawLabel.setText("Draw Pile:\n" + 0 + " cards");
-        discardLabel.setText("Discard Pile:\n" + 0 + " cards");
-        wateringHoleLabel.setText("Food: " + 0 + " pieces");
+        drawLabel.setText("Draw Pile:\n" + game.getDrawPile().getSize() + " cards");
+        discardLabel.setText("Discard Pile:\n" + game.getDiscardPile().getSize() + " cards");
+        wateringHoleLabel.setText("Food: " + game.getWateringHole().getFoodCount() + " pieces");
         phaseLabel.setText("Phase: " + "Deal Cards");
-        playerTurnLabel.setText("Player " + 0 + " Turn");
-        foodBankLabel.setText("Food Bank: " + 0 + " pieces left");
+        playerTurnLabel.setText("Player " + game.getTurn() + " Turn");
+        foodBankLabel.setText("Food Bank: " + game.getFoodBankCount() + " pieces left");
     }
 
     /**
@@ -191,7 +180,7 @@ public class GameScreenController implements Initializable {
      * @param num  player number
      */
     private void startingPaneSetup(HBox pane, int num) {
-        MyHBox hBox = new MyHBox();
+        MyHBox hBox = new MyHBox(this.players.get(num - 1));
         HBox playerPane = hBox.createBox(num);
         pane.getChildren().addAll(playerPane);
         playerPanes.add(playerPane);

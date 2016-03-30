@@ -1,0 +1,21 @@
+.split-pane {
+    -fx-background-color: black;
+}
+
+.scroll-pane {
+    -fx-background: black;
+}
+
+.split-pane *.split-pane-divider {
+    -fx-padding: 0 0 0 0;
+}
+
+#gridPane {
+    -fx-background-color: black;
+}
+
+.label {
+    -fx-text-fill: darkorange;
+    -fx-alignment: center;
+}
+
