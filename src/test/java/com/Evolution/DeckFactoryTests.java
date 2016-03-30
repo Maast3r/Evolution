@@ -93,4 +93,10 @@ public class DeckFactoryTests {
         assertTrue(c.get(1).getFood() == 6);
         assertTrue(c.get(1).getDirection() == 2);
     }
+
+    @Test(expected = WrongFileException.class)
+    public void testIllegalStringFormat1() throws IOException, IllegalCardDirectionException {
+        DeckFactory df = new DeckFactory();
+        df.readLineToCard("asdf");
+    }
 }

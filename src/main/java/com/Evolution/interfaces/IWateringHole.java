@@ -29,13 +29,11 @@ public interface IWateringHole {
 
     /**
      * Removes a single piece of food from the watering hole
-     * TODO: Needs Error Handling
      */
     void removeFood() throws WateringHoleEmptyException;
 
     /**
      * Removes i pieces of food from the watering hole
-     * TODO: Needs Error Handling
      */
     void removeFood(int i) throws WateringHoleEmptyException;
 }
