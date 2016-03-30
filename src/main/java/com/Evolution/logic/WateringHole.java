@@ -36,7 +36,7 @@ public class WateringHole implements IWateringHole {
 
     @Override
     public void removeFood(int i) throws WateringHoleEmptyException {
-        if(i > this.foodCount){
+        if(i > this.foodCount || i < 0){
             throw new WateringHoleEmptyException("WateringHole is empty.");
         }
         this.foodCount -= i;
