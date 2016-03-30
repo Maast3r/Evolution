@@ -156,4 +156,13 @@ public class PlayerTests {
         assertTrue(p.removeCardFromHand(card));
         assertTrue(!p.getCards().contains(card));
     }
+
+    @Test
+    public void testInvalidDiscard(){
+        Player p = new Player(new TestSpecies());
+        ICard card = new TestCard();
+        assertTrue(!p.getCards().contains(card));
+        assertTrue(!p.removeCardFromHand(card));
+        assertTrue(!p.getCards().contains(card));
+    }
 }
