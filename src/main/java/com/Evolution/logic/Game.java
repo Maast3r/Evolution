@@ -24,7 +24,7 @@ public class Game {
      * @param players      playing game
      * @param wateringHole
      * @param drawPile
-     * @param discardPileK
+     * @param discardPile
      * @throws IllegalNumberOfPlayers
      * @throws IllegalCardDirectionException
      */
