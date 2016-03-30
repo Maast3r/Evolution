@@ -15,6 +15,7 @@ public class Game {
     private ArrayList<IPlayer> players;
     private IDeck<ICard> drawPile;
     private IDeck<ICard> discardPile;
+    private IWateringHole wateringHole;
 
     /**
      * Evolution Game constructor which contains main logic to interact with players, species, and cards
@@ -30,6 +31,7 @@ public class Game {
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
         }
         this.players = players;
+        this.wateringHole = wateringHole;
 
         this.drawPile = new Deck<>();
         for (int i = 0; i < 50; i++) {
@@ -111,6 +113,6 @@ public class Game {
     }
 
     public IWateringHole getWateringHole() {
-        return new WateringHole();
+        return this.wateringHole;
     }
 }
