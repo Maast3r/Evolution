@@ -146,4 +146,14 @@ public class PlayerTests {
         p.addCardToHand(card3);
         assertTrue(Arrays.equals(p.getCards().toArray(), expected.toArray()));
     }
+
+    @Test
+    public void testDiscard(){
+        Player p = new Player(new TestSpecies());
+        ICard card = new TestCard();
+        p.addCardToHand(card);
+        assertTrue(p.getCards().contains(card));
+        assertTrue(p.removeCardFromHand(card));
+        assertTrue(!p.getCards().contains(card));
+    }
 }
