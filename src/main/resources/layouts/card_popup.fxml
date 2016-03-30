@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" stylesheets="@../styles/card_popup.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+    <items>
+        <Pane maxHeight="-Infinity" minHeight="50.0" prefHeight="75.0">
+            <Label fx:id="infoLabel" contentDisplay="CENTER" maxWidth="800.0" text="" textAlignment="CENTER" wrapText="true">
+                <font>
+                    <Font size="16.0" />
+                </font>
+            </Label>
+        </Pane>
+        <ScrollPane fitToWidth="true" maxWidth="-Infinity" minWidth="800.0" prefWidth="800.0" stylesheets="@../styles/card_popup.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+            <content>
+                <GridPane id="gridPane" fx:id="gridPane" alignment="CENTER" minHeight="250.0" minWidth="800.0" stylesheets="@../styles/card_popup.css">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" halignment="CENTER"/>
+                        <ColumnConstraints hgrow="SOMETIMES" halignment="CENTER"/>
+                        <ColumnConstraints hgrow="SOMETIMES" halignment="CENTER"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="250" minHeight="250" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                </GridPane>
+            </content>
+        </ScrollPane>
+    </items>
+</SplitPane>

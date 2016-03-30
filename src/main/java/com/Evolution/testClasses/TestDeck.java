@@ -18,7 +18,8 @@ public class TestDeck implements IDeck {
     }
 
     @Override
-    public void shuffle() {
+    public void discard(Object object) {}
 
-    }
+    @Override
+    public void shuffle() {}
 }

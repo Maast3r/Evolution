@@ -1,9 +1,11 @@
 package com.Evolution.logic;
 
 import com.Evolution.exceptions.InvalidPlayerSpeciesRemovalException;
+import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IPlayer;
 import com.Evolution.interfaces.ISpecies;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -11,6 +13,7 @@ import java.util.ArrayList;
  */
 public class Player implements IPlayer {
     private ArrayList<ISpecies> speciesList = new ArrayList<>();
+    private ArrayList<ICard> cardList = new ArrayList<>();
 
     public Player(ISpecies species) {
         speciesList.add(species);
@@ -36,5 +39,19 @@ public class Player implements IPlayer {
         } else {
             this.speciesList.remove(i);
         }
+    }
+
+    public ArrayList<ICard> getCards() {
+        return cardList;
+    }
+
+    @Override
+    public void addCardToHand(ICard card) {
+        cardList.add(card);
+    }
+
+    @Override
+    public boolean removeCardFromHand(ICard card) {
+        return cardList.remove(card);
     }
 }

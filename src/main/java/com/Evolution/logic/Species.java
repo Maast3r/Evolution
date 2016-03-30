@@ -11,6 +11,9 @@ public class Species implements ISpecies {
     private int bodySize;
     private int population;
 
+    /**
+     * Creates a species defaulted with body size and population equal to 0.
+     */
     public Species() {
         this.bodySize = 1;
         this.population = 1;

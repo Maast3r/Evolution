@@ -4,13 +4,22 @@ package com.Evolution.gui;
  * Created by brownba1 on 3/22/2016.
  */
 
-import javafx.collections.FXCollections;
+import com.Evolution.exceptions.IllegalCardDirectionException;
+import com.Evolution.exceptions.IllegalNumberOfPlayers;
+import com.Evolution.interfaces.ICard;
+import com.Evolution.interfaces.IDeck;
+import com.Evolution.interfaces.IPlayer;
+import com.Evolution.logic.*;
+import com.Evolution.interfaces.IWateringHole;
 import javafx.fxml.Initializable;
+
+import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
@@ -20,9 +29,10 @@ import javafx.scene.layout.*;
 public class GameScreenController implements Initializable {
 
     private int numPlayers = 0;
+    private ArrayList<IPlayer> players = new ArrayList<>();
+    private ArrayList<HBox> playerPanes = new ArrayList<>();
+    private Game game;
 
-    @FXML
-    private BorderPane gamePane;
     @FXML
     private HBox topPane;
     @FXML
@@ -44,6 +54,7 @@ public class GameScreenController implements Initializable {
 
     /**
      * Set the number of players after initializing the controller
+     *
      * @param numPlayers the number of players selected on the start screen
      */
     GameScreenController(int numPlayers) {
@@ -51,12 +62,41 @@ public class GameScreenController implements Initializable {
     }
 
     /**
-     * Initialize the game controller and screen
+     * Initialize the game, game controller, and screen for the number of selected players
+     *
      * @param fxmlFileLocation fxml file this controller is for (game_screen.fxml)
-     * @param resources resources available in the package
+     * @param resources        resources available in the package
      */
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-        // TODO: Null check for scene objects
+        assert topPane != null : "fx:id=\"topPane\" was not injected: check your FXML file 'game_screen.fxml'.";
+        assert leftPane != null : "fx:id=\"leftPane\" was not injected: check your FXML file 'game_screen.fxml'.";
+        assert bottomPane != null : "fx:id=\"bottomPane\" was not injected: check your FXML file 'game_screen.fxml'.";
+        assert drawLabel != null : "fx:id=\"drawLabel\" was not injected: check your FXML file 'game_screen.fxml'.";
+        assert discardLabel != null : "fx:id=\"discardLabel\" was not injected: check your FXML file 'game_screen.fxml'.";
+        assert wateringHoleLabel != null : "fx:id=\"wateringHoleLabel\" was not injected: check your FXML file 'game_screen.fxml'.";
+        assert playerTurnLabel != null : "fx:id=\"playerTurnLabel\" was not injected: check your FXML file 'game_screen.fxml'.";
+        assert phaseLabel != null : "fx:id=\"phaseLabel\" was not injected: check your FXML file 'game_screen.fxml'.";
+        assert foodBankLabel != null : "fx:id=\"foodBankLabel\" was not injected: check your FXML file 'game_screen.fxml'.";
+
+        for (int i = 0; i < numPlayers; i++) {
+            players.add(new Player(new Species()));
+        }
+
+        try {
+            IWateringHole wateringHole = new WateringHole();
+            DeckFactory df = new DeckFactory();
+            IDeck<ICard> drawPile = df.generateDrawPile(new FileInputStream(
+                    new File("src/main/resources/cardFiles/cardInformation.txt")));
+            IDeck<ICard> discardPile = df.generateDiscardPile();
+
+            for (int i = 0; i < 5; i++) {
+                players.get(0).addCardToHand(drawPile.draw());
+            }
+
+            game = new Game(players, wateringHole, drawPile, discardPile);
+        } catch (IllegalNumberOfPlayers | IllegalCardDirectionException | IOException exception) {
+            exception.printStackTrace();
+        }
 
         staticElementsUpdate();
 
@@ -73,13 +113,12 @@ public class GameScreenController implements Initializable {
      * Set up the 'static' elements on the screen (i.e. watering hole, cards, etc.)
      */
     private void staticElementsUpdate() {
-        // TODO: update to fit actual data
-        drawLabel.setText("Draw Pile:\n" + 0 + " cards");
-        discardLabel.setText("Discard Pile:\n" + 0 + " cards");
-        wateringHoleLabel.setText("Food: " + 0 + " pieces");
+        drawLabel.setText("Draw Pile:\n" + game.getDrawPile().getSize() + " cards");
+        discardLabel.setText("Discard Pile:\n" + game.getDiscardPile().getSize() + " cards");
+        wateringHoleLabel.setText("Food: " + game.getWateringHole().getFoodCount() + " pieces");
         phaseLabel.setText("Phase: " + "Deal Cards");
-        playerTurnLabel.setText("Player " + 1 + " Turn");
-        foodBankLabel.setText("Food Bank: " + 0 + " pieces left");
+        playerTurnLabel.setText("Player " + game.getTurn() + " Turn");
+        foodBankLabel.setText("Food Bank: " + game.getFoodBankCount() + " pieces left");
     }
 
     /**
@@ -99,10 +138,8 @@ public class GameScreenController implements Initializable {
     private void fourPlayerSetup() {
         HBox player1 = new HBox();
         player1.setAlignment(Pos.CENTER);
-        player1.setMinWidth(600);
         HBox player2 = new HBox();
         player2.setAlignment(Pos.CENTER);
-        player2.setMinWidth(600);
 
         startingPaneSetup(player1, 1);
         startingPaneSetup(player2, 2);
@@ -119,16 +156,12 @@ public class GameScreenController implements Initializable {
     private void fivePlayerSetup() {
         HBox player1 = new HBox();
         player1.setAlignment(Pos.CENTER);
-        player1.setMinWidth(600);
         HBox player2 = new HBox();
         player2.setAlignment(Pos.CENTER);
-        player2.setMinWidth(600);
         HBox player4 = new HBox();
         player4.setAlignment(Pos.CENTER);
-        player4.setMinWidth(600);
         HBox player5 = new HBox();
         player5.setAlignment(Pos.CENTER);
-        player5.setMinWidth(600);
 
         startingPaneSetup(player1, 1);
         startingPaneSetup(player2, 2);
@@ -141,49 +174,15 @@ public class GameScreenController implements Initializable {
     }
 
     /**
-     * Set up the default screen with player info and single species
-     * @param playerPane player pane
-     * @param num player number
+     * Set up the starting screen for each player
+     *
+     * @param pane player pane
+     * @param num  player number
      */
-    private void startingPaneSetup(HBox playerPane, int num) {
-        Label foodBagLabel = new Label("Food bag: " + 0);
-        Label playerNumLabel = new Label("Player " + num);
-
-        VBox playerInfo = new VBox();
-        playerInfo.setAlignment(Pos.CENTER);
-        playerInfo.getChildren().addAll(playerNumLabel, foodBagLabel);
-
-        VBox speciesPane = makeSpeciesPane();
-        playerPane.getChildren().addAll(playerInfo, speciesPane);
-    }
-
-    /**
-     * Create a default species pane with traits, board, and actions
-     * @return the species pane
-     */
-    private VBox makeSpeciesPane() {
-        VBox speciesPane = new VBox();
-        VBox speciesBoard = new VBox();
-
-        Label trait1Label = new Label("Trait 1: " + "T1");
-        Label trait2Label = new Label("Trait 2: " + "T2");
-        Label trait3Label = new Label("Trait 3: " + "T3");
-
-        Label populationSize = new Label("Population: " + 1);
-        populationSize.setStyle("-fx-text-fill: black");
-        Label bodySize = new Label("Body Size: " + 1);
-        bodySize.setStyle("-fx-text-fill: black");
-
-        speciesBoard.getChildren().addAll(populationSize, bodySize);
-        speciesBoard.setStyle("-fx-padding: 20, 0, 20, 0; -fx-min-width: 75;" +
-                " -fx-min-height: 150; -fx-background-color: burlywood; -fx-alignment: center");
-
-        ChoiceBox<String> actionChoiceBox = new ChoiceBox<>();
-        actionChoiceBox.setItems(FXCollections.observableArrayList("Actions", "Action1", "Action2"));
-        actionChoiceBox.getSelectionModel().selectFirst();
-
-        speciesPane.getChildren().addAll(trait1Label, trait2Label, trait3Label, speciesBoard, actionChoiceBox);
-        speciesPane.setStyle("-fx-padding: 20, 20, 20, 20");
-        return speciesPane;
+    private void startingPaneSetup(HBox pane, int num) {
+        MyHBox hBox = new MyHBox(this.players.get(num - 1));
+        HBox playerPane = hBox.createBox(num);
+        pane.getChildren().addAll(playerPane);
+        playerPanes.add(playerPane);
     }
 }

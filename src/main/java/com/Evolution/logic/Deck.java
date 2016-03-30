@@ -26,6 +26,9 @@ public class Deck<T> extends Stack<T> implements IDeck<T> {
     }
 
     @Override
+    public void discard(T object) { this.push(object); }
+
+    @Override
     public void shuffle() {
         Collections.shuffle(this);
     }
