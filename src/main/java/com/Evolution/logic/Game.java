@@ -28,8 +28,8 @@ public class Game {
      * @throws IllegalNumberOfPlayers
      * @throws IllegalCardDirectionException
      */
-    public Game(ArrayList<IPlayer> players, IWateringHole wateringHole, IDeck<ICard> drawPile, IDeck<ICard> discardPile) throws
-            IllegalNumberOfPlayers, IllegalCardDirectionException {
+    public Game(ArrayList<IPlayer> players, IWateringHole wateringHole, IDeck<ICard> drawPile, IDeck<ICard> discardPile)
+            throws IllegalNumberOfPlayers, IllegalCardDirectionException {
         // TODO: Refactor this to fulfill dependency injection by having the Decks and WateringHole passed in
         if (players.size() < 3 || players.size() > 6) {
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
@@ -125,7 +125,6 @@ public class Game {
     public int getFoodBankCount() {
         return this.foodBank;
     }
-
 
     public void decrementFoodBank() {
         this.foodBank--;

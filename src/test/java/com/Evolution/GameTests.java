@@ -97,6 +97,7 @@ public class GameTests {
             IllegalCardDirectionException {
         Game g = new Game(generateNumPlayers(4), wateringHole, this.drawPile, this.discardPile);
         assertTrue(g.getDrawPile() == this.drawPile);
+        assertEquals(0, g.getDrawPile().getSize());
     }
 
     @Test
@@ -104,6 +105,7 @@ public class GameTests {
             IllegalCardDirectionException {
         Game g = new Game(generateNumPlayers(5), wateringHole, this.drawPile, this.discardPile);
         assertTrue(this.discardPile == g.getDiscardPile());
+        assertEquals(0, g.getDiscardPile().getSize());
     }
 
     @Test
