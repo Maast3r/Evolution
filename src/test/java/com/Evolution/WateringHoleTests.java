@@ -74,7 +74,7 @@ public class WateringHoleTests {
     }
 
     @Test
-    public void testRemove5Food() {
+    public void testRemove5Food() throws WateringHoleEmptyException {
         WateringHole wateringHole = new WateringHole();
         wateringHole.addFood(10);
         wateringHole.removeFood(5);
@@ -82,7 +82,7 @@ public class WateringHoleTests {
     }
 
     @Test
-    public void testRemoveNFood() {
+    public void testRemoveNFood() throws WateringHoleEmptyException {
         WateringHole wateringHole = new WateringHole();
         wateringHole.addFood(10);
         wateringHole.removeFood(5);

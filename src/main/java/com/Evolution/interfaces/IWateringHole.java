@@ -37,5 +37,5 @@ public interface IWateringHole {
      * Removes i pieces of food from the watering hole
      * TODO: Needs Error Handling
      */
-    void removeFood(int i);
+    void removeFood(int i) throws WateringHoleEmptyException;
 }
