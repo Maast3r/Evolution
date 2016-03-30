@@ -130,4 +130,8 @@ public class Game {
     public void decrementFoodBank() {
         this.foodBank--;
     }
+
+    public void decrementFoodBank(int i) {
+        this.foodBank -= i;
+    }
 }
