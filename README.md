@@ -35,6 +35,12 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 	* 100+ LOC
 	* No control logic
 * Trevor Burch
+    * ICard + Card/TestCard + CardTests
+    * IDeck + Deck/TestDeck + DeckTests
+    * JavaDocs contained in relevant Interfaces/Classes
+    * Testing above classes based on correct values/inputs
+    * 100+ LOC
+    * No GUI calls
 * Andrew Ma
     * IllegalNumberOfPlayers + Game + GameTests
     * InvalidPlayerSpeciesRemovalException + Player + PlayerTests

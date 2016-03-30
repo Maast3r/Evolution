@@ -2,60 +2,158 @@ package com.Evolution.logic;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
-import com.Evolution.interfaces.ICard;
-import com.Evolution.interfaces.IPlayer;
+import com.Evolution.interfaces.*;
 
 import java.util.ArrayList;
 
 /**
- * Created by goistjt on 3/23/2016.
+ * Game logic controller class. Handles most interaction between related game objects.
  */
 public class Game {
     private int round = 1;
-    private int numberOfPlayers;
+    private int turn = 1;
     private ArrayList<IPlayer> players;
-    private Deck<ICard> drawPile;
-    private Deck<ICard> discardPile;
+    private IDeck<ICard> drawPile;
+    private IDeck<ICard> discardPile;
+    private IWateringHole wateringHole;
+    private int foodBank = 240;
 
-    public Game(int numberOfPlayers) throws IllegalNumberOfPlayers, IllegalCardDirectionException {
-        if(numberOfPlayers < 3 || numberOfPlayers > 6){
+    /**
+     * Evolution Game constructor which contains main logic to interact with players, species, and cards
+     *
+     * @param players      playing game
+     * @param wateringHole food available to species
+     * @param drawPile     cards available to draw from
+     * @param discardPile  cards that have been discarded
+     * @throws IllegalNumberOfPlayers
+     * @throws IllegalCardDirectionException
+     */
+    public Game(ArrayList<IPlayer> players, IWateringHole wateringHole, IDeck<ICard> drawPile, IDeck<ICard> discardPile)
+            throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        // TODO: Refactor this to fulfill dependency injection by having the Decks and WateringHole passed in
+        if (players.size() < 3 || players.size() > 6) {
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
         }
-        this.numberOfPlayers = numberOfPlayers;
-        this.players = new ArrayList<>();
-        for(int i=0; i<this.numberOfPlayers; i++){
-            this.players.add(new Player(new Species()));
-        }
+        this.players = players;
+        this.wateringHole = wateringHole;
 
-        this.drawPile = new Deck<ICard>();
-        for(int i=0; i<50; i++){
-            drawPile.add(new Card("Carnivore",
-                    "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
-        }
-        this.discardPile = new Deck<ICard>();
+        this.drawPile = drawPile;
+        this.discardPile = discardPile;
     }
 
-    public int getNumPlayers(){
-        return this.numberOfPlayers;
-    }
-
+    /**
+     * Returns the current round of the Game
+     *
+     * @return round
+     */
     public int getRound() {
         return this.round;
     }
 
+    /**
+     * Increases the current round by one
+     */
     public void increaseRound() {
         this.round++;
     }
 
+    /**
+     * Returns the list of players in the Game
+     *
+     * @return players
+     */
     public ArrayList<IPlayer> getPlayerObjects() {
         return this.players;
     }
 
-    public Deck getDrawPile(){
+    /**
+     * Returns the Deck of Cards corresponding to the draw pile
+     *
+     * @return drawPile
+     */
+    public IDeck<ICard> getDrawPile() {
         return this.drawPile;
     }
 
-    public Deck getDiscardPile() {
+    /**
+     * Returns the Deck of Cards corresponding to the discard pile
+     *
+     * @return discardPile
+     */
+    public IDeck<ICard> getDiscardPile() {
         return this.discardPile;
+    }
+
+    /**
+     * @param phase 1 of the game
+     *              Starts the game with Phase 1.
+     *              Calls PhaseOne.execute()
+     */
+    public void startGame(IPhases phase) {
+        phase.execute();
+    }
+
+    /**
+     * The turn that the game is currently on
+     *
+     * @return The number of the player whose turn it is
+     */
+    public int getTurn() {
+        return this.turn;
+    }
+
+    /**
+     * Increments which player number's turn it is
+     */
+    public void nextTurn() {
+        if (this.turn == this.players.size()) {
+            this.turn = 1;
+        } else {
+            this.turn++;
+        }
+    }
+
+    /**
+     * Gets the IWateringHole associated with this Game
+     *
+     * @return IWateringHole
+     */
+    public IWateringHole getWateringHole() {
+        return this.wateringHole;
+    }
+
+    /**
+     * Returns the amount of food currently available in the bank
+     *
+     * @return foodBank
+     */
+    public int getFoodBankCount() {
+        return this.foodBank;
+    }
+
+    /**
+     * Decrements the food bank by one
+     */
+    public void decrementFoodBank() {
+        this.foodBank--;
+    }
+
+    /**
+     * Decrements the food bank by i
+     *
+     * @param i food
+     */
+    public void decrementFoodBank(int i) {
+        this.foodBank -= i;
+    }
+
+    /**
+     * Decrements the food bank by i and increments the wateringHole food by i
+     *
+     * @param i food
+     */
+    public void moveFoodFromBankToHole(int i) {
+        decrementFoodBank(i);
+        this.wateringHole.addFood(i);
     }
 }
