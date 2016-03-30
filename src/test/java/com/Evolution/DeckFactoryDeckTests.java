@@ -1,6 +1,7 @@
 package com.Evolution;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
+import com.Evolution.exceptions.WrongFileException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IDeck;
 import com.Evolution.logic.DeckFactory;
@@ -15,7 +16,7 @@ import static org.junit.Assert.*;
 public class DeckFactoryDeckTests {
 
     @Test
-    public void testGenerateDrawPile() throws IOException, IllegalCardDirectionException {
+    public void testGenerateDrawPile() throws IOException, IllegalCardDirectionException, WrongFileException {
         DeckFactory df = new DeckFactory();
         InputStream input = new ByteArrayInputStream(("asdf2;asdf2 random stuff;./asdf2.jpg;2;1\n" +
                 "Random;Does random stuff;./random.jpg;6;2").getBytes());

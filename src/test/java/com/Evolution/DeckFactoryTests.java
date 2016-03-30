@@ -1,6 +1,7 @@
 package com.Evolution;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
+import com.Evolution.exceptions.WrongFileException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IDeck;
 import com.Evolution.logic.Deck;
@@ -18,7 +19,7 @@ import static org.junit.Assert.*;
 public class DeckFactoryTests {
 
     @Test
-    public void testReadLineToCard() throws IllegalCardDirectionException, IOException {
+    public void testReadLineToCard() throws IllegalCardDirectionException, IOException, WrongFileException {
         DeckFactory df = new DeckFactory();
         ICard c = df.readLineToCard("Carnivore;Makes a species a carnivore;./carnivore.jpg;3;0");
         assertTrue(c.getName().equals("Carnivore"));
@@ -29,7 +30,7 @@ public class DeckFactoryTests {
     }
 
     @Test
-    public void testReadLineToCard2() throws IllegalCardDirectionException, IOException {
+    public void testReadLineToCard2() throws IllegalCardDirectionException, IOException, WrongFileException {
         DeckFactory df = new DeckFactory();
         ICard c = df.readLineToCard("Random;Does random stuff;./random.jpg;2;1");
         assertTrue(c.getName().equals("Random"));
@@ -40,7 +41,7 @@ public class DeckFactoryTests {
     }
 
     @Test
-    public void testReadFile1() throws IllegalCardDirectionException, IOException {
+    public void testReadFile1() throws IllegalCardDirectionException, IOException, WrongFileException {
         DeckFactory df = new DeckFactory();
         InputStream input = new ByteArrayInputStream("Random;Does random stuff;./random.jpg;2;1".getBytes());
         ArrayList<ICard> c = df.readFile(input);
@@ -52,7 +53,7 @@ public class DeckFactoryTests {
     }
 
     @Test
-    public void testReadFile2() throws IllegalCardDirectionException, IOException {
+    public void testReadFile2() throws IllegalCardDirectionException, IOException, WrongFileException {
         DeckFactory df = new DeckFactory();
         InputStream input = new ByteArrayInputStream("asdf;asdf random stuff;./asdf.jpg;2;1".getBytes());
         ArrayList<ICard> c = df.readFile(input);
@@ -64,7 +65,7 @@ public class DeckFactoryTests {
     }
 
     @Test
-    public void testReadFile3() throws IllegalCardDirectionException, IOException {
+    public void testReadFile3() throws IllegalCardDirectionException, IOException, WrongFileException {
         DeckFactory df = new DeckFactory();
         InputStream input = new ByteArrayInputStream("asdf2;asdf2 random stuff;./asdf2.jpg;2;1".getBytes());
         ArrayList<ICard> c = df.readFile(input);
@@ -76,7 +77,7 @@ public class DeckFactoryTests {
     }
 
     @Test
-    public void testReadFileMultipleLines() throws IOException, IllegalCardDirectionException {
+    public void testReadFileMultipleLines() throws IOException, IllegalCardDirectionException, WrongFileException {
         DeckFactory df = new DeckFactory();
         InputStream input = new ByteArrayInputStream(("asdf2;asdf2 random stuff;./asdf2.jpg;2;1\n" +
                 "Random;Does random stuff;./random.jpg;6;2").getBytes());
@@ -95,7 +96,7 @@ public class DeckFactoryTests {
     }
 
     @Test(expected = WrongFileException.class)
-    public void testIllegalStringFormat1() throws IOException, IllegalCardDirectionException {
+    public void testIllegalStringFormat1() throws IOException, IllegalCardDirectionException, WrongFileException {
         DeckFactory df = new DeckFactory();
         df.readLineToCard("asdf");
     }
