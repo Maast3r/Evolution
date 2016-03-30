@@ -87,7 +87,7 @@ public class GameScreenController implements Initializable {
         try {
             IWateringHole wateringHole = new WateringHole();
             DeckFactory df = new DeckFactory();
-            IDeck<ICard> drawPile = df.generateDrawPile(new FileInputStream(new File("/cardFiles/CardTestMultiple.txt")));
+            IDeck<ICard> drawPile = df.generateDrawPile(new FileInputStream(new File("src/main/resources/cardFiles/CardTestMultiple.txt")));
             IDeck<ICard> discardPile = df.generateDiscardPile();
             game = new Game(players, wateringHole, drawPile, discardPile);
             System.out.println("game initialized");
