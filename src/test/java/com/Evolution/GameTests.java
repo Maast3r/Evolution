@@ -2,16 +2,9 @@ package com.Evolution;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
-import com.Evolution.interfaces.IPhases;
-import com.Evolution.interfaces.IPlayer;
-import com.Evolution.interfaces.IWateringHole;
-import com.Evolution.logic.Card;
-import com.Evolution.logic.Game;
-import com.Evolution.logic.PhaseOne;
-import com.Evolution.logic.WateringHole;
-import com.Evolution.testClasses.TestPlayer;
-import com.Evolution.testClasses.TestSpecies;
-import com.Evolution.testClasses.TestWateringHole;
+import com.Evolution.interfaces.*;
+import com.Evolution.logic.*;
+import com.Evolution.testClasses.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.easymock.EasyMock;
@@ -24,7 +17,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class GameTests {
-    IWateringHole wateringHole;
+    private IWateringHole wateringHole;
+    private IDeck<ICard> drawPile;
+    private IDeck<ICard> discardPile;
 
     private ArrayList<IPlayer> generateNumPlayers(int num) {
         ArrayList<IPlayer> players = new ArrayList<>();
@@ -37,6 +32,8 @@ public class GameTests {
     @Before
     public void initObjects() {
         wateringHole = new TestWateringHole();
+        drawPile = EasyMock.niceMock(Deck.class);
+        discardPile = EasyMock.niceMock(Deck.class);
     }
 
     @Test
@@ -98,8 +95,8 @@ public class GameTests {
     @Test
     public void getDrawPile() throws IllegalNumberOfPlayers,
             IllegalCardDirectionException {
-        Game g = new Game(generateNumPlayers(4), wateringHole);
-        assertEquals(50, g.getDrawPile().getSize());
+        Game g = new Game(generateNumPlayers(4), wateringHole, this.drawPile);
+        assertTrue(g.getDrawPile() == this.drawPile);
     }
 
     @Test

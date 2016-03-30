@@ -112,6 +112,10 @@ public class Game {
         }
     }
 
+    /**
+     * Gets the IWateringHole associated with this Game
+     * @return IWateringHole
+     */
     public IWateringHole getWateringHole() {
         return this.wateringHole;
     }
