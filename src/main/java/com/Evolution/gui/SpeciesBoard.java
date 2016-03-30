@@ -133,26 +133,26 @@ public class SpeciesBoard extends VBox {
                 break;
             case ADD_TRAIT:
                 openCardWindow(Actions.ADD_TRAIT);
-                // TODO discard selected card
+                player.removeCardFromHand(this.selectedCard);
                 break;
             case ADD_SPECIES_LEFT:
                 openCardWindow(Actions.ADD_SPECIES_LEFT);
-                // TODO discard selected card
+                this.player.removeCardFromHand(this.selectedCard);
                 this.playerPane.addSpecies(0);
                 break;
             case ADD_SPECIES_RIGHT:
                 openCardWindow(Actions.ADD_SPECIES_RIGHT);
-                // TODO discard selected card
+                player.removeCardFromHand(this.selectedCard);
                 this.playerPane.addSpecies(1);
                 break;
             case INCREASE_POPULATION:
                 openCardWindow(Actions.INCREASE_POPULATION);
-                // TODO discard selected card
+                player.removeCardFromHand(this.selectedCard);
                 setPopulationSize(1);
                 break;
             case INCREASE_BODY_SIZE:
                 openCardWindow(Actions.INCREASE_BODY_SIZE);
-                // TODO discard selected card
+                player.removeCardFromHand(this.selectedCard);
                 setBodySize(1);
                 break;
         }
@@ -188,7 +188,6 @@ public class SpeciesBoard extends VBox {
      */
     public void setSelectedCard(ICard c) {
         this.selectedCard = c;
-        System.out.println("card selected: " + c.getName());
     }
 
     /**
