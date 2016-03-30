@@ -205,4 +205,14 @@ public class GameTests {
             assertEquals(240-(i*5), g.getFoodBankCount());
         }
     }
+
+    @Test
+    public void testMoveFoodFromBankToHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        IWateringHole wateringHole = new WateringHole();
+        Game g = new Game(generateNumPlayers(4), wateringHole, this.drawPile, this.discardPile);
+        g.moveFoodFromBankToHole(1);
+        assertEquals(239, g.getFoodBankCount());
+        assertEquals(1, g.getWateringHole().getFoodCount());
+
+    }
 }
