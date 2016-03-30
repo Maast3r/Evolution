@@ -1,0 +1,10 @@
+- Good, Clean Methods
+    1. Goal - promote clean, readable, useful methods.
+    2. Question - Are all of our methods good, clean, and readable?
+    3. Proxy Measures
+        - Must be less than 15 lines of code
+        - Must take in <=5 parameters
+    4. Action Plan - refactor if method doesn't meet requirements
+    5. Collect Data - Use Eclipse Metric Plugin
+    6. Validate Proxy - http://programmers.stackexchange.com/questions/133404/what-is-the-ideal-length-of-a-method-for-you
+    7. Change Your Behavior - Follow action plan. Repeat 5-7 until no more violations.
