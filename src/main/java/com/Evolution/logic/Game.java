@@ -133,4 +133,14 @@ public class Game {
     public void decrementFoodBank(int i) {
         this.foodBank -= i;
     }
+
+    /**
+     * Deal a card from the draw pile to a player
+     * @param i the index of the player
+     */
+    //TODO: ADD ERROR HANDLING
+    public void dealToPlayer(int i) {
+        ICard card = this.drawPile.draw();
+        this.players.get(i).addCardToHand(card);
+    }
 }
