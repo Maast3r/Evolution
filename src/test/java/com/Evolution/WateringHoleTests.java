@@ -104,4 +104,10 @@ public class WateringHoleTests {
         WateringHole w = new WateringHole();
         w.removeFood();
     }
+
+    @Test(expected = WateringHoleEmptyException.class)
+    public void testWateringHoleIEmpty1 () throws WateringHoleEmptyException {
+        WateringHole w = new WateringHole();
+        w.removeFood(1);
+    }
 }
