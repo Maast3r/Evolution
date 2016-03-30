@@ -302,15 +302,15 @@ public class GameTests {
         fakePlayerList.add(fakePlayer);
         playerList.set(g, fakePlayerList);
         EasyMock.expect(fakePlayer.removeCardFromHand(fakeCard)).andReturn(true);
-        this.drawPile.discard(fakeCard);
+        this.discardPile.discard(fakeCard);
 
-        EasyMock.replay(this.drawPile);
+        EasyMock.replay(this.discardPile);
         EasyMock.replay(fakePlayer);
         EasyMock.replay(fakeCard);
 
         g.discardFromPlayer(0, fakeCard);
 
-        EasyMock.verify(this.drawPile);
+        EasyMock.verify(this.discardPile);
         EasyMock.verify(fakePlayer);
         EasyMock.verify(fakeCard);
     }

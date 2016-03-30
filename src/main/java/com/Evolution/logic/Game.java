@@ -159,11 +159,26 @@ public class Game {
 
     /**
      * Deal a card from the draw pile to a player
+     *
      * @param i the index of the player
      */
     //TODO: ADD ERROR HANDLING
     public void dealToPlayer(int i) {
         ICard card = this.drawPile.draw();
         this.players.get(i).addCardToHand(card);
+    }
+
+    /**
+     * Removes the provided card object from the hand of the player specified by i
+     * @param i player index
+     * @param card to remove
+     * @return successful discard
+     */
+    public boolean discardFromPlayer(int i, ICard card) {
+        if (this.players.get(i).removeCardFromHand(card)) {
+            this.discardPile.discard(card);
+            return true;
+        }
+        return false;
     }
 }
