@@ -9,14 +9,12 @@ import com.Evolution.exceptions.IllegalNumberOfPlayers;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IDeck;
 import com.Evolution.interfaces.IPlayer;
+import com.Evolution.logic.*;
 import com.Evolution.interfaces.IWateringHole;
 import com.Evolution.logic.*;
 import javafx.fxml.Initializable;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -85,7 +83,6 @@ public class GameScreenController implements Initializable {
             players.add(new Player(new Species()));
         }
 
-
         // TODO: ANDREW - edit the exceptions here
         try {
             IWateringHole wateringHole = new WateringHole();
@@ -121,11 +118,17 @@ public class GameScreenController implements Initializable {
      */
     private void staticElementsUpdate() {
         // TODO: update to fit actual data
-        drawLabel.setText("Draw Pile:\n" + game.getDrawPile().getSize() + " cards");
-        discardLabel.setText("Discard Pile:\n" + game.getDiscardPile().getSize() + " cards");
+//        drawLabel.setText("Draw Pile:\n" + game.getDrawPile().getSize() + " cards");
+//        discardLabel.setText("Discard Pile:\n" + game.getDiscardPile().getSize() + " cards");
+//        wateringHoleLabel.setText("Food: " + 0 + " pieces");
+//        phaseLabel.setText("Phase: " + "Deal Cards");
+//        playerTurnLabel.setText("Player " + game.getTurn() + " Turn");
+//        foodBankLabel.setText("Food Bank: " + 0 + " pieces left");
+        drawLabel.setText("Draw Pile:\n" + 0 + " cards");
+        discardLabel.setText("Discard Pile:\n" + 0 + " cards");
         wateringHoleLabel.setText("Food: " + 0 + " pieces");
         phaseLabel.setText("Phase: " + "Deal Cards");
-        playerTurnLabel.setText("Player " + 1 + " Turn");
+        playerTurnLabel.setText("Player " + 0 + " Turn");
         foodBankLabel.setText("Food Bank: " + 0 + " pieces left");
     }
 
