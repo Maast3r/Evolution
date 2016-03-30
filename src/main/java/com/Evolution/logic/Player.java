@@ -49,4 +49,9 @@ public class Player implements IPlayer {
     public void addCardToHand(ICard card) {
         cardList.add(card);
     }
+
+    @Override
+    public boolean removeCardFromHand(ICard card) {
+        return cardList.remove(card);
+    }
 }

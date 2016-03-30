@@ -22,9 +22,9 @@ public class Game {
      * Evolution Game constructor which contains main logic to interact with players, species, and cards
      *
      * @param players      playing game
-     * @param wateringHole
-     * @param drawPile
-     * @param discardPile
+     * @param wateringHole food available to species
+     * @param drawPile     cards available to draw from
+     * @param discardPile  cards that have been discarded
      * @throws IllegalNumberOfPlayers
      * @throws IllegalCardDirectionException
      */
@@ -122,15 +122,48 @@ public class Game {
         return this.wateringHole;
     }
 
+    /**
+     * Returns the amount of food currently available in the bank
+     *
+     * @return foodBank
+     */
     public int getFoodBankCount() {
         return this.foodBank;
     }
 
+    /**
+     * Decrements the food bank by one
+     */
     public void decrementFoodBank() {
         this.foodBank--;
     }
 
+    /**
+     * Decrements the food bank by i
+     *
+     * @param i food
+     */
     public void decrementFoodBank(int i) {
         this.foodBank -= i;
+    }
+
+    /**
+     * Decrements the food bank by i and increments the wateringHole food by i
+     *
+     * @param i food
+     */
+    public void moveFoodFromBankToHole(int i) {
+        decrementFoodBank(i);
+        this.wateringHole.addFood(i);
+    }
+
+    /**
+     * Deal a card from the draw pile to a player
+     * @param i the index of the player
+     */
+    //TODO: ADD ERROR HANDLING
+    public void dealToPlayer(int i) {
+        ICard card = this.drawPile.draw();
+        this.players.get(i).addCardToHand(card);
     }
 }
