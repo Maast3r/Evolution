@@ -194,4 +194,13 @@ public class GameTests {
             assertEquals(240-i, g.getFoodBankCount());
         }
     }
+
+    @Test
+    public void testDecrementNFoodBank() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        Game g = new Game(generateNumPlayers(4), this.wateringHole, this.drawPile, this.discardPile);
+        for (int i = 1; i < 10; i++) {
+            g.decrementFoodBank(5);
+            assertEquals(240-(i*5), g.getFoodBankCount());
+        }
+    }
 }
