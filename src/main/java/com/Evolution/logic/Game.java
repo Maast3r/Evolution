@@ -120,4 +120,10 @@ public class Game {
     public IWateringHole getWateringHole() {
         return this.wateringHole;
     }
+
+    public int getFoodBankCount() {
+        return 240;
+    }
+
+
 }
