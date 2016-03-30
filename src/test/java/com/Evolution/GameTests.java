@@ -192,8 +192,6 @@ public class GameTests {
         for (int i = 1; i < 50; i++) {
             g.decrementFoodBank();
             assertEquals(240-i, g.getFoodBankCount());
-
         }
     }
-
 }

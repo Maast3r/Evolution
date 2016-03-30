@@ -16,6 +16,7 @@ public class Game {
     private IDeck<ICard> drawPile;
     private IDeck<ICard> discardPile;
     private IWateringHole wateringHole;
+    private int foodBank = 240;
 
     /**
      * Evolution Game constructor which contains main logic to interact with players, species, and cards
@@ -122,8 +123,11 @@ public class Game {
     }
 
     public int getFoodBankCount() {
-        return 240;
+        return this.foodBank;
     }
 
 
+    public void decrementFoodBank() {
+        this.foodBank--;
+    }
 }
