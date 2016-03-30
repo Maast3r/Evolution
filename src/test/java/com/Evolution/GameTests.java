@@ -101,8 +101,8 @@ public class GameTests {
     @Test
     public void getDiscardPile1() throws IllegalNumberOfPlayers,
             IllegalCardDirectionException {
-        Game g = new Game(generateNumPlayers(5), wateringHole, this.drawPile);
-        assertEquals(0, g.getDiscardPile().getSize());
+        Game g = new Game(generateNumPlayers(5), wateringHole, this.drawPile, this.discardPile);
+        assertTrue(this.discardPile == g.getDiscardPile());
     }
 
     @Test
