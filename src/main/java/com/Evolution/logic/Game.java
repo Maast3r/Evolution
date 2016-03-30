@@ -162,4 +162,14 @@ public class Game {
         decrementFoodBank(i);
         this.wateringHole.addFood(i);
     }
+
+    /**
+     * Deal a card from the draw pile to a player
+     * @param i the index of the player
+     */
+    //TODO: ADD ERROR HANDLING
+    public void dealToPlayer(int i) {
+        ICard card = this.drawPile.draw();
+        this.players.get(i).addCardToHand(card);
+    }
 }
