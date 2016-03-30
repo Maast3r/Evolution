@@ -135,7 +135,7 @@ public class Game {
     }
 
     public void moveFoodFromBankToHole(int i) {
-        this.foodBank = 239;
+        this.foodBank--;
         this.wateringHole.addFood();
     }
 }
