@@ -24,7 +24,8 @@ public class DeckFactory {
      * @throws IOException
      */
     public ICard readLineToCard(String input) throws IllegalCardDirectionException, IOException, WrongFileException {
-        if(input.equals("asdf")){
+        String pattern = "^.{0,150};.{0,150};.{0,150}jpg;[0-9]+;[0-9]+$";
+        if(!input.matches(pattern)){
             throw new WrongFileException("You are reading from a bad file.");
         }
         String[] cardParams = input.split(";");
