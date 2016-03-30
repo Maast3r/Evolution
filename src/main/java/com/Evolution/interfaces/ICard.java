@@ -33,7 +33,7 @@ public interface ICard {
     /**
      * Returns the direction on the board that the card effects
      * 0 - The card effects the species that the card is played on
-     * 1 - The card effects the species that is left of the species the card is played on
+     * 1 - The card effects the species that are left and right of the species the card is played on
      * 2 - The card effects the species that is right of the species the card is played on
      * Others - Invalid
      * @return The direction on the board that the card effects
