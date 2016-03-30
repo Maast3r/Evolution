@@ -147,7 +147,10 @@ public class Game {
      *
      * @param i food
      */
-    public void decrementFoodBank(int i){
+    public void decrementFoodBank(int i) throws FoodBankEmptyException {
+        if(i > this.foodBank) {
+            throw new FoodBankEmptyException("The argument is larger than the current food bank.");
+        }
         this.foodBank -= i;
     }
 
