@@ -7,9 +7,11 @@ package com.Evolution.gui;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
 import com.Evolution.interfaces.IPlayer;
+import com.Evolution.interfaces.IWateringHole;
 import com.Evolution.logic.Game;
 import com.Evolution.logic.Player;
 import com.Evolution.logic.Species;
+import com.Evolution.testClasses.TestWateringHole;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
@@ -82,7 +84,8 @@ public class GameScreenController implements Initializable {
 
         // TODO: ANDREW - edit the exceptions here
         try {
-            game = new Game(players);
+            IWateringHole wateringHole = new TestWateringHole();
+            game = new Game(players, wateringHole);
             System.out.println("game initialized");
         } catch (IllegalNumberOfPlayers illegalNumberOfPlayers) {
             illegalNumberOfPlayers.printStackTrace();

@@ -2,10 +2,7 @@ package com.Evolution.logic;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
-import com.Evolution.interfaces.ICard;
-import com.Evolution.interfaces.IDeck;
-import com.Evolution.interfaces.IPhases;
-import com.Evolution.interfaces.IPlayer;
+import com.Evolution.interfaces.*;
 
 import java.util.ArrayList;
 
@@ -23,10 +20,11 @@ public class Game {
      * Evolution Game constructor which contains main logic to interact with players, species, and cards
      *
      * @param players playing game
+     * @param wateringHole
      * @throws IllegalNumberOfPlayers
      * @throws IllegalCardDirectionException
      */
-    public Game(ArrayList<IPlayer> players) throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+    public Game(ArrayList<IPlayer> players, IWateringHole wateringHole) throws IllegalNumberOfPlayers, IllegalCardDirectionException {
         // TODO: Refactor this to fulfill dependency injection by having the Decks and WateringHole passed in
         if (players.size() < 3 || players.size() > 6) {
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
@@ -110,5 +108,9 @@ public class Game {
         } else {
             this.turn++;
         }
+    }
+
+    public IWateringHole getWateringHole() {
+        return new WateringHole();
     }
 }
