@@ -70,7 +70,14 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 	* Helped refactor logic to fit GUI
 	* 50+ LOC
 * Trevor Burch
-    *
+    * Cleaned up imports and comments
+    * Dealing a card to a player
+    * Retrieving all cards in a player's hand
+    * Turn tracking
+    * Discarding a card from a player's hand
+    * Scanned in image files for cards
+    * Performed code reviews and had others review my commits.
+    * 75+ LOC
 * Andrew Ma
     * Coding Practices.txt
     * Metrics.txt
