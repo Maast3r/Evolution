@@ -276,7 +276,7 @@ public class GameTests {
             ArrayList<IPlayer> fakePlayerList = new ArrayList<>();
             fakePlayerList.add(fakePlayer);
             playerList.set(g, fakePlayerList);
-        }catch (Exception e){
+        } catch (Exception e) {
             Assert.fail();
         }
 
@@ -302,14 +302,56 @@ public class GameTests {
         drawPile.contains(card);
         Player player = new Player(new TestSpecies());
         ArrayList<IPlayer> playerList = new ArrayList<>();
-        for(int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) {
             playerList.add(player);
         }
         Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
         g.dealToPlayer(0);
-        System.out.println(player.getCards());
         assertTrue(player.getCards().get(0).equals(card));
         assertTrue(!drawPile.contains(card));
+
+    }
+
+    @Test
+    public void testRemovePlayerValid() throws IllegalNumberOfPlayers, IllegalCardDirectionException, NoSuchFieldException, IllegalAccessException {
+        Game g = new Game(generateNumPlayers(4), this.wateringHole, this.drawPile, this.discardPile);
+        IPlayer fakePlayer = EasyMock.niceMock(Player.class);
+        ICard fakeCard = EasyMock.niceMock(Card.class);
+
+        Field playerList = g.getClass().getDeclaredField("players");
+        playerList.setAccessible(true);
+        ArrayList<IPlayer> fakePlayerList = new ArrayList<>();
+        fakePlayerList.add(fakePlayer);
+        playerList.set(g, fakePlayerList);
+        EasyMock.expect(fakePlayer.removeCardFromHand(fakeCard)).andReturn(true);
+        this.discardPile.discard(fakeCard);
+
+        EasyMock.replay(this.discardPile);
+        EasyMock.replay(fakePlayer);
+        EasyMock.replay(fakeCard);
+
+        g.discardFromPlayer(0, fakeCard);
+
+        EasyMock.verify(this.discardPile);
+        EasyMock.verify(fakePlayer);
+        EasyMock.verify(fakeCard);
+    }
+
+    @Test
+    public void testRemoveFromPlayerResults() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        Deck<ICard> discardPile = new Deck<>();
+        ICard card = new TestCard();
+        assertTrue(!discardPile.contains(card));
+        Player player = new Player(new TestSpecies());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, discardPile);
+        player.addCardToHand(card);
+        assertTrue(player.getCards().get(0).equals(card));
+        assertTrue(g.discardFromPlayer(0, card));
+        assertTrue(discardPile.contains(card));
 
     }
 
