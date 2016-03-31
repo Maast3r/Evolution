@@ -147,7 +147,7 @@ public class GameTests {
 
     @Test
     public void testStartPhase() throws IllegalNumberOfPlayers,
-            IllegalCardDirectionException {
+            IllegalCardDirectionException, DeckEmptyException {
         IPhases fakePhaseOne = EasyMock.niceMock(PhaseOne.class);
         fakePhaseOne.execute();
         EasyMock.replay(fakePhaseOne);
@@ -381,4 +381,34 @@ public class GameTests {
         Game g = new Game(playerList, this.wateringHole, this.drawPile, discardPile);
         g.dealToPlayer(-1);
     }
+
+    @Test
+    public void testGetPhase() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        Deck<ICard> discardPile = new Deck<>();
+        ICard card = new TestCard();
+        assertTrue(!discardPile.contains(card));
+        Player player = new Player(new TestSpecies());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, discardPile);
+        assertEquals(PhaseOne.class, g.getPhase().getClass());
+    }
+
+    @Test
+    public void testSetPhase() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        Deck<ICard> discardPile = new Deck<>();
+        ICard card = new TestCard();
+        assertTrue(!discardPile.contains(card));
+        Player player = new Player(new TestSpecies());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, discardPile);
+        g.setPhase(new PhaseTwo(g));
+        assertEquals(PhaseTwo.class, g.getPhase().getClass());
+    }
+
 }

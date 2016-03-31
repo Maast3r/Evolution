@@ -16,6 +16,7 @@ public class Game {
     private IDeck<ICard> discardPile;
     private IWateringHole wateringHole;
     private int foodBank = 240;
+    private IPhases currentPhase = new PhaseOne(this);
 
     /**
      * Evolution Game constructor which contains main logic to interact with players, species, and cards
@@ -87,7 +88,6 @@ public class Game {
      *              Starts the game with Phase 1.
      *              Calls PhaseOne.execute()
      */
-    public void startGame(IPhases phase) {
         phase.execute();
     }
 
@@ -175,6 +175,25 @@ public class Game {
     }
 
     /**
+     * Changes the current phase to phase;
+     * @param phase
+     */
+    public void setPhase(IPhases phase){
+        this.currentPhase = phase;
+    }
+
+    /**
+     * Draws the appropriate amount of cards for each player.
+     * Appropriate amount = # of species + 3
+     */
+        for (IPlayer p : this.getPlayerObjects()) {
+            for (int i = 0; i < p.getSpecies().size() + 3; i++) {
+                p.addCardToHand(this.getDrawPile().draw());
+            }
+        }
+    }
+
+    /**
      * Removes the provided card object from the hand of the player specified by i
      * @param i player index
      * @param card to remove
@@ -186,5 +205,13 @@ public class Game {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Returns the game's current phase
+     * @return phase
+     */
+    public IPhases getPhase(){
+        return this.currentPhase;
     }
 }
