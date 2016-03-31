@@ -24,7 +24,6 @@ public class DeckFactoryDeckTests {
         IDeck<ICard> drawPile = df.generateDrawPile(input);
         assertNotNull(drawPile.draw());
         assertNotNull(drawPile.draw());
-        // TODO: Add exception handling to prevent drawing from empty deck
     }
 
     @Test
