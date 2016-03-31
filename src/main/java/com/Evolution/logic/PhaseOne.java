@@ -6,9 +6,6 @@ import com.Evolution.interfaces.IPlayer;
 import java.awt.*;
 import java.util.ArrayList;
 
-/**
- * Created by maas on 3/28/2016.
- */
 public class PhaseOne implements IPhases{
     private ArrayList<IPlayer> players;
     private Deck<Card> drawPile;

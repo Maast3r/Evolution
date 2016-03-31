@@ -20,8 +20,8 @@ public class PhaseOneTests {
     public void testInit(){
         ArrayList<IPlayer> players = new ArrayList<IPlayer>();
         players.add(new Player(new Species()));
-        Deck<Card> drawPile = new Deck();
-        Deck<Card> discardPile = new Deck();
+        Deck<Card> drawPile = new Deck<>();
+        Deck<Card> discardPile = new Deck<>();
 
         PhaseOne p = new PhaseOne(players, drawPile, discardPile);
         assertEquals(1, p.getPlayers().size());
@@ -34,8 +34,8 @@ public class PhaseOneTests {
         ArrayList<IPlayer> players = new ArrayList<IPlayer>();
         Random rn = new Random();
         int random = rn.nextInt(1000 - 0 + 1) + 0;
-        Deck<Card> drawPile = new Deck();
-        Deck<Card> discardPile = new Deck();
+        Deck<Card> drawPile = new Deck<>();
+        Deck<Card> discardPile = new Deck<>();
         for(int i=0; i<random; i++){
             players.add(new Player(new Species()));
             drawPile.add(new Card("Carnivore", "Makes a species a carnivore",
@@ -59,11 +59,22 @@ public class PhaseOneTests {
 
         ArrayList<IPlayer> players = new ArrayList<IPlayer>();
         players.add(new Player(new Species()));
-        Deck<Card> drawPile = new Deck();
-        Deck<Card> discardPile = new Deck();
+        Deck<Card> drawPile = new Deck<>();
+        Deck<Card> discardPile = new Deck<>();
         PhaseOne p = new PhaseOne(players, drawPile, discardPile);
         p.nextPhase(fakePhaseTwo);
 
         EasyMock.verify(fakePhaseTwo);
+    }
+
+    @Test
+    public void testExecute1(){
+        ArrayList<IPlayer> players = new ArrayList<IPlayer>();
+        players.add(new Player(new Species()));
+        Deck<Card> drawPile = new Deck<>();
+        Deck<Card> discardPile = new Deck<>();
+        PhaseOne p = new PhaseOne(players, drawPile, discardPile);
+        p.execute();
+        assertEquals(4, p.getPlayers().get(0).getCards().size());
     }
 }
