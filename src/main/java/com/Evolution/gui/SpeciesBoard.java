@@ -1,10 +1,7 @@
 package com.Evolution.gui;
 
 import com.Evolution.interfaces.ICard;
-import com.Evolution.interfaces.IPlayer;
 import com.Evolution.logic.Game;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +33,8 @@ public class SpeciesBoard extends VBox {
     private Label traitLabel1;
     private Label traitLabel2;
     private Label traitLabel3;
-    private IPlayer player;
+    private int playerIndex;
+    private int speciesNum;
     private ICard selectedCard;
     private String traitSelection;
 
@@ -49,7 +47,6 @@ public class SpeciesBoard extends VBox {
     public enum Actions {
         ACTIONS("Actions"),
         VIEW_CARDS("View Cards"),
-        DRAW_CARD("Draw Card"),
         ADD_TRAIT("Add Trait"),
         ADD_SPECIES_LEFT("Add Species (Left)"),
         ADD_SPECIES_RIGHT("Add Species (Right)"),
@@ -70,9 +67,10 @@ public class SpeciesBoard extends VBox {
     /**
      * Constructor for the species board
      */
-    public SpeciesBoard(IPlayer player, MyHBox playerPane, Game game) {
+    public SpeciesBoard(int index, int num, MyHBox playerPane, Game game) {
         this.board = new VBox();
-        this.player = player;
+        this.playerIndex = index;
+        this.speciesNum = num;
         this.playerPane = playerPane;
         this.game = game;
     }
@@ -128,34 +126,36 @@ public class SpeciesBoard extends VBox {
             case ACTIONS:
                 // do nothing
                 break;
-            case DRAW_CARD:
-                // TODO draw a card into player hand
-                break;
             case VIEW_CARDS:
                 openCardWindow(Actions.VIEW_CARDS);
                 break;
             case ADD_TRAIT:
                 openCardWindow(Actions.ADD_TRAIT);
-                player.removeCardFromHand(this.selectedCard);
+                this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+                this.playerPane.updateGameScreen();
                 break;
             case ADD_SPECIES_LEFT:
                 openCardWindow(Actions.ADD_SPECIES_LEFT);
-                this.player.removeCardFromHand(this.selectedCard);
+                this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+                this.playerPane.updateGameScreen();
                 this.playerPane.addSpecies(0);
                 break;
             case ADD_SPECIES_RIGHT:
                 openCardWindow(Actions.ADD_SPECIES_RIGHT);
-                player.removeCardFromHand(this.selectedCard);
+                this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+                this.playerPane.updateGameScreen();
                 this.playerPane.addSpecies(1);
                 break;
             case INCREASE_POPULATION:
                 openCardWindow(Actions.INCREASE_POPULATION);
-                player.removeCardFromHand(this.selectedCard);
+                this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+                this.playerPane.updateGameScreen();
                 setPopulationSize(1);
                 break;
             case INCREASE_BODY_SIZE:
                 openCardWindow(Actions.INCREASE_BODY_SIZE);
-                player.removeCardFromHand(this.selectedCard);
+                this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+                this.playerPane.updateGameScreen();
                 setBodySize(1);
                 break;
         }
@@ -168,7 +168,8 @@ public class SpeciesBoard extends VBox {
     private void openCardWindow(Actions action) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/card_popup.fxml"));
-            CardPopupController controller = new CardPopupController(this.player.getCards(), this);
+            CardPopupController controller =
+                    new CardPopupController(this.game.getPlayerObjects().get(this.playerIndex).getCards(), this);
             if (action == Actions.ADD_TRAIT) {
                 controller.setAddTrait(true);
             }
@@ -219,6 +220,7 @@ public class SpeciesBoard extends VBox {
      */
     public void setPopulationSize(int amount) {
         // Set the population size on player then update label
+        this.game.getPlayerObjects().get(this.playerIndex).getSpecies();
     }
 
 
@@ -265,5 +267,21 @@ public class SpeciesBoard extends VBox {
      */
     public void setTrait3(String trait) {
         // Set trait 3 for this species then update label
+    }
+
+    /**
+     * Gets this species current number
+     * @return species number
+     */
+    public int getSpeciesNum() {
+        return this.speciesNum;
+    }
+
+    /**
+     * Sets this species current species number
+     * @param num the new number for this species
+     */
+    public void setSpeciesNum(int num) {
+        this.speciesNum = num;
     }
 }
