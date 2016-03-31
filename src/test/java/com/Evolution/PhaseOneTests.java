@@ -52,7 +52,7 @@ public class PhaseOneTests {
     }
 
     @Test
-    public void testNextPhase(){
+    public void testNextPhase() throws IllegalCardDirectionException {
         IPhases fakePhaseTwo = EasyMock.niceMock(PhaseTwo.class);
         fakePhaseTwo.execute();
         EasyMock.replay(fakePhaseTwo);
@@ -68,13 +68,18 @@ public class PhaseOneTests {
     }
 
     @Test
-    public void testExecute1(){
+    public void testExecute1() throws IllegalCardDirectionException {
         ArrayList<IPlayer> players = new ArrayList<IPlayer>();
         players.add(new Player(new Species()));
         Deck<Card> drawPile = new Deck<>();
+        drawPile.add(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+        drawPile.add(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+        drawPile.add(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+        drawPile.add(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
         Deck<Card> discardPile = new Deck<>();
         PhaseOne p = new PhaseOne(players, drawPile, discardPile);
         p.execute();
         assertEquals(4, p.getPlayers().get(0).getCards().size());
+        assertEquals(0, p.getDrawPile().size());
     }
 }

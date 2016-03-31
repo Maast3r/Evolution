@@ -1,5 +1,7 @@
 package com.Evolution.interfaces;
 
+import com.Evolution.exceptions.IllegalCardDirectionException;
+
 /**
  * Created by maas on 3/28/2016.
  */
@@ -7,7 +9,7 @@ public interface IPhases {
     /**
      * Executes a certain phase of the game.
      */
-    void execute();
+    void execute() throws IllegalCardDirectionException;
 
     /**
      * Like a linked list, each phase knows which phase should happen next.
@@ -15,5 +17,5 @@ public interface IPhases {
      *
      * @param nextPhase
      */
-    void nextPhase(IPhases nextPhase);
+    void nextPhase(IPhases nextPhase) throws IllegalCardDirectionException;
 }

@@ -1,5 +1,6 @@
 package com.Evolution.logic;
 
+import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.interfaces.IPhases;
 import com.Evolution.interfaces.IPlayer;
 
@@ -19,12 +20,16 @@ public class PhaseOne implements IPhases{
     }
 
     @Override
-    public void execute() {
+    public void execute() throws IllegalCardDirectionException {
+        this.players.get(0).addCardToHand(this.drawPile.draw());
+        this.players.get(0).addCardToHand(this.drawPile.draw());
+        this.players.get(0).addCardToHand(this.drawPile.draw());
+        this.players.get(0).addCardToHand(this.drawPile.draw());
 
     }
 
     @Override
-    public void nextPhase(IPhases nextPhase) {
+    public void nextPhase(IPhases nextPhase) throws IllegalCardDirectionException {
         nextPhase.execute();
     }
 
