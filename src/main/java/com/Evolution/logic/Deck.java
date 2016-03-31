@@ -1,5 +1,6 @@
 package com.Evolution.logic;
 
+import com.Evolution.exceptions.DeckEmptyException;
 import com.Evolution.interfaces.IDeck;
 
 import java.util.Collections;
@@ -21,7 +22,10 @@ public class Deck<T> extends Stack<T> implements IDeck<T> {
     }
 
     @Override
-    public T draw() {
+    public T draw() throws DeckEmptyException {
+        if(getSize() == 0){
+            throw new DeckEmptyException("The deck is empty.");
+        }
         return this.pop();
     }
 

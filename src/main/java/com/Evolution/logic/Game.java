@@ -1,8 +1,6 @@
 package com.Evolution.logic;
 
-import com.Evolution.exceptions.FoodBankEmptyException;
-import com.Evolution.exceptions.IllegalCardDirectionException;
-import com.Evolution.exceptions.IllegalNumberOfPlayers;
+import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.*;
 
 import java.util.ArrayList;
@@ -90,7 +88,7 @@ public class Game {
      *              Starts the game with Phase 1.
      *              Calls PhaseOne.execute()
      */
-    public void startGame(IPhases phase) throws IllegalCardDirectionException {
+    public void startGame(IPhases phase) throws IllegalCardDirectionException, DeckEmptyException {
         phase.execute();
     }
 
@@ -169,8 +167,10 @@ public class Game {
      *
      * @param i the index of the player
      */
-    //TODO: ADD ERROR HANDLING
-    public void dealToPlayer(int i) {
+    public void dealToPlayer(int i) throws DeckEmptyException, InvalidPlayerSelectException {
+        if(i > this.players.size() || i < 0) {
+            throw new InvalidPlayerSelectException("You selected an invalid player to deal to.");
+        }
         ICard card = this.drawPile.draw();
         this.players.get(i).addCardToHand(card);
     }
@@ -187,7 +187,7 @@ public class Game {
      * Draws the appropriate amount of cards for each player.
      * Appropriate amount = # of species + 3
      */
-    public void drawForPlayers() {
+    public void drawForPlayers() throws DeckEmptyException {
         for (IPlayer p : this.getPlayerObjects()) {
             for (int i = 0; i < p.getSpecies().size() + 3; i++) {
                 p.addCardToHand(this.getDrawPile().draw());
