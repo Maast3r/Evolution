@@ -88,8 +88,8 @@ public class Game {
      *              Starts the game with Phase 1.
      *              Calls PhaseOne.execute()
      */
-    public void startGame(IPhases phase) throws IllegalCardDirectionException, DeckEmptyException {
-        phase.execute();
+    public void startGame() throws IllegalCardDirectionException, DeckEmptyException {
+        this.currentPhase.execute();
     }
 
     /**
