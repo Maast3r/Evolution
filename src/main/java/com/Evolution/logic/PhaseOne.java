@@ -21,11 +21,11 @@ public class PhaseOne implements IPhases{
 
     @Override
     public void execute() throws IllegalCardDirectionException {
-        this.players.get(0).addCardToHand(this.drawPile.draw());
-        this.players.get(0).addCardToHand(this.drawPile.draw());
-        this.players.get(0).addCardToHand(this.drawPile.draw());
-        this.players.get(0).addCardToHand(this.drawPile.draw());
-
+        for(IPlayer p : this.players){
+            for(int i=0; i<p.getSpecies().size()+3; i++){
+                p.addCardToHand(this.drawPile.draw());
+            }
+        }
     }
 
     @Override
