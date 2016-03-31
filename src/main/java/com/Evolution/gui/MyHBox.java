@@ -42,17 +42,17 @@ public class MyHBox extends HBox {
      * @return the pane created for this player
      */
     public HBox createBox() {
-        this.firstPlayerMarker = (this.playerIndex == 0) ? new ImageView("/images/empty.png") :
-                new ImageView("/images/first_player_marker.png");
+        this.firstPlayerMarker = (this.playerIndex == 0) ? new ImageView("/images/first_player_marker.png") :
+                new ImageView("/images/empty.png");
 
         this.foodLabel = new Label("Food bag: " + 0);
         Label playerNumLabel = new Label("Player " + (this.playerIndex + 1));
 
         VBox playerInfo = new VBox();
         playerInfo.setAlignment(Pos.CENTER);
-        playerInfo.getChildren().addAll(this.firstPlayerMarker, playerNumLabel, foodLabel);
+        playerInfo.getChildren().addAll(this.firstPlayerMarker, playerNumLabel, this.foodLabel);
 
-        SpeciesBoard speciesBoard = new SpeciesBoard(this.playerIndex, 0, this, game);
+        SpeciesBoard speciesBoard = new SpeciesBoard(this.playerIndex, 0, this, this.game);
         VBox speciesPane = speciesBoard.createSpeciesBoard();
         this.playerSpeciesBoards.add(speciesBoard);
 

@@ -54,7 +54,16 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 * Jeremiah Goist
     *
 * Brooke Brown
-	*
+	* CardPopupController.java
+	* Connecting GUI to Logic
+	* Reformatted card images to be uniform
+	* Exploratory Testing
+	* Code inspections
+	* Refactored GUI setup
+	* Designed GUI to simplify actions
+	    ~ Simplified for adding additional actions later
+	* Helped refactor logic to fit GUI
+	* 50+ LOC
 * Trevor Burch
     *
 * Andrew Ma

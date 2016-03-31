@@ -83,36 +83,37 @@ public class SpeciesBoard extends VBox {
     public VBox createSpeciesBoard() {
         VBox speciesBoard = new VBox();
 
-        traitLabel1 = new Label("Trait 1: ");
-        traitLabel2 = new Label("Trait 2: ");
-        traitLabel3 = new Label("Trait 3: ");
+        this.traitLabel1 = new Label("Trait 1: ");
+        this.traitLabel2 = new Label("Trait 2: ");
+        this.traitLabel3 = new Label("Trait 3: ");
 
-        populationSize = new Label("Population: " + 1);
-        populationSize.setStyle("-fx-text-fill: black;");
-        bodySize = new Label("Body Size: " + 1);
-        bodySize.setStyle("-fx-text-fill: black;");
-        foodOnBoard = new Label("Food: " + 0);
-        foodOnBoard.setStyle("-fx-text-fill: black;");
+        this.populationSize = new Label("Population: " + 1);
+        this.populationSize.setStyle("-fx-text-fill: black;");
+        this.bodySize = new Label("Body Size: " + 1);
+        this.bodySize.setStyle("-fx-text-fill: black;");
+        this.foodOnBoard = new Label("Food: " + 0);
+        this.foodOnBoard.setStyle("-fx-text-fill: black;");
 
-        speciesBoard.getChildren().addAll(populationSize, bodySize, foodOnBoard);
+        speciesBoard.getChildren().addAll(this.populationSize, this.bodySize, this.foodOnBoard);
         speciesBoard.setStyle("-fx-padding: 20, 0, 20, 0; -fx-min-width: 75;" +
                 " -fx-min-height: 150; -fx-background-color: burlywood; -fx-alignment: center;");
 
-        actionChoiceBox = new ChoiceBox<>();
+        this.actionChoiceBox = new ChoiceBox<>();
         ObservableList<String> options = FXCollections.observableArrayList();
         for (Actions a : Actions.values()) {
             options.add(a.getName());
         }
-        actionChoiceBox.setItems(options);
-        actionChoiceBox.getSelectionModel().selectFirst();
-        actionChoiceBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+        this.actionChoiceBox.setItems(options);
+        this.actionChoiceBox.getSelectionModel().selectFirst();
+        this.actionChoiceBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
             performAction(Actions.values()[newValue.intValue()]);
             this.actionChoiceBox.getSelectionModel().selectFirst();
         });
 
-        board.getChildren().addAll(traitLabel1, traitLabel2, traitLabel3, speciesBoard, actionChoiceBox);
-        board.setStyle("-fx-padding: 20, 20, 20, 20;");
-        return board;
+        this.board.getChildren().addAll(this.traitLabel1, this.traitLabel2, this.traitLabel3, speciesBoard,
+                this.actionChoiceBox);
+        this.board.setStyle("-fx-padding: 20, 20, 20, 20;");
+        return this.board;
     }
 
     /**
@@ -271,6 +272,7 @@ public class SpeciesBoard extends VBox {
 
     /**
      * Gets this species current number
+     *
      * @return species number
      */
     public int getSpeciesNum() {
@@ -279,6 +281,7 @@ public class SpeciesBoard extends VBox {
 
     /**
      * Sets this species current species number
+     *
      * @param num the new number for this species
      */
     public void setSpeciesNum(int num) {

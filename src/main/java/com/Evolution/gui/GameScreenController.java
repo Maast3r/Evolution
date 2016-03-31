@@ -65,18 +65,25 @@ public class GameScreenController implements Initializable {
      * @param resources        resources available in the package
      */
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-        assert topPane != null : "fx:id=\"topPane\" was not injected: check your FXML file 'game_screen.fxml'.";
-        assert leftPane != null : "fx:id=\"leftPane\" was not injected: check your FXML file 'game_screen.fxml'.";
-        assert bottomPane != null : "fx:id=\"bottomPane\" was not injected: check your FXML file 'game_screen.fxml'.";
-        assert drawLabel != null : "fx:id=\"drawLabel\" was not injected: check your FXML file 'game_screen.fxml'.";
-        assert discardLabel != null : "fx:id=\"discardLabel\" was not injected: check your FXML file 'game_screen.fxml'.";
-        assert wateringHoleLabel != null : "fx:id=\"wateringHoleLabel\" was not injected: check your FXML file 'game_screen.fxml'.";
-        assert playerTurnLabel != null : "fx:id=\"playerTurnLabel\" was not injected: check your FXML file 'game_screen.fxml'.";
-        assert phaseLabel != null : "fx:id=\"phaseLabel\" was not injected: check your FXML file 'game_screen.fxml'.";
-        assert foodBankLabel != null : "fx:id=\"foodBankLabel\" was not injected: check your FXML file 'game_screen.fxml'.";
+        assert this.topPane != null : "fx:id=\"topPane\" was not injected: check your FXML file 'game_screen.fxml'.";
+        assert this.leftPane != null : "fx:id=\"leftPane\" was not injected: check your FXML file 'game_screen.fxml'.";
+        assert this.bottomPane != null : "fx:id=\"bottomPane\" was not injected: check your FXML file 'game_screen" +
+                ".fxml'.";
+        assert this.drawLabel != null : "fx:id=\"drawLabel\" was not injected: check your FXML file 'game_screen" +
+                ".fxml'.";
+        assert this.discardLabel != null : "fx:id=\"discardLabel\" was not injected: check your FXML file " +
+                "'game_screen.fxml'.";
+        assert this.wateringHoleLabel != null : "fx:id=\"wateringHoleLabel\" was not injected: check your FXML file " +
+                "'game_screen.fxml'.";
+        assert this.playerTurnLabel != null : "fx:id=\"playerTurnLabel\" was not injected: check your FXML file " +
+                "'game_screen.fxml'.";
+        assert this.phaseLabel != null : "fx:id=\"phaseLabel\" was not injected: check your FXML file 'game_screen" +
+                ".fxml'.";
+        assert this.foodBankLabel != null : "fx:id=\"foodBankLabel\" was not injected: check your FXML file " +
+                "'game_screen.fxml'.";
 
-        for (int i = 0; i < numPlayers; i++) {
-            players.add(new Player(new Species()));
+        for (int i = 0; i < this.numPlayers; i++) {
+            this.players.add(new Player(new Species()));
         }
 
         try {
@@ -86,12 +93,8 @@ public class GameScreenController implements Initializable {
                     new File("src/main/resources/cardFiles/cardInformation.txt")));
             IDeck<ICard> discardPile = df.generateDiscardPile();
 
-            game = new Game(players, wateringHole, drawPile, discardPile);
-            for (int i = 0; i < this.numPlayers; i++) {
-                for (int j = 0; j < 3; j++) {
-                    this.game.dealToPlayer(i);
-                }
-            }
+            this.game = new Game(this.players, wateringHole, drawPile, discardPile);
+            this.game.startGame();
 
             System.out.println("game initialized");
         } catch (IllegalNumberOfPlayers | IllegalCardDirectionException
@@ -102,9 +105,9 @@ public class GameScreenController implements Initializable {
 
         staticElementsUpdate();
 
-        if (numPlayers == 3) {
+        if (this.numPlayers == 3) {
             threePlayerSetup();
-        } else if (numPlayers == 4) {
+        } else if (this.numPlayers == 4) {
             fourPlayerSetup();
         } else {
             fivePlayerSetup();
@@ -115,12 +118,12 @@ public class GameScreenController implements Initializable {
      * Set up the 'static' elements on the screen (i.e. watering hole, cards, etc.)
      */
     public void staticElementsUpdate() {
-        drawLabel.setText("Draw Pile:\n" + game.getDrawPile().getSize() + " cards");
-        discardLabel.setText("Discard Pile:\n" + game.getDiscardPile().getSize() + " cards");
-        wateringHoleLabel.setText("Food: " + game.getWateringHole().getFoodCount() + " pieces");
-        phaseLabel.setText("Phase: " + "Deal Cards");
-        playerTurnLabel.setText("Player " + game.getTurn() + " Turn");
-        foodBankLabel.setText("Food Bank: " + game.getFoodBankCount() + " pieces left");
+        this.drawLabel.setText("Draw Pile:\n" + this.game.getDrawPile().getSize() + " cards");
+        this.discardLabel.setText("Discard Pile:\n" + this.game.getDiscardPile().getSize() + " cards");
+        this.wateringHoleLabel.setText("Food: " + this.game.getWateringHole().getFoodCount() + " pieces");
+        this.phaseLabel.setText("Phase: " + "Deal Cards");
+        this.playerTurnLabel.setText("Player " + this.game.getTurn() + " Turn");
+        this.foodBankLabel.setText("Food Bank: " + this.game.getFoodBankCount() + " pieces left");
     }
 
     /**
@@ -128,9 +131,9 @@ public class GameScreenController implements Initializable {
      * Each player gets assigned to a pane
      */
     private void threePlayerSetup() {
-        startingPaneSetup(bottomPane, 0);
-        startingPaneSetup(leftPane, 1);
-        startingPaneSetup(topPane, 2);
+        startingPaneSetup(this.bottomPane, 0);
+        startingPaneSetup(this.leftPane, 1);
+        startingPaneSetup(this.topPane, 2);
     }
 
     /**
@@ -145,10 +148,10 @@ public class GameScreenController implements Initializable {
 
         startingPaneSetup(player1, 0);
         startingPaneSetup(player2, 1);
-        startingPaneSetup(leftPane, 2);
-        startingPaneSetup(topPane, 3);
+        startingPaneSetup(this.leftPane, 2);
+        startingPaneSetup(this.topPane, 3);
 
-        bottomPane.getChildren().addAll(player2, player1);
+        this.bottomPane.getChildren().addAll(player2, player1);
     }
 
     /**
@@ -167,12 +170,12 @@ public class GameScreenController implements Initializable {
 
         startingPaneSetup(player1, 0);
         startingPaneSetup(player2, 1);
-        startingPaneSetup(leftPane, 2);
+        startingPaneSetup(this.leftPane, 2);
         startingPaneSetup(player4, 3);
         startingPaneSetup(player5, 4);
 
-        bottomPane.getChildren().addAll(player2, player1);
-        topPane.getChildren().addAll(player4, player5);
+        this.bottomPane.getChildren().addAll(player2, player1);
+        this.topPane.getChildren().addAll(player4, player5);
     }
 
     /**
@@ -185,6 +188,6 @@ public class GameScreenController implements Initializable {
         MyHBox hBox = new MyHBox(index, this.game, this);
         HBox playerPane = hBox.createBox();
         pane.getChildren().addAll(playerPane);
-        playerPanes.add(playerPane);
+        this.playerPanes.add(playerPane);
     }
 }

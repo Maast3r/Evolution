@@ -59,8 +59,8 @@ public class CardPopupController implements Initializable {
      * @param resources        resources available in the package
      */
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
-        assert gridPane != null : "fx:id=\"gridPane\" was not injected: check your FXML file 'card_popup.fxml'.";
-        assert infoLabel != null : "fx:id=\"infoLabel\" was not injected: check your FXML file 'card_popup.fxml'.";
+        assert this.gridPane != null : "fx:id=\"gridPane\" was not injected: check your FXML file 'card_popup.fxml'.";
+        assert this.infoLabel != null : "fx:id=\"infoLabel\" was not injected: check your FXML file 'card_popup.fxml'.";
 
         gridSetup();
 
@@ -72,15 +72,15 @@ public class CardPopupController implements Initializable {
      */
     private void displayCards() {
         int index = 0;
-        if (hand.size() == 0) {
-            infoLabel.setText("No cards in your hand");
+        if (this.hand.size() == 0) {
+            this.infoLabel.setText("No cards in your hand");
             return;
         }
-        for (ICard card : hand) {
+        for (ICard card : this.hand) {
             ImageView cardView = new ImageView("/images/card_images/" + (card.getImgPath()));
             cardView.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.SECONDARY) {
-                    infoLabel.setText(card.getName() + ": " + card.getDesc());
+                    this.infoLabel.setText(card.getName() + ": " + card.getDesc());
                 } else {
                     this.board.setSelectedCard(card);
                     if (this.addTrait) {
