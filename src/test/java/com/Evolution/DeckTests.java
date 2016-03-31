@@ -75,4 +75,10 @@ public class DeckTests {
         }
         assertTrue((countPasses/1000) > .97);
     }
+
+    @Test(expected = DeckEmptyException.class)
+    public void testDeckEmpty(){
+        Deck<ICard> d = new Deck<>();
+        d.draw();
+    }
 }
