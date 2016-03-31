@@ -8,14 +8,9 @@ import com.Evolution.exceptions.IllegalCardDirectionException;
 public interface IPhases {
     /**
      * Executes a certain phase of the game.
+     * Like a linked list, each phase knows which phase should happen next.
+     * This method moves to the next phase of the game.
      */
     void execute() throws IllegalCardDirectionException;
 
-    /**
-     * Like a linked list, each phase knows which phase should happen next.
-     * This method moves to the next phase of the game.
-     *
-     * @param nextPhase
-     */
-    void nextPhase(IPhases nextPhase) throws IllegalCardDirectionException;
 }

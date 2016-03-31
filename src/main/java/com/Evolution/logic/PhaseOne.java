@@ -8,40 +8,16 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class PhaseOne implements IPhases{
-    private ArrayList<IPlayer> players;
-    private Deck<Card> drawPile;
-    private Deck<Card> discardPile;
+    private Game game;
 
-    public PhaseOne(ArrayList<IPlayer> players,
-                    Deck<Card> drawPile, Deck<Card> discardPile) {
-        this.players = players;
-        this.drawPile = drawPile;
-        this.discardPile = discardPile;
+    public PhaseOne(Game g) {
+        this.game = game;
     }
 
     @Override
     public void execute() throws IllegalCardDirectionException {
-        for(IPlayer p : this.players){
-            for(int i=0; i<p.getSpecies().size()+3; i++){
-                p.addCardToHand(this.drawPile.draw());
-            }
-        }
+        game.drawForPlayers();
+        game.setPhase(new PhaseTwo(game));
     }
 
-    @Override
-    public void nextPhase(IPhases nextPhase) throws IllegalCardDirectionException {
-        nextPhase.execute();
-    }
-
-    public ArrayList<IPlayer> getPlayers() {
-        return players;
-    }
-
-    public Deck<Card> getDrawPile() {
-        return drawPile;
-    }
-
-    public Deck<Card> getDiscardPile() {
-        return discardPile;
-    }
 }
