@@ -1,9 +1,6 @@
 package com.Evolution.logic;
 
-import com.Evolution.exceptions.DeckEmptyException;
-import com.Evolution.exceptions.FoodBankEmptyException;
-import com.Evolution.exceptions.IllegalCardDirectionException;
-import com.Evolution.exceptions.IllegalNumberOfPlayers;
+import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.*;
 
 import java.util.ArrayList;
@@ -169,7 +166,10 @@ public class Game {
      *
      * @param i the index of the player
      */
-    public void dealToPlayer(int i) throws DeckEmptyException {
+    public void dealToPlayer(int i) throws DeckEmptyException, InvalidPlayerSelectException {
+        if(i > this.players.size()) {
+            throw new InvalidPlayerSelectException("You selected an invalid player to deal to.");
+        }
         ICard card = this.drawPile.draw();
         this.players.get(i).addCardToHand(card);
     }
