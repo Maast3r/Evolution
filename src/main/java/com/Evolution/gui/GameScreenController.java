@@ -180,7 +180,7 @@ public class GameScreenController implements Initializable {
      * @param num  player number
      */
     private void startingPaneSetup(HBox pane, int num) {
-        MyHBox hBox = new MyHBox(this.players.get(num - 1));
+        MyHBox hBox = new MyHBox(this.players.get(num - 1), this.game);
         HBox playerPane = hBox.createBox(num);
         pane.getChildren().addAll(playerPane);
         playerPanes.add(playerPane);

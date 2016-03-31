@@ -1,6 +1,8 @@
 package com.Evolution.gui;
 
 import com.Evolution.interfaces.IPlayer;
+import com.Evolution.logic.Game;
+import com.Evolution.logic.Species;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
  */
 public class MyHBox extends HBox {
 
+    private Game game;
     private HBox playerPane;
     private Label foodLabel;
     private ImageView firstPlayerMarker;
@@ -26,9 +29,10 @@ public class MyHBox extends HBox {
     /**
      * Constructor for our HBox that stores children
      */
-    public MyHBox(IPlayer player) {
+    public MyHBox(IPlayer player, Game g) {
         this.player = player;
         this.playerPane = new HBox();
+        this.game = g;
     }
 
     /**
@@ -50,7 +54,7 @@ public class MyHBox extends HBox {
         playerInfo.setAlignment(Pos.CENTER);
         playerInfo.getChildren().addAll(this.firstPlayerMarker, playerNumLabel, foodLabel);
 
-        SpeciesBoard speciesBoard = new SpeciesBoard(this.player, this);
+        SpeciesBoard speciesBoard = new SpeciesBoard(this.player, this, game);
         VBox speciesPane = speciesBoard.createSpeciesBoard();
         this.playerSpeciesBoards.add(speciesPane);
 
@@ -102,12 +106,14 @@ public class MyHBox extends HBox {
      * @param side "left" or "right" - the side to add the new species to
      */
     public void addSpecies(int side) {
-        SpeciesBoard speciesBoard = new SpeciesBoard(this.player, this);
+        SpeciesBoard speciesBoard = new SpeciesBoard(this.player, this, this.game);
         VBox speciesPane = speciesBoard.createSpeciesBoard();
         if (side == 0) {
+            // TODO add species to player through game
             this.playerSpeciesBoards.add(0, speciesPane);
             this.playerPane.getChildren().add(1, speciesPane);
         } else {
+            // TODO add species to player through game
             this.playerSpeciesBoards.add(speciesPane);
             this.playerPane.getChildren().add(speciesPane);
         }
