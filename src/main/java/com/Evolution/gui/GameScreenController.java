@@ -90,11 +90,12 @@ public class GameScreenController implements Initializable {
                     new File("src/main/resources/cardFiles/cardInformation.txt")));
             IDeck<ICard> discardPile = df.generateDiscardPile();
 
-            for (int i = 0; i < 5; i++) {
-                players.get(0).addCardToHand(drawPile.draw());
-            }
-
             game = new Game(players, wateringHole, drawPile, discardPile);
+            for (int i = 0; i < this.numPlayers; i++) {
+                for (int j = 0; j < 3; j++) {
+                    this.game.dealToPlayer(i);
+                }
+            }
 
             System.out.println("game initialized");
         } catch (IllegalNumberOfPlayers | IllegalCardDirectionException |
@@ -116,7 +117,7 @@ public class GameScreenController implements Initializable {
     /**
      * Set up the 'static' elements on the screen (i.e. watering hole, cards, etc.)
      */
-    private void staticElementsUpdate() {
+    public void staticElementsUpdate() {
         drawLabel.setText("Draw Pile:\n" + game.getDrawPile().getSize() + " cards");
         discardLabel.setText("Discard Pile:\n" + game.getDiscardPile().getSize() + " cards");
         wateringHoleLabel.setText("Food: " + game.getWateringHole().getFoodCount() + " pieces");
@@ -130,9 +131,9 @@ public class GameScreenController implements Initializable {
      * Each player gets assigned to a pane
      */
     private void threePlayerSetup() {
-        startingPaneSetup(bottomPane, 1);
-        startingPaneSetup(leftPane, 2);
-        startingPaneSetup(topPane, 3);
+        startingPaneSetup(bottomPane, 0);
+        startingPaneSetup(leftPane, 1);
+        startingPaneSetup(topPane, 2);
     }
 
     /**
@@ -145,10 +146,10 @@ public class GameScreenController implements Initializable {
         HBox player2 = new HBox();
         player2.setAlignment(Pos.CENTER);
 
-        startingPaneSetup(player1, 1);
-        startingPaneSetup(player2, 2);
-        startingPaneSetup(leftPane, 3);
-        startingPaneSetup(topPane, 4);
+        startingPaneSetup(player1, 0);
+        startingPaneSetup(player2, 1);
+        startingPaneSetup(leftPane, 2);
+        startingPaneSetup(topPane, 3);
 
         bottomPane.getChildren().addAll(player2, player1);
     }
@@ -167,11 +168,11 @@ public class GameScreenController implements Initializable {
         HBox player5 = new HBox();
         player5.setAlignment(Pos.CENTER);
 
-        startingPaneSetup(player1, 1);
-        startingPaneSetup(player2, 2);
-        startingPaneSetup(leftPane, 3);
-        startingPaneSetup(player4, 4);
-        startingPaneSetup(player5, 5);
+        startingPaneSetup(player1, 0);
+        startingPaneSetup(player2, 1);
+        startingPaneSetup(leftPane, 2);
+        startingPaneSetup(player4, 3);
+        startingPaneSetup(player5, 4);
 
         bottomPane.getChildren().addAll(player2, player1);
         topPane.getChildren().addAll(player4, player5);
@@ -181,11 +182,11 @@ public class GameScreenController implements Initializable {
      * Set up the starting screen for each player
      *
      * @param pane player pane
-     * @param num  player number
+     * @param index  player index in the players array
      */
-    private void startingPaneSetup(HBox pane, int num) {
-        MyHBox hBox = new MyHBox(this.players.get(num - 1));
-        HBox playerPane = hBox.createBox(num);
+    private void startingPaneSetup(HBox pane, int index) {
+        MyHBox hBox = new MyHBox(index, this.game, this);
+        HBox playerPane = hBox.createBox();
         pane.getChildren().addAll(playerPane);
         playerPanes.add(playerPane);
     }
