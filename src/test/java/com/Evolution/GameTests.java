@@ -152,7 +152,8 @@ public class GameTests {
         fakePhaseOne.execute();
         EasyMock.replay(fakePhaseOne);
         Game g = new Game(generateNumPlayers(4), wateringHole, this.drawPile, this.discardPile);
-        g.startGame(fakePhaseOne);
+        g.setPhase(fakePhaseOne);
+        g.startGame();
         EasyMock.verify(fakePhaseOne);
     }
 
