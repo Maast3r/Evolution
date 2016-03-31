@@ -3,15 +3,15 @@ package com.Evolution;
 import com.Evolution.exceptions.DeckEmptyException;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
-import com.Evolution.interfaces.*;
+import com.Evolution.exceptions.InvalidPlayerSelectException;
+import com.Evolution.interfaces.ICard;
+import com.Evolution.interfaces.IDeck;
+import com.Evolution.interfaces.IPlayer;
+import com.Evolution.interfaces.IWateringHole;
 import com.Evolution.logic.*;
-import com.Evolution.testClasses.TestPlayer;
-import com.Evolution.testClasses.TestSpecies;
-import org.easymock.EasyMock;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
@@ -40,9 +40,9 @@ public class PhaseOneTests {
     }
 
     @Test
-    public void testNextPhase() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException {
+    public void testNextPhase() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException, InvalidPlayerSelectException {
         IDeck<ICard> drawPile = new Deck<>();
-        for(int i=0; i<12; i++){
+        for (int i = 0; i < 12; i++) {
             drawPile.discard(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
         }
         IDeck<ICard> discardPile = new Deck<>();
@@ -54,9 +54,9 @@ public class PhaseOneTests {
     }
 
     @Test
-    public void testExecute1() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException {
+    public void testExecute1() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException, InvalidPlayerSelectException {
         IDeck<ICard> drawPile = new Deck<>();
-        for(int i=0; i<12; i++){
+        for (int i = 0; i < 12; i++) {
             drawPile.discard(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
         }
         IDeck<ICard> discardPile = new Deck<>();
@@ -70,11 +70,11 @@ public class PhaseOneTests {
     }
 
     @Test
-    public void testExecute2() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException {
+    public void testExecute2() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException, InvalidPlayerSelectException {
         ArrayList<IPlayer> players = generateNumPlayers(3);
         players.get(0).addSpeciesLeft(new Species());
         IDeck<ICard> drawPile = new Deck<>();
-        for(int i=0; i<13; i++){
+        for (int i = 0; i < 13; i++) {
             drawPile.discard(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
         }
         IDeck<ICard> discardPile = new Deck<>();
