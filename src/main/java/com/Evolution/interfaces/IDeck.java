@@ -1,5 +1,7 @@
 package com.Evolution.interfaces;
 
+import com.Evolution.exceptions.DeckEmptyException;
+
 /**
  * Interface for decks
  * Created by burchtm on 3/23/2016.
@@ -15,7 +17,7 @@ public interface IDeck<T> {
      * Draws from the deck
      * @return The instance of the object stored in the deck
      */
-    T draw();
+    T draw() throws DeckEmptyException;
 
     /**
      * Discards an object onto the deck

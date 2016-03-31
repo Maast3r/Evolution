@@ -1,5 +1,6 @@
 package com.Evolution.interfaces;
 
+import com.Evolution.exceptions.DeckEmptyException;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 
 /**
@@ -11,6 +12,6 @@ public interface IPhases {
      * Like a linked list, each phase knows which phase should happen next.
      * This method moves to the next phase of the game.
      */
-    void execute() throws IllegalCardDirectionException;
+    void execute() throws IllegalCardDirectionException, DeckEmptyException;
 
 }
