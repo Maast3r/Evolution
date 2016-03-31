@@ -3,18 +3,15 @@ package com.Evolution;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.WrongFileException;
 import com.Evolution.interfaces.ICard;
-import com.Evolution.interfaces.IDeck;
-import com.Evolution.logic.Deck;
 import com.Evolution.logic.DeckFactory;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class DeckFactoryTests {
 

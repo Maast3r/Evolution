@@ -8,9 +8,7 @@ import com.Evolution.logic.Deck;
 import com.Evolution.testClasses.TestCard;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Tests the Deck class

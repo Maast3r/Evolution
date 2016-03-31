@@ -4,10 +4,6 @@ import com.Evolution.exceptions.DeckEmptyException;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.InvalidPlayerSelectException;
 import com.Evolution.interfaces.IPhases;
-import com.Evolution.interfaces.IPlayer;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 public class PhaseOne implements IPhases{
     private Game game;

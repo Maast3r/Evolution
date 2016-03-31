@@ -1,7 +1,5 @@
 package com.Evolution;
 
-import static org.junit.Assert.*;
-
 import com.Evolution.exceptions.InvalidPlayerSpeciesRemovalException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Player;
@@ -11,6 +9,8 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by goistjt on 3/22/2016.

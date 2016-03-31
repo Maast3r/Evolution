@@ -3,20 +3,19 @@ package com.Evolution;
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.*;
 import com.Evolution.logic.*;
-import com.Evolution.testClasses.*;
-import com.sun.xml.internal.bind.v2.model.core.ID;
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
+import com.Evolution.testClasses.TestCard;
+import com.Evolution.testClasses.TestPlayer;
+import com.Evolution.testClasses.TestSpecies;
+import com.Evolution.testClasses.TestWateringHole;
+import org.easymock.EasyMock;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.easymock.EasyMock;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class GameTests {
