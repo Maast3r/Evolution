@@ -1,9 +1,5 @@
 package com.Evolution.gui;
 
-/**
- * Created by brownba1 on 3/22/2016.
- */
-
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IDeck;
@@ -24,6 +20,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
+ * Created by brownba1 on 3/22/2016.
  * Controller for the game screen
  */
 public class GameScreenController implements Initializable {

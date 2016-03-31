@@ -13,6 +13,7 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 /**
+ * Tests for the Player implementation
  * Created by goistjt on 3/22/2016.
  */
 public class PlayerTests {

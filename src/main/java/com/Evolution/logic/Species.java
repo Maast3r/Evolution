@@ -5,6 +5,7 @@ import com.Evolution.exceptions.SpeciesPopulationException;
 import com.Evolution.interfaces.ISpecies;
 
 /**
+ * Logic class for handling the logic behind Species during gameplay
  * Created by goistjt on 3/21/2016.
  */
 public class Species implements ISpecies {

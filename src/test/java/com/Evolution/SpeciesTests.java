@@ -8,6 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Tests for the Species implementation
  * Created by goistjt on 3/21/2016.
  */
 public class SpeciesTests {

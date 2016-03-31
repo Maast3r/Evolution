@@ -5,6 +5,9 @@ import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.InvalidPlayerSelectException;
 import com.Evolution.interfaces.IPhases;
 
+/**
+ * Logic class handling the logic for the first phase of the game
+ */
 public class PhaseOne implements IPhases{
     private Game game;
 

@@ -177,7 +177,7 @@ public class Game {
     /**
      * Changes the current phase to phase;
      *
-     * @param phase
+     * @param phase The phase being set
      */
     public void setPhase(IPhases phase) {
         this.currentPhase = phase;

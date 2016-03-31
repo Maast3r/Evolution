@@ -1,8 +1,5 @@
 package com.Evolution.gui;
 
-/**
- * Created by brownba1 on 3/21/2016.
- */
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +17,7 @@ import java.util.ResourceBundle;
 
 /**
  * Controller for the start screen
+ * Created by brownba1 on 3/21/2016.
  */
 public class StartScreenController implements Initializable {
 

@@ -22,6 +22,7 @@ public class PlayerSpeciesTest {
 		assertEquals(2, test.getSpecies().size());
 	}
 
+	@Test
 	public void testAddOneSpeciesRight(){
 		Player test = new Player(new Species());
 		Species s = new Species();

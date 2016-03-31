@@ -1,6 +1,7 @@
 package com.Evolution;
 
 /**
+ * Main class for running the game
  * Created by brownba1 on 3/21/2016.
  */
 import javafx.application.Application;

@@ -5,6 +5,7 @@ import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.InvalidPlayerSelectException;
 
 /**
+ * Interface for Phases
  * Created by maas on 3/28/2016.
  */
 public interface IPhases {

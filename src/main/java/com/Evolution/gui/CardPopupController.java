@@ -1,9 +1,5 @@
 package com.Evolution.gui;
 
-/**
- * Created by brownba1 on 3/27/2016.
- */
-
 import com.Evolution.interfaces.ICard;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -21,6 +17,7 @@ import java.util.ResourceBundle;
 
 /**
  * Controller for the card selection popup
+ * Created by brownba1 on 3/27/2016.
  */
 public class CardPopupController implements Initializable {
 
