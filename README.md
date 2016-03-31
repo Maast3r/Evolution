@@ -52,7 +52,12 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 
 # Sprint 2
 * Jeremiah Goist
-    *
+    * Game constructor refactoring
+    * Game.foodBank and WateringHole interaction
+    * DeckFactory w/ Andrew
+    * Players discarding to discardPile, drawing from drawPile w/ Trevor
+    * Performed code reviews and had others review my commits.
+    * 75+ LOC
 * Brooke Brown
 	* CardPopupController.java
 	* Connecting GUI to Logic
