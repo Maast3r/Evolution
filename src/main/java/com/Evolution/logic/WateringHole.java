@@ -1,5 +1,6 @@
 package com.Evolution.logic;
 
+import com.Evolution.exceptions.WateringHoleEmptyException;
 import com.Evolution.interfaces.IWateringHole;
 
 /**
@@ -26,12 +27,18 @@ public class WateringHole implements IWateringHole {
     }
 
     @Override
-    public void removeFood() {
+    public void removeFood() throws WateringHoleEmptyException {
+        if(this.foodCount == 0){
+            throw new WateringHoleEmptyException("WateringHole is empty.");
+        }
         this.foodCount--;
     }
 
     @Override
-    public void removeFood(int i) {
+    public void removeFood(int i) throws WateringHoleEmptyException {
+        if(i > this.foodCount || i < 0){
+            throw new WateringHoleEmptyException("WateringHole is empty.");
+        }
         this.foodCount -= i;
     }
 }

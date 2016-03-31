@@ -1,5 +1,6 @@
 package com.Evolution.logic;
 
+import com.Evolution.exceptions.FoodBankEmptyException;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
 import com.Evolution.interfaces.*;
@@ -31,8 +32,7 @@ public class Game {
      */
     public Game(ArrayList<IPlayer> players, IWateringHole wateringHole, IDeck<ICard> drawPile, IDeck<ICard> discardPile)
             throws IllegalNumberOfPlayers, IllegalCardDirectionException {
-        // TODO: Refactor this to fulfill dependency injection by having the Decks and WateringHole passed in
-        if (players.size() < 3 || players.size() > 6) {
+        if (players.size() < 3 || players.size() > 5) {
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
         }
         this.players = players;
@@ -135,7 +135,10 @@ public class Game {
     /**
      * Decrements the food bank by one
      */
-    public void decrementFoodBank() {
+    public void decrementFoodBank() throws FoodBankEmptyException {
+        if(this.foodBank == 0){
+            throw new FoodBankEmptyException("The food bank is empty");
+        }
         this.foodBank--;
     }
 
@@ -144,7 +147,10 @@ public class Game {
      *
      * @param i food
      */
-    public void decrementFoodBank(int i) {
+    public void decrementFoodBank(int i) throws FoodBankEmptyException {
+        if(i > this.foodBank || i < 0) {
+            throw new FoodBankEmptyException("The argument is larger than the current food bank.");
+        }
         this.foodBank -= i;
     }
 
@@ -153,13 +159,14 @@ public class Game {
      *
      * @param i food
      */
-    public void moveFoodFromBankToHole(int i) {
+    public void moveFoodFromBankToHole(int i) throws FoodBankEmptyException {
         decrementFoodBank(i);
         this.wateringHole.addFood(i);
     }
 
     /**
      * Deal a card from the draw pile to a player
+     *
      * @param i the index of the player
      */
     //TODO: ADD ERROR HANDLING
@@ -180,11 +187,33 @@ public class Game {
      * Draws the appropriate amount of cards for each player.
      * Appropriate amount = # of species + 3
      */
-    public void drawForPlayers(){
-        for(IPlayer p : this.getPlayerObjects()){
-            for(int i=0; i<p.getSpecies().size()+3; i++){
+    public void drawForPlayers() {
+        for (IPlayer p : this.getPlayerObjects()) {
+            for (int i = 0; i < p.getSpecies().size() + 3; i++) {
                 p.addCardToHand(this.getDrawPile().draw());
             }
         }
+    }
+
+    /**
+     * Removes the provided card object from the hand of the player specified by i
+     * @param i player index
+     * @param card to remove
+     * @return successful discard
+     */
+    public boolean discardFromPlayer(int i, ICard card) {
+        if (this.players.get(i).removeCardFromHand(card)) {
+            this.discardPile.discard(card);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns the game's current phase
+     * @return phase
+     */
+    public IPhases getPhase(){
+        return this.currentPhase;
     }
 }

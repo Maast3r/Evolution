@@ -10,14 +10,14 @@ import java.util.ArrayList;
 public class PhaseOne implements IPhases{
     private Game game;
 
-    public PhaseOne(Game g) {
+    public PhaseOne(Game game) {
         this.game = game;
     }
 
     @Override
     public void execute() throws IllegalCardDirectionException {
-        game.drawForPlayers();
-        game.setPhase(new PhaseTwo(game));
+        this.game.drawForPlayers();
+        this.game.setPhase(new PhaseTwo(game));
     }
 
 }
