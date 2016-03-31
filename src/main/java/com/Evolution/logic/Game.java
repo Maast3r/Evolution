@@ -169,7 +169,6 @@ public class Game {
      *
      * @param i the index of the player
      */
-    //TODO: ADD ERROR HANDLING
     public void dealToPlayer(int i) throws DeckEmptyException {
         ICard card = this.drawPile.draw();
         this.players.get(i).addCardToHand(card);

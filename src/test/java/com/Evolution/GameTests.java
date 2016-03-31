@@ -356,4 +356,17 @@ public class GameTests {
 
     }
 
+    @Test(expected = InvalidPlayerSelectException.class)
+    public void testInvalidPlayerSelect1() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        Deck<ICard> discardPile = new Deck<>();
+        ICard card = new TestCard();
+        assertTrue(!discardPile.contains(card));
+        Player player = new Player(new TestSpecies());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, discardPile);
+        g.dealToPlayer(4);
+    }
 }
