@@ -49,3 +49,24 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * CardTests + Card
     * 100+ LOC
     * No GUI calls
+
+# Sprint 2
+* Jeremiah Goist
+    *
+* Brooke Brown
+	*
+* Trevor Burch
+    *
+* Andrew Ma
+    * Coding Practices.txt
+    * Metrics.txt
+    * Phase One and Phase One Tests
+    * DeckFactory
+    * DeckEmptyException
+    * FoodBankEmptyException
+    * InvalidPlayerSelectException
+    * WateringHoleEmptyException
+    * WrongFileException
+    * CardTests/DeckFactoryTests/DeckTests/GameTests/WaterHoleTests
+    * 100+ LOC
+    * No GUI calls
