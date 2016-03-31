@@ -4,6 +4,7 @@ package com.Evolution.gui;
  * Created by brownba1 on 3/22/2016.
  */
 
+import com.Evolution.exceptions.DeckEmptyException;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
 import com.Evolution.exceptions.WrongFileException;
@@ -98,8 +99,7 @@ public class GameScreenController implements Initializable {
             }
 
             System.out.println("game initialized");
-        } catch (IllegalNumberOfPlayers | IllegalCardDirectionException |
-                IOException | WrongFileException exception) {
+        } catch (IllegalNumberOfPlayers | IllegalCardDirectionException | IOException | WrongFileException | DeckEmptyException exception) {
             exception.printStackTrace();
         }
 

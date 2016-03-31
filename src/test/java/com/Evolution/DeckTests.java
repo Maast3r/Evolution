@@ -1,6 +1,7 @@
 package com.Evolution;
 
 
+import com.Evolution.exceptions.DeckEmptyException;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Deck;
@@ -31,7 +32,7 @@ public class DeckTests {
     }
 
     @Test
-    public void testDraw() throws IllegalCardDirectionException{
+    public void testDraw() throws IllegalCardDirectionException, DeckEmptyException {
         Deck<ICard> testDeck = new Deck<>();
         ICard testCard = new TestCard();
         testDeck.add(testCard);
@@ -48,7 +49,7 @@ public class DeckTests {
     }
 
     @Test
-    public void testDrawMultiple() throws IllegalCardDirectionException{
+    public void testDrawMultiple() throws IllegalCardDirectionException, DeckEmptyException {
         Deck<ICard> testDeck = new Deck<>();
         ICard testCard = new TestCard();
         ICard testCard2 = new TestCard();
@@ -77,7 +78,7 @@ public class DeckTests {
     }
 
     @Test(expected = DeckEmptyException.class)
-    public void testDeckEmpty(){
+    public void testDeckEmpty() throws DeckEmptyException {
         Deck<ICard> d = new Deck<>();
         d.draw();
     }

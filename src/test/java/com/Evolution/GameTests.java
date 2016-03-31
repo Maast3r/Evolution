@@ -1,5 +1,6 @@
 package com.Evolution;
 
+import com.Evolution.exceptions.DeckEmptyException;
 import com.Evolution.exceptions.FoodBankEmptyException;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
@@ -265,7 +266,7 @@ public class GameTests {
         g.decrementFoodBank(-241);
     }
     @Test
-    public void testDealToPlayerValid() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+    public void testDealToPlayerValid() throws IllegalNumberOfPlayers, IllegalCardDirectionException, DeckEmptyException {
         Game g = new Game(generateNumPlayers(4), this.wateringHole, this.drawPile, this.discardPile);
         IPlayer fakePlayer = EasyMock.niceMock(Player.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
@@ -295,7 +296,7 @@ public class GameTests {
     }
 
     @Test
-    public void testDealToPlayerResults() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+    public void testDealToPlayerResults() throws IllegalNumberOfPlayers, IllegalCardDirectionException, DeckEmptyException {
         Deck<ICard> drawPile = new Deck<>();
         ICard card = new TestCard();
         drawPile.discard(card);

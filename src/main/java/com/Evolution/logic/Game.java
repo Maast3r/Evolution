@@ -1,5 +1,6 @@
 package com.Evolution.logic;
 
+import com.Evolution.exceptions.DeckEmptyException;
 import com.Evolution.exceptions.FoodBankEmptyException;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalNumberOfPlayers;
@@ -169,7 +170,7 @@ public class Game {
      * @param i the index of the player
      */
     //TODO: ADD ERROR HANDLING
-    public void dealToPlayer(int i) {
+    public void dealToPlayer(int i) throws DeckEmptyException {
         ICard card = this.drawPile.draw();
         this.players.get(i).addCardToHand(card);
     }
