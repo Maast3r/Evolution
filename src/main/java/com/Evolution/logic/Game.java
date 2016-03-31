@@ -88,6 +88,7 @@ public class Game {
      *              Starts the game with Phase 1.
      *              Calls PhaseOne.execute()
      */
+    public void startGame(IPhases phase) throws IllegalCardDirectionException, DeckEmptyException {
         phase.execute();
     }
 
@@ -186,6 +187,7 @@ public class Game {
      * Draws the appropriate amount of cards for each player.
      * Appropriate amount = # of species + 3
      */
+    public void drawForPlayers() throws DeckEmptyException {
         for (IPlayer p : this.getPlayerObjects()) {
             for (int i = 0; i < p.getSpecies().size() + 3; i++) {
                 p.addCardToHand(this.getDrawPile().draw());
