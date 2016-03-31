@@ -180,6 +180,11 @@ public class SpeciesBoard extends VBox {
             s.setTitle("Evolution!");
             s.getIcons().add(new Image("/images/icon.png"));
             s.setScene(new Scene(p, Color.BLACK));
+            s.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    s.hide();
+                }
+            });
             s.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();

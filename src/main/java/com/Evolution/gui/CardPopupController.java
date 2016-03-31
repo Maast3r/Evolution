@@ -1,16 +1,22 @@
 package com.Evolution.gui;
 
 import com.Evolution.interfaces.ICard;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 
+import java.awt.event.WindowEvent;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -78,6 +84,7 @@ public class CardPopupController implements Initializable {
         }
         for (ICard card : this.hand) {
             ImageView cardView = new ImageView("/images/card_images/" + (card.getImgPath()));
+            Label cardFoodLabel = new Label("Food value: " + card.getFood());
             cardView.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.SECONDARY) {
                     this.infoLabel.setText(card.getName() + ": " + card.getDesc());
@@ -95,7 +102,10 @@ public class CardPopupController implements Initializable {
                     this.gridPane.getScene().getWindow().hide();
                 }
             });
-            addToGrid(cardView, index);
+            VBox cardPane = new VBox();
+            cardPane.setAlignment(Pos.CENTER);
+            cardPane.getChildren().addAll(cardView, cardFoodLabel);
+            addToGrid(cardPane, index);
             index++;
         }
     }
@@ -104,10 +114,10 @@ public class CardPopupController implements Initializable {
      * Adds the provided image to the grid pane at the correct position
      * based on the card index
      *
-     * @param image   the image to add
+     * @param cardPane the card to add (with it's food label)
      * @param cardNum the card index within the hand
      */
-    private void addToGrid(ImageView image, int cardNum) {
+    private void addToGrid(VBox cardPane, int cardNum) {
         int row = (int) Math.ceil(cardNum / 3);
         int col;
         if (cardNum < 3) {
@@ -115,7 +125,7 @@ public class CardPopupController implements Initializable {
         } else {
             col = cardNum % 3;
         }
-        this.gridPane.add(image, col, row);
+        this.gridPane.add(cardPane, col, row);
     }
 
     /**
