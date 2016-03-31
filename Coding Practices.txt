@@ -9,7 +9,7 @@ Methods
 
 Coding Styles
    - Must code using TDD
-   - Split code onto 2 or more lines when it exceeds 80 characters
+   - Split code onto 2 or more lines when it exceeds 120 characters
    - Remove all unnecessary comments
    - Name all packages, classes, fields, variables, and methods with meaningful names
    - Program to an interface, not an implementation

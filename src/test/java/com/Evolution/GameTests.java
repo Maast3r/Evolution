@@ -355,4 +355,18 @@ public class GameTests {
 
     }
 
+    @Test
+    public void testGetPhase() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        Deck<ICard> discardPile = new Deck<>();
+        ICard card = new TestCard();
+        assertTrue(!discardPile.contains(card));
+        Player player = new Player(new TestSpecies());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, discardPile);
+        assertEquals(PhaseOne.class, g.getPhase().getClass());
+    }
+
 }
