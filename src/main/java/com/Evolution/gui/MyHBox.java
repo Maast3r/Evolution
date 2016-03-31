@@ -1,5 +1,8 @@
 package com.Evolution.gui;
 
+import com.Evolution.interfaces.IPlayer;
+import com.Evolution.logic.Game;
+import com.Evolution.logic.Species;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -16,17 +19,20 @@ import java.util.ArrayList;
  */
 public class MyHBox extends HBox {
 
+    private Game game;
     private HBox playerPane;
     private Label foodLabel;
     private ImageView firstPlayerMarker;
-    private ArrayList<VBox> playerSpecies = new ArrayList<>();
-    private int playerNum;
+    private ArrayList<VBox> playerSpeciesBoards = new ArrayList<>();
+    private IPlayer player;
 
     /**
      * Constructor for our HBox that stores children
      */
-    public MyHBox() {
+    public MyHBox(IPlayer player, Game g) {
+        this.player = player;
         this.playerPane = new HBox();
+        this.game = g;
     }
 
     /**
@@ -42,16 +48,16 @@ public class MyHBox extends HBox {
             this.firstPlayerMarker = new ImageView("/images/first_player_marker.png");
         }
         this.foodLabel = new Label("Food bag: " + 0);
-        this.playerNum = playerNum;
-        Label playerNumLabel = new Label("Player " + this.playerNum);
+        Label playerNumLabel = new Label("Player " + playerNum);
 
         VBox playerInfo = new VBox();
         playerInfo.setAlignment(Pos.CENTER);
         playerInfo.getChildren().addAll(this.firstPlayerMarker, playerNumLabel, foodLabel);
 
-        SpeciesBoard speciesBoard = new SpeciesBoard(playerNum);
+        SpeciesBoard speciesBoard = new SpeciesBoard(this.player, this, game);
         VBox speciesPane = speciesBoard.createSpeciesBoard();
-        this.playerSpecies.add(speciesPane);
+        this.playerSpeciesBoards.add(speciesPane);
+
         this.playerPane.getChildren().addAll(playerInfo, speciesPane);
         return this.playerPane;
     }
@@ -92,21 +98,23 @@ public class MyHBox extends HBox {
      * @return ArrayList of species boards
      */
     public ArrayList<VBox> getPlayerSpecies() {
-        return this.playerSpecies;
+        return this.playerSpeciesBoards;
     }
 
     /**
      * Adds a species to this player on the given side
      * @param side "left" or "right" - the side to add the new species to
      */
-    public void addSpecies(String side) {
-        SpeciesBoard speciesBoard = new SpeciesBoard(this.playerNum);
+    public void addSpecies(int side) {
+        SpeciesBoard speciesBoard = new SpeciesBoard(this.player, this, this.game);
         VBox speciesPane = speciesBoard.createSpeciesBoard();
-        if (side.equals("left")) {
-            this.playerSpecies.add(0, speciesPane);
+        if (side == 0) {
+            // TODO add species to player through game
+            this.playerSpeciesBoards.add(0, speciesPane);
             this.playerPane.getChildren().add(1, speciesPane);
         } else {
-            this.playerSpecies.add(speciesPane);
+            // TODO add species to player through game
+            this.playerSpeciesBoards.add(speciesPane);
             this.playerPane.getChildren().add(speciesPane);
         }
     }
