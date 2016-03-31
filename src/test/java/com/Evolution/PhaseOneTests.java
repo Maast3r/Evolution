@@ -81,5 +81,25 @@ public class PhaseOneTests {
         p.execute();
         assertEquals(4, p.getPlayers().get(0).getCards().size());
         assertEquals(0, p.getDrawPile().size());
+        assertEquals(1, p.getPlayers().get(0).getSpecies().size());
+    }
+
+    @Test
+    public void testExecute2() throws IllegalCardDirectionException {
+        ArrayList<IPlayer> players = new ArrayList<IPlayer>();
+        players.add(new Player(new Species()));
+        players.get(0).addSpeciesLeft(new Species());
+        Deck<Card> drawPile = new Deck<>();
+        drawPile.add(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+        drawPile.add(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+        drawPile.add(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+        drawPile.add(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+        drawPile.add(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+        Deck<Card> discardPile = new Deck<>();
+        PhaseOne p = new PhaseOne(players, drawPile, discardPile);
+        p.execute();
+        assertEquals(5, p.getPlayers().get(0).getCards().size());
+        assertEquals(0, p.getDrawPile().size());
+        assertEquals(2, p.getPlayers().get(0).getSpecies().size());
     }
 }
