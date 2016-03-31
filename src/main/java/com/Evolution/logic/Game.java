@@ -167,7 +167,7 @@ public class Game {
      * @param i the index of the player
      */
     public void dealToPlayer(int i) throws DeckEmptyException, InvalidPlayerSelectException {
-        if(i > this.players.size()) {
+        if(i > this.players.size() || i < 0) {
             throw new InvalidPlayerSelectException("You selected an invalid player to deal to.");
         }
         ICard card = this.drawPile.draw();
