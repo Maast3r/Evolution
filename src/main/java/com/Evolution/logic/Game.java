@@ -165,6 +165,8 @@ public class Game {
      * Deal a card from the draw pile to a player
      *
      * @param i the index of the player
+     * @throws DeckEmptyException           propagated from {@link Deck#draw()}
+     * @throws InvalidPlayerSelectException if the index provided is outside of [0, size) of {@link #getPlayerObjects()}
      */
     public void dealToPlayer(int i) throws DeckEmptyException, InvalidPlayerSelectException {
         if (i >= this.players.size() || i < 0) {
@@ -186,6 +188,9 @@ public class Game {
     /**
      * Draws the appropriate amount of cards for each player.
      * Appropriate amount = # of species + 3
+     *
+     * @throws DeckEmptyException           propagated from {@link #dealToPlayer(int)}
+     * @throws InvalidPlayerSelectException propagated from {@link #dealToPlayer(int)}
      */
     public void drawForPlayers() throws DeckEmptyException, InvalidPlayerSelectException {
         for (int i = 0; i < this.players.size(); i++) {

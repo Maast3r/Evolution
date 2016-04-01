@@ -25,21 +25,29 @@ public interface ISpecies {
 
     /**
      * Increases the population size of the species up to a maximum of 6
+     *
+     * @throws SpeciesPopulationException when the {@link ISpecies#getPopulation()} is already at 6
      */
     void increasePopulation() throws SpeciesPopulationException;
 
     /**
      * Increases the body size of the species up to a maximum of 6
+     *
+     * @throws SpeciesBodySizeException when the {@link ISpecies#getBodySize()} is already at 6
      */
     void increaseBodySize() throws SpeciesBodySizeException;
 
     /**
      * Decreases the population size of the species down to a minimum of 0
+     *
+     * @throws SpeciesPopulationException when the {@link ISpecies#getPopulation()} is already at 0
      */
     void decreasePopulation() throws SpeciesPopulationException;
 
     /**
      * Decreases the body size of the species down to a minimum of 0
+     *
+     * @throws SpeciesBodySizeException when the {@link ISpecies#getBodySize()} is already at 0
      */
     void decreaseBodySize() throws SpeciesBodySizeException;
 

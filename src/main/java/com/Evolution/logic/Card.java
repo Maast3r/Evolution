@@ -15,11 +15,23 @@ public class Card implements ICard {
     private int food;
     private int direction;
 
-    public Card(String name, String desc, String imgPath, 
-    		int food, int direction) throws IllegalCardDirectionException {
-    	if(direction != 0 && direction != 1 && direction != 2){
-    		throw new IllegalCardDirectionException("The direction is not 0, 1, or 2.\n");
-    	}
+    /**
+     * Constructs a new card with the given attributes
+     *
+     * @param name      of card
+     * @param desc      of trait
+     * @param imgPath   file name of image including '.png'
+     * @param food      amount of food this card will represent
+     * @param direction of influence. Used for determining how it interacts with nearby
+     *                  {@link com.Evolution.interfaces.ISpecies} when it is attached to a
+     *                  {@link com.Evolution.interfaces.ISpecies}
+     * @throws IllegalCardDirectionException when the direction is not within the integer interval [0, 2]
+     */
+    public Card(String name, String desc, String imgPath, int food, int direction) throws
+            IllegalCardDirectionException {
+        if (direction != 0 && direction != 1 && direction != 2) {
+            throw new IllegalCardDirectionException("The direction is not 0, 1, or 2.\n");
+        }
         this.name = name;
         this.desc = desc;
         this.imgPath = imgPath;
@@ -29,7 +41,7 @@ public class Card implements ICard {
 
 
     @Override
-    public String getName(){
+    public String getName() {
         return name;
     }
 

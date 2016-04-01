@@ -30,11 +30,15 @@ public interface IWateringHole {
 
     /**
      * Removes a single piece of food from the watering hole
+     *
+     * @throws WateringHoleEmptyException when more food is removed from the {@link IWateringHole} than is available
      */
     void removeFood() throws WateringHoleEmptyException;
 
     /**
      * Removes i pieces of food from the watering hole
+     *
+     * @throws WateringHoleEmptyException when more food is removed from the {@link IWateringHole} than is available
      */
     void removeFood(int i) throws WateringHoleEmptyException;
 }
