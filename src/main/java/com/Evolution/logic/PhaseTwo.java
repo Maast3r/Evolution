@@ -15,6 +15,6 @@ public class PhaseTwo implements IPhases {
 
     @Override
     public void execute() {
-
+        game.setPhase(new PhaseThree(this.game));
     }
 }
