@@ -57,6 +57,7 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * DeckFactory w/ Andrew
     * Players discarding to discardPile, drawing from drawPile w/ Trevor
     * Performed code reviews and had others review my commits.
+    * Began writing text file containing card information
     * 75+ LOC
 * Brooke Brown
 	* CardPopupController.java
