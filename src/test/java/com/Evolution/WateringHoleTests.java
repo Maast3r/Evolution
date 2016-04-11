@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 public class WateringHoleTests {
 
     @Test
-    public void testGetFoodCount0(){
+    public void testGetFoodCount0() {
         WateringHole wateringHole = new WateringHole();
         assertTrue(wateringHole.getFoodCount() == 0);
     }
@@ -103,29 +103,40 @@ public class WateringHoleTests {
     }
 
     @Test(expected = WateringHoleEmptyException.class)
-    public void testWateringHoleEmpty () throws WateringHoleEmptyException {
+    public void testWateringHoleEmpty() throws WateringHoleEmptyException {
         WateringHole w = new WateringHole();
         w.removeFood();
     }
 
     @Test(expected = WateringHoleEmptyException.class)
-    public void testWateringHoleIEmpty1 () throws WateringHoleEmptyException {
+    public void testWateringHoleIEmpty1() throws WateringHoleEmptyException {
         WateringHole w = new WateringHole();
         w.removeFood(1);
     }
 
     @Test(expected = WateringHoleEmptyException.class)
-    public void testWateringHoleIEmpty2 () throws WateringHoleEmptyException {
+    public void testWateringHoleIEmpty2() throws WateringHoleEmptyException {
         WateringHole w = new WateringHole();
         w.removeFood(-1);
     }
 
     @Test
-    public void testAddCardToWateringHole () {
+    public void testAddCardToWateringHole() {
         WateringHole w = new WateringHole();
         ICard card = EasyMock.niceMock(Card.class);
         w.addCard(card);
 
         assertEquals(w.getCards().size(), 1);
+    }
+
+    /**
+     * BVA - Removing all from an empty deck. Should succeed
+     * leaving the deck empty.
+     */
+    @Test
+    public void testRemoveCardsFromWateringHole() {
+        WateringHole w = new WateringHole();
+        w.removeCards();
+        assertEquals(w.getCards().size(), 0);
     }
 }
