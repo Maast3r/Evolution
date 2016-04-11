@@ -51,4 +51,9 @@ public interface IWateringHole {
      * @param card the card to add
      */
     void addCard(ICard card);
+
+    /**
+     * Removes all cards from the watering hole
+     */
+    void removeCards();
 }

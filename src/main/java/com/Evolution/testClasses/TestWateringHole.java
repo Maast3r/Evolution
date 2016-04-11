@@ -45,4 +45,9 @@ public class TestWateringHole implements IWateringHole {
     public void addCard(ICard card) {
 
     }
+
+    @Override
+    public void removeCards() {
+
+    }
 }

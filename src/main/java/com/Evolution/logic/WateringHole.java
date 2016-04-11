@@ -56,5 +56,10 @@ public class WateringHole implements IWateringHole {
         this.cards.add(card);
     }
 
+    @Override
+    public void removeCards() {
+        this.cards = new ArrayList<>();
+    }
+
 
 }
