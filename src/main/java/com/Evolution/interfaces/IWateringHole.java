@@ -2,6 +2,8 @@ package com.Evolution.interfaces;
 
 import com.Evolution.exceptions.WateringHoleEmptyException;
 
+import java.util.ArrayList;
+
 /**
  * Interface for the WateringHole
  * Created by goistjt on 3/23/2016.
@@ -41,4 +43,21 @@ public interface IWateringHole {
      * @throws WateringHoleEmptyException when more food is removed from the {@link IWateringHole} than is available
      */
     void removeFood(int i) throws WateringHoleEmptyException;
+
+    /**
+     * Returns the current cards in the watering hole
+     * @return cards
+     */
+    ArrayList<ICard> getCards();
+
+    /**
+     * Adds the given card to the watering hole
+     * @param card the card to add
+     */
+    void addCard(ICard card) throws Exception;
+
+    /**
+     * Removes all cards from the watering hole
+     */
+    void removeCards();
 }

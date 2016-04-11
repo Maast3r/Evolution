@@ -1,7 +1,10 @@
 package com.Evolution.logic;
 
 import com.Evolution.exceptions.WateringHoleEmptyException;
+import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IWateringHole;
+
+import java.util.ArrayList;
 
 /**
  * Manages the watering hole
@@ -10,6 +13,7 @@ import com.Evolution.interfaces.IWateringHole;
 public class WateringHole implements IWateringHole {
 
     private int foodCount = 0;
+    private ArrayList<ICard> cards = new ArrayList<>();
 
     @Override
     public int getFoodCount() {
@@ -41,4 +45,25 @@ public class WateringHole implements IWateringHole {
         }
         this.foodCount -= i;
     }
+
+    @Override
+    public ArrayList<ICard> getCards() {
+        return this.cards;
+    }
+
+    @Override
+    public void addCard(ICard card) throws Exception{
+        // TODO: TREVOR add custom exception here
+        if (this.cards.size() == 5) {
+            throw new Exception();
+        }
+        this.cards.add(card);
+    }
+
+    @Override
+    public void removeCards() {
+        this.cards = new ArrayList<>();
+    }
+
+
 }
