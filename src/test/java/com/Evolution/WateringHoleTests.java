@@ -130,12 +130,30 @@ public class WateringHoleTests {
     }
 
     /**
-     * BVA - Removing all from an empty deck. Should succeed
+     * BVA - Removing all from an empty list. Should succeed
      * leaving the deck empty.
      */
     @Test
     public void testRemoveCardsFromWateringHole() {
         WateringHole w = new WateringHole();
+        w.removeCards();
+        assertEquals(w.getCards().size(), 0);
+    }
+
+    /**
+     * BVA - Removing all from a full list.
+     * Max of 5 cards in the watering hole at a time because
+     * there is a max of five players w/ 1 card per player.
+     * Should succeed leaving the deck empty.
+     */
+    @Test
+    public void testRemoveCardsFromWateringHole2() {
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 5; i++) {
+            ICard card = EasyMock.niceMock(Card.class);
+            w.addCard(card);
+        }
+        assertEquals(w.getCards().size(), 5);
         w.removeCards();
         assertEquals(w.getCards().size(), 0);
     }
