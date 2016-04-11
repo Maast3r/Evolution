@@ -218,4 +218,14 @@ public class Game {
     public IPhases getPhase() {
         return this.currentPhase;
     }
+
+    /**
+     * Discards the given card from the player at the given index's hand
+     * @param index The index of the player
+     * @param card The card to discard
+     */
+    public void discardToWateringHole(int index, ICard card) {
+        this.wateringHole.addCard(card);
+        this.players.get(index).removeCardFromHand(card);
+    }
 }

@@ -422,7 +422,7 @@ public class GameTests {
         for (int i = 0; i < 3; i++) {
             playerList.add(player);
         }
-        Game g = new Game(playerList, wateringHole, this.drawPile, this.discardPile);
+        Game g = new Game(playerList, wateringHole, drawPile, this.discardPile);
         g.dealToPlayer(0);
         assertTrue(g.getPlayerObjects().get(0).getCards().contains(card));
         assertTrue(!g.getWateringHole().getCards().contains(card));
