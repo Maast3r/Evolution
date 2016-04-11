@@ -223,4 +223,19 @@ public class Game {
     public IPhases getPhase() {
         return this.currentPhase;
     }
+
+    /**
+     * Discards the given card from the player at the given index's hand
+     *
+     * @param index The index of the player
+     * @param card  The card to discard
+     */
+    public void discardToWateringHole(int index, ICard card) throws InvalidDiscardToWateringHoleException {
+        if (this.wateringHole.getCards().size() == this.players.size()) {
+            throw new InvalidDiscardToWateringHoleException("You can not discard more cards to the watering hole " +
+                    "than the number of players.");
+        }
+        this.wateringHole.addCard(card);
+        this.players.get(index).removeCardFromHand(card);
+    }
 }
