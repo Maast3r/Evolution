@@ -120,14 +120,20 @@ public class WateringHoleTests {
         w.removeFood(-1);
     }
 
+
+    /**
+     * BVA - Upper limit is 5 cards (assuming 5 players)
+     */
     @Test
     public void testAddCardToWateringHole() {
         WateringHole w = new WateringHole();
-        ICard card = EasyMock.niceMock(Card.class);
-        w.addCard(card);
-
-        assertEquals(w.getCards().size(), 1);
+        for (int i = 0; i < 5; i++) {
+            ICard card = EasyMock.niceMock(Card.class);
+            w.addCard(card);
+        }
+        assertEquals(w.getCards().size(), 5);
     }
+
 
     /**
      * BVA - Removing all from an empty list. Should succeed
