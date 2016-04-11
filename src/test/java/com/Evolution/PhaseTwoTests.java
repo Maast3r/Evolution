@@ -32,7 +32,7 @@ public class PhaseTwoTests {
         IDeck<ICard> drawPile = new Deck<>();
         IDeck<ICard> discardPile = new Deck<>();
         IWateringHole wh = new WateringHole();
-        for (int i = 0; i < 13; i++) {
+        for (int i = 0; i < 3; i++) {
             try{
                 wh.addCard(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
             } catch (Exception e){
@@ -41,8 +41,28 @@ public class PhaseTwoTests {
         }
         Game g = new Game(generateNumPlayers(3), wh, drawPile, discardPile);
         PhaseTwo p = new PhaseTwo(g);
+        g.setPhase(p);
         p.execute();
         assertEquals(PhaseThree.class, g.getPhase().getClass());
+    }
+
+    @Test
+    public void textNotNextPhase() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException, InvalidPlayerSelectException {
+        IDeck<ICard> drawPile = new Deck<>();
+        IDeck<ICard> discardPile = new Deck<>();
+        IWateringHole wh = new WateringHole();
+        for (int i = 0; i < 2; i++) {
+            try{
+                wh.addCard(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        Game g = new Game(generateNumPlayers(3), wh, drawPile, discardPile);
+        PhaseTwo p = new PhaseTwo(g);
+        g.setPhase(p);
+        p.execute();
+        assertEquals(PhaseTwo.class, g.getPhase().getClass());
     }
 
 }
