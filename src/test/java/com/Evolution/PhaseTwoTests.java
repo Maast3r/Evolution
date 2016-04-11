@@ -32,6 +32,13 @@ public class PhaseTwoTests {
         IDeck<ICard> drawPile = new Deck<>();
         IDeck<ICard> discardPile = new Deck<>();
         IWateringHole wh = new WateringHole();
+        for (int i = 0; i < 13; i++) {
+            try{
+                wh.addCard(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
         Game g = new Game(generateNumPlayers(3), wh, drawPile, discardPile);
         PhaseTwo p = new PhaseTwo(g);
         p.execute();
