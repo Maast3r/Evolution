@@ -411,4 +411,24 @@ public class GameTests {
         assertEquals(PhaseTwo.class, g.getPhase().getClass());
     }
 
+    @Test
+    public void testDiscardToWateringHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException, InvalidPlayerSelectException, DeckEmptyException {
+        Deck<ICard> drawPile = new Deck<>();
+        WateringHole wateringHole = new WateringHole();
+        ICard card = new TestCard();
+        drawPile.discard(card);
+        Player player = new Player(new TestSpecies());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, wateringHole, this.drawPile, this.discardPile);
+        g.dealToPlayer(0);
+        assertTrue(g.getPlayerObjects().get(0).getCards().contains(card));
+        assertTrue(!g.getWateringHole().getCards().contains(card));
+        g.discardToWateringHole(0, g.getPlayerObjects().get(0).getCards().get(0));
+        assertTrue(!g.getPlayerObjects().get(0).getCards().contains(card));
+        assertTrue(g.getWateringHole().getCards().contains(card));
+    }
+
 }
