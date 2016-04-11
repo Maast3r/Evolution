@@ -124,7 +124,7 @@ public class WateringHoleTests {
      * BVA - Upper limit is 5 cards (assuming 5 players)
      */
     @Test
-    public void testAddCardToWateringHole() {
+    public void testAddCardToWateringHole() throws Exception {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = EasyMock.niceMock(Card.class);
@@ -138,7 +138,7 @@ public class WateringHoleTests {
      * Asserting that adding 6 cards throws an error
      */
     @Test (expected = Exception.class)
-    public void testAdd6CardsToWateringHole() {
+    public void testAdd6CardsToWateringHole() throws Exception {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 6; i++) {
             ICard card = EasyMock.niceMock(Card.class);
@@ -164,7 +164,7 @@ public class WateringHoleTests {
      * Should succeed leaving the deck empty.
      */
     @Test
-    public void testRemoveCardsFromWateringHole2() {
+    public void testRemoveCardsFromWateringHole2() throws Exception {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = EasyMock.niceMock(Card.class);

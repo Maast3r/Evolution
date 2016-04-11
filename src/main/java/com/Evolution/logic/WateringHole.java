@@ -52,7 +52,11 @@ public class WateringHole implements IWateringHole {
     }
 
     @Override
-    public void addCard(ICard card) {
+    public void addCard(ICard card) throws Exception{
+        // TODO: TREVOR add custom exception here
+        if (this.cards.size() == 5) {
+            throw new Exception();
+        }
         this.cards.add(card);
     }
 
