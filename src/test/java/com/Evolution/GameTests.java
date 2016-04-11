@@ -431,4 +431,28 @@ public class GameTests {
         assertTrue(g.getWateringHole().getCards().contains(card));
     }
 
+    /**
+     * BVA - Can only add card to the watering hole equal to the number of players
+     */
+    @Test(expected = InvalidDiscardToWateringHoleException.class)
+    public void testDiscard6ToWateringHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException, InvalidPlayerSelectException, DeckEmptyException {
+        Deck<ICard> drawPile = new Deck<>();
+        WateringHole wateringHole = new WateringHole();
+        for(int i = 0; i < 4; i ++) {
+            ICard card = new TestCard();
+            drawPile.discard(card);
+        }
+        Player player = new Player(new TestSpecies());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, wateringHole, drawPile, this.discardPile);
+        for(int k = 0; k < 4; k++) {
+            g.dealToPlayer(k % 3);
+            g.discardToWateringHole(k % 3, g.getPlayerObjects().get(k % 3).getCards().get(0));
+        }
+    }
+
+
 }
