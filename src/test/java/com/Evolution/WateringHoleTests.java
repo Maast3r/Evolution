@@ -1,7 +1,10 @@
 package com.Evolution;
 
 import com.Evolution.exceptions.WateringHoleEmptyException;
+import com.Evolution.interfaces.ICard;
+import com.Evolution.logic.Card;
 import com.Evolution.logic.WateringHole;
+import org.easymock.EasyMock;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -115,5 +118,14 @@ public class WateringHoleTests {
     public void testWateringHoleIEmpty2 () throws WateringHoleEmptyException {
         WateringHole w = new WateringHole();
         w.removeFood(-1);
+    }
+
+    @Test
+    public void testAddCardToWateringHole () {
+        WateringHole w = new WateringHole();
+        ICard card = EasyMock.niceMock(Card.class);
+        w.addCard(card);
+
+        assertEquals(w.getCards().size(), 1);
     }
 }
