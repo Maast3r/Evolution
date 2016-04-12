@@ -7,6 +7,8 @@ import com.Evolution.logic.WateringHole;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
+import java.lang.reflect.Field;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -157,5 +159,23 @@ public class WateringHoleTests {
         assertEquals(w.getCards().size(), 5);
         w.removeCards();
         assertEquals(w.getCards().size(), 0);
+    }
+
+    /**
+     * BVA - Counting a total of 0 food from all cards.
+     * Lowest number of food to be ever counted from the cards
+     * in teh watering hole.
+     */
+    @Test
+    public void testCountCardFood1() throws NoSuchFieldException, IllegalAccessException {
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 5; i++) {
+            ICard card = EasyMock.niceMock(Card.class);
+            Field field = card.getClass().getDeclaredField("food");
+            field.setAccessible(true);
+            field.set(card, -2);
+            w.addCard(card);
+        }
+        assertEquals(-10, w.getCardFoodCount());
     }
 }
