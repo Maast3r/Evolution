@@ -164,9 +164,9 @@ public class WateringHoleTests {
     }
 
     /**
-     * BVA - Counting a total of 0 food from all cards.
+     * BVA - Counting a total of -10 food from all cards.
      * Lowest number of food to be ever counted from the cards
-     * in teh watering hole.
+     * in the watering hole.
      */
     @Test
     public void testCountCardFood1() throws NoSuchFieldException, IllegalAccessException, IllegalCardDirectionException {
@@ -180,5 +180,25 @@ public class WateringHoleTests {
             w.addCard(card);
         }
         assertEquals(-10, w.getCardFoodCount());
+    }
+
+    /**
+     * BVA - Counting a total of 35 food from all cards.
+     * Highest number of food to be ever counted from the cards
+     * in the watering hole.
+     */
+    @Test
+    public void testCountCardFood2() throws NoSuchFieldException, IllegalAccessException,
+            IllegalCardDirectionException {
+        Card dummy = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 5; i++) {
+            ICard card = EasyMock.niceMock(Card.class);
+            Field field = dummy.getClass().getDeclaredField("food");
+            field.setAccessible(true);
+            field.set(card, 7);
+            w.addCard(card);
+        }
+        assertEquals(35, w.getCardFoodCount());
     }
 }
