@@ -62,4 +62,7 @@ public class WateringHole implements IWateringHole {
     }
 
 
+    public int getCardFoodCount() {
+        return -10;
+    }
 }

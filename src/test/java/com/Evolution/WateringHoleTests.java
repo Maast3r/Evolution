@@ -1,5 +1,6 @@
 package com.Evolution;
 
+import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.WateringHoleEmptyException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Card;
@@ -8,6 +9,7 @@ import org.easymock.EasyMock;
 import org.junit.Test;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -167,11 +169,12 @@ public class WateringHoleTests {
      * in teh watering hole.
      */
     @Test
-    public void testCountCardFood1() throws NoSuchFieldException, IllegalAccessException {
+    public void testCountCardFood1() throws NoSuchFieldException, IllegalAccessException, IllegalCardDirectionException {
+        Card dummy = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = EasyMock.niceMock(Card.class);
-            Field field = card.getClass().getDeclaredField("food");
+            Field field = dummy.getClass().getDeclaredField("food");
             field.setAccessible(true);
             field.set(card, -2);
             w.addCard(card);
