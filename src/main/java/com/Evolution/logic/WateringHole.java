@@ -64,7 +64,9 @@ public class WateringHole implements IWateringHole {
 
     public int getCardFoodCount() {
         int count = 0;
+        System.out.println(this.cards.size() + " ----");
         for(ICard c : this.cards) {
+            System.out.println(c.getFood() + "  adfasdfs\n");
             count += c.getFood();
         }
         return count;

@@ -172,8 +172,7 @@ public class WateringHoleTests {
     public void testCountCardFood1() throws NoSuchFieldException, IllegalAccessException, IllegalCardDirectionException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
-            ICard card = EasyMock.niceMock(Card.class);
-            card.setField(-2);
+            ICard card = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", -2, 0);
             w.addCard(card);
         }
         assertEquals(-10, w.getCardFoodCount());
@@ -189,8 +188,7 @@ public class WateringHoleTests {
             IllegalCardDirectionException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
-            ICard card = EasyMock.niceMock(Card.class);
-            card.setField(7);
+            ICard card = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 7, 0);
             w.addCard(card);
         }
         assertEquals(35, w.getCardFoodCount());
