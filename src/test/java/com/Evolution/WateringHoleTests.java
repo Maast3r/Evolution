@@ -193,4 +193,46 @@ public class WateringHoleTests {
         }
         assertEquals(35, w.getCardFoodCount());
     }
+
+    /**
+     * Same as 1, but as unit test
+     * BVA - Counting a total of -10 food from all cards.
+     * Lowest number of food to be ever counted from the cards
+     * in the watering hole.
+     */
+    @Test
+    public void testCountCardFood3() throws NoSuchFieldException, IllegalAccessException,
+            IllegalCardDirectionException {
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 5; i++) {
+            Card card = EasyMock.createMockBuilder(Card.class)
+                    .withConstructor(String.class, String.class, String.class,
+                            int.class, int.class)
+                    .withArgs("","","",-2, 0)
+                    .createMock();
+            w.addCard(card);
+        }
+        assertEquals(-10, w.getCardFoodCount());
+    }
+
+    /**
+     * Same as 2, but as unit test
+     * BVA - Counting a total of 35 food from all cards.
+     * Highest number of food to be ever counted from the cards
+     * in the watering hole.
+     */
+    @Test
+    public void testCountCardFood4() throws NoSuchFieldException, IllegalAccessException,
+            IllegalCardDirectionException {
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 5; i++) {
+            Card card = EasyMock.createMockBuilder(Card.class)
+                    .withConstructor(String.class, String.class, String.class,
+                            int.class, int.class)
+                    .withArgs("","","",7, 0)
+                    .createMock();
+            w.addCard(card);
+        }
+        assertEquals(35, w.getCardFoodCount());
+    }
 }
