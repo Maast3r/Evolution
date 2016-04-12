@@ -63,6 +63,10 @@ public class WateringHole implements IWateringHole {
 
 
     public int getCardFoodCount() {
-        return -10;
+        int count = 0;
+        for(ICard c : this.cards) {
+            count += c.getFood();
+        }
+        return count;
     }
 }
