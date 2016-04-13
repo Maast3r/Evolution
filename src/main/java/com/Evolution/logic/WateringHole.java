@@ -61,6 +61,11 @@ public class WateringHole implements IWateringHole {
         this.cards = new ArrayList<>();
     }
 
+    @Override
+    public void addTotalCardFood() {
+       this.foodCount = -10;
+    }
+
 
     public int getCardFoodCount() {
         int count = 0;
