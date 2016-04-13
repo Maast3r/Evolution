@@ -63,7 +63,7 @@ public class WateringHole implements IWateringHole {
 
     @Override
     public void addTotalCardFood() {
-       this.foodCount = -10;
+       this.foodCount = getCardFoodCount();
     }
 
 
