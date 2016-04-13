@@ -1,5 +1,6 @@
 package com.Evolution.gui;
 
+import com.Evolution.exceptions.InvalidDiscardToWateringHoleException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Game;
 import javafx.collections.FXCollections;
@@ -51,7 +52,8 @@ public class SpeciesBoard extends VBox {
         ADD_SPECIES_LEFT("Add Species (Left)"),
         ADD_SPECIES_RIGHT("Add Species (Right)"),
         INCREASE_POPULATION("Increase Population"),
-        INCREASE_BODY_SIZE("Increase Body Size");
+        INCREASE_BODY_SIZE("Increase Body Size"),
+        DISCARD_TO_WATERINGHOLE("Discard to Watering Hole");
 
         private String name;
 
@@ -63,6 +65,14 @@ public class SpeciesBoard extends VBox {
             return name;
         }
     }
+
+    private ObservableList<String> phase2Options = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
+            Actions.VIEW_CARDS.getName(), Actions.DISCARD_TO_WATERINGHOLE.getName());
+
+    private ObservableList<String> phase3Options = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
+            Actions.VIEW_CARDS.getName(), Actions.ADD_TRAIT.getName(), Actions.ADD_SPECIES_LEFT.getName(),
+            Actions.ADD_SPECIES_RIGHT.getName(), Actions.INCREASE_POPULATION.getName(),
+            Actions.INCREASE_BODY_SIZE.getName());
 
     /**
      * Constructor for the species board
@@ -106,7 +116,11 @@ public class SpeciesBoard extends VBox {
         this.actionChoiceBox.setItems(options);
         this.actionChoiceBox.getSelectionModel().selectFirst();
         this.actionChoiceBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-            performAction(Actions.values()[newValue.intValue()]);
+            try {
+                performAction(Actions.values()[newValue.intValue()]);
+            } catch (InvalidDiscardToWateringHoleException e) {
+                e.printStackTrace();
+            }
             this.actionChoiceBox.getSelectionModel().selectFirst();
         });
 
@@ -121,7 +135,7 @@ public class SpeciesBoard extends VBox {
      *
      * @param action the selected action
      */
-    private void performAction(Actions action) {
+    private void performAction(Actions action) throws InvalidDiscardToWateringHoleException {
         // perform selected action
         switch (action) {
             case ACTIONS:
@@ -158,6 +172,12 @@ public class SpeciesBoard extends VBox {
                 this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
                 this.playerPane.updateGameScreen();
                 setBodySize(1);
+                break;
+            case DISCARD_TO_WATERINGHOLE:
+                openCardWindow(Actions.DISCARD_TO_WATERINGHOLE);
+                this.game.discardToWateringHole(this.playerIndex, this.selectedCard);
+                this.game.nextTurn();
+                this.playerPane.updateGameScreen();
                 break;
         }
 

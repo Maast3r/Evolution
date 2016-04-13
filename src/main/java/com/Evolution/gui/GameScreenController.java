@@ -43,6 +43,8 @@ public class GameScreenController implements Initializable {
     @FXML
     private Label wateringHoleLabel;
     @FXML
+    private Label wateringHoleCardLabel;
+    @FXML
     private Label playerTurnLabel;
     @FXML
     private Label phaseLabel;
@@ -75,6 +77,8 @@ public class GameScreenController implements Initializable {
                 "'game_screen.fxml'.";
         assert this.wateringHoleLabel != null : "fx:id=\"wateringHoleLabel\" was not injected: check your FXML file " +
                 "'game_screen.fxml'.";
+        assert this.wateringHoleCardLabel != null : "fx:id\"wateringHoleCardLabel\" was not injected: check your FXML" +
+                " file 'game_screen.fxml'.";
         assert this.playerTurnLabel != null : "fx:id=\"playerTurnLabel\" was not injected: check your FXML file " +
                 "'game_screen.fxml'.";
         assert this.phaseLabel != null : "fx:id=\"phaseLabel\" was not injected: check your FXML file 'game_screen" +
@@ -121,6 +125,7 @@ public class GameScreenController implements Initializable {
         this.drawLabel.setText("Draw Pile:\n" + this.game.getDrawPile().getSize() + " cards");
         this.discardLabel.setText("Discard Pile:\n" + this.game.getDiscardPile().getSize() + " cards");
         this.wateringHoleLabel.setText("Food: " + this.game.getWateringHole().getFoodCount() + " pieces");
+        this.wateringHoleCardLabel.setText("Cards: " + this.game.getWateringHole().getCards().size());
         this.phaseLabel.setText("Phase: " + "Deal Cards");
         this.playerTurnLabel.setText("Player " + this.game.getTurn() + " Turn");
         this.foodBankLabel.setText("Food Bank: " + this.game.getFoodBankCount() + " pieces left");
@@ -181,8 +186,8 @@ public class GameScreenController implements Initializable {
     /**
      * Set up the starting screen for each player
      *
-     * @param pane player pane
-     * @param index  player index in the players array
+     * @param pane  player pane
+     * @param index player index in the players array
      */
     private void startingPaneSetup(HBox pane, int index) {
         MyHBox hBox = new MyHBox(index, this.game, this);
