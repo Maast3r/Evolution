@@ -166,7 +166,8 @@ public class WateringHoleTests {
     /**
      * BVA - Counting a total of -10 food from all cards.
      * Lowest number of food to be ever counted from the cards
-     * in the watering hole.
+     * in the watering hole
+     * TODO check the lowest negative and highest postiive
      */
     @Test
     public void testCountCardFood1() throws NoSuchFieldException, IllegalAccessException, IllegalCardDirectionException {
