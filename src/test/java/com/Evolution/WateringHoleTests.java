@@ -253,6 +253,26 @@ public class WateringHoleTests {
             w.addCard(card);
         }
         w.addTotalCardFood();
-        assertEquals(-10, w.getCardFoodCount());
+        assertEquals(-10, w.getFoodCount());
+    }
+
+    /**
+     * BVA - add the total card food count to the watering hole
+     * Highest number is 35
+     *
+     */
+    @Test
+    public void addCardFoodToCount2(){
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 5; i++) {
+            Card card = EasyMock.createMockBuilder(Card.class)
+                    .withConstructor(String.class, String.class, String.class,
+                            int.class, int.class)
+                    .withArgs("","","",7, 0)
+                    .createMock();
+            w.addCard(card);
+        }
+        w.addTotalCardFood();
+        assertEquals(35, w.getFoodCount());
     }
 }
