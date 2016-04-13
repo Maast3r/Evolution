@@ -92,3 +92,15 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * CardTests/DeckFactoryTests/DeckTests/GameTests/WaterHoleTests
     * 100+ LOC
     * No GUI calls
+
+# Sprint 3
+* Jeremiah Goist
+    * 75+ LOC
+* Brooke Brown
+	* 50+ LOC
+* Trevor Burch
+    * 75+ LOC
+* Andrew Ma
+    * WateringHole and WateringHoleTests
+    * 50+ LOC
+    * No GUI calls
