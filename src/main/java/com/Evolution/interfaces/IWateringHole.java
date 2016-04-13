@@ -56,4 +56,16 @@ public interface IWateringHole {
      * Removes all cards from the watering hole
      */
     void removeCards();
+
+    /**
+     * Adds total Card food count to watering hole
+     */
+    void addTotalCardFood();
+
+    /**
+     * Counts all the total food on the cards in the
+     * watering hole
+     * @return total food of cards
+     */
+    int getCardFoodCount();
 }
