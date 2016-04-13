@@ -235,4 +235,24 @@ public class WateringHoleTests {
         }
         assertEquals(35, w.getCardFoodCount());
     }
+
+    /**
+     * BVA - add the total card food count to the watering hole
+     * Lowest number is -10
+     *
+     */
+    @Test
+    public void addCardFoodToCount1(){
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 5; i++) {
+            Card card = EasyMock.createMockBuilder(Card.class)
+                    .withConstructor(String.class, String.class, String.class,
+                            int.class, int.class)
+                    .withArgs("","","",-2, 0)
+                    .createMock();
+            w.addCard(card);
+        }
+        w.addTotalCardFood();
+        assertEquals(-10, w.getCardFoodCount());
+    }
 }
