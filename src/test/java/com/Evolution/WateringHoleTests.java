@@ -275,4 +275,38 @@ public class WateringHoleTests {
         w.addTotalCardFood();
         assertEquals(35, w.getFoodCount());
     }
+
+    /**
+     * Same as addCardFoodToCount1 but integration
+     * BVA - add the total card food count to the watering hole
+     * Lowest number is -10
+     *
+     */
+    @Test
+    public void addCardFoodToCount3() throws IllegalCardDirectionException {
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 5; i++) {
+            ICard card = new Card("","","",-2, 0);
+            w.addCard(card);
+        }
+        w.addTotalCardFood();
+        assertEquals(-10, w.getFoodCount());
+    }
+
+    /**
+     * Same as addCardFoodToCount2 but integration
+     * BVA - add the total card food count to the watering hole
+     * Highest number is 35
+     *
+     */
+    @Test
+    public void addCardFoodToCount4() throws IllegalCardDirectionException {
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 5; i++) {
+            ICard card = new Card("","","",7, 0);
+            w.addCard(card);
+        }
+        w.addTotalCardFood();
+        assertEquals(35, w.getFoodCount());
+    }
 }
