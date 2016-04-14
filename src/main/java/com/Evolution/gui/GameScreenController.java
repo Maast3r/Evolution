@@ -27,7 +27,7 @@ public class GameScreenController implements Initializable {
 
     private int numPlayers = 0;
     private ArrayList<IPlayer> players = new ArrayList<>();
-    private ArrayList<HBox> playerPanes = new ArrayList<>();
+    private ArrayList<MyHBox> playerPanes = new ArrayList<>();
     private Game game;
 
     @FXML
@@ -116,6 +116,8 @@ public class GameScreenController implements Initializable {
         } else {
             fivePlayerSetup();
         }
+
+        updateChoiceBoxes();
     }
 
     /**
@@ -129,6 +131,20 @@ public class GameScreenController implements Initializable {
         this.phaseLabel.setText("Phase: " + "Deal Cards");
         this.playerTurnLabel.setText("Player " + this.game.getTurn() + " Turn");
         this.foodBankLabel.setText("Food Bank: " + this.game.getFoodBankCount() + " pieces left");
+    }
+
+    /**
+     * De/Activates the ChoiceBoxes under each SpeciesBoard depending on which player's turn it currently is.
+     */
+    public void updateChoiceBoxes() {
+        int activeTurn = this.game.getTurn() - 1;
+        for (int i = 0; i < this.players.size(); i++) {
+            if (activeTurn == i) {
+                this.playerPanes.get(i).setChoicesActive(true);
+            } else {
+                this.playerPanes.get(i).setChoicesActive(false);
+            }
+        }
     }
 
     /**
@@ -193,6 +209,6 @@ public class GameScreenController implements Initializable {
         MyHBox hBox = new MyHBox(index, this.game, this);
         HBox playerPane = hBox.createBox();
         pane.getChildren().addAll(playerPane);
-        this.playerPanes.add(playerPane);
+        this.playerPanes.add(hBox);
     }
 }

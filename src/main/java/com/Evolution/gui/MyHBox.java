@@ -1,5 +1,6 @@
 package com.Evolution.gui;
 
+import com.Evolution.interfaces.IPlayer;
 import com.Evolution.logic.Game;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -52,7 +53,7 @@ public class MyHBox extends HBox {
         playerInfo.setAlignment(Pos.CENTER);
         playerInfo.getChildren().addAll(this.firstPlayerMarker, playerNumLabel, this.foodLabel);
 
-        SpeciesBoard speciesBoard = new SpeciesBoard(this.playerIndex, 0, this, this.game);
+        SpeciesBoard speciesBoard = new SpeciesBoard(this.playerIndex, 0, this, this.game, this.gameScreen);
         VBox speciesPane = speciesBoard.createSpeciesBoard();
         this.playerSpeciesBoards.add(speciesBoard);
 
@@ -116,14 +117,14 @@ public class MyHBox extends HBox {
                 int oldNum = this.playerSpeciesBoards.get(i).getSpeciesNum();
                 this.playerSpeciesBoards.get(i).setSpeciesNum(oldNum + 1);
             }
-            SpeciesBoard speciesBoard = new SpeciesBoard(this.playerIndex, 0, this, this.game);
+            SpeciesBoard speciesBoard = new SpeciesBoard(this.playerIndex, 0, this, this.game, this.gameScreen);
             VBox speciesPane = speciesBoard.createSpeciesBoard();
             this.playerSpeciesBoards.add(0, speciesBoard);
             this.playerPane.getChildren().add(1, speciesPane);
         } else {
             // TODO add species to player through game
             SpeciesBoard speciesBoard = new SpeciesBoard(this.playerIndex,
-                    this.playerSpeciesBoards.size(), this, this.game);
+                    this.playerSpeciesBoards.size(), this, this.game, this.gameScreen);
             VBox speciesPane = speciesBoard.createSpeciesBoard();
             this.playerSpeciesBoards.add(speciesBoard);
             this.playerPane.getChildren().add(speciesPane);
@@ -135,5 +136,16 @@ public class MyHBox extends HBox {
      */
     public void updateGameScreen() {
         this.gameScreen.staticElementsUpdate();
+    }
+
+    /**
+     * De/Activates this player pane's SpeciesBoards' ChoiceBoxes
+     *
+     * @param active whether or not this player's ChoiceBoxes are enables
+     */
+    public void setChoicesActive(boolean active) {
+        for (SpeciesBoard board : this.playerSpeciesBoards) {
+            board.setChoiceBoxViewable(active);
+        }
     }
 }

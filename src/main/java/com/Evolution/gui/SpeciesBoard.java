@@ -1,6 +1,9 @@
 package com.Evolution.gui;
 
+import com.Evolution.exceptions.DeckEmptyException;
+import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.InvalidDiscardToWateringHoleException;
+import com.Evolution.exceptions.InvalidPlayerSelectException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Game;
 import javafx.collections.FXCollections;
@@ -25,6 +28,7 @@ import java.io.IOException;
 public class SpeciesBoard extends VBox {
 
     private Game game;
+    private GameScreenController gameController;
     private VBox board;
     private MyHBox playerPane;
     private Label populationSize;
@@ -38,6 +42,10 @@ public class SpeciesBoard extends VBox {
     private int speciesNum;
     private ICard selectedCard;
     private String traitSelection;
+
+    public void setChoiceBoxViewable(boolean viewable) {
+        this.actionChoiceBox.setDisable(!viewable);
+    }
 
     /**
      * Enum for the actions in the choiceBox
@@ -77,12 +85,13 @@ public class SpeciesBoard extends VBox {
     /**
      * Constructor for the species board
      */
-    public SpeciesBoard(int index, int num, MyHBox playerPane, Game game) {
+    public SpeciesBoard(int index, int num, MyHBox playerPane, Game game, GameScreenController controller) {
         this.board = new VBox();
         this.playerIndex = index;
         this.speciesNum = num;
         this.playerPane = playerPane;
         this.game = game;
+        this.gameController = controller;
     }
 
     /**
@@ -177,7 +186,14 @@ public class SpeciesBoard extends VBox {
                 openCardWindow(Actions.DISCARD_TO_WATERINGHOLE);
                 this.game.discardToWateringHole(this.playerIndex, this.selectedCard);
                 this.game.nextTurn();
+                try {
+                    this.game.getPhase().execute();
+                } catch (IllegalCardDirectionException | InvalidPlayerSelectException | DeckEmptyException e) {
+                    e.printStackTrace();
+                }
                 this.playerPane.updateGameScreen();
+                this.gameController.updateChoiceBoxes();
+
                 break;
         }
 
