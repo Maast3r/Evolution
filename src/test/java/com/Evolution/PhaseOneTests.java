@@ -9,6 +9,7 @@ import com.Evolution.interfaces.IDeck;
 import com.Evolution.interfaces.IPlayer;
 import com.Evolution.interfaces.IWateringHole;
 import com.Evolution.logic.*;
+import org.easymock.EasyMock;
 import org.junit.Test;
 
 import java.util.ArrayList;
