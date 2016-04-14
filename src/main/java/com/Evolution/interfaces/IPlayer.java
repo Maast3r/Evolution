@@ -2,10 +2,10 @@ package com.Evolution.interfaces;
 
 import com.Evolution.exceptions.InvalidPlayerSpeciesRemovalException;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
+ * Interface for Players
  * Created by goistjt on 3/22/2016.
  */
 public interface IPlayer {

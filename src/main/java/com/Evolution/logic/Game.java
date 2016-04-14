@@ -84,11 +84,10 @@ public class Game {
     }
 
     /**
-     * @param phase 1 of the game
-     *              Starts the game with Phase 1.
-     *              Calls PhaseOne.execute()
+     * Starts the game with Phase 1.
+     * Calls currentPhase.execute()
      */
-    public void startGame() throws IllegalCardDirectionException, DeckEmptyException {
+    public void startGame() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException {
         this.currentPhase.execute();
     }
 
@@ -134,7 +133,7 @@ public class Game {
      * Decrements the food bank by one
      */
     public void decrementFoodBank() throws FoodBankEmptyException {
-        if(this.foodBank == 0){
+        if (this.foodBank == 0) {
             throw new FoodBankEmptyException("The food bank is empty");
         }
         this.foodBank--;
@@ -146,7 +145,7 @@ public class Game {
      * @param i food
      */
     public void decrementFoodBank(int i) throws FoodBankEmptyException {
-        if(i > this.foodBank || i < 0) {
+        if (i > this.foodBank || i < 0) {
             throw new FoodBankEmptyException("The argument is larger than the current food bank.");
         }
         this.foodBank -= i;
@@ -168,7 +167,7 @@ public class Game {
      * @param i the index of the player
      */
     public void dealToPlayer(int i) throws DeckEmptyException, InvalidPlayerSelectException {
-        if(i > this.players.size() || i < 0) {
+        if (i >= this.players.size() || i < 0) {
             throw new InvalidPlayerSelectException("You selected an invalid player to deal to.");
         }
         ICard card = this.drawPile.draw();
@@ -177,9 +176,10 @@ public class Game {
 
     /**
      * Changes the current phase to phase;
-     * @param phase
+     *
+     * @param phase The phase being set
      */
-    public void setPhase(IPhases phase){
+    public void setPhase(IPhases phase) {
         this.currentPhase = phase;
     }
 
@@ -187,17 +187,18 @@ public class Game {
      * Draws the appropriate amount of cards for each player.
      * Appropriate amount = # of species + 3
      */
-    public void drawForPlayers() throws DeckEmptyException {
-        for (IPlayer p : this.getPlayerObjects()) {
-            for (int i = 0; i < p.getSpecies().size() + 3; i++) {
-                p.addCardToHand(this.getDrawPile().draw());
+    public void drawForPlayers() throws DeckEmptyException, InvalidPlayerSelectException {
+        for (int i = 0; i < this.players.size(); i++) {
+            for (int j = 0; j < this.players.get(i).getSpecies().size() + 3; j++) {
+                dealToPlayer(i);
             }
         }
     }
 
     /**
      * Removes the provided card object from the hand of the player specified by i
-     * @param i player index
+     *
+     * @param i    player index
      * @param card to remove
      * @return successful discard
      */
@@ -211,9 +212,25 @@ public class Game {
 
     /**
      * Returns the game's current phase
+     *
      * @return phase
      */
-    public IPhases getPhase(){
+    public IPhases getPhase() {
         return this.currentPhase;
+    }
+
+    /**
+     * Discards the given card from the player at the given index's hand
+     *
+     * @param index The index of the player
+     * @param card  The card to discard
+     */
+    public void discardToWateringHole(int index, ICard card) throws InvalidDiscardToWateringHoleException {
+        if (this.wateringHole.getCards().size() == this.players.size()) {
+            throw new InvalidDiscardToWateringHoleException("You can not discard more cards to the watering hole " +
+                    "than the number of players.");
+        }
+        this.wateringHole.addCard(card);
+        this.players.get(index).removeCardFromHand(card);
     }
 }

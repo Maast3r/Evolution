@@ -4,6 +4,7 @@ import com.Evolution.exceptions.SpeciesBodySizeException;
 import com.Evolution.exceptions.SpeciesPopulationException;
 
 /**
+ * Interface for Species
  * Created by goistjt on 3/22/2016.
  */
 public interface ISpecies {

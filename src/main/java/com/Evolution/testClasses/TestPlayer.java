@@ -7,6 +7,8 @@ import com.Evolution.interfaces.ISpecies;
 import java.util.ArrayList;
 
 /**
+ * Test class for use in unit tests that
+ * do not require full player implementations
  * Created by goistjt on 3/22/2016.
  */
 public class TestPlayer implements IPlayer {

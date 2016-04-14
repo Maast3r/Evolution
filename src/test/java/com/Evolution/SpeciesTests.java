@@ -1,13 +1,14 @@
 package com.Evolution;
 
-import static org.junit.Assert.*;
-
 import com.Evolution.exceptions.SpeciesBodySizeException;
 import com.Evolution.exceptions.SpeciesPopulationException;
 import com.Evolution.logic.Species;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 /**
+ * Tests for the Species implementation
  * Created by goistjt on 3/21/2016.
  */
 public class SpeciesTests {

@@ -3,20 +3,19 @@ package com.Evolution;
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.*;
 import com.Evolution.logic.*;
-import com.Evolution.testClasses.*;
-import com.sun.xml.internal.bind.v2.model.core.ID;
-import com.sun.xml.internal.bind.v2.runtime.reflect.Lister;
+import com.Evolution.testClasses.TestCard;
+import com.Evolution.testClasses.TestPlayer;
+import com.Evolution.testClasses.TestSpecies;
+import com.Evolution.testClasses.TestWateringHole;
+import org.easymock.EasyMock;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.easymock.EasyMock;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class GameTests {
@@ -147,7 +146,7 @@ public class GameTests {
 
     @Test
     public void testStartPhase() throws IllegalNumberOfPlayers,
-            IllegalCardDirectionException, DeckEmptyException {
+            IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException {
         IPhases fakePhaseOne = EasyMock.niceMock(PhaseOne.class);
         fakePhaseOne.execute();
         EasyMock.replay(fakePhaseOne);
@@ -411,5 +410,49 @@ public class GameTests {
         g.setPhase(new PhaseTwo(g));
         assertEquals(PhaseTwo.class, g.getPhase().getClass());
     }
+
+    @Test
+    public void testDiscardToWateringHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException, InvalidPlayerSelectException, DeckEmptyException, InvalidDiscardToWateringHoleException {
+        Deck<ICard> drawPile = new Deck<>();
+        WateringHole wateringHole = new WateringHole();
+        ICard card = new TestCard();
+        drawPile.discard(card);
+        Player player = new Player(new TestSpecies());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, wateringHole, drawPile, this.discardPile);
+        g.dealToPlayer(0);
+        assertTrue(g.getPlayerObjects().get(0).getCards().contains(card));
+        assertTrue(!g.getWateringHole().getCards().contains(card));
+        g.discardToWateringHole(0, g.getPlayerObjects().get(0).getCards().get(0));
+        assertTrue(!g.getPlayerObjects().get(0).getCards().contains(card));
+        assertTrue(g.getWateringHole().getCards().contains(card));
+    }
+
+    /**
+     * BVA - Can only add card to the watering hole equal to the number of players
+     */
+    @Test(expected = InvalidDiscardToWateringHoleException.class)
+    public void testDiscard6ToWateringHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException, InvalidPlayerSelectException, DeckEmptyException, InvalidDiscardToWateringHoleException {
+        Deck<ICard> drawPile = new Deck<>();
+        WateringHole wateringHole = new WateringHole();
+        for(int i = 0; i < 4; i ++) {
+            ICard card = new TestCard();
+            drawPile.discard(card);
+        }
+        Player player = new Player(new TestSpecies());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, wateringHole, drawPile, this.discardPile);
+        for(int k = 0; k < 4; k++) {
+            g.dealToPlayer(k % 3);
+            g.discardToWateringHole(k % 3, g.getPlayerObjects().get(k % 3).getCards().get(0));
+        }
+    }
+
 
 }

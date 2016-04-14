@@ -3,6 +3,9 @@ package com.Evolution.logic;
 import com.Evolution.interfaces.IPhases;
 
 
+/**
+ * Logic class for all logic for the second phase of the game
+ */
 public class PhaseTwo implements IPhases {
     private Game game;
 
@@ -12,6 +15,8 @@ public class PhaseTwo implements IPhases {
 
     @Override
     public void execute() {
-
+        if(game.getWateringHole().getCards().size() == game.getPlayerObjects().size()) {
+            game.setPhase(new PhaseThree(this.game));
+        }
     }
 }

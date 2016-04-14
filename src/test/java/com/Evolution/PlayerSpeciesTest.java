@@ -1,11 +1,11 @@
 package com.Evolution;
 
-import static org.junit.Assert.*;
-
 import com.Evolution.exceptions.InvalidPlayerSpeciesRemovalException;
 import com.Evolution.logic.Player;
 import com.Evolution.logic.Species;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Unit tests for the Player and Species classes
@@ -22,6 +22,7 @@ public class PlayerSpeciesTest {
 		assertEquals(2, test.getSpecies().size());
 	}
 
+	@Test
 	public void testAddOneSpeciesRight(){
 		Player test = new Player(new Species());
 		Species s = new Species();

@@ -17,7 +17,7 @@ The project was setup using Eclipse (Mars 1 - Java Developer). It can be downloa
 
 To build the project in Eclipse, right-click on the project -> Run As -> Gradle Build ... -> Under Gradle task box, enter **build** -> Apply -> Run. Your build should start. Note that you must **install JDK 8 (not JRE)** for all of these to work.
 
-# Sprint 1
+# Sprint 2
 * Jeremiah Goist
     * IPlayer + Player/TestPlayer + PlayerTests
     * ISpecies + Species/TestSpecies + SpeciesTests
@@ -49,3 +49,57 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * CardTests + Card
     * 100+ LOC
     * No GUI calls
+
+# Sprint 3
+* Jeremiah Goist
+    * Game constructor refactoring
+    * Game.foodBank and WateringHole interaction
+    * DeckFactory w/ Andrew
+    * Players discarding to discardPile, drawing from drawPile w/ Trevor
+    * Performed code reviews and had others review my commits.
+    * Began writing text file containing card information
+    * 75+ LOC
+* Brooke Brown
+	* CardPopupController.java
+	* Connecting GUI to Logic
+	* Reformatted card images to be uniform
+	* Exploratory Testing
+	* Code inspections
+	* Refactored GUI setup
+	* Designed GUI to simplify actions
+	    ~ Simplified for adding additional actions later
+	* Helped refactor logic to fit GUI
+	* 50+ LOC
+* Trevor Burch
+    * Cleaned up imports and comments
+    * Dealing a card to a player
+    * Retrieving all cards in a player's hand
+    * Turn tracking
+    * Discarding a card from a player's hand
+    * Scanned in image files for cards
+    * Performed code reviews and had others review my commits.
+    * 75+ LOC
+* Andrew Ma
+    * Coding Practices.txt
+    * Metrics.txt
+    * Phase One and Phase One Tests
+    * DeckFactory
+    * DeckEmptyException
+    * FoodBankEmptyException
+    * InvalidPlayerSelectException
+    * WateringHoleEmptyException
+    * WrongFileException
+    * CardTests/DeckFactoryTests/DeckTests/GameTests/WaterHoleTests
+    * 100+ LOC
+    * No GUI calls
+
+# Sprint 4
+* Jeremiah Goist
+* Brooke Brown
+	* Adding & removing cards from Watering Hole
+	* Used mocking & BVA for tests
+	* Performed code reviews
+	* Worked on card text file
+	* 50+ LOC
+* Trevor Burch
+* Andrew Ma

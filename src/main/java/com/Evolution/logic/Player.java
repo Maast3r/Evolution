@@ -5,10 +5,10 @@ import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IPlayer;
 import com.Evolution.interfaces.ISpecies;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 /**
+ * Logic class handling all logic for Players of the game
  * Created by goistjt on 3/22/2016.
  */
 public class Player implements IPlayer {
