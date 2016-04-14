@@ -14,4 +14,10 @@ public interface IPhases {
      */
     void execute() throws IllegalCardDirectionException, DeckEmptyException;
 
+    /**
+     * Returns the name of the current phase
+     * @return phase name
+     */
+    String getName();
+
 }
