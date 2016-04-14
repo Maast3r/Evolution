@@ -128,7 +128,7 @@ public class GameScreenController implements Initializable {
         this.discardLabel.setText("Discard Pile:\n" + this.game.getDiscardPile().getSize() + " cards");
         this.wateringHoleLabel.setText("Food: " + this.game.getWateringHole().getFoodCount() + " pieces");
         this.wateringHoleCardLabel.setText("Cards: " + this.game.getWateringHole().getCards().size());
-        this.phaseLabel.setText("Phase: " + "Deal Cards");
+        this.phaseLabel.setText("Phase: " + this.game.getPhase().getName());
         this.playerTurnLabel.setText("Player " + this.game.getTurn() + " Turn");
         this.foodBankLabel.setText("Food Bank: " + this.game.getFoodBankCount() + " pieces left");
     }
