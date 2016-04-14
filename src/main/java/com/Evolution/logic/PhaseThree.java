@@ -19,4 +19,9 @@ public class PhaseThree implements IPhases{
     public void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException {
 
     }
+
+    @Override
+    public String getName() {
+        return null;
+    }
 }

@@ -166,7 +166,8 @@ public class WateringHoleTests {
     /**
      * BVA - Counting a total of -10 food from all cards.
      * Lowest number of food to be ever counted from the cards
-     * in the watering hole.
+     * in the watering hole
+     * TODO check the lowest negative and highest postiive
      */
     @Test
     public void testCountCardFood1() throws NoSuchFieldException, IllegalAccessException, IllegalCardDirectionException {
@@ -234,5 +235,79 @@ public class WateringHoleTests {
             w.addCard(card);
         }
         assertEquals(35, w.getCardFoodCount());
+    }
+
+    /**
+     * BVA - add the total card food count to the watering hole
+     * Lowest number is -10
+     *
+     */
+    @Test
+    public void addCardFoodToCount1(){
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 5; i++) {
+            Card card = EasyMock.createMockBuilder(Card.class)
+                    .withConstructor(String.class, String.class, String.class,
+                            int.class, int.class)
+                    .withArgs("","","",-2, 0)
+                    .createMock();
+            w.addCard(card);
+        }
+        w.addTotalCardFood();
+        assertEquals(-10, w.getFoodCount());
+    }
+
+    /**
+     * BVA - add the total card food count to the watering hole
+     * Highest number is 35
+     *
+     */
+    @Test
+    public void addCardFoodToCount2(){
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 5; i++) {
+            Card card = EasyMock.createMockBuilder(Card.class)
+                    .withConstructor(String.class, String.class, String.class,
+                            int.class, int.class)
+                    .withArgs("","","",7, 0)
+                    .createMock();
+            w.addCard(card);
+        }
+        w.addTotalCardFood();
+        assertEquals(35, w.getFoodCount());
+    }
+
+    /**
+     * Same as addCardFoodToCount1 but integration
+     * BVA - add the total card food count to the watering hole
+     * Lowest number is -10
+     *
+     */
+    @Test
+    public void addCardFoodToCount3() throws IllegalCardDirectionException {
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 5; i++) {
+            ICard card = new Card("","","",-2, 0);
+            w.addCard(card);
+        }
+        w.addTotalCardFood();
+        assertEquals(-10, w.getFoodCount());
+    }
+
+    /**
+     * Same as addCardFoodToCount2 but integration
+     * BVA - add the total card food count to the watering hole
+     * Highest number is 35
+     *
+     */
+    @Test
+    public void addCardFoodToCount4() throws IllegalCardDirectionException {
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 5; i++) {
+            ICard card = new Card("","","",7, 0);
+            w.addCard(card);
+        }
+        w.addTotalCardFood();
+        assertEquals(35, w.getFoodCount());
     }
 }

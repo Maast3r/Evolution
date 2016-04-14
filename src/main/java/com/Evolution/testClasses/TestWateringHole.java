@@ -50,4 +50,14 @@ public class TestWateringHole implements IWateringHole {
     public void removeCards() {
 
     }
+
+    @Override
+    public void addTotalCardFood() {
+
+    }
+
+    @Override
+    public int getCardFoodCount() {
+        return 0;
+    }
 }
