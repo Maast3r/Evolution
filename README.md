@@ -17,7 +17,7 @@ The project was setup using Eclipse (Mars 1 - Java Developer). It can be downloa
 
 To build the project in Eclipse, right-click on the project -> Run As -> Gradle Build ... -> Under Gradle task box, enter **build** -> Apply -> Run. Your build should start. Note that you must **install JDK 8 (not JRE)** for all of these to work.
 
-# Sprint 1
+# Sprint 2
 * Jeremiah Goist
     * IPlayer + Player/TestPlayer + PlayerTests
     * ISpecies + Species/TestSpecies + SpeciesTests
@@ -50,7 +50,7 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * 100+ LOC
     * No GUI calls
 
-# Sprint 2
+# Sprint 3
 * Jeremiah Goist
     * Game constructor refactoring
     * Game.foodBank and WateringHole interaction
@@ -93,14 +93,13 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * 100+ LOC
     * No GUI calls
 
-# Sprint 3
+# Sprint 4
 * Jeremiah Goist
-    * 75+ LOC
 * Brooke Brown
+	* Adding & removing cards from Watering Hole
+	* Used mocking & BVA for tests
+	* Performed code reviews
+	* Added name to phases & unit tested them with mocking
 	* 50+ LOC
 * Trevor Burch
-    * 75+ LOC
 * Andrew Ma
-    * WateringHole and WateringHoleTests
-    * 50+ LOC
-    * No GUI calls
