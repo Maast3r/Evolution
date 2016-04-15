@@ -1,5 +1,6 @@
 package com.Evolution.interfaces;
 
+import com.Evolution.exceptions.InvalidAddToWateringHoleException;
 import com.Evolution.exceptions.WateringHoleEmptyException;
 
 import java.util.ArrayList;
@@ -53,8 +54,9 @@ public interface IWateringHole {
     /**
      * Adds the given card to the watering hole
      * @param card the card to add
+     * @throws InvalidAddToWateringHoleException  when a null card is added to the {@link IWateringHole}
      */
-    void addCard(ICard card) throws Exception;
+    void addCard(ICard card) throws InvalidAddToWateringHoleException;
 
     /**
      * Removes all cards from the watering hole

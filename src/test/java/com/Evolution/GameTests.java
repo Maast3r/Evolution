@@ -413,7 +413,8 @@ public class GameTests {
 
     @Test
     public void testDiscardToWateringHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            InvalidPlayerSelectException, DeckEmptyException, InvalidDiscardToWateringHoleException, Exception {
+            InvalidPlayerSelectException, DeckEmptyException, InvalidDiscardToWateringHoleException,
+            InvalidAddToWateringHoleException {
         Deck<ICard> drawPile = new Deck<>();
         WateringHole wateringHole = new WateringHole();
         ICard card = new TestCard();
@@ -437,7 +438,8 @@ public class GameTests {
      */
     @Test(expected = InvalidDiscardToWateringHoleException.class)
     public void testDiscard6ToWateringHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            InvalidPlayerSelectException, DeckEmptyException, InvalidDiscardToWateringHoleException, Exception {
+            InvalidPlayerSelectException, DeckEmptyException, InvalidDiscardToWateringHoleException,
+            InvalidAddToWateringHoleException {
         Deck<ICard> drawPile = new Deck<>();
         WateringHole wateringHole = new WateringHole();
         for(int i = 0; i < 4; i ++) {

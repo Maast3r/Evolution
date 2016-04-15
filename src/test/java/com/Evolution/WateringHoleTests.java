@@ -1,6 +1,7 @@
 package com.Evolution;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
+import com.Evolution.exceptions.InvalidAddToWateringHoleException;
 import com.Evolution.exceptions.InvalidWateringHoleCardCountException;
 import com.Evolution.exceptions.WateringHoleEmptyException;
 import com.Evolution.interfaces.ICard;
@@ -125,14 +126,14 @@ public class WateringHoleTests {
         w.removeFood(-1);
     }
 
-    @Test (expected = Exception.class)
-    public void testAddNullCardToWateringHole() throws Exception{
+    @Test (expected = InvalidAddToWateringHoleException.class)
+    public void testAddNullCardToWateringHole() throws InvalidAddToWateringHoleException {
         WateringHole w = new WateringHole();
         w.addCard(null);
     }
 
     @Test
-    public void testAddCardToWateringHole()throws Exception {
+    public void testAddCardToWateringHole() throws InvalidAddToWateringHoleException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = EasyMock.niceMock(Card.class);

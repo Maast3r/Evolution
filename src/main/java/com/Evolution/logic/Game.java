@@ -229,8 +229,12 @@ public class Game {
      *
      * @param index The index of the player
      * @param card  The card to discard
+     * @throws InvalidAddToWateringHoleException propagated from {@link IWateringHole#addCard(ICard)}
+     * @throws InvalidDiscardToWateringHoleException trying to discard to watering hole when it already has the
+     * maximum number of cards
      */
-    public void discardToWateringHole(int index, ICard card) throws InvalidDiscardToWateringHoleException, Exception {
+    public void discardToWateringHole(int index, ICard card) throws InvalidDiscardToWateringHoleException,
+            InvalidAddToWateringHoleException {
         if (this.wateringHole.getCards().size() == this.players.size()) {
             throw new InvalidDiscardToWateringHoleException("You can not discard more cards to the watering hole " +
                     "than the number of players.");
