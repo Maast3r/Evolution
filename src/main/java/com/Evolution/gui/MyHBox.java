@@ -1,6 +1,5 @@
 package com.Evolution.gui;
 
-import com.Evolution.interfaces.IPlayer;
 import com.Evolution.logic.Game;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -74,7 +73,7 @@ class MyHBox extends HBox {
     /**
      * Sets the amount of food in this players food bag to the foodAmt
      *
-     * @param foodAmt
+     * @param foodAmt value to show on Food Bag label
      */
     public void setFoodLabel(int foodAmt) {
         this.foodLabel.setText("Food Bag: " + foodAmt);
@@ -149,9 +148,12 @@ class MyHBox extends HBox {
         }
     }
 
+    /**
+     * Commands each of this HBox's nested SpeciesBoards to update what their ChoiceBoxes are showing
+     */
     void updateChoices() {
         int phase = this.game.getPhase().getNumber();
-        for(SpeciesBoard board : this.playerSpeciesBoards) {
+        for (SpeciesBoard board : this.playerSpeciesBoards) {
             board.setChoiceBoxPhase(phase);
         }
     }

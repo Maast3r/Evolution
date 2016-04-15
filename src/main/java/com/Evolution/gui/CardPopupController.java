@@ -111,7 +111,7 @@ class CardPopupController implements Initializable {
      * based on the card index
      *
      * @param cardPane the card to add (with it's food label)
-     * @param cardNum the card index within the hand
+     * @param cardNum  the card index within the hand
      */
     private void addToGrid(VBox cardPane, int cardNum) {
         int row = (int) Math.ceil(cardNum / 3);

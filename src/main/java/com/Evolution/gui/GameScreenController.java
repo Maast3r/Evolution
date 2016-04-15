@@ -147,6 +147,9 @@ class GameScreenController implements Initializable {
         }
     }
 
+    /**
+     * Commands each player pane to update the ChoiceBoxes under each of its SpeciesBoards
+     */
     void changeChoiceBox() {
         this.playerPanes.forEach(MyHBox::updateChoices);
     }

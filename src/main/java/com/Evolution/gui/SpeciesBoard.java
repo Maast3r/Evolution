@@ -47,12 +47,17 @@ class SpeciesBoard extends VBox {
 
     private ChangeListener actionListener;
 
+    private ObservableList<String> phase2Options = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
+            Actions.VIEW_CARDS.getName(), Actions.DISCARD_TO_WATERINGHOLE.getName());
+
+    private ObservableList<String> phase3Options = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
+            Actions.VIEW_CARDS.getName(), Actions.ADD_TRAIT.getName(), Actions.ADD_SPECIES_LEFT.getName(),
+            Actions.ADD_SPECIES_RIGHT.getName(), Actions.INCREASE_POPULATION.getName(),
+            Actions.INCREASE_BODY_SIZE.getName());
 
     /**
      * Enum for the actions in the choiceBox
-     * Action, String to show in drop down
-     * New actions are automatically added to drop down, but must the execution
-     * needs added to performAction
+     * Name is the string to show in drop down
      */
     private enum Actions {
         ACTIONS("Actions"),
@@ -66,22 +71,24 @@ class SpeciesBoard extends VBox {
 
         private String name;
 
+        /**
+         * Used in enum initialization to store its corresponding string as a field
+         *
+         * @param name Action string representation
+         */
         Actions(String name) {
             this.name = name;
         }
 
+        /**
+         * Returns the string representation of this Action.
+         *
+         * @return Action.name
+         */
         public String getName() {
             return name;
         }
     }
-
-    private ObservableList<String> phase2Options = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
-            Actions.VIEW_CARDS.getName(), Actions.DISCARD_TO_WATERINGHOLE.getName());
-
-    private ObservableList<String> phase3Options = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
-            Actions.VIEW_CARDS.getName(), Actions.ADD_TRAIT.getName(), Actions.ADD_SPECIES_LEFT.getName(),
-            Actions.ADD_SPECIES_RIGHT.getName(), Actions.INCREASE_POPULATION.getName(),
-            Actions.INCREASE_BODY_SIZE.getName());
 
     /**
      * Constructor for the species board
@@ -130,6 +137,9 @@ class SpeciesBoard extends VBox {
         return this.board;
     }
 
+    /**
+     * Creates a ChangeListener which is used by a ChoiceBox to perform actions
+     */
     private void initChangeListener() {
         this.actionListener = (ObservableValue observable, Object oldValue, Object newValue) -> {
             int val = ((int) newValue < 0) ? 0 : (int) newValue;
@@ -158,7 +168,6 @@ class SpeciesBoard extends VBox {
      *
      * @param action the selected action
      */
-
     private void performAction(Actions action) throws InvalidDiscardToWateringHoleException {
         // perform selected action
         switch (action) {
