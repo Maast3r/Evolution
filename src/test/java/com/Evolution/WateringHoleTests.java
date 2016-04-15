@@ -1,6 +1,7 @@
 package com.Evolution;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
+import com.Evolution.exceptions.InvalidWateringHoleCardCountException;
 import com.Evolution.exceptions.WateringHoleEmptyException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Card;
@@ -238,7 +239,7 @@ public class WateringHoleTests {
      * BVA - Counting a total of -11 food from all cards.
      * Can't be lower than -10 food
      */
-    @Test(expected = Exception.class)
+    @Test(expected = InvalidWateringHoleCardCountException.class)
     public void testCountCardFood5() throws Exception {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 4; i++) {
@@ -262,7 +263,7 @@ public class WateringHoleTests {
      * BVA - Counting a total of 36 food from all cards.
      * Can't be more than 35 food
      */
-    @Test(expected = Exception.class)
+    @Test(expected = InvalidWateringHoleCardCountException.class)
     public void testCountCardFood6() throws Exception {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 4; i++) {

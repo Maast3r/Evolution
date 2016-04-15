@@ -1,5 +1,6 @@
 package com.Evolution.logic;
 
+import com.Evolution.exceptions.InvalidWateringHoleCardCountException;
 import com.Evolution.exceptions.WateringHoleEmptyException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IWateringHole;
@@ -74,7 +75,7 @@ public class WateringHole implements IWateringHole {
         }
 
         if(count <= -11 || count > 35) {
-            throw new Exception("Illegal number of counted food.");
+            throw new InvalidWateringHoleCardCountException("Illegal number of counted food.");
         }
         return count;
     }
