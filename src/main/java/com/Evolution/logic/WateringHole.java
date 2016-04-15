@@ -72,6 +72,10 @@ public class WateringHole implements IWateringHole {
         for(ICard c : this.cards) {
             count += c.getFood();
         }
+
+        if(count == -11) {
+            throw new Exception("Illegal number of counted food.");
+        }
         return count;
     }
 }
