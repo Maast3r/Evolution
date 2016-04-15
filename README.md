@@ -95,6 +95,12 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 
 # Sprint 4
 * Jeremiah Goist
+    * Discard from hand to Watering Hole
+    * De/Activate dropdown for not/current player
+    * Phase Label updates on phase switch
+    * Dropdown shows only relevant options
+    * Fixed GUI bug allowing free add of species
+    * 25+ LOC
 * Brooke Brown
 	* Adding & removing cards from Watering Hole
 	* Used mocking & BVA for tests
