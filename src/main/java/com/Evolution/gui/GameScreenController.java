@@ -23,11 +23,11 @@ import java.util.ResourceBundle;
  * Created by brownba1 on 3/22/2016.
  * Controller for the game screen
  */
-public class GameScreenController implements Initializable {
+class GameScreenController implements Initializable {
 
     private int numPlayers = 0;
     private ArrayList<IPlayer> players = new ArrayList<>();
-    private ArrayList<HBox> playerPanes = new ArrayList<>();
+    private ArrayList<MyHBox> playerPanes = new ArrayList<>();
     private Game game;
 
     @FXML
@@ -42,6 +42,8 @@ public class GameScreenController implements Initializable {
     private Label discardLabel;
     @FXML
     private Label wateringHoleLabel;
+    @FXML
+    private Label wateringHoleCardLabel;
     @FXML
     private Label playerTurnLabel;
     @FXML
@@ -75,6 +77,8 @@ public class GameScreenController implements Initializable {
                 "'game_screen.fxml'.";
         assert this.wateringHoleLabel != null : "fx:id=\"wateringHoleLabel\" was not injected: check your FXML file " +
                 "'game_screen.fxml'.";
+        assert this.wateringHoleCardLabel != null : "fx:id\"wateringHoleCardLabel\" was not injected: check your FXML" +
+                " file 'game_screen.fxml'.";
         assert this.playerTurnLabel != null : "fx:id=\"playerTurnLabel\" was not injected: check your FXML file " +
                 "'game_screen.fxml'.";
         assert this.phaseLabel != null : "fx:id=\"phaseLabel\" was not injected: check your FXML file 'game_screen" +
@@ -112,18 +116,42 @@ public class GameScreenController implements Initializable {
         } else {
             fivePlayerSetup();
         }
+
+        toggleChoiceBox();
     }
 
     /**
      * Set up the 'static' elements on the screen (i.e. watering hole, cards, etc.)
      */
-    public void staticElementsUpdate() {
+    void staticElementsUpdate() {
         this.drawLabel.setText("Draw Pile:\n" + this.game.getDrawPile().getSize() + " cards");
         this.discardLabel.setText("Discard Pile:\n" + this.game.getDiscardPile().getSize() + " cards");
         this.wateringHoleLabel.setText("Food: " + this.game.getWateringHole().getFoodCount() + " pieces");
-        this.phaseLabel.setText("Phase: " + "Deal Cards");
+        this.wateringHoleCardLabel.setText("Cards: " + this.game.getWateringHole().getCards().size());
+        this.phaseLabel.setText("Phase: " + this.game.getPhase().getName());
         this.playerTurnLabel.setText("Player " + this.game.getTurn() + " Turn");
         this.foodBankLabel.setText("Food Bank: " + this.game.getFoodBankCount() + " pieces left");
+    }
+
+    /**
+     * De/Activates the ChoiceBoxes under each SpeciesBoard depending on which player's turn it currently is.
+     */
+    void toggleChoiceBox() {
+        int activeTurn = this.game.getTurn() - 1;
+        for (int i = 0; i < this.players.size(); i++) {
+            if (activeTurn == i) {
+                this.playerPanes.get(i).setChoicesActive(true);
+            } else {
+                this.playerPanes.get(i).setChoicesActive(false);
+            }
+        }
+    }
+
+    /**
+     * Commands each player pane to update the ChoiceBoxes under each of its SpeciesBoards
+     */
+    void changeChoiceBox() {
+        this.playerPanes.forEach(MyHBox::updateChoices);
     }
 
     /**
@@ -181,13 +209,14 @@ public class GameScreenController implements Initializable {
     /**
      * Set up the starting screen for each player
      *
-     * @param pane player pane
-     * @param index  player index in the players array
+     * @param pane  player pane
+     * @param index player index in the players array
      */
     private void startingPaneSetup(HBox pane, int index) {
         MyHBox hBox = new MyHBox(index, this.game, this);
         HBox playerPane = hBox.createBox();
         pane.getChildren().addAll(playerPane);
-        this.playerPanes.add(playerPane);
+        this.playerPanes.add(hBox);
     }
+
 }
