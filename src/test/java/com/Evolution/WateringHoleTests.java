@@ -259,6 +259,30 @@ public class WateringHoleTests {
     }
 
     /**
+     * BVA - Counting a total of 36 food from all cards.
+     * Can't be more than 35 food
+     */
+    @Test(expected = Exception.class)
+    public void testCountCardFood6() throws Exception {
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 4; i++) {
+            Card card = EasyMock.createMockBuilder(Card.class)
+                    .withConstructor(String.class, String.class, String.class,
+                            int.class, int.class)
+                    .withArgs("","","",7, 0)
+                    .createMock();
+            w.addCard(card);
+        }
+        Card card = EasyMock.createMockBuilder(Card.class)
+                .withConstructor(String.class, String.class, String.class,
+                        int.class, int.class)
+                .withArgs("","","",8, 0)
+                .createMock();
+        w.addCard(card);
+        w.getCardFoodCount();
+    }
+
+    /**
      * BVA - add the total card food count to the watering hole
      * Lowest number is -10
      *
