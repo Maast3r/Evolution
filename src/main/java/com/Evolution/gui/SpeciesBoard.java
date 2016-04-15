@@ -47,44 +47,6 @@ class SpeciesBoard extends VBox {
 
     private ChangeListener actionListener;
 
-    /**
-     * Sets the ability to open this SpeciesBoard's ChoiceBox
-     *
-     * @param viewable whether or not it should be clickable
-     */
-    void setChoiceBoxViewable(boolean viewable) {
-        this.actionChoiceBox.setDisable(!viewable);
-    }
-
-    /**
-     * Changes the viewable options for this SpeciesBoard based on the given phase number
-     *
-     * @param phaseNum current phase
-     */
-    void setChoiceBoxPhase(int phaseNum) {
-        switch (phaseNum) {
-            case 1:
-                this.actionChoiceBox.setItems(this.phase2Options);
-                break;
-            case 2:
-                this.actionChoiceBox.setItems(this.phase2Options);
-                break;
-            case 3:
-                this.actionChoiceBox.setItems(this.phase3Options);
-                break;
-            case 4:
-                break;
-            default:
-                ObservableList<String> options = FXCollections.observableArrayList();
-                for (Actions a : Actions.values()) {
-                    options.add(a.getName());
-                }
-                this.actionChoiceBox.setItems(options);
-                break;
-        }
-        this.actionChoiceBox.getSelectionModel().selectFirst();
-
-    }
 
     /**
      * Enum for the actions in the choiceBox
@@ -212,6 +174,7 @@ class SpeciesBoard extends VBox {
                 if (this.selectedCard != null) {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
                     this.playerPane.updateGameScreen();
+                    this.selectedCard = null;
                 }
                 break;
             case ADD_SPECIES_LEFT:
@@ -220,6 +183,7 @@ class SpeciesBoard extends VBox {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
                     this.playerPane.updateGameScreen();
                     this.playerPane.addSpecies(0);
+                    this.selectedCard = null;
                 }
                 break;
             case ADD_SPECIES_RIGHT:
@@ -228,6 +192,7 @@ class SpeciesBoard extends VBox {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
                     this.playerPane.updateGameScreen();
                     this.playerPane.addSpecies(1);
+                    this.selectedCard = null;
                 }
                 break;
             case INCREASE_POPULATION:
@@ -236,6 +201,7 @@ class SpeciesBoard extends VBox {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
                     this.playerPane.updateGameScreen();
                     setPopulationSize(1);
+                    this.selectedCard = null;
                 }
                 break;
             case INCREASE_BODY_SIZE:
@@ -244,6 +210,7 @@ class SpeciesBoard extends VBox {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
                     this.playerPane.updateGameScreen();
                     setBodySize(1);
+                    this.selectedCard = null;
                 }
                 break;
             case DISCARD_TO_WATERINGHOLE:
@@ -263,7 +230,6 @@ class SpeciesBoard extends VBox {
                 }
                 break;
         }
-
     }
 
     /**
@@ -293,6 +259,44 @@ class SpeciesBoard extends VBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Sets the ability to open this SpeciesBoard's ChoiceBox
+     *
+     * @param viewable whether or not it should be clickable
+     */
+    void setChoiceBoxViewable(boolean viewable) {
+        this.actionChoiceBox.setDisable(!viewable);
+    }
+
+    /**
+     * Changes the viewable options for this SpeciesBoard based on the given phase number
+     *
+     * @param phaseNum current phase
+     */
+    void setChoiceBoxPhase(int phaseNum) {
+        switch (phaseNum) {
+            case 1:
+                this.actionChoiceBox.setItems(this.phase2Options);
+                break;
+            case 2:
+                this.actionChoiceBox.setItems(this.phase2Options);
+                break;
+            case 3:
+                this.actionChoiceBox.setItems(this.phase3Options);
+                break;
+            case 4:
+                break;
+            default:
+                ObservableList<String> options = FXCollections.observableArrayList();
+                for (Actions a : Actions.values()) {
+                    options.add(a.getName());
+                }
+                this.actionChoiceBox.setItems(options);
+                break;
+        }
+        this.actionChoiceBox.getSelectionModel().selectFirst();
     }
 
     /**
