@@ -103,3 +103,7 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 	* 50+ LOC
 * Trevor Burch
 * Andrew Ma
+    * WateringHole and WateringHoleTests
+    * BVA Testing
+    * 50+ LOC
+    * NO GUI calls

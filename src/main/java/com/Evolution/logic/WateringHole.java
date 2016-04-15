@@ -62,12 +62,12 @@ public class WateringHole implements IWateringHole {
     }
 
     @Override
-    public void addTotalCardFood() {
+    public void addTotalCardFood() throws Exception {
        this.foodCount += getCardFoodCount();
     }
 
     @Override
-    public int getCardFoodCount() {
+    public int getCardFoodCount() throws Exception {
         int count = 0;
         for(ICard c : this.cards) {
             count += c.getFood();
