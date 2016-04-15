@@ -125,14 +125,14 @@ public class WateringHoleTests {
         w.removeFood(-1);
     }
 
-    @Test (expected = WateringHoleEmptyException.class)
-    public void testAddNullCardToWateringHole() {
+    @Test (expected = Exception.class)
+    public void testAddNullCardToWateringHole() throws Exception{
         WateringHole w = new WateringHole();
         w.addCard(null);
     }
 
     @Test
-    public void testAddCardToWateringHole(){
+    public void testAddCardToWateringHole()throws Exception {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = EasyMock.niceMock(Card.class);

@@ -50,7 +50,7 @@ public interface IWateringHole {
      * Adds the given card to the watering hole
      * @param card the card to add
      */
-    void addCard(ICard card);
+    void addCard(ICard card) throws Exception;
 
     /**
      * Removes all cards from the watering hole
