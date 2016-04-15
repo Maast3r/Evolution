@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
  * Created by brownba1 on 3/22/2016.
  * Controller for the game screen
  */
-public class GameScreenController implements Initializable {
+class GameScreenController implements Initializable {
 
     private int numPlayers = 0;
     private ArrayList<IPlayer> players = new ArrayList<>();
@@ -117,13 +117,13 @@ public class GameScreenController implements Initializable {
             fivePlayerSetup();
         }
 
-        updateChoiceBoxes();
+        toggleChoiceBox();
     }
 
     /**
      * Set up the 'static' elements on the screen (i.e. watering hole, cards, etc.)
      */
-    public void staticElementsUpdate() {
+    void staticElementsUpdate() {
         this.drawLabel.setText("Draw Pile:\n" + this.game.getDrawPile().getSize() + " cards");
         this.discardLabel.setText("Discard Pile:\n" + this.game.getDiscardPile().getSize() + " cards");
         this.wateringHoleLabel.setText("Food: " + this.game.getWateringHole().getFoodCount() + " pieces");
@@ -136,7 +136,7 @@ public class GameScreenController implements Initializable {
     /**
      * De/Activates the ChoiceBoxes under each SpeciesBoard depending on which player's turn it currently is.
      */
-    public void updateChoiceBoxes() {
+    void toggleChoiceBox() {
         int activeTurn = this.game.getTurn() - 1;
         for (int i = 0; i < this.players.size(); i++) {
             if (activeTurn == i) {
@@ -145,6 +145,10 @@ public class GameScreenController implements Initializable {
                 this.playerPanes.get(i).setChoicesActive(false);
             }
         }
+    }
+
+    void changeChoiceBox() {
+        this.playerPanes.forEach(MyHBox::updateChoices);
     }
 
     /**
@@ -211,4 +215,5 @@ public class GameScreenController implements Initializable {
         pane.getChildren().addAll(playerPane);
         this.playerPanes.add(hBox);
     }
+
 }

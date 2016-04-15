@@ -6,6 +6,8 @@ import com.Evolution.exceptions.InvalidDiscardToWateringHoleException;
 import com.Evolution.exceptions.InvalidPlayerSelectException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Game;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +27,7 @@ import java.io.IOException;
  * Creates a new SpeciesBoard to add to a player's list of species
  * when they add a species
  */
-public class SpeciesBoard extends VBox {
+class SpeciesBoard extends VBox {
 
     private Game game;
     private GameScreenController gameController;
@@ -43,8 +45,45 @@ public class SpeciesBoard extends VBox {
     private ICard selectedCard;
     private String traitSelection;
 
-    public void setChoiceBoxViewable(boolean viewable) {
+    private ChangeListener actionListener;
+
+    /**
+     * Sets the ability to open this SpeciesBoard's ChoiceBox
+     *
+     * @param viewable whether or not it should be clickable
+     */
+    void setChoiceBoxViewable(boolean viewable) {
         this.actionChoiceBox.setDisable(!viewable);
+    }
+
+    /**
+     * Changes the viewable options for this SpeciesBoard based on the given phase number
+     *
+     * @param phaseNum current phase
+     */
+    void setChoiceBoxPhase(int phaseNum) {
+        switch (phaseNum) {
+            case 1:
+                this.actionChoiceBox.setItems(this.phase2Options);
+                break;
+            case 2:
+                this.actionChoiceBox.setItems(this.phase2Options);
+                break;
+            case 3:
+                this.actionChoiceBox.setItems(this.phase3Options);
+                break;
+            case 4:
+                break;
+            default:
+                ObservableList<String> options = FXCollections.observableArrayList();
+                for (Actions a : Actions.values()) {
+                    options.add(a.getName());
+                }
+                this.actionChoiceBox.setItems(options);
+                break;
+        }
+        this.actionChoiceBox.getSelectionModel().selectFirst();
+
     }
 
     /**
@@ -53,7 +92,7 @@ public class SpeciesBoard extends VBox {
      * New actions are automatically added to drop down, but must the execution
      * needs added to performAction
      */
-    public enum Actions {
+    private enum Actions {
         ACTIONS("Actions"),
         VIEW_CARDS("View Cards"),
         ADD_TRAIT("Add Trait"),
@@ -85,7 +124,7 @@ public class SpeciesBoard extends VBox {
     /**
      * Constructor for the species board
      */
-    public SpeciesBoard(int index, int num, MyHBox playerPane, Game game, GameScreenController controller) {
+    SpeciesBoard(int index, int num, MyHBox playerPane, Game game, GameScreenController controller) {
         this.board = new VBox();
         this.playerIndex = index;
         this.speciesNum = num;
@@ -99,7 +138,7 @@ public class SpeciesBoard extends VBox {
      *
      * @return the species pane
      */
-    public VBox createSpeciesBoard() {
+    VBox createSpeciesBoard() {
         VBox speciesBoard = new VBox();
 
         this.traitLabel1 = new Label("Trait 1: ");
@@ -118,20 +157,10 @@ public class SpeciesBoard extends VBox {
                 " -fx-min-height: 150; -fx-background-color: burlywood; -fx-alignment: center;");
 
         this.actionChoiceBox = new ChoiceBox<>();
-        ObservableList<String> options = FXCollections.observableArrayList();
-        for (Actions a : Actions.values()) {
-            options.add(a.getName());
-        }
-        this.actionChoiceBox.setItems(options);
-        this.actionChoiceBox.getSelectionModel().selectFirst();
-        this.actionChoiceBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
-            try {
-                performAction(Actions.values()[newValue.intValue()]);
-            } catch (InvalidDiscardToWateringHoleException e) {
-                e.printStackTrace();
-            }
-            this.actionChoiceBox.getSelectionModel().selectFirst();
-        });
+        setChoiceBoxPhase(this.game.getPhase().getNumber());
+        initChangeListener();
+        this.actionChoiceBox.getSelectionModel().selectedIndexProperty().addListener(actionListener);
+        actionChoiceBox.getSelectionModel().selectFirst();
 
         this.board.getChildren().addAll(this.traitLabel1, this.traitLabel2, this.traitLabel3, speciesBoard,
                 this.actionChoiceBox);
@@ -139,11 +168,35 @@ public class SpeciesBoard extends VBox {
         return this.board;
     }
 
+    private void initChangeListener() {
+        this.actionListener = (ObservableValue observable, Object oldValue, Object newValue) -> {
+            int val = ((int) newValue < 0) ? 0 : (int) newValue;
+            try {
+                switch (this.game.getPhase().getNumber()) {
+                    // TODO: This block will need edited as future phases are implemented
+                    case 2:
+                        if (newValue.equals(2)) {
+                            performAction(Actions.values()[7]);
+                        } else {
+                            performAction(Actions.values()[val]);
+                        }
+                        break;
+                    default:
+                        performAction(Actions.values()[val]);
+                        break;
+                }
+            } catch (InvalidDiscardToWateringHoleException e) {
+                e.printStackTrace();
+            }
+        };
+    }
+
     /**
      * Performs the action that the user selected from the action choiceBox for this species
      *
      * @param action the selected action
      */
+
     private void performAction(Actions action) throws InvalidDiscardToWateringHoleException {
         // perform selected action
         switch (action) {
@@ -152,6 +205,7 @@ public class SpeciesBoard extends VBox {
                 break;
             case VIEW_CARDS:
                 openCardWindow(Actions.VIEW_CARDS);
+                this.selectedCard = null;
                 break;
             case ADD_TRAIT:
                 openCardWindow(Actions.ADD_TRAIT);
@@ -184,15 +238,18 @@ public class SpeciesBoard extends VBox {
                 break;
             case DISCARD_TO_WATERINGHOLE:
                 openCardWindow(Actions.DISCARD_TO_WATERINGHOLE);
-                this.game.discardToWateringHole(this.playerIndex, this.selectedCard);
-                this.game.nextTurn();
-                try {
-                    this.game.getPhase().execute();
-                } catch (IllegalCardDirectionException | InvalidPlayerSelectException | DeckEmptyException e) {
-                    e.printStackTrace();
+                if (this.selectedCard != null) {
+                    this.game.discardToWateringHole(this.playerIndex, this.selectedCard);
+                    this.game.nextTurn();
+                    try {
+                        this.game.getPhase().execute();
+                    } catch (IllegalCardDirectionException | InvalidPlayerSelectException | DeckEmptyException e) {
+                        e.printStackTrace();
+                    }
+                    this.playerPane.updateGameScreen();
+                    this.gameController.toggleChoiceBox();
+                    this.gameController.changeChoiceBox();
                 }
-                this.playerPane.updateGameScreen();
-                this.gameController.updateChoiceBoxes();
 
                 break;
         }
@@ -219,6 +276,7 @@ public class SpeciesBoard extends VBox {
             s.focusedProperty().addListener((observable, oldValue, newValue) -> {
                 if (!newValue) {
                     s.hide();
+                    this.actionChoiceBox.getSelectionModel().selectFirst();
                 }
             });
             s.showAndWait();
@@ -232,7 +290,7 @@ public class SpeciesBoard extends VBox {
      *
      * @param c the card that was selected
      */
-    public void setSelectedCard(ICard c) {
+    void setSelectedCard(ICard c) {
         this.selectedCard = c;
     }
 
@@ -241,7 +299,7 @@ public class SpeciesBoard extends VBox {
      *
      * @param trait which trait to set
      */
-    public void setTraitSelection(int trait) {
+    void setTraitSelection(int trait) {
         switch (trait) {
             case 0:
                 setTrait1(this.selectedCard.getName());
@@ -260,7 +318,7 @@ public class SpeciesBoard extends VBox {
      *
      * @param amount amount to increase/decrease the population by
      */
-    public void setPopulationSize(int amount) {
+    private void setPopulationSize(int amount) {
         // Set the population size on player then update label
         this.game.getPlayerObjects().get(this.playerIndex).getSpecies();
     }
@@ -271,7 +329,7 @@ public class SpeciesBoard extends VBox {
      *
      * @param amount amount to increase/decrease the population by
      */
-    public void setBodySize(int amount) {
+    private void setBodySize(int amount) {
         // Set the body size on player then update label
     }
 
@@ -289,7 +347,7 @@ public class SpeciesBoard extends VBox {
      *
      * @param trait the new trait to set for trait 1
      */
-    public void setTrait1(String trait) {
+    private void setTrait1(String trait) {
         // Set trait 1 for this species then update label
     }
 
@@ -298,7 +356,7 @@ public class SpeciesBoard extends VBox {
      *
      * @param trait the new trait to set for trait 2
      */
-    public void setTrait2(String trait) {
+    private void setTrait2(String trait) {
         // Set trait 2 for this species then update label
     }
 
@@ -307,7 +365,7 @@ public class SpeciesBoard extends VBox {
      *
      * @param trait the new trait to set for trait 3
      */
-    public void setTrait3(String trait) {
+    private void setTrait3(String trait) {
         // Set trait 3 for this species then update label
     }
 
@@ -316,7 +374,7 @@ public class SpeciesBoard extends VBox {
      *
      * @return species number
      */
-    public int getSpeciesNum() {
+    int getSpeciesNum() {
         return this.speciesNum;
     }
 
@@ -325,7 +383,7 @@ public class SpeciesBoard extends VBox {
      *
      * @param num the new number for this species
      */
-    public void setSpeciesNum(int num) {
+    void setSpeciesNum(int num) {
         this.speciesNum = num;
     }
 }

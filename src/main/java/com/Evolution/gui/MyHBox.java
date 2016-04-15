@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Class to create our version of an HBox so that children are
  * stored and easily accessible
  */
-public class MyHBox extends HBox {
+class MyHBox extends HBox {
 
     private GameScreenController gameScreen;
     private Game game;
@@ -29,7 +29,7 @@ public class MyHBox extends HBox {
     /**
      * Constructor for our HBox that stores children
      */
-    public MyHBox(int playerIndex, Game g, GameScreenController gameScreen) {
+    MyHBox(int playerIndex, Game g, GameScreenController gameScreen) {
         this.playerPane = new HBox();
         this.playerIndex = playerIndex;
         this.game = g;
@@ -42,7 +42,7 @@ public class MyHBox extends HBox {
      *
      * @return the pane created for this player
      */
-    public HBox createBox() {
+    HBox createBox() {
         this.firstPlayerMarker = (this.playerIndex == 0) ? new ImageView("/images/first_player_marker.png") :
                 new ImageView("/images/empty.png");
 
@@ -109,7 +109,7 @@ public class MyHBox extends HBox {
      *
      * @param side "left" or "right" - the side to add the new species to
      */
-    public void addSpecies(int side) {
+    void addSpecies(int side) {
         int numSpecies = this.game.getPlayerObjects().get(this.playerIndex).getSpecies().size();
         if (side == 0) {
             // TODO add species to player through game
@@ -134,7 +134,7 @@ public class MyHBox extends HBox {
     /**
      * Updates the static game objects if this player pane causes any changes
      */
-    public void updateGameScreen() {
+    void updateGameScreen() {
         this.gameScreen.staticElementsUpdate();
     }
 
@@ -143,9 +143,16 @@ public class MyHBox extends HBox {
      *
      * @param active whether or not this player's ChoiceBoxes are enables
      */
-    public void setChoicesActive(boolean active) {
+    void setChoicesActive(boolean active) {
         for (SpeciesBoard board : this.playerSpeciesBoards) {
             board.setChoiceBoxViewable(active);
+        }
+    }
+
+    void updateChoices() {
+        int phase = this.game.getPhase().getNumber();
+        for(SpeciesBoard board : this.playerSpeciesBoards) {
+            board.setChoiceBoxPhase(phase);
         }
     }
 }
