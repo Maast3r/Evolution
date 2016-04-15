@@ -160,7 +160,7 @@ public class WateringHoleTests {
      * Should succeed leaving the deck empty.
      */
     @Test
-    public void testRemoveCardsFromWateringHole2() throws Exception {
+    public void testRemoveCardsFromWateringHole2() throws InvalidAddToWateringHoleException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = EasyMock.niceMock(Card.class);
@@ -178,7 +178,8 @@ public class WateringHoleTests {
      * TODO check the lowest negative and highest postiive
      */
     @Test
-    public void testCountCardFood1() throws Exception {
+    public void testCountCardFood1() throws InvalidWateringHoleCardCountException, IllegalCardDirectionException,
+            InvalidAddToWateringHoleException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", -2, 0);
@@ -193,7 +194,8 @@ public class WateringHoleTests {
      * in the watering hole.
      */
     @Test
-    public void testCountCardFood2() throws Exception {
+    public void testCountCardFood2() throws InvalidAddToWateringHoleException, IllegalCardDirectionException,
+            InvalidWateringHoleCardCountException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 7, 0);
@@ -209,7 +211,7 @@ public class WateringHoleTests {
      * in the watering hole.
      */
     @Test
-    public void testCountCardFood3() throws Exception {
+    public void testCountCardFood3() throws InvalidAddToWateringHoleException, InvalidWateringHoleCardCountException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             Card card = EasyMock.createMockBuilder(Card.class)
@@ -229,7 +231,7 @@ public class WateringHoleTests {
      * in the watering hole.
      */
     @Test
-    public void testCountCardFood4() throws Exception {
+    public void testCountCardFood4() throws InvalidAddToWateringHoleException, InvalidWateringHoleCardCountException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             Card card = EasyMock.createMockBuilder(Card.class)
@@ -247,7 +249,7 @@ public class WateringHoleTests {
      * Can't be lower than -10 food
      */
     @Test(expected = InvalidWateringHoleCardCountException.class)
-    public void testCountCardFood5() throws Exception {
+    public void testCountCardFood5() throws InvalidAddToWateringHoleException, InvalidWateringHoleCardCountException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 4; i++) {
             Card card = EasyMock.createMockBuilder(Card.class)
@@ -271,7 +273,7 @@ public class WateringHoleTests {
      * Can't be more than 35 food
      */
     @Test(expected = InvalidWateringHoleCardCountException.class)
-    public void testCountCardFood6() throws Exception {
+    public void testCountCardFood6() throws InvalidAddToWateringHoleException, InvalidWateringHoleCardCountException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 4; i++) {
             Card card = EasyMock.createMockBuilder(Card.class)
@@ -296,7 +298,7 @@ public class WateringHoleTests {
      *
      */
     @Test
-    public void addCardFoodToCount1() throws Exception {
+    public void addCardFoodToCount1() throws InvalidAddToWateringHoleException, InvalidWateringHoleCardCountException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             Card card = EasyMock.createMockBuilder(Card.class)
@@ -316,7 +318,7 @@ public class WateringHoleTests {
      *
      */
     @Test
-    public void addCardFoodToCount2() throws Exception {
+    public void addCardFoodToCount2() throws InvalidAddToWateringHoleException, InvalidWateringHoleCardCountException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             Card card = EasyMock.createMockBuilder(Card.class)
@@ -337,7 +339,8 @@ public class WateringHoleTests {
      *
      */
     @Test
-    public void addCardFoodToCount3() throws Exception {
+    public void addCardFoodToCount3() throws InvalidAddToWateringHoleException, IllegalCardDirectionException,
+            InvalidWateringHoleCardCountException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = new Card("","","",-2, 0);
@@ -354,7 +357,8 @@ public class WateringHoleTests {
      *
      */
     @Test
-    public void addCardFoodToCount4() throws Exception {
+    public void addCardFoodToCount4() throws InvalidAddToWateringHoleException, IllegalCardDirectionException,
+            InvalidWateringHoleCardCountException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = new Card("","","",7, 0);

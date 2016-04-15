@@ -1,6 +1,7 @@
 package com.Evolution.interfaces;
 
 import com.Evolution.exceptions.InvalidAddToWateringHoleException;
+import com.Evolution.exceptions.InvalidWateringHoleCardCountException;
 import com.Evolution.exceptions.WateringHoleEmptyException;
 
 import java.util.ArrayList;
@@ -65,13 +66,16 @@ public interface IWateringHole {
 
     /**
      * Adds total Card food count to watering hole
+     * @throws InvalidAddToWateringHoleException  propagated from {@link IWateringHole#getCardFoodCount}
      */
-    void addTotalCardFood() throws Exception;
+    void addTotalCardFood() throws InvalidWateringHoleCardCountException;
 
     /**
      * Counts all the total food on the cards in the
      * watering hole
      * @return total food of cards
+     * @throws InvalidAddToWateringHoleException  when an invalid amount of food is counted from the cards
+     * {@link IWateringHole}
      */
-    int getCardFoodCount() throws Exception;
+    int getCardFoodCount() throws InvalidWateringHoleCardCountException;
 }
