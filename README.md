@@ -99,8 +99,9 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 	* Adding & removing cards from Watering Hole
 	* Used mocking & BVA for tests
 	* Performed code reviews
-	* Added name to phases & unit tested them with mocking
+	* Added name & number to phases & unit tested them with mocking
 	* 50+ LOC
+	* No GUI calls
 * Trevor Burch
 * Andrew Ma
     * WateringHole and WateringHoleTests
