@@ -126,6 +126,13 @@ public class WateringHoleTests {
     }
 
     @Test
+    public void testAddNullCardToWateringHole() {
+        WateringHole w = new WateringHole();
+        w.addCard(null);
+        assertEquals(w.getCards().size(), 0);
+    }
+
+    @Test
     public void testAddCardToWateringHole(){
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
