@@ -24,4 +24,9 @@ public class PhaseThree implements IPhases{
     public String getName() {
         return null;
     }
+
+    @Override
+    public int getNumber() {
+        return 0;
+    }
 }

@@ -26,4 +26,9 @@ public class PhaseTwo implements IPhases {
     public String getName() {
         return this.name;
     }
+
+    @Override
+    public int getNumber() {
+        return 0;
+    }
 }

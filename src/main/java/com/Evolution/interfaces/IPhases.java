@@ -22,4 +22,10 @@ public interface IPhases {
      */
     String getName();
 
+    /**
+     * Returns the number of the phase
+     * @return phase number
+     */
+    int getNumber();
+
 }
