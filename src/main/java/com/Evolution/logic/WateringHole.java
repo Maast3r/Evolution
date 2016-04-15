@@ -73,7 +73,7 @@ public class WateringHole implements IWateringHole {
             count += c.getFood();
         }
 
-        if(count <= -11) {
+        if(count <= -11 || count > 35) {
             throw new Exception("Illegal number of counted food.");
         }
         return count;
