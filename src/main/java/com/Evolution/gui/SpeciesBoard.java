@@ -105,7 +105,8 @@ public class SpeciesBoard extends VBox {
         }
         this.actionChoiceBox.setItems(options);
         this.actionChoiceBox.getSelectionModel().selectFirst();
-        this.actionChoiceBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+        this.actionChoiceBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue)
+                -> {
             performAction(Actions.values()[newValue.intValue()]);
             this.actionChoiceBox.getSelectionModel().selectFirst();
         });
