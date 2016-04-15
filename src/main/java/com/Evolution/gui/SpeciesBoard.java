@@ -209,32 +209,42 @@ class SpeciesBoard extends VBox {
                 break;
             case ADD_TRAIT:
                 openCardWindow(Actions.ADD_TRAIT);
-                this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
-                this.playerPane.updateGameScreen();
+                if (this.selectedCard != null) {
+                    this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+                    this.playerPane.updateGameScreen();
+                }
                 break;
             case ADD_SPECIES_LEFT:
                 openCardWindow(Actions.ADD_SPECIES_LEFT);
-                this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
-                this.playerPane.updateGameScreen();
-                this.playerPane.addSpecies(0);
+                if (this.selectedCard != null) {
+                    this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+                    this.playerPane.updateGameScreen();
+                    this.playerPane.addSpecies(0);
+                }
                 break;
             case ADD_SPECIES_RIGHT:
                 openCardWindow(Actions.ADD_SPECIES_RIGHT);
-                this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
-                this.playerPane.updateGameScreen();
-                this.playerPane.addSpecies(1);
+                if (this.selectedCard != null) {
+                    this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+                    this.playerPane.updateGameScreen();
+                    this.playerPane.addSpecies(1);
+                }
                 break;
             case INCREASE_POPULATION:
                 openCardWindow(Actions.INCREASE_POPULATION);
-                this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
-                this.playerPane.updateGameScreen();
-                setPopulationSize(1);
+                if (this.selectedCard != null) {
+                    this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+                    this.playerPane.updateGameScreen();
+                    setPopulationSize(1);
+                }
                 break;
             case INCREASE_BODY_SIZE:
                 openCardWindow(Actions.INCREASE_BODY_SIZE);
-                this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
-                this.playerPane.updateGameScreen();
-                setBodySize(1);
+                if (this.selectedCard != null) {
+                    this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+                    this.playerPane.updateGameScreen();
+                    setBodySize(1);
+                }
                 break;
             case DISCARD_TO_WATERINGHOLE:
                 openCardWindow(Actions.DISCARD_TO_WATERINGHOLE);
@@ -249,8 +259,8 @@ class SpeciesBoard extends VBox {
                     this.playerPane.updateGameScreen();
                     this.gameController.toggleChoiceBox();
                     this.gameController.changeChoiceBox();
+                    this.selectedCard = null;
                 }
-
                 break;
         }
 
