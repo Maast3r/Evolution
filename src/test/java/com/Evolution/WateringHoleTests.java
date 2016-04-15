@@ -1,6 +1,7 @@
 package com.Evolution;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
+import com.Evolution.exceptions.InvalidWateringHoleCardCountException;
 import com.Evolution.exceptions.WateringHoleEmptyException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Card;
@@ -170,7 +171,7 @@ public class WateringHoleTests {
      * TODO check the lowest negative and highest postiive
      */
     @Test
-    public void testCountCardFood1() throws NoSuchFieldException, IllegalAccessException, IllegalCardDirectionException {
+    public void testCountCardFood1() throws Exception {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", -2, 0);
@@ -185,8 +186,7 @@ public class WateringHoleTests {
      * in the watering hole.
      */
     @Test
-    public void testCountCardFood2() throws NoSuchFieldException, IllegalAccessException,
-            IllegalCardDirectionException {
+    public void testCountCardFood2() throws Exception {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 7, 0);
@@ -202,8 +202,7 @@ public class WateringHoleTests {
      * in the watering hole.
      */
     @Test
-    public void testCountCardFood3() throws NoSuchFieldException, IllegalAccessException,
-            IllegalCardDirectionException {
+    public void testCountCardFood3() throws Exception {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             Card card = EasyMock.createMockBuilder(Card.class)
@@ -223,8 +222,7 @@ public class WateringHoleTests {
      * in the watering hole.
      */
     @Test
-    public void testCountCardFood4() throws NoSuchFieldException, IllegalAccessException,
-            IllegalCardDirectionException {
+    public void testCountCardFood4() throws Exception {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             Card card = EasyMock.createMockBuilder(Card.class)
@@ -238,12 +236,60 @@ public class WateringHoleTests {
     }
 
     /**
+     * BVA - Counting a total of -11 food from all cards.
+     * Can't be lower than -10 food
+     */
+    @Test(expected = InvalidWateringHoleCardCountException.class)
+    public void testCountCardFood5() throws Exception {
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 4; i++) {
+            Card card = EasyMock.createMockBuilder(Card.class)
+                    .withConstructor(String.class, String.class, String.class,
+                            int.class, int.class)
+                    .withArgs("","","",-2, 0)
+                    .createMock();
+            w.addCard(card);
+        }
+        Card card = EasyMock.createMockBuilder(Card.class)
+                .withConstructor(String.class, String.class, String.class,
+                        int.class, int.class)
+                .withArgs("","","",-3, 0)
+                .createMock();
+        w.addCard(card);
+        w.getCardFoodCount();
+    }
+
+    /**
+     * BVA - Counting a total of 36 food from all cards.
+     * Can't be more than 35 food
+     */
+    @Test(expected = InvalidWateringHoleCardCountException.class)
+    public void testCountCardFood6() throws Exception {
+        WateringHole w = new WateringHole();
+        for (int i = 0; i < 4; i++) {
+            Card card = EasyMock.createMockBuilder(Card.class)
+                    .withConstructor(String.class, String.class, String.class,
+                            int.class, int.class)
+                    .withArgs("","","",7, 0)
+                    .createMock();
+            w.addCard(card);
+        }
+        Card card = EasyMock.createMockBuilder(Card.class)
+                .withConstructor(String.class, String.class, String.class,
+                        int.class, int.class)
+                .withArgs("","","",8, 0)
+                .createMock();
+        w.addCard(card);
+        w.getCardFoodCount();
+    }
+
+    /**
      * BVA - add the total card food count to the watering hole
      * Lowest number is -10
      *
      */
     @Test
-    public void addCardFoodToCount1(){
+    public void addCardFoodToCount1() throws Exception {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             Card card = EasyMock.createMockBuilder(Card.class)
@@ -263,7 +309,7 @@ public class WateringHoleTests {
      *
      */
     @Test
-    public void addCardFoodToCount2(){
+    public void addCardFoodToCount2() throws Exception {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             Card card = EasyMock.createMockBuilder(Card.class)
@@ -284,7 +330,7 @@ public class WateringHoleTests {
      *
      */
     @Test
-    public void addCardFoodToCount3() throws IllegalCardDirectionException {
+    public void addCardFoodToCount3() throws Exception {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = new Card("","","",-2, 0);
@@ -301,7 +347,7 @@ public class WateringHoleTests {
      *
      */
     @Test
-    public void addCardFoodToCount4() throws IllegalCardDirectionException {
+    public void addCardFoodToCount4() throws Exception {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = new Card("","","",7, 0);
