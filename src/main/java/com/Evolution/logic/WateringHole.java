@@ -1,5 +1,6 @@
 package com.Evolution.logic;
 
+import com.Evolution.exceptions.InvalidWateringHoleCardCountException;
 import com.Evolution.exceptions.WateringHoleEmptyException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IWateringHole;
@@ -62,15 +63,19 @@ public class WateringHole implements IWateringHole {
     }
 
     @Override
-    public void addTotalCardFood() {
+    public void addTotalCardFood() throws Exception {
        this.foodCount += getCardFoodCount();
     }
 
     @Override
-    public int getCardFoodCount() {
+    public int getCardFoodCount() throws Exception {
         int count = 0;
         for(ICard c : this.cards) {
             count += c.getFood();
+        }
+
+        if(count <= -11 || count > 35) {
+            throw new InvalidWateringHoleCardCountException("Illegal number of counted food.");
         }
         return count;
     }

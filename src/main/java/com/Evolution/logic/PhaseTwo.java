@@ -8,11 +8,9 @@ import com.Evolution.interfaces.IPhases;
  */
 public class PhaseTwo implements IPhases {
     private Game game;
-    private String name;
 
     public PhaseTwo(Game g){
         this.game = g;
-        this.name = "Discard to Watering Hole";
     }
 
     @Override
@@ -24,6 +22,11 @@ public class PhaseTwo implements IPhases {
 
     @Override
     public String getName() {
-        return this.name;
+        return "Discard to Watering Hole";
+    }
+
+    @Override
+    public int getNumber() {
+        return 2;
     }
 }

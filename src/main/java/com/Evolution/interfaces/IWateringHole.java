@@ -64,12 +64,12 @@ public interface IWateringHole {
     /**
      * Adds total Card food count to watering hole
      */
-    void addTotalCardFood();
+    void addTotalCardFood() throws Exception;
 
     /**
      * Counts all the total food on the cards in the
      * watering hole
      * @return total food of cards
      */
-    int getCardFoodCount();
+    int getCardFoodCount() throws Exception;
 }

@@ -94,4 +94,11 @@ public class PhaseOneTests {
         PhaseOne p = new PhaseOne(g);
         assertEquals(p.getName(), "Deal Cards");
     }
+
+    @Test
+    public void testGetPhaseNumber() {
+        Game g = EasyMock.niceMock(Game.class);
+        PhaseOne p = new PhaseOne(g);
+        assertEquals(p.getNumber(), 1);
+    }
 }
