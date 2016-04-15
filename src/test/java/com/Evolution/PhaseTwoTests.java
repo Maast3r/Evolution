@@ -72,4 +72,11 @@ public class PhaseTwoTests {
         PhaseTwo p = new PhaseTwo(g);
         assertEquals(p.getName(), "Discard to Watering Hole");
     }
+
+    @Test
+    public void testGetPhaseNumber() {
+        Game g = EasyMock.niceMock(Game.class);
+        PhaseTwo p = new PhaseTwo(g);
+        assertEquals(p.getNumber(), 2);
+    }
 }
