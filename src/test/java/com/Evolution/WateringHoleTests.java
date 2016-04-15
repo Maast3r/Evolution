@@ -125,11 +125,10 @@ public class WateringHoleTests {
         w.removeFood(-1);
     }
 
-    @Test
+    @Test (expected = WateringHoleEmptyException.class)
     public void testAddNullCardToWateringHole() {
         WateringHole w = new WateringHole();
         w.addCard(null);
-        assertEquals(w.getCards().size(), 0);
     }
 
     @Test
