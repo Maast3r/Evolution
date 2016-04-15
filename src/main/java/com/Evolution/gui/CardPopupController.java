@@ -91,7 +91,8 @@ class CardPopupController implements Initializable {
                         ChoiceBox<String> choices = new ChoiceBox<>();
                         choices.setItems(FXCollections.observableArrayList("Trait 1", "Trait 2",
                                 "Trait 3"));
-                        choices.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+                        choices.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue)
+                                -> {
                             this.board.setTraitSelection(newValue.intValue());
                         });
                     }
