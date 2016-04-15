@@ -9,18 +9,22 @@ import com.Evolution.exceptions.DeckEmptyException;
 public interface IDeck<T> {
     /**
      * Gets the amount of cards in the deck
+     *
      * @return The number of cards in the deck
      */
     int getSize();
 
     /**
      * Draws from the deck
+     *
      * @return The instance of the object stored in the deck
+     * @throws DeckEmptyException when a draw is attempted without any cards remaining in the Deck
      */
     T draw() throws DeckEmptyException;
 
     /**
      * Discards an object onto the deck
+     *
      * @param object The object to discard onto the deck
      */
     void discard(T object);

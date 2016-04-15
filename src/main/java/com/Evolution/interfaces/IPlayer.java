@@ -37,24 +37,30 @@ public interface IPlayer {
     /**
      * Removes the species at the specified index from the player's
      * species list
+     *
      * @param i index of species to remove
+     * @throws InvalidPlayerSpeciesRemovalException if the index i is not within [0, size)
+     *                                              of {@link IPlayer#getSpecies()}
      */
     void removeSpecies(int i) throws InvalidPlayerSpeciesRemovalException;
 
     /**
      * Returns the list of cards in the player's hand
+     *
      * @return The list of cards in the player's hand
      */
     ArrayList<ICard> getCards();
 
     /**
      * Adds a card to a player's hand
+     *
      * @param card The card to add
      */
     void addCardToHand(ICard card);
 
     /**
      * Removes the given card from the players hand
+     *
      * @param card the card to remove
      * @return If the removal was successful
      */

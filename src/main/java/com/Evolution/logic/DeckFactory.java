@@ -18,14 +18,15 @@ public class DeckFactory {
 
     /**
      * Parses a string and converts it into a new Card
+     *
      * @param input string containing card information
      * @return Card
-     * @throws IllegalCardDirectionException
-     * @throws IOException
+     * @throws IllegalCardDirectionException propagated from {@link Card#Card(String, String, String, int, int)}
+     * @throws WrongFileException            thrown when string format does not match the specified pattern
      */
-    public ICard readLineToCard(String input) throws IllegalCardDirectionException, IOException, WrongFileException {
+    public ICard readLineToCard(String input) throws IllegalCardDirectionException, WrongFileException {
         String pattern = "^.{0,150};.{0,175};.{0,150}png;[0-9]+;[0-9]+$";
-        if(!input.matches(pattern)){
+        if (!input.matches(pattern)) {
             throw new WrongFileException("You are reading from a bad file.");
         }
         String[] cardParams = input.split(";");
@@ -35,19 +36,21 @@ public class DeckFactory {
 
     /**
      * Read an InputStream and convert it to an ArrayList of ICard line by line
+     *
      * @param input input stream containing strings of card info
      * @return ArrayList<ICard>
-     * @throws IllegalCardDirectionException
-     * @throws IOException
+     * @throws IllegalCardDirectionException propagated from {@link #readLineToCard(String)}
+     * @throws IOException                   thrown if the BufferedReader is unable to read a line from the InputStream
+     * @throws WrongFileException            propagated from {@link #readLineToCard(String)}
      */
-    public ArrayList<ICard> readFile(InputStream input) throws IllegalCardDirectionException,
-            IOException, WrongFileException {
+    public ArrayList<ICard> readFile(InputStream input) throws IllegalCardDirectionException, IOException,
+            WrongFileException {
         ArrayList<ICard> cards = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(input));
 
         String strLine;
 
-        while ((strLine = br.readLine()) != null){
+        while ((strLine = br.readLine()) != null) {
             cards.add(readLineToCard(strLine));
         }
 
@@ -56,12 +59,15 @@ public class DeckFactory {
 
     /**
      * Constructs a Deck filled with cards to be used during gameplay
+     *
      * @param s input stream containing strings of card info
      * @return IDeck<ICard>
-     * @throws IOException
-     * @throws IllegalCardDirectionException
+     * @throws IOException                   propagated from {@link #readFile(InputStream)}
+     * @throws IllegalCardDirectionException propagated from {@link Card#Card(String, String, String, int, int)}
+     * @throws WrongFileException            propagated from {@link #readLineToCard(String)}
      */
-    public IDeck<ICard> generateDrawPile(InputStream s) throws IOException, IllegalCardDirectionException, WrongFileException {
+    public IDeck<ICard> generateDrawPile(InputStream s) throws IOException, IllegalCardDirectionException,
+            WrongFileException {
         Deck<ICard> drawPile = new Deck<>();
         drawPile.addAll(readFile(s));
         return drawPile;
@@ -69,6 +75,7 @@ public class DeckFactory {
 
     /**
      * Constructs an empty Deck to be used as a discard pile during gameplay
+     *
      * @return empty IDeck<ICard>
      */
     public IDeck<ICard> generateDiscardPile() {

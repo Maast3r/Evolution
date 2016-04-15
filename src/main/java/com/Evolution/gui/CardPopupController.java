@@ -1,10 +1,7 @@
 package com.Evolution.gui;
 
 import com.Evolution.interfaces.ICard;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -16,7 +13,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
-import java.awt.event.WindowEvent;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -25,7 +21,7 @@ import java.util.ResourceBundle;
  * Controller for the card selection popup
  * Created by brownba1 on 3/27/2016.
  */
-public class CardPopupController implements Initializable {
+class CardPopupController implements Initializable {
 
     private ArrayList<ICard> hand;
     private int numCards = 0;
@@ -54,7 +50,7 @@ public class CardPopupController implements Initializable {
      *
      * @param addTrait boolean value
      */
-    public void setAddTrait(boolean addTrait) {
+    void setAddTrait(boolean addTrait) {
         this.addTrait = addTrait;
     }
 
@@ -95,7 +91,8 @@ public class CardPopupController implements Initializable {
                         ChoiceBox<String> choices = new ChoiceBox<>();
                         choices.setItems(FXCollections.observableArrayList("Trait 1", "Trait 2",
                                 "Trait 3"));
-                        choices.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue) -> {
+                        choices.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue)
+                                -> {
                             this.board.setTraitSelection(newValue.intValue());
                         });
                     }
@@ -115,7 +112,7 @@ public class CardPopupController implements Initializable {
      * based on the card index
      *
      * @param cardPane the card to add (with it's food label)
-     * @param cardNum the card index within the hand
+     * @param cardNum  the card index within the hand
      */
     private void addToGrid(VBox cardPane, int cardNum) {
         int row = (int) Math.ceil(cardNum / 3);

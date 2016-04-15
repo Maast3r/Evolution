@@ -95,13 +95,26 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 
 # Sprint 4
 * Jeremiah Goist
+    * Discard from hand to Watering Hole
+    * De/Activate dropdown for not/current player
+    * Phase Label updates on phase switch
+    * Dropdown shows only relevant options
+    * Fixed GUI bug allowing free add of species
+    * 25+ LOC
 * Brooke Brown
 	* Adding & removing cards from Watering Hole
 	* Used mocking & BVA for tests
 	* Performed code reviews
-	* Added name to phases & unit tested them with mocking
+	* Added name & number to phases & unit tested them with mocking
 	* 50+ LOC
+	* No GUI calls
 * Trevor Burch
+    * Updated metric standards and added a new metric
+    * Implemented the execution of PhaseTwo
+    * Discarding a card to the wateringHole
+    * Exception handling for discarding to the wateringHole
+    * Verified coding practices were still being followed
+    * 25+ LOC
 * Andrew Ma
     * WateringHole and WateringHoleTests
     * BVA Testing
