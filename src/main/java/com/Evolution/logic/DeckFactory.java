@@ -1,6 +1,7 @@
 package com.Evolution.logic;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
+import com.Evolution.exceptions.IllegalCardFoodException;
 import com.Evolution.exceptions.WrongFileException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IDeck;
@@ -23,8 +24,10 @@ public class DeckFactory {
      * @return Card
      * @throws IllegalCardDirectionException propagated from {@link Card#Card(String, String, String, int, int)}
      * @throws WrongFileException            thrown when string format does not match the specified pattern
+     * @throws IllegalCardFoodException      propagated from {@link Card#Card(String, String, String, int, int)}
      */
-    public ICard readLineToCard(String input) throws IllegalCardDirectionException, WrongFileException {
+    public ICard readLineToCard(String input) throws IllegalCardDirectionException, WrongFileException,
+            IllegalCardFoodException {
         String pattern = "^.{0,150};.{0,175};.{0,150}png;-?[0-9]+;[0-9]+$";
         if (!input.matches(pattern)) {
             throw new WrongFileException("You are reading from a bad file.");
@@ -44,7 +47,7 @@ public class DeckFactory {
      * @throws WrongFileException            propagated from {@link #readLineToCard(String)}
      */
     public ArrayList<ICard> readFile(InputStream input) throws IllegalCardDirectionException, IOException,
-            WrongFileException {
+            WrongFileException, IllegalCardFoodException {
         ArrayList<ICard> cards = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(input));
 
@@ -67,7 +70,7 @@ public class DeckFactory {
      * @throws WrongFileException            propagated from {@link #readLineToCard(String)}
      */
     public IDeck<ICard> generateDrawPile(InputStream s) throws IOException, IllegalCardDirectionException,
-            WrongFileException {
+            WrongFileException, IllegalCardFoodException {
         Deck<ICard> drawPile = new Deck<>();
         drawPile.addAll(readFile(s));
         return drawPile;

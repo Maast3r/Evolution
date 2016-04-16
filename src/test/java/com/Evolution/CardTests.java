@@ -1,6 +1,7 @@
 package com.Evolution;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
+import com.Evolution.exceptions.IllegalCardFoodException;
 import com.Evolution.logic.Card;
 import org.junit.Test;
 
@@ -14,25 +15,25 @@ import static org.junit.Assert.assertTrue;
 public class CardTests {
 
     @Test
-    public void testName() throws IllegalCardDirectionException {
+    public void testName() throws IllegalCardDirectionException, IllegalCardFoodException {
         Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
         assertTrue("Carnivore".equals(testCard.getName()));
     }
 
     @Test
-    public void testDesc() throws IllegalCardDirectionException{
+    public void testDesc() throws IllegalCardDirectionException, IllegalCardFoodException {
         Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
         assertTrue("Makes a species a carnivore".equals(testCard.getDesc()));
     }
 
     @Test
-    public void testImgPath() throws IllegalCardDirectionException{
+    public void testImgPath() throws IllegalCardDirectionException, IllegalCardFoodException {
         Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
         assertTrue("./carnivore.jpg".equals(testCard.getImgPath()));
     }
 
     @Test
-    public void testFood() throws IllegalCardDirectionException{
+    public void testFood() throws IllegalCardDirectionException, IllegalCardFoodException {
         Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
         assertEquals(testCard.getFood(), 3);
     }
@@ -42,7 +43,7 @@ public class CardTests {
      * This is the test for the lower boundary
      */
     @Test
-    public void testFood2() throws IllegalCardDirectionException {
+    public void testFood2() throws IllegalCardDirectionException, IllegalCardFoodException {
         Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", -3, 0);
         assertEquals(testCard.getFood(), -3);
     }
@@ -52,33 +53,33 @@ public class CardTests {
      * This is the test for outside of the lower boundary
      */
     @Test (expected = IllegalCardFoodException.class)
-    public void testFood3() throws IllegalCardDirectionException {
+    public void testFood3() throws IllegalCardDirectionException, IllegalCardFoodException {
         Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", -4, 0);
     }
 
     @Test
-    public void testDirection() throws IllegalCardDirectionException{
+    public void testDirection() throws IllegalCardDirectionException, IllegalCardFoodException {
         Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
         assertEquals(testCard.getDirection(), 0);
     }
     
     @Test(expected = IllegalCardDirectionException.class)
-    public void testValidCardDirection1() throws IllegalCardDirectionException{
+    public void testValidCardDirection1() throws IllegalCardDirectionException, IllegalCardFoodException {
     	Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, -1);
     }
     
     @Test(expected = IllegalCardDirectionException.class)
-    public void testValidCardDirection2() throws IllegalCardDirectionException{
+    public void testValidCardDirection2() throws IllegalCardDirectionException, IllegalCardFoodException {
     	Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, -1234);
     }
     
     @Test(expected = IllegalCardDirectionException.class)
-    public void testValidCardDirection3() throws IllegalCardDirectionException{
+    public void testValidCardDirection3() throws IllegalCardDirectionException, IllegalCardFoodException {
     	Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 3);
     }
     
     @Test(expected = IllegalCardDirectionException.class)
-    public void testValidCardDirection4() throws IllegalCardDirectionException{
+    public void testValidCardDirection4() throws IllegalCardDirectionException, IllegalCardFoodException {
     	Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 234);
     }
     

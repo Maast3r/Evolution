@@ -1,9 +1,6 @@
 package com.Evolution;
 
-import com.Evolution.exceptions.IllegalCardDirectionException;
-import com.Evolution.exceptions.InvalidAddToWateringHoleException;
-import com.Evolution.exceptions.InvalidWateringHoleCardCountException;
-import com.Evolution.exceptions.WateringHoleEmptyException;
+import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Card;
 import com.Evolution.logic.WateringHole;
@@ -179,7 +176,7 @@ public class WateringHoleTests {
      */
     @Test
     public void testCountCardFood1() throws InvalidWateringHoleCardCountException, IllegalCardDirectionException,
-            InvalidAddToWateringHoleException {
+            InvalidAddToWateringHoleException, IllegalCardFoodException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", -2, 0);
@@ -195,7 +192,7 @@ public class WateringHoleTests {
      */
     @Test
     public void testCountCardFood2() throws InvalidAddToWateringHoleException, IllegalCardDirectionException,
-            InvalidWateringHoleCardCountException {
+            InvalidWateringHoleCardCountException, IllegalCardFoodException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 7, 0);
@@ -340,7 +337,7 @@ public class WateringHoleTests {
      */
     @Test
     public void addCardFoodToCount3() throws InvalidAddToWateringHoleException, IllegalCardDirectionException,
-            InvalidWateringHoleCardCountException {
+            InvalidWateringHoleCardCountException, IllegalCardFoodException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = new Card("","","",-2, 0);
@@ -358,7 +355,7 @@ public class WateringHoleTests {
      */
     @Test
     public void addCardFoodToCount4() throws InvalidAddToWateringHoleException, IllegalCardDirectionException,
-            InvalidWateringHoleCardCountException {
+            InvalidWateringHoleCardCountException, IllegalCardFoodException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 5; i++) {
             ICard card = new Card("","","",7, 0);
