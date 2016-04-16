@@ -32,10 +32,14 @@ public class CardTests {
         assertTrue("./carnivore.jpg".equals(testCard.getImgPath()));
     }
 
+    /**
+     * BVA - food value must be between -3 and 9
+     * This is the test for inside of the upper boundary
+     */
     @Test
     public void testFood() throws IllegalCardDirectionException, IllegalCardFoodException {
-        Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
-        assertEquals(testCard.getFood(), 3);
+        Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 9, 0);
+        assertEquals(testCard.getFood(), 9);
     }
 
     /**
@@ -55,6 +59,15 @@ public class CardTests {
     @Test (expected = IllegalCardFoodException.class)
     public void testFood3() throws IllegalCardDirectionException, IllegalCardFoodException {
         Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", -4, 0);
+    }
+
+    /**
+     * BVA - food value must be between -3 and 9
+     * This is the test for outside of the upper boundary
+     */
+    @Test (expected = IllegalCardFoodException.class)
+    public void testFood4() throws IllegalCardDirectionException, IllegalCardFoodException {
+        Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 10, 0);
     }
 
     @Test
