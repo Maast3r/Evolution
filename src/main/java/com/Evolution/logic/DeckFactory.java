@@ -25,7 +25,7 @@ public class DeckFactory {
      * @throws WrongFileException            thrown when string format does not match the specified pattern
      */
     public ICard readLineToCard(String input) throws IllegalCardDirectionException, WrongFileException {
-        String pattern = "^.{0,150};.{0,175};.{0,150}png;[0-9]+;[0-9]+$";
+        String pattern = "^.{0,150};.{0,175};.{0,150}png;-?[0-9]+;[0-9]+$";
         if (!input.matches(pattern)) {
             throw new WrongFileException("You are reading from a bad file.");
         }

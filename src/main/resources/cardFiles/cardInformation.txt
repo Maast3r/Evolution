@@ -1,17 +1,129 @@
-Defensive Herding;A Carnivore must be larger in Population to attack this species.;defensiveHerding.png;8;0
-Foraging;Anytime this species eats Plant Food, take 1 additional Plant Food from the same source.;foraging.png;3;0
-Climbing;A Carnivore must have CLimbing to attack this species.;climbing.png;3;0
-Pack Hunting;This species' Body size is equal to its Population + Body Size when determining if it can attack another species.;packHunting.png;1;0
-Long Neck;Before the food cards are revealed, take 1 Plant Food from the Food Bank;longNeck.png;6;0
-Ambush;Negates Warning Call when attacking.;ambush.png;3;0
-Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;5;0
-Hard Shell;+4 Body Size when determining if this species can be attacked.;hardShell.png;1;0
-Cooperation;When this species takes food, your species to the right takes 1 food from the same source.;cooperation.png;5;2
-Symbiosis;This species cannot be attacked if your species to the right has a larger Body Size than this species.;symbiosis.png;4;2
-Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;4;0
-Scavenger;Take 1 Meat Food from the Food Bank when a Carnivore successfully attacks any species.;scavenger.png;4;0
-Burrowing;This species cannot be attacked if it has food equal to its Population.;burrowing.png;5;0
-Fertile;Before the food cards are revealed, this species gains 1 Population if there is food on the Watering Hole.;fertile.png;2;0
 Horns;A Carnivore must first lose 1 Population to attack this species;horns.png;3;0
-Intelligence;Discard a card(s) from your hand during one of your Feeding turns: Carnivore - Negate a trait for this species' next attack. Non-Carnivore - Take 2 Food from the Food Bank.;intelligence.png;6;0
+Horns;A Carnivore must first lose 1 Population to attack this species;horns.png;1;0
+Horns;A Carnivore must first lose 1 Population to attack this species;horns.png;4;0
+Horns;A Carnivore must first lose 1 Population to attack this species;horns.png;4;0
+Horns;A Carnivore must first lose 1 Population to attack this species;horns.png;5;0
+Horns;A Carnivore must first lose 1 Population to attack this species;horns.png;2;0
+Horns;A Carnivore must first lose 1 Population to attack this species;horns.png;3;0
+Fertile;Before the food cards are revealed, this species gains 1 Population if there is food on the Watering Hole.;fertile.png;3;0
+Fertile;Before the food cards are revealed, this species gains 1 Population if there is food on the Watering Hole.;fertile.png;7;0
+Fertile;Before the food cards are revealed, this species gains 1 Population if there is food on the Watering Hole.;fertile.png;5;0
+Fertile;Before the food cards are revealed, this species gains 1 Population if there is food on the Watering Hole.;fertile.png;2;0
+Fertile;Before the food cards are revealed, this species gains 1 Population if there is food on the Watering Hole.;fertile.png;4;0
+Fertile;Before the food cards are revealed, this species gains 1 Population if there is food on the Watering Hole.;fertile.png;6;0
+Fertile;Before the food cards are revealed, this species gains 1 Population if there is food on the Watering Hole.;fertile.png;6;0
+Burrowing;This species cannot be attacked if it has food equal to its Population.;burrowing.png;4;0
+Burrowing;This species cannot be attacked if it has food equal to its Population.;burrowing.png;1;0
+Burrowing;This species cannot be attacked if it has food equal to its Population.;burrowing.png;3;0
+Burrowing;This species cannot be attacked if it has food equal to its Population.;burrowing.png;4;0
+Burrowing;This species cannot be attacked if it has food equal to its Population.;burrowing.png;5;0
+Burrowing;This species cannot be attacked if it has food equal to its Population.;burrowing.png;2;0
+Burrowing;This species cannot be attacked if it has food equal to its Population.;burrowing.png;3;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;3;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;5;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;4;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;5;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;-1;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;0;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;4;0
+Scavenger;Take 1 Meat Food from the Food Bank when a Carnivore successfully attacks any species.;scavenger.png;2;0
+Scavenger;Take 1 Meat Food from the Food Bank when a Carnivore successfully attacks any species.;scavenger.png;4;0
+Scavenger;Take 1 Meat Food from the Food Bank when a Carnivore successfully attacks any species.;scavenger.png;7;0
+Scavenger;Take 1 Meat Food from the Food Bank when a Carnivore successfully attacks any species.;scavenger.png;6;0
+Scavenger;Take 1 Meat Food from the Food Bank when a Carnivore successfully attacks any species.;scavenger.png;6;0
+Scavenger;Take 1 Meat Food from the Food Bank when a Carnivore successfully attacks any species.;scavenger.png;5;0
+Scavenger;Take 1 Meat Food from the Food Bank when a Carnivore successfully attacks any species.;scavenger.png;3;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;1;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;6;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;6;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;3;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;2;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;2;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;3;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;3;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;5;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;4;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;5;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;1;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;0;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;4;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;2;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;4;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;0;0
+Defensive Herding;A Carnivore must be larger in Population to attack this species.;defensiveHerding.png;8;0
+Defensive Herding;A Carnivore must be larger in Population to attack this species.;defensiveHerding.png;6;0
+Defensive Herding;A Carnivore must be larger in Population to attack this species.;defensiveHerding.png;2;0
+Defensive Herding;A Carnivore must be larger in Population to attack this species.;defensiveHerding.png;4;0
+Defensive Herding;A Carnivore must be larger in Population to attack this species.;defensiveHerding.png;5;0
+Defensive Herding;A Carnivore must be larger in Population to attack this species.;defensiveHerding.png;3;0
+Defensive Herding;A Carnivore must be larger in Population to attack this species.;defensiveHerding.png;7;0
+Warning Call;A Carnivore must have Ambush to attack your species that are adjacent to this species.;warningCall.png;5;1
+Warning Call;A Carnivore must have Ambush to attack your species that are adjacent to this species.;warningCall.png;3;1
+Warning Call;A Carnivore must have Ambush to attack your species that are adjacent to this species.;warningCall.png;3;1
+Warning Call;A Carnivore must have Ambush to attack your species that are adjacent to this species.;warningCall.png;2;1
 Warning Call;A Carnivore must have Ambush to attack your species that are adjacent to this species.;warningCall.png;4;1
+Warning Call;A Carnivore must have Ambush to attack your species that are adjacent to this species.;warningCall.png;1;1
+Warning Call;A Carnivore must have Ambush to attack your species that are adjacent to this species.;warningCall.png;4;1
+Pack Hunting;This species' Body size is equal to its Population + Body Size when determining if it can attack another species.;packHunting.png;-1;0
+Pack Hunting;This species' Body size is equal to its Population + Body Size when determining if it can attack another species.;packHunting.png;3;0
+Pack Hunting;This species' Body size is equal to its Population + Body Size when determining if it can attack another species.;packHunting.png;2;0
+Pack Hunting;This species' Body size is equal to its Population + Body Size when determining if it can attack another species.;packHunting.png;0;0
+Pack Hunting;This species' Body size is equal to its Population + Body Size when determining if it can attack another species.;packHunting.png;1;0
+Pack Hunting;This species' Body size is equal to its Population + Body Size when determining if it can attack another species.;packHunting.png;-3;0
+Pack Hunting;This species' Body size is equal to its Population + Body Size when determining if it can attack another species.;packHunting.png;-2;0
+Foraging;Anytime this species eats Plant Food, take 1 additional Plant Food from the same source.;foraging.png;7;0
+Foraging;Anytime this species eats Plant Food, take 1 additional Plant Food from the same source.;foraging.png;6;0
+Foraging;Anytime this species eats Plant Food, take 1 additional Plant Food from the same source.;foraging.png;4;0
+Foraging;Anytime this species eats Plant Food, take 1 additional Plant Food from the same source.;foraging.png;3;0
+Foraging;Anytime this species eats Plant Food, take 1 additional Plant Food from the same source.;foraging.png;6;0
+Foraging;Anytime this species eats Plant Food, take 1 additional Plant Food from the same source.;foraging.png;2;0
+Foraging;Anytime this species eats Plant Food, take 1 additional Plant Food from the same source.;foraging.png;5;0
+Hard Shell;+4 Body Size when determining if this species can be attacked.;hardShell.png;3;0
+Hard Shell;+4 Body Size when determining if this species can be attacked.;hardShell.png;2;0
+Hard Shell;+4 Body Size when determining if this species can be attacked.;hardShell.png;1;0
+Hard Shell;+4 Body Size when determining if this species can be attacked.;hardShell.png;5;0
+Hard Shell;+4 Body Size when determining if this species can be attacked.;hardShell.png;3;0
+Hard Shell;+4 Body Size when determining if this species can be attacked.;hardShell.png;4;0
+Hard Shell;+4 Body Size when determining if this species can be attacked.;hardShell.png;4;0
+Long Neck;Before the food cards are revealed, take 1 Plant Food from the Food Bank;longNeck.png;5;0
+Long Neck;Before the food cards are revealed, take 1 Plant Food from the Food Bank;longNeck.png;6;0
+Long Neck;Before the food cards are revealed, take 1 Plant Food from the Food Bank;longNeck.png;7;0
+Long Neck;Before the food cards are revealed, take 1 Plant Food from the Food Bank;longNeck.png;3;0
+Long Neck;Before the food cards are revealed, take 1 Plant Food from the Food Bank;longNeck.png;9;0
+Long Neck;Before the food cards are revealed, take 1 Plant Food from the Food Bank;longNeck.png;4;0
+Long Neck;Before the food cards are revealed, take 1 Plant Food from the Food Bank;longNeck.png;8;0
+Intelligence;Discard a card(s) from your hand during one of your Feeding turns: Carnivore - Negate a trait for this species' next attack. Non-Carnivore - Take 2 Food from the Food Bank.;intelligence.png;6;0
+Intelligence;Discard a card(s) from your hand during one of your Feeding turns: Carnivore - Negate a trait for this species' next attack. Non-Carnivore - Take 2 Food from the Food Bank.;intelligence.png;-1;0
+Intelligence;Discard a card(s) from your hand during one of your Feeding turns: Carnivore - Negate a trait for this species' next attack. Non-Carnivore - Take 2 Food from the Food Bank.;intelligence.png;5;0
+Intelligence;Discard a card(s) from your hand during one of your Feeding turns: Carnivore - Negate a trait for this species' next attack. Non-Carnivore - Take 2 Food from the Food Bank.;intelligence.png;7;0
+Intelligence;Discard a card(s) from your hand during one of your Feeding turns: Carnivore - Negate a trait for this species' next attack. Non-Carnivore - Take 2 Food from the Food Bank.;intelligence.png;0;0
+Intelligence;Discard a card(s) from your hand during one of your Feeding turns: Carnivore - Negate a trait for this species' next attack. Non-Carnivore - Take 2 Food from the Food Bank.;intelligence.png;4;0
+Intelligence;Discard a card(s) from your hand during one of your Feeding turns: Carnivore - Negate a trait for this species' next attack. Non-Carnivore - Take 2 Food from the Food Bank.;intelligence.png;-2;0
+Ambush;Negates Warning Call when attacking.;ambush.png;0;0
+Ambush;Negates Warning Call when attacking.;ambush.png;-3;0
+Ambush;Negates Warning Call when attacking.;ambush.png;-2;0
+Ambush;Negates Warning Call when attacking.;ambush.png;1;0
+Ambush;Negates Warning Call when attacking.;ambush.png;2;0
+Ambush;Negates Warning Call when attacking.;ambush.png;3;0
+Ambush;Negates Warning Call when attacking.;ambush.png;-1;0
+Symbiosis;This species cannot be attacked if your species to the right has a larger Body Size than this species.;symbiosis.png;4;2
+Symbiosis;This species cannot be attacked if your species to the right has a larger Body Size than this species.;symbiosis.png;5;2
+Symbiosis;This species cannot be attacked if your species to the right has a larger Body Size than this species.;symbiosis.png;4;2
+Symbiosis;This species cannot be attacked if your species to the right has a larger Body Size than this species.;symbiosis.png;3;2
+Symbiosis;This species cannot be attacked if your species to the right has a larger Body Size than this species.;symbiosis.png;3;2
+Symbiosis;This species cannot be attacked if your species to the right has a larger Body Size than this species.;symbiosis.png;1;2
+Symbiosis;This species cannot be attacked if your species to the right has a larger Body Size than this species.;symbiosis.png;2;2
+Cooperation;When this species takes food, your species to the right takes 1 food from the same source.;cooperation.png;4;2
+Cooperation;When this species takes food, your species to the right takes 1 food from the same source.;cooperation.png;5;2
+Cooperation;When this species takes food, your species to the right takes 1 food from the same source.;cooperation.png;4;2
+Cooperation;When this species takes food, your species to the right takes 1 food from the same source.;cooperation.png;3;2
+Cooperation;When this species takes food, your species to the right takes 1 food from the same source.;cooperation.png;3;2
+Cooperation;When this species takes food, your species to the right takes 1 food from the same source.;cooperation.png;5;2
+Cooperation;When this species takes food, your species to the right takes 1 food from the same source.;cooperation.png;0;2
+Climbing;A Carnivore must have Climbing to attack this species.;climbing.png;4;0
+Climbing;A Carnivore must have Climbing to attack this species.;climbing.png;5;0
+Climbing;A Carnivore must have Climbing to attack this species.;climbing.png;4;0
+Climbing;A Carnivore must have Climbing to attack this species.;climbing.png;2;0
+Climbing;A Carnivore must have Climbing to attack this species.;climbing.png;3;0
+Climbing;A Carnivore must have Climbing to attack this species.;climbing.png;3;0
+Climbing;A Carnivore must have Climbing to attack this species.;climbing.png;1;0

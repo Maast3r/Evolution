@@ -37,6 +37,7 @@ public class Game {
         this.wateringHole = wateringHole;
 
         this.drawPile = drawPile;
+        this.drawPile.shuffle();
         this.discardPile = discardPile;
     }
 
