@@ -37,6 +37,16 @@ public class CardTests {
         assertEquals(testCard.getFood(), 3);
     }
 
+    /**
+     * BVA - food value must be between -3 and 9
+     * This is the test for the lower boundary
+     */
+    @Test
+    public void testFood2() throws IllegalCardDirectionException {
+        Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", -3, 0);
+        assertEquals(testCard.getFood(), -3);
+    }
+
     @Test
     public void testDirection() throws IllegalCardDirectionException{
         Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
