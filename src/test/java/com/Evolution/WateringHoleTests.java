@@ -169,24 +169,27 @@ public class WateringHoleTests {
     }
 
     /**
-     * BVA - Counting a total of -10 food from all cards.
+     * BVA - Counting a total of -12 food from all cards.
      * Lowest number of food to be ever counted from the cards
      * in the watering hole
-     * TODO check the lowest negative and highest postiive
      */
     @Test
     public void testCountCardFood1() throws InvalidWateringHoleCardCountException, IllegalCardDirectionException,
             InvalidAddToWateringHoleException, IllegalCardFoodException {
         WateringHole w = new WateringHole();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 2; i++) {
+            ICard card = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", -3, 0);
+            w.addCard(card);
+        }
+        for (int i = 0; i < 3; i++) {
             ICard card = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", -2, 0);
             w.addCard(card);
         }
-        assertEquals(-10, w.getCardFoodCount());
+        assertEquals(-12, w.getCardFoodCount());
     }
 
     /**
-     * BVA - Counting a total of 35 food from all cards.
+     * BVA - Counting a total of 39 food from all cards.
      * Highest number of food to be ever counted from the cards
      * in the watering hole.
      */
@@ -194,23 +197,27 @@ public class WateringHoleTests {
     public void testCountCardFood2() throws InvalidAddToWateringHoleException, IllegalCardDirectionException,
             InvalidWateringHoleCardCountException, IllegalCardFoodException {
         WateringHole w = new WateringHole();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 2; i++) {
             ICard card = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 7, 0);
             w.addCard(card);
+            card = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 8, 0);
+            w.addCard(card);
         }
-        assertEquals(35, w.getCardFoodCount());
+        ICard card = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 9, 0);
+        w.addCard(card);
+        assertEquals(39, w.getCardFoodCount());
     }
 
     /**
      * Same as 1, but as unit test
-     * BVA - Counting a total of -10 food from all cards.
+     * BVA - Counting a total of -12 food from all cards.
      * Lowest number of food to be ever counted from the cards
      * in the watering hole.
      */
     @Test
     public void testCountCardFood3() throws InvalidAddToWateringHoleException, InvalidWateringHoleCardCountException {
         WateringHole w = new WateringHole();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 3; i++) {
             Card card = EasyMock.createMockBuilder(Card.class)
                     .withConstructor(String.class, String.class, String.class,
                             int.class, int.class)
@@ -218,32 +225,52 @@ public class WateringHoleTests {
                     .createMock();
             w.addCard(card);
         }
-        assertEquals(-10, w.getCardFoodCount());
+        for (int i = 0; i < 2; i++) {
+            Card card = EasyMock.createMockBuilder(Card.class)
+                    .withConstructor(String.class, String.class, String.class,
+                            int.class, int.class)
+                    .withArgs("","","",-3, 0)
+                    .createMock();
+            w.addCard(card);
+        }
+        assertEquals(-12, w.getCardFoodCount());
     }
 
     /**
      * Same as 2, but as unit test
-     * BVA - Counting a total of 35 food from all cards.
+     * BVA - Counting a total of 39 food from all cards.
      * Highest number of food to be ever counted from the cards
      * in the watering hole.
      */
     @Test
     public void testCountCardFood4() throws InvalidAddToWateringHoleException, InvalidWateringHoleCardCountException {
         WateringHole w = new WateringHole();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 2; i++) {
             Card card = EasyMock.createMockBuilder(Card.class)
                     .withConstructor(String.class, String.class, String.class,
                             int.class, int.class)
                     .withArgs("","","",7, 0)
                     .createMock();
             w.addCard(card);
+            card = EasyMock.createMockBuilder(Card.class)
+                    .withConstructor(String.class, String.class, String.class,
+                            int.class, int.class)
+                    .withArgs("","","",8, 0)
+                    .createMock();
+            w.addCard(card);
         }
-        assertEquals(35, w.getCardFoodCount());
+        Card card = EasyMock.createMockBuilder(Card.class)
+                .withConstructor(String.class, String.class, String.class,
+                        int.class, int.class)
+                .withArgs("","","",9, 0)
+                .createMock();
+        w.addCard(card);
+        assertEquals(39, w.getCardFoodCount());
     }
 
     /**
-     * BVA - Counting a total of -11 food from all cards.
-     * Can't be lower than -10 food
+     * BVA - Counting a total of -13 food from all cards.
+     * Can't be lower than -12 food
      */
     @Test(expected = InvalidWateringHoleCardCountException.class)
     public void testCountCardFood5() throws InvalidAddToWateringHoleException, InvalidWateringHoleCardCountException {
@@ -252,116 +279,118 @@ public class WateringHoleTests {
             Card card = EasyMock.createMockBuilder(Card.class)
                     .withConstructor(String.class, String.class, String.class,
                             int.class, int.class)
-                    .withArgs("","","",-2, 0)
+                    .withArgs("","","",-3, 0)
                     .createMock();
             w.addCard(card);
         }
         Card card = EasyMock.createMockBuilder(Card.class)
                 .withConstructor(String.class, String.class, String.class,
                         int.class, int.class)
-                .withArgs("","","",-3, 0)
+                .withArgs("","","",-1, 0)
                 .createMock();
         w.addCard(card);
         w.getCardFoodCount();
     }
 
     /**
-     * BVA - Counting a total of 36 food from all cards.
-     * Can't be more than 35 food
+     * BVA - Counting a total of 40 food from all cards.
+     * Can't be more than 39 food
      */
     @Test(expected = InvalidWateringHoleCardCountException.class)
     public void testCountCardFood6() throws InvalidAddToWateringHoleException, InvalidWateringHoleCardCountException {
         WateringHole w = new WateringHole();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             Card card = EasyMock.createMockBuilder(Card.class)
                     .withConstructor(String.class, String.class, String.class,
                             int.class, int.class)
-                    .withArgs("","","",7, 0)
+                    .withArgs("","","",8, 0)
                     .createMock();
             w.addCard(card);
         }
-        Card card = EasyMock.createMockBuilder(Card.class)
-                .withConstructor(String.class, String.class, String.class,
-                        int.class, int.class)
-                .withArgs("","","",8, 0)
-                .createMock();
-        w.addCard(card);
         w.getCardFoodCount();
     }
 
     /**
      * BVA - add the total card food count to the watering hole
-     * Lowest number is -10
+     * Lowest number is -12
      *
      */
     @Test
     public void addCardFoodToCount1() throws InvalidAddToWateringHoleException, InvalidWateringHoleCardCountException {
         WateringHole w = new WateringHole();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             Card card = EasyMock.createMockBuilder(Card.class)
                     .withConstructor(String.class, String.class, String.class,
                             int.class, int.class)
-                    .withArgs("","","",-2, 0)
+                    .withArgs("","","",-3, 0)
                     .createMock();
             w.addCard(card);
         }
         w.addTotalCardFood();
-        assertEquals(-10, w.getFoodCount());
+        assertEquals(-12, w.getFoodCount());
     }
 
     /**
      * BVA - add the total card food count to the watering hole
-     * Highest number is 35
+     * Highest number is 39
      *
      */
     @Test
     public void addCardFoodToCount2() throws InvalidAddToWateringHoleException, InvalidWateringHoleCardCountException {
         WateringHole w = new WateringHole();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             Card card = EasyMock.createMockBuilder(Card.class)
                     .withConstructor(String.class, String.class, String.class,
                             int.class, int.class)
-                    .withArgs("","","",7, 0)
+                    .withArgs("","","",8, 0)
                     .createMock();
             w.addCard(card);
         }
+        Card card = EasyMock.createMockBuilder(Card.class)
+                .withConstructor(String.class, String.class, String.class,
+                        int.class, int.class)
+                .withArgs("","","",7, 0)
+                .createMock();
+        w.addCard(card);
         w.addTotalCardFood();
-        assertEquals(35, w.getFoodCount());
+        assertEquals(39, w.getFoodCount());
     }
 
     /**
      * Same as addCardFoodToCount1 but integration
      * BVA - add the total card food count to the watering hole
-     * Lowest number is -10
+     * Lowest number is -12
      *
      */
     @Test
     public void addCardFoodToCount3() throws InvalidAddToWateringHoleException, IllegalCardDirectionException,
             InvalidWateringHoleCardCountException, IllegalCardFoodException {
         WateringHole w = new WateringHole();
-        for (int i = 0; i < 5; i++) {
-            ICard card = new Card("","","",-2, 0);
+        for (int i = 0; i < 4; i++) {
+            ICard card = new Card("","","",-3, 0);
             w.addCard(card);
         }
         w.addTotalCardFood();
-        assertEquals(-10, w.getFoodCount());
+        assertEquals(-12, w.getFoodCount());
     }
 
     /**
      * Same as addCardFoodToCount2 but integration
      * BVA - add the total card food count to the watering hole
-     * Highest number is 35
+     * Highest number is 39
      *
      */
     @Test
     public void addCardFoodToCount4() throws InvalidAddToWateringHoleException, IllegalCardDirectionException,
             InvalidWateringHoleCardCountException, IllegalCardFoodException {
         WateringHole w = new WateringHole();
-        for (int i = 0; i < 5; i++) {
-            ICard card = new Card("","","",7, 0);
+        for (int i = 0; i < 4; i++) {
+            ICard card = new Card("","","",8, 0);
             w.addCard(card);
         }
+        ICard card = new Card("","","",7, 0);
+        w.addCard(card);
         w.addTotalCardFood();
-        assertEquals(35, w.getFoodCount());
+        assertEquals(39, w.getFoodCount());
     }
 }
