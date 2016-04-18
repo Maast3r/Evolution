@@ -242,4 +242,16 @@ public class Game {
         this.wateringHole.addCard(card);
         this.players.get(index).removeCardFromHand(card);
     }
+
+    /**
+     * Increases the population of the species with the given index
+     * for the player with the given index
+     * @param playerIndex index of the player
+     * @param speciesIndex index of the species
+     * @param card the card to remove from the player's hand
+     */
+    public void increasePopulation(int playerIndex, int speciesIndex, ICard card) throws SpeciesPopulationException {
+        this.players.get(playerIndex).getSpecies().get(speciesIndex).increasePopulation();
+        this.players.get(0).removeCardFromHand(card);
+    }
 }
