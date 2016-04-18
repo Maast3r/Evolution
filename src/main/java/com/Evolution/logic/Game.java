@@ -242,4 +242,5 @@ public class Game {
         this.wateringHole.addCard(card);
         this.players.get(index).removeCardFromHand(card);
     }
+
 }

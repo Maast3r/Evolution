@@ -26,7 +26,7 @@ public class GameTests {
     private ArrayList<IPlayer> generateNumPlayers(int num) {
         ArrayList<IPlayer> players = new ArrayList<>();
         for (int i = 0; i < num; i++) {
-            players.add(new TestPlayer(new TestSpecies()));
+            players.add(EasyMock.niceMock(Player.class));
         }
         return players;
     }
@@ -456,6 +456,21 @@ public class GameTests {
             g.dealToPlayer(k % 3);
             g.discardToWateringHole(k % 3, g.getPlayerObjects().get(k % 3).getCards().get(0));
         }
+    }
+
+    @Test
+    public void testDiscardForLeftSpecies() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        ArrayList<IPlayer> players = generateNumPlayers(3);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
+        ICard fakeCard = EasyMock.niceMock(Card.class);
+        players.get(0).addSpeciesLeft(fakeSpecies);
+        this.drawPile.discard(fakeCard);
+        EasyMock.replay(players.get(0), this.drawPile, fakeSpecies, fakeCard);
+
+        g.discardForLeftSpecies(0, fakeCard);
+
+        EasyMock.verify(players.get(0), this.drawPile, fakeSpecies, fakeCard);
     }
 
 
