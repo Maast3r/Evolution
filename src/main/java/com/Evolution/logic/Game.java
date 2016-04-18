@@ -260,13 +260,15 @@ public class Game {
             IllegalCardDiscardException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
         if (playerIndex > this.players.size() - 1) {
             throw new IllegalPlayerIndexException("The given player index is greater than the number of players.");
-        } else if (!this.players.get(playerIndex).getCards().contains(card)) {
+        }
+        if (!this.players.get(playerIndex).getCards().contains(card)) {
             throw new IllegalCardDiscardException("Selected card is not in this players hand.");
-        } else if (speciesIndex > this.players.get(playerIndex).getSpecies().size() - 1) {
+        }
+        if (speciesIndex > this.players.get(playerIndex).getSpecies().size() - 1) {
             throw new IllegalSpeciesIndexException("The given species index is greater than the number of species for" +
                     " player " + playerIndex + 1);
         }
         this.players.get(playerIndex).getSpecies().get(speciesIndex).increasePopulation();
-        this.players.get(0).removeCardFromHand(card);
+        this.players.get(playerIndex).removeCardFromHand(card);
     }
 }
