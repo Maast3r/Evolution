@@ -460,7 +460,7 @@ public class GameTests {
 
     @Test
     public void testDiscardToIncreasePopulation() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
+            SpeciesPopulationException, DeckEmptyException, IllegalCardDiscardException,
             InvalidPlayerSelectException, IllegalSpeciesIndexException {
         Deck<ICard> drawPile = new Deck<>();
         for(int i = 0; i < 4; i ++) {
@@ -481,7 +481,7 @@ public class GameTests {
 
     @Test (expected = IllegalCardDiscardException.class)
     public void testDiscardToIncreasePopulation2() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
+            SpeciesPopulationException, DeckEmptyException, IllegalCardDiscardException,
             InvalidPlayerSelectException, IllegalSpeciesIndexException {
         Deck<ICard> drawPile = new Deck<>();
         for(int i = 0; i < 4; i ++) {
@@ -502,7 +502,7 @@ public class GameTests {
 
     @Test (expected = InvalidPlayerSelectException.class)
     public void testDiscardToIncreasePopulation3() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
+            SpeciesPopulationException, DeckEmptyException, IllegalCardDiscardException,
             InvalidPlayerSelectException, IllegalSpeciesIndexException {
         ArrayList<IPlayer> playerList = new ArrayList<>();
         for (int j = 0; j < 3; j++) {
@@ -514,7 +514,7 @@ public class GameTests {
 
     @Test (expected = IllegalSpeciesIndexException.class)
     public void testDiscardToIncreasePopulation4() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
+            SpeciesPopulationException, DeckEmptyException, IllegalCardDiscardException,
             InvalidPlayerSelectException, IllegalSpeciesIndexException {
         ArrayList<IPlayer> playerList = new ArrayList<>();
         for (int j = 0; j < 3; j++) {
@@ -532,7 +532,7 @@ public class GameTests {
 
     @Test
     public void testDiscardToIncreaseBodySize() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, InvalidPlayerSelectException,
+            DeckEmptyException, IllegalCardDiscardException, InvalidPlayerSelectException,
             IllegalSpeciesIndexException, SpeciesBodySizeException {
         Deck<ICard> drawPile = new Deck<>();
         for(int i = 0; i < 4; i ++) {
@@ -553,7 +553,7 @@ public class GameTests {
 
     @Test (expected = InvalidPlayerSelectException.class)
     public void testDiscardToIncreaseBodySize2() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, InvalidPlayerSelectException,
+            DeckEmptyException, IllegalCardDiscardException, InvalidPlayerSelectException,
             IllegalSpeciesIndexException, SpeciesBodySizeException {
         ArrayList<IPlayer> playerList = new ArrayList<>();
         for (int j = 0; j < 3; j++) {
@@ -565,7 +565,7 @@ public class GameTests {
 
     @Test (expected = IllegalCardDiscardException.class)
     public void testDiscardToIncreaseBodySize3() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, InvalidPlayerSelectException,
+            DeckEmptyException, IllegalCardDiscardException, InvalidPlayerSelectException,
             IllegalSpeciesIndexException, SpeciesBodySizeException {
         Deck<ICard> drawPile = new Deck<>();
         for(int i = 0; i < 4; i ++) {
@@ -586,7 +586,7 @@ public class GameTests {
 
     @Test (expected = IllegalSpeciesIndexException.class)
     public void testDiscardToIncreaseBodySize4() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, InvalidPlayerSelectException,
+            DeckEmptyException, IllegalCardDiscardException, InvalidPlayerSelectException,
             IllegalSpeciesIndexException, SpeciesBodySizeException {
         ArrayList<IPlayer> playerList = new ArrayList<>();
         for (int j = 0; j < 3; j++) {
