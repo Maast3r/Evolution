@@ -1,9 +1,8 @@
 package com.Evolution;
 
-import com.Evolution.exceptions.SpeciesBodySizeException;
-import com.Evolution.exceptions.SpeciesNumberTraitsException;
-import com.Evolution.exceptions.SpeciesPopulationException;
+import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
+import com.Evolution.logic.Card;
 import com.Evolution.logic.Species;
 import com.Evolution.testClasses.TestCard;
 import org.junit.Test;
@@ -138,12 +137,21 @@ public class SpeciesTests {
         }
     }
 
-    @Test(expected = Exception.class)
+    @Test(expected = SpeciesNumberTraitsException.class)
     public void testAddFourTraits() throws SpeciesNumberTraitsException {
         Species s = new Species();
         for (int i = 0; i < 4; i++) {
             ICard c = new TestCard();
             s.addTrait(c);
         }
+    }
+
+    @Test(expcected = SpeciesDuplicateTraitException.class)
+    public void testAddDuplicateTraits() throws SpeciesDuplicateTraitException, IllegalCardFoodException, IllegalCardDirectionException, SpeciesNumberTraitsException {
+        Species s = new Species();
+        ICard c = new Card("foo", "bar", "foobar", 1, 1);
+        ICard c2 = new Card("foo", "bar", "foobar", 1, 1);
+        s.addTrait(c);
+        s.addTrait(c2);
     }
 }
