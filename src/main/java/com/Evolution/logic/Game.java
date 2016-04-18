@@ -244,6 +244,64 @@ public class Game {
     }
 
     /**
+     * Increases the population of the species with the given index
+     * for the player with the given index
+     * @param playerIndex index of the player
+     * @param speciesIndex index of the species
+     * @param card the card to remove from the player's hand
+     * @throws SpeciesPopulationException propagated from {@link Species#increasePopulation()}
+     * @throws IllegalCardDiscardException thrown when the given card is not in the specified
+     *        player's hand
+     * @throws IllegalPlayerIndexException thrown when the given player index is greater than the number of players
+     * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
+     *        for the given player
+     */
+    public void increasePopulation(int playerIndex, int speciesIndex, ICard card) throws SpeciesPopulationException,
+            IllegalCardDiscardException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+        if (playerIndex > this.players.size() - 1) {
+            throw new IllegalPlayerIndexException("The given player index is greater than the number of players.");
+        }
+        if (!this.players.get(playerIndex).getCards().contains(card)) {
+            throw new IllegalCardDiscardException("Selected card is not in this players hand.");
+        }
+        if (speciesIndex > this.players.get(playerIndex).getSpecies().size() - 1) {
+            throw new IllegalSpeciesIndexException("The given species index is greater than the number of species for" +
+                    " player " + playerIndex + 1);
+        }
+        this.players.get(playerIndex).getSpecies().get(speciesIndex).increasePopulation();
+        this.players.get(playerIndex).removeCardFromHand(card);
+    }
+
+    /**
+     * Increases the body size of the species with the given index
+     * for the player with the given index
+     * @param playerIndex index of the player
+     * @param speciesIndex index of the species
+     * @param card the card to remove from the player's hand
+     * @throws SpeciesBodySizeException propagated from {@link Species#increaseBodySize()}
+     * @throws IllegalCardDiscardException thrown when the given card is not in the specified
+     *        player's hand
+     * @throws IllegalPlayerIndexException thrown when the given player index is greater than the number of players
+     * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
+     *        for the given player
+     */
+    public void increaseBodySize(int playerIndex, int speciesIndex, ICard card) throws SpeciesBodySizeException,
+            IllegalPlayerIndexException, IllegalCardDiscardException, IllegalSpeciesIndexException {
+        if (playerIndex > this.players.size() - 1) {
+            throw new IllegalPlayerIndexException("The given player index is greater than the number of players.");
+        }
+        if (!this.players.get(playerIndex).getCards().contains(card)) {
+            throw new IllegalCardDiscardException("Selected card is not in this players hand.");
+        }
+        if (speciesIndex > this.players.get(playerIndex).getSpecies().size() - 1) {
+            throw new IllegalSpeciesIndexException("The given species index is greater than the number of species for" +
+                    " player " + playerIndex + 1);
+        }
+        this.players.get(playerIndex).getSpecies().get(speciesIndex).increaseBodySize();
+        this.discardFromPlayer(playerIndex, card);
+    }
+
+    /**
      * Adds a given species to the left of a player's Species
      *
      * @param playerIndex position in player list of player to add to
