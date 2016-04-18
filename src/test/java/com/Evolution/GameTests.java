@@ -505,6 +505,24 @@ public class GameTests {
         EasyMock.verify(players.get(0), this.discardPile, fakeSpecies, fakeCard);
     }
 
+    @Test
+    public void testDiscardForRightSpecies2() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        for (int i = 3; i < 6; i++) {
+            ArrayList<IPlayer> players = generateNumPlayers(i);
+            Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+            ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
+            ICard fakeCard = EasyMock.niceMock(Card.class);
+            for(int j = 0;j<i;j++) {
+                players.get(j).addSpeciesRight(fakeSpecies);
+                this.discardPile.discard(fakeCard);
+                EasyMock.replay(players.get(j), this.discardPile, fakeSpecies, fakeCard);
+                g.discardForRightSpecies(j, fakeCard, fakeSpecies);
+                EasyMock.verify(players.get(j), this.discardPile, fakeSpecies, fakeCard);
+                EasyMock.reset(players.get(j), this.discardPile, fakeSpecies, fakeCard);
+            }
+        }
+    }
+
 
 
 }
