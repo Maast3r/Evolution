@@ -273,12 +273,16 @@ public class Game {
     }
 
     public void increaseBodySize(int playerIndex, int speciesIndex, ICard card) throws SpeciesBodySizeException,
-            IllegalPlayerIndexException, IllegalCardDiscardException {
+            IllegalPlayerIndexException, IllegalCardDiscardException, IllegalSpeciesIndexException {
         if (playerIndex > this.players.size() - 1) {
             throw new IllegalPlayerIndexException("The given player index is greater than the number of players.");
         }
         if (!this.players.get(playerIndex).getCards().contains(card)) {
             throw new IllegalCardDiscardException("Selected card is not in this players hand.");
+        }
+        if (speciesIndex > this.players.get(playerIndex).getSpecies().size() - 1) {
+            throw new IllegalSpeciesIndexException("The given species index is greater than the number of species for" +
+                    " player " + playerIndex + 1);
         }
         this.players.get(playerIndex).getSpecies().get(speciesIndex).increaseBodySize();
         this.discardFromPlayer(playerIndex, card);
