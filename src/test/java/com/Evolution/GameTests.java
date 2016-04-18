@@ -460,9 +460,7 @@ public class GameTests {
         players.get(this.playerIndex).addSpeciesLeft(fakeSpecies);
         this.discardPile.discard(fakeCard);
         EasyMock.replay(players.get(this.playerIndex), this.discardPile, fakeSpecies, fakeCard);
-
         g.discardForLeftSpecies(this.playerIndex, fakeCard, fakeSpecies);
-
         EasyMock.verify(players.get(this.playerIndex), this.discardPile, fakeSpecies, fakeCard);
     }
 
