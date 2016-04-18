@@ -22,11 +22,11 @@ public class PhaseThree implements IPhases{
 
     @Override
     public String getName() {
-        return null;
+        return "Play Cards";
     }
 
     @Override
     public int getNumber() {
-        return 0;
+        return 3;
     }
 }
