@@ -549,4 +549,16 @@ public class GameTests {
         }
         g.increaseBodySize(0, 0, playerList.get(0).getCards().get(0));
     }
+
+    @Test (expected = IllegalPlayerIndexException.class)
+    public void testDiscardToIncreaseBodySize2() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, IllegalPlayerIndexException,
+            IllegalSpeciesIndexException, SpeciesBodySizeException {
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(new TestPlayer(new TestSpecies()));
+        }
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
+        g.increaseBodySize(3, 0, new TestCard());
+    }
 }
