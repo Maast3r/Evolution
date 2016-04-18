@@ -17,9 +17,9 @@ public class PhaseThree implements IPhases{
 
     @Override
     public void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException {
-        game.nextTurn();
-        if(game.getTurn() == 1){
-            game.setPhase(new PhaseFour(this.game));
+        this.game.nextTurn();
+        if(this.game.getTurn() == 1){
+            this.game.setPhase(new PhaseFour(this.game));
         }
     }
 
