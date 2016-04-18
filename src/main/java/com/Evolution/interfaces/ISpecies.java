@@ -45,14 +45,7 @@ public interface ISpecies {
     void decreasePopulation() throws SpeciesPopulationException;
 
     /**
-     * Decreases the body size of the species down to a minimum of 0
-     *
-     * @throws SpeciesBodySizeException when the {@link ISpecies#getBodySize()} is already at 0
-     */
-    void decreaseBodySize() throws SpeciesBodySizeException;
-
-    /**
-     * Returns whether or not this species has at least 1 population and body size
+     * Returns whether or not this species has at least 1 population
      *
      * @return isDead
      */
