@@ -272,6 +272,19 @@ public class Game {
         this.players.get(playerIndex).removeCardFromHand(card);
     }
 
+    /**
+     * Increases the body size of the species with the given index
+     * for the player with the given index
+     * @param playerIndex index of the player
+     * @param speciesIndex index of the species
+     * @param card the card to remove from the player's hand
+     * @throws SpeciesBodySizeException propagated from {@link Species#increaseBodySize()}
+     * @throws IllegalCardDiscardException thrown when the given card is not in the specified
+     *        player's hand
+     * @throws IllegalPlayerIndexException thrown when the given player index is greater than the number of players
+     * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
+     *        for the given player
+     */
     public void increaseBodySize(int playerIndex, int speciesIndex, ICard card) throws SpeciesBodySizeException,
             IllegalPlayerIndexException, IllegalCardDiscardException, IllegalSpeciesIndexException {
         if (playerIndex > this.players.size() - 1) {
