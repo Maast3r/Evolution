@@ -2,7 +2,9 @@ package com.Evolution;
 
 import com.Evolution.exceptions.SpeciesBodySizeException;
 import com.Evolution.exceptions.SpeciesPopulationException;
+import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Species;
+import com.Evolution.testClasses.TestCard;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -113,5 +115,13 @@ public class SpeciesTests {
         Species s = new Species();
         s.decreasePopulation();
         s.decreasePopulation();
+    }
+
+    @Test
+    public void testAddFirstTrait() {
+        Species s = new Species();
+        ICard c = new TestCard();
+        s.addTrait(c);
+        assertTrue(s.getTraits().contains(c));
     }
 }
