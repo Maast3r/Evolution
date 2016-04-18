@@ -466,6 +466,6 @@ public class GameTests {
             playerList.add(player);
         }
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
-        g.increasePopulation(0, 0);
+        g.increasePopulation(0, 0, g.getPlayerObjects().get(0).getCards().get(0));
     }
 }
