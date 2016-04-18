@@ -253,13 +253,18 @@ public class Game {
      * @throws IllegalCardDiscardException thrown when the given card is not in the specified
      *        player's hand
      * @throws IllegalPlayerIndexException thrown when the given player index is greater than the number of players
+     * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
+     *        for the given player
      */
     public void increasePopulation(int playerIndex, int speciesIndex, ICard card) throws SpeciesPopulationException,
-            IllegalCardDiscardException, IllegalPlayerIndexException {
-        if (playerIndex > this.players.size()) {
+            IllegalCardDiscardException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+        if (playerIndex > this.players.size() - 1) {
             throw new IllegalPlayerIndexException("The given player index is greater than the number of players.");
         } else if (!this.players.get(playerIndex).getCards().contains(card)) {
             throw new IllegalCardDiscardException("Selected card is not in this players hand.");
+        } else if (speciesIndex > this.players.get(playerIndex).getSpecies().size() - 1) {
+            throw new IllegalSpeciesIndexException("The given species index is greater than the number of species for" +
+                    " player " + playerIndex + 1);
         }
         this.players.get(playerIndex).getSpecies().get(speciesIndex).increasePopulation();
         this.players.get(0).removeCardFromHand(card);

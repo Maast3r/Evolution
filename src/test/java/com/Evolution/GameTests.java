@@ -460,7 +460,7 @@ public class GameTests {
 
     @Test
     public void testDiscardToIncreasePopulation() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, IllegalPlayerIndexException {
+            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
         Deck<ICard> drawPile = new Deck<>();
         for(int i = 0; i < 4; i ++) {
             ICard card = new TestCard();
@@ -481,7 +481,7 @@ public class GameTests {
     @Test (expected = IllegalCardDiscardException.class)
     public void testDiscardToIncreasePopulation2() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
-            IllegalPlayerIndexException {
+            IllegalPlayerIndexException, IllegalSpeciesIndexException {
         Deck<ICard> drawPile = new Deck<>();
         for(int i = 0; i < 4; i ++) {
             ICard card = new TestCard();
@@ -502,24 +502,30 @@ public class GameTests {
     @Test (expected = IllegalPlayerIndexException.class)
     public void testDiscardToIncreasePopulation3() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
-            IllegalPlayerIndexException {
+            IllegalPlayerIndexException, IllegalSpeciesIndexException {
         ArrayList<IPlayer> playerList = new ArrayList<>();
         for (int j = 0; j < 3; j++) {
             playerList.add(new TestPlayer(new TestSpecies()));
         }
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
-        g.increasePopulation(4, 0, new TestCard());
+        g.increasePopulation(3, 0, new TestCard());
     }
 
     @Test (expected = IllegalSpeciesIndexException.class)
     public void testDiscardToIncreasePopulation4() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
-            IllegalPlayerIndexException {
+            IllegalPlayerIndexException, IllegalSpeciesIndexException {
         ArrayList<IPlayer> playerList = new ArrayList<>();
         for (int j = 0; j < 3; j++) {
             playerList.add(new Player(new TestSpecies()));
         }
-        Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
-        g.increasePopulation(0, 1, new TestCard());
+        Deck<ICard> drawPile = new Deck<>();
+        for(int i = 0; i < 4; i ++) {
+            ICard card = new TestCard();
+            drawPile.discard(card);
+        }
+        Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
+        g.dealToPlayer(0);
+        g.increasePopulation(0, 1, playerList.get(0).getCards().get(0));
     }
 }
