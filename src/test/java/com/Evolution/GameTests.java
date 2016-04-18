@@ -460,7 +460,7 @@ public class GameTests {
 
     @Test
     public void testDiscardToIncreasePopulation() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException {
+            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException {
         Deck<ICard> drawPile = new Deck<>();
         for(int i = 0; i < 4; i ++) {
             ICard card = new TestCard();
@@ -478,15 +478,20 @@ public class GameTests {
         g.increasePopulation(0, 0, g.getPlayerObjects().get(0).getCards().get(0));
     }
 
-    @Test (expected = IllegalCardDiscard.class)
+    @Test (expected = IllegalCardDiscardException.class)
     public void testDiscardToIncreasePopulation2() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException {
+            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException {
         Deck<ICard> drawPile = new Deck<>();
         for(int i = 0; i < 4; i ++) {
             ICard card = new TestCard();
             drawPile.discard(card);
         }
-        Game g = new Game(generateNumPlayers(3), this.wateringHole, drawPile, this.discardPile);
+        Player player = new Player(new Species());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
         for (int i = 0; i < 3; i++) {
             g.dealToPlayer(i);
         }

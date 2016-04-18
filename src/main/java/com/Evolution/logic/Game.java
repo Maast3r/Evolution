@@ -250,8 +250,14 @@ public class Game {
      * @param speciesIndex index of the species
      * @param card the card to remove from the player's hand
      * @throws SpeciesPopulationException propagated from {@link Species#increasePopulation()}
+     * @throws IllegalCardDiscardException thrown when the given card is not in the specified
+     *        player's hand
      */
-    public void increasePopulation(int playerIndex, int speciesIndex, ICard card) throws SpeciesPopulationException {
+    public void increasePopulation(int playerIndex, int speciesIndex, ICard card) throws SpeciesPopulationException,
+            IllegalCardDiscardException {
+        if (!this.players.get(playerIndex).getCards().contains(card)) {
+            throw new IllegalCardDiscardException("Selected card is not in this players hand.");
+        }
         this.players.get(playerIndex).getSpecies().get(speciesIndex).increasePopulation();
         this.players.get(0).removeCardFromHand(card);
     }
