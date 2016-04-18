@@ -120,7 +120,7 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testAddFirstTrait() {
+    public void testAddFirstTrait() throws Exception {
         Species s = new Species();
         ICard c = new TestCard();
         s.addTrait(c);
@@ -128,7 +128,7 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testAddThreeTraits() {
+    public void testAddThreeTraits() throws Exception {
         Species s = new Species();
         for(int i = 0; i < 3; i++) {
             ICard c = new TestCard();
@@ -138,7 +138,7 @@ public class SpeciesTests {
     }
 
     @Test(expected = Exception.class)
-    public void testAddFourTraits() {
+    public void testAddFourTraits() throws Exception {
         Species s = new Species();
         for(int i = 0; i < 4; i++) {
             ICard c = new TestCard();

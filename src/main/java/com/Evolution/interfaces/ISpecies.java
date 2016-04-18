@@ -57,7 +57,7 @@ public interface ISpecies {
      * Adds the given card as a trait on the species
      * @param c The card which to add as a trait
      */
-    void addTrait(ICard c);
+    void addTrait(ICard c) throws Exception;
 
     /**
      * Gets the list of all traits on the species

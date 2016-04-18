@@ -65,7 +65,10 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public void addTrait(ICard c) {
+    public void addTrait(ICard c) throws Exception {
+        if(this.traits.size() == 3){
+            throw new Exception("To many traits");
+        }
         this.traits.add(c);
     }
 
