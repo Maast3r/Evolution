@@ -252,14 +252,14 @@ public class Game {
      * @throws SpeciesPopulationException propagated from {@link Species#increasePopulation()}
      * @throws IllegalCardDiscardException thrown when the given card is not in the specified
      *        player's hand
-     * @throws IllegalPlayerIndexException thrown when the given player index is greater than the number of players
+     * @throws InvalidPlayerSelectException thrown when the given player index is greater than the number of players
      * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
      *        for the given player
      */
     public void increasePopulation(int playerIndex, int speciesIndex, ICard card) throws SpeciesPopulationException,
-            IllegalCardDiscardException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+            IllegalCardDiscardException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
         if (playerIndex > this.players.size() - 1) {
-            throw new IllegalPlayerIndexException("The given player index is greater than the number of players.");
+            throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }
         if (!this.players.get(playerIndex).getCards().contains(card)) {
             throw new IllegalCardDiscardException("Selected card is not in this players hand.");
@@ -281,14 +281,14 @@ public class Game {
      * @throws SpeciesBodySizeException propagated from {@link Species#increaseBodySize()}
      * @throws IllegalCardDiscardException thrown when the given card is not in the specified
      *        player's hand
-     * @throws IllegalPlayerIndexException thrown when the given player index is greater than the number of players
+     * @throws InvalidPlayerSelectException thrown when the given player index is greater than the number of players
      * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
      *        for the given player
      */
     public void increaseBodySize(int playerIndex, int speciesIndex, ICard card) throws SpeciesBodySizeException,
-            IllegalPlayerIndexException, IllegalCardDiscardException, IllegalSpeciesIndexException {
+            InvalidPlayerSelectException, IllegalCardDiscardException, IllegalSpeciesIndexException {
         if (playerIndex > this.players.size() - 1) {
-            throw new IllegalPlayerIndexException("The given player index is greater than the number of players.");
+            throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }
         if (!this.players.get(playerIndex).getCards().contains(card)) {
             throw new IllegalCardDiscardException("Selected card is not in this players hand.");
