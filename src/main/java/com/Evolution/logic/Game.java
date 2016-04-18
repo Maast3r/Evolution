@@ -229,9 +229,9 @@ public class Game {
      *
      * @param index The index of the player
      * @param card  The card to discard
-     * @throws InvalidAddToWateringHoleException propagated from {@link IWateringHole#addCard(ICard)}
+     * @throws InvalidAddToWateringHoleException     propagated from {@link IWateringHole#addCard(ICard)}
      * @throws InvalidDiscardToWateringHoleException trying to discard to watering hole when it already has the
-     * maximum number of cards
+     *                                               maximum number of cards
      */
     public void discardToWateringHole(int index, ICard card) throws InvalidDiscardToWateringHoleException,
             InvalidAddToWateringHoleException {
@@ -243,11 +243,25 @@ public class Game {
         this.players.get(index).removeCardFromHand(card);
     }
 
+    /**
+     * Adds a given species to the left of a player's Species
+     *
+     * @param playerIndex position in player list of player to add to
+     * @param card        Card from player's hand that is being discarded
+     * @param species     Species being added to player
+     */
     public void discardForLeftSpecies(int playerIndex, ICard card, ISpecies species) {
         this.discardPile.discard(card);
         this.players.get(playerIndex).addSpeciesLeft(species);
     }
 
+    /**
+     * Adds a given species to the right of a player's Species
+     *
+     * @param playerIndex position in player list of player to add to
+     * @param card        Card from player's hand that is being discarded
+     * @param species     Species being added to player
+     */
     public void discardForRightSpecies(int playerIndex, ICard card, ISpecies species) {
         this.discardPile.discard(card);
         this.players.get(playerIndex).addSpeciesRight(species);
