@@ -531,8 +531,8 @@ public class GameTests {
 
     @Test
     public void testDiscardToIncreaseBodySize() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
-            IllegalPlayerIndexException, IllegalSpeciesIndexException {
+            InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, IllegalPlayerIndexException,
+            IllegalSpeciesIndexException, SpeciesBodySizeException {
         Deck<ICard> drawPile = new Deck<>();
         for(int i = 0; i < 4; i ++) {
             ICard card = new TestCard();

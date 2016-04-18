@@ -271,4 +271,9 @@ public class Game {
         this.players.get(playerIndex).getSpecies().get(speciesIndex).increasePopulation();
         this.players.get(playerIndex).removeCardFromHand(card);
     }
+
+    public void increaseBodySize(int playerIndex, int speciesIndex, ICard card) throws SpeciesBodySizeException {
+        this.players.get(playerIndex).getSpecies().get(speciesIndex).increaseBodySize();
+        this.discardFromPlayer(playerIndex, card);
+    }
 }
