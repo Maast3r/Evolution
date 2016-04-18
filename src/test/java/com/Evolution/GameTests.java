@@ -459,13 +459,22 @@ public class GameTests {
     }
 
     @Test
-    public void testDiscardToIncreasePopulation() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+    public void testDiscardToIncreasePopulation() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException {
+        Deck<ICard> drawPile = new Deck<>();
+        for(int i = 0; i < 4; i ++) {
+            ICard card = new TestCard();
+            drawPile.discard(card);
+        }
         Player player = new Player(new Species());
         ArrayList<IPlayer> playerList = new ArrayList<>();
         for (int j = 0; j < 3; j++) {
             playerList.add(player);
         }
-        Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
+        Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
+        for (int i = 0; i < 3; i++) {
+            g.dealToPlayer(i);
+        }
         g.increasePopulation(0, 0, g.getPlayerObjects().get(0).getCards().get(0));
     }
 }
