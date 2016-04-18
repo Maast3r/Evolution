@@ -249,6 +249,7 @@ public class Game {
      * @param playerIndex index of the player
      * @param speciesIndex index of the species
      * @param card the card to remove from the player's hand
+     * @throws SpeciesPopulationException propagated from {@link Species#increasePopulation()}
      */
     public void increasePopulation(int playerIndex, int speciesIndex, ICard card) throws SpeciesPopulationException {
         this.players.get(playerIndex).getSpecies().get(speciesIndex).increasePopulation();
