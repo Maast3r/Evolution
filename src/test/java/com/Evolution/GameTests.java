@@ -465,12 +465,12 @@ public class GameTests {
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
         players.get(0).addSpeciesLeft(fakeSpecies);
-        this.drawPile.discard(fakeCard);
-        EasyMock.replay(players.get(0), this.drawPile, fakeSpecies, fakeCard);
+        this.discardPile.discard(fakeCard);
+        EasyMock.replay(players.get(0), this.discardPile, fakeSpecies, fakeCard);
 
-        g.discardForLeftSpecies(0, fakeCard);
+        g.discardForLeftSpecies(0, fakeCard, fakeSpecies);
 
-        EasyMock.verify(players.get(0), this.drawPile, fakeSpecies, fakeCard);
+        EasyMock.verify(players.get(0), this.discardPile, fakeSpecies, fakeCard);
     }
 
 

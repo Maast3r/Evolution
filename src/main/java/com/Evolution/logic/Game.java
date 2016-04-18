@@ -243,4 +243,8 @@ public class Game {
         this.players.get(index).removeCardFromHand(card);
     }
 
+    public void discardForLeftSpecies(int playerIndex, ICard card, ISpecies species) {
+        this.discardPile.discard(card);
+        this.players.get(0).addSpeciesLeft(species);
+    }
 }
