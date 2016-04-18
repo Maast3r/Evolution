@@ -136,4 +136,13 @@ public class SpeciesTests {
             assertTrue(s.getTraits().contains(c));
         }
     }
+
+    @Test(expected = Exception.class)
+    public void testAddFourTraits() {
+        Species s = new Species();
+        for(int i = 0; i < 4; i++) {
+            ICard c = new TestCard();
+            s.addTrait(c);
+        }
+    }
 }
