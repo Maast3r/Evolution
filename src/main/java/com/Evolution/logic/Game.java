@@ -248,8 +248,8 @@ public class Game {
         this.players.get(playerIndex).addSpeciesLeft(species);
     }
 
-    public void discardForRightSpecies(int playersIndex, ICard card, ISpecies species) {
+    public void discardForRightSpecies(int playerIndex, ICard card, ISpecies species) {
         this.discardPile.discard(card);
-        this.players.get(0).addSpeciesRight(species);
+        this.players.get(playerIndex).addSpeciesRight(species);
     }
 }
