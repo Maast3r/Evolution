@@ -15,6 +15,8 @@ import static org.junit.Assert.*;
  */
 public class SpeciesTests {
 
+
+
     @Test
     public void testBodySize() {
         Species s = new Species();
@@ -123,5 +125,15 @@ public class SpeciesTests {
         ICard c = new TestCard();
         s.addTrait(c);
         assertTrue(s.getTraits().contains(c));
+    }
+
+    @Test
+    public void testAddThreeTraits() {
+        Species s = new Species();
+        for(int i = 0; i < 3; i++) {
+            ICard c = new TestCard();
+            s.addTrait(c);
+            assertTrue(s.getTraits().contains(c));
+        }
     }
 }
