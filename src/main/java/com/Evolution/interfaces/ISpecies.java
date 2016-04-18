@@ -3,6 +3,8 @@ package com.Evolution.interfaces;
 import com.Evolution.exceptions.SpeciesBodySizeException;
 import com.Evolution.exceptions.SpeciesPopulationException;
 
+import java.util.ArrayList;
+
 /**
  * Interface for Species
  * Created by goistjt on 3/22/2016.
@@ -51,4 +53,15 @@ public interface ISpecies {
      */
     boolean isDead();
 
+    /**
+     * Adds the given card as a trait on the species
+     * @param c The card which to add as a trait
+     */
+    void addTrait(ICard c);
+
+    /**
+     * Gets the list of all traits on the species
+     * @return The list of traits
+     */
+    ArrayList<ICard> getTraits();
 }
