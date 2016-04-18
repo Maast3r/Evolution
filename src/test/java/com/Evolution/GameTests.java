@@ -458,5 +458,14 @@ public class GameTests {
         }
     }
 
-
+    @Test
+    public void testDiscardToIncreasePopulation() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+        Player player = new Player(new Species());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
+        g.increasePopulation(0, 0);
+    }
 }
