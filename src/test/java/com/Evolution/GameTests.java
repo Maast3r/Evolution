@@ -510,4 +510,16 @@ public class GameTests {
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
         g.increasePopulation(4, 0, new TestCard());
     }
+
+    @Test (expected = IllegalSpeciesIndexException.class)
+    public void testDiscardToIncreasePopulation4() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
+            IllegalPlayerIndexException {
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(new Player(new TestSpecies()));
+        }
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
+        g.increasePopulation(0, 1, new TestCard());
+    }
 }
