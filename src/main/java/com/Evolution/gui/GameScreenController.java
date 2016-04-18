@@ -95,15 +95,15 @@ class GameScreenController implements Initializable {
             DeckFactory df = new DeckFactory();
             IDeck<ICard> drawPile = df.generateDrawPile(new FileInputStream(
                     new File("src/main/resources/cardFiles/cardInformation.txt")));
+            drawPile.shuffle();
             IDeck<ICard> discardPile = df.generateDiscardPile();
 
             this.game = new Game(this.players, wateringHole, drawPile, discardPile);
             this.game.startGame();
 
             System.out.println("game initialized");
-        } catch (IllegalNumberOfPlayers | IllegalCardDirectionException
-                | IOException | WrongFileException | DeckEmptyException
-                | InvalidPlayerSelectException exception) {
+        } catch (IllegalNumberOfPlayers | IllegalCardDirectionException | IOException | WrongFileException |
+                DeckEmptyException | InvalidPlayerSelectException | IllegalCardFoodException exception) {
             exception.printStackTrace();
         }
 

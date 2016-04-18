@@ -1,6 +1,7 @@
 package com.Evolution.logic;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
+import com.Evolution.exceptions.IllegalCardFoodException;
 import com.Evolution.interfaces.ICard;
 
 /**
@@ -26,11 +27,15 @@ public class Card implements ICard {
      *                  {@link com.Evolution.interfaces.ISpecies} when it is attached to a
      *                  {@link com.Evolution.interfaces.ISpecies}
      * @throws IllegalCardDirectionException when the direction is not within the integer interval [0, 2]
+     * @throws IllegalCardFoodException when the input food value does not fall between -3 and 9
      */
     public Card(String name, String desc, String imgPath, int food, int direction) throws
-            IllegalCardDirectionException {
+            IllegalCardDirectionException, IllegalCardFoodException {
         if (direction != 0 && direction != 1 && direction != 2) {
             throw new IllegalCardDirectionException("The direction is not 0, 1, or 2.\n");
+        }
+        if (food < -3 || food > 9) {
+            throw new IllegalCardFoodException("Tried adding an invalid food value. Must be between -3 and 9.");
         }
         this.name = name;
         this.desc = desc;

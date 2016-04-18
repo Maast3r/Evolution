@@ -1,9 +1,6 @@
 package com.Evolution.gui;
 
-import com.Evolution.exceptions.DeckEmptyException;
-import com.Evolution.exceptions.IllegalCardDirectionException;
-import com.Evolution.exceptions.InvalidDiscardToWateringHoleException;
-import com.Evolution.exceptions.InvalidPlayerSelectException;
+import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Game;
 import javafx.beans.value.ChangeListener;
@@ -157,7 +154,7 @@ class SpeciesBoard extends VBox {
                         performAction(Actions.values()[val]);
                         break;
                 }
-            } catch (InvalidDiscardToWateringHoleException e) {
+            } catch (InvalidDiscardToWateringHoleException | InvalidAddToWateringHoleException e) {
                 e.printStackTrace();
             }
         };
@@ -168,7 +165,8 @@ class SpeciesBoard extends VBox {
      *
      * @param action the selected action
      */
-    private void performAction(Actions action) throws InvalidDiscardToWateringHoleException {
+    private void performAction(Actions action) throws InvalidDiscardToWateringHoleException,
+            InvalidAddToWateringHoleException {
         // perform selected action
         switch (action) {
             case ACTIONS:
@@ -226,7 +224,6 @@ class SpeciesBoard extends VBox {
                 openCardWindow(Actions.DISCARD_TO_WATERINGHOLE);
                 if (this.selectedCard != null) {
                     this.game.discardToWateringHole(this.playerIndex, this.selectedCard);
-                    this.game.nextTurn();
                     try {
                         this.game.getPhase().execute();
                     } catch (IllegalCardDirectionException | InvalidPlayerSelectException | DeckEmptyException e) {

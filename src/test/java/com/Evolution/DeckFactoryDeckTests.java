@@ -2,6 +2,7 @@ package com.Evolution;
 
 import com.Evolution.exceptions.DeckEmptyException;
 import com.Evolution.exceptions.IllegalCardDirectionException;
+import com.Evolution.exceptions.IllegalCardFoodException;
 import com.Evolution.exceptions.WrongFileException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IDeck;
@@ -18,7 +19,8 @@ import static org.junit.Assert.assertTrue;
 public class DeckFactoryDeckTests {
 
     @Test
-    public void testGenerateDrawPile() throws IOException, IllegalCardDirectionException, WrongFileException, DeckEmptyException {
+    public void testGenerateDrawPile() throws IOException, IllegalCardDirectionException, WrongFileException,
+            DeckEmptyException, IllegalCardFoodException {
         DeckFactory df = new DeckFactory();
         InputStream input = new ByteArrayInputStream(("asdf2;asdf2 random stuff;./asdf2.png;2;1\n" +
                 "Random;Does random stuff;./random.png;6;2").getBytes());

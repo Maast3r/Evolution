@@ -35,11 +35,6 @@ public class TestSpecies implements ISpecies {
     }
 
     @Override
-    public void decreaseBodySize() {
-
-    }
-
-    @Override
     public boolean isDead() {
         return false;
     }

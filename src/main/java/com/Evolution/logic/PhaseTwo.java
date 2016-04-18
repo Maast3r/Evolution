@@ -15,8 +15,9 @@ public class PhaseTwo implements IPhases {
 
     @Override
     public void execute() {
-        if(game.getWateringHole().getCards().size() == game.getPlayerObjects().size()) {
-            game.setPhase(new PhaseThree(this.game));
+        this.game.nextTurn();
+        if(this.game.getWateringHole().getCards().size() == this.game.getPlayerObjects().size()) {
+            this.game.setPhase(new PhaseThree(this.game));
         }
     }
 

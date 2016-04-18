@@ -1,9 +1,6 @@
 package com.Evolution;
 
-import com.Evolution.exceptions.DeckEmptyException;
-import com.Evolution.exceptions.IllegalCardDirectionException;
-import com.Evolution.exceptions.IllegalNumberOfPlayers;
-import com.Evolution.exceptions.InvalidPlayerSelectException;
+import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IDeck;
 import com.Evolution.interfaces.IPlayer;
@@ -41,7 +38,8 @@ public class PhaseOneTests {
     }
 
     @Test
-    public void testNextPhase() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException, InvalidPlayerSelectException {
+    public void testNextPhase() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException,
+            InvalidPlayerSelectException, IllegalCardFoodException {
         IDeck<ICard> drawPile = new Deck<>();
         for (int i = 0; i < 12; i++) {
             drawPile.discard(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
@@ -55,7 +53,8 @@ public class PhaseOneTests {
     }
 
     @Test
-    public void testExecute1() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException, InvalidPlayerSelectException {
+    public void testExecute1() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException,
+            InvalidPlayerSelectException, IllegalCardFoodException {
         IDeck<ICard> drawPile = new Deck<>();
         for (int i = 0; i < 12; i++) {
             drawPile.discard(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
@@ -71,7 +70,8 @@ public class PhaseOneTests {
     }
 
     @Test
-    public void testExecute2() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException, InvalidPlayerSelectException {
+    public void testExecute2() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException,
+            InvalidPlayerSelectException, IllegalCardFoodException {
         ArrayList<IPlayer> players = generateNumPlayers(3);
         players.get(0).addSpeciesLeft(new Species());
         IDeck<ICard> drawPile = new Deck<>();

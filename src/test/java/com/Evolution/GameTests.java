@@ -412,7 +412,9 @@ public class GameTests {
     }
 
     @Test
-    public void testDiscardToWateringHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException, InvalidPlayerSelectException, DeckEmptyException, InvalidDiscardToWateringHoleException {
+    public void testDiscardToWateringHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            InvalidPlayerSelectException, DeckEmptyException, InvalidDiscardToWateringHoleException,
+            InvalidAddToWateringHoleException {
         Deck<ICard> drawPile = new Deck<>();
         WateringHole wateringHole = new WateringHole();
         ICard card = new TestCard();
@@ -435,7 +437,9 @@ public class GameTests {
      * BVA - Can only add card to the watering hole equal to the number of players
      */
     @Test(expected = InvalidDiscardToWateringHoleException.class)
-    public void testDiscard6ToWateringHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException, InvalidPlayerSelectException, DeckEmptyException, InvalidDiscardToWateringHoleException {
+    public void testDiscard6ToWateringHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            InvalidPlayerSelectException, DeckEmptyException, InvalidDiscardToWateringHoleException,
+            InvalidAddToWateringHoleException {
         Deck<ICard> drawPile = new Deck<>();
         WateringHole wateringHole = new WateringHole();
         for(int i = 0; i < 4; i ++) {
@@ -454,5 +458,146 @@ public class GameTests {
         }
     }
 
+    @Test
+    public void testDiscardToIncreasePopulation() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+        Deck<ICard> drawPile = new Deck<>();
+        for(int i = 0; i < 4; i ++) {
+            ICard card = new TestCard();
+            drawPile.discard(card);
+        }
+        Player player = new Player(new Species());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
+        for (int i = 0; i < 3; i++) {
+            g.dealToPlayer(i);
+        }
+        g.increasePopulation(0, 0, g.getPlayerObjects().get(0).getCards().get(0));
+    }
 
+    @Test (expected = IllegalCardDiscardException.class)
+    public void testDiscardToIncreasePopulation2() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
+            IllegalPlayerIndexException, IllegalSpeciesIndexException {
+        Deck<ICard> drawPile = new Deck<>();
+        for(int i = 0; i < 4; i ++) {
+            ICard card = new TestCard();
+            drawPile.discard(card);
+        }
+        Player player = new Player(new Species());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
+        for (int i = 0; i < 3; i++) {
+            g.dealToPlayer(i);
+        }
+        g.increasePopulation(0, 0, new TestCard());
+    }
+
+    @Test (expected = IllegalPlayerIndexException.class)
+    public void testDiscardToIncreasePopulation3() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
+            IllegalPlayerIndexException, IllegalSpeciesIndexException {
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(new TestPlayer(new TestSpecies()));
+        }
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
+        g.increasePopulation(3, 0, new TestCard());
+    }
+
+    @Test (expected = IllegalSpeciesIndexException.class)
+    public void testDiscardToIncreasePopulation4() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
+            IllegalPlayerIndexException, IllegalSpeciesIndexException {
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(new Player(new TestSpecies()));
+        }
+        Deck<ICard> drawPile = new Deck<>();
+        for(int i = 0; i < 4; i ++) {
+            ICard card = new TestCard();
+            drawPile.discard(card);
+        }
+        Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
+        g.dealToPlayer(0);
+        g.increasePopulation(0, 1, playerList.get(0).getCards().get(0));
+    }
+
+    @Test
+    public void testDiscardToIncreaseBodySize() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, IllegalPlayerIndexException,
+            IllegalSpeciesIndexException, SpeciesBodySizeException {
+        Deck<ICard> drawPile = new Deck<>();
+        for(int i = 0; i < 4; i ++) {
+            ICard card = new TestCard();
+            drawPile.discard(card);
+        }
+        Player player = new Player(new Species());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
+        for (int i = 0; i < 3; i++) {
+            g.dealToPlayer(i);
+        }
+        g.increaseBodySize(0, 0, playerList.get(0).getCards().get(0));
+    }
+
+    @Test (expected = IllegalPlayerIndexException.class)
+    public void testDiscardToIncreaseBodySize2() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, IllegalPlayerIndexException,
+            IllegalSpeciesIndexException, SpeciesBodySizeException {
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(new TestPlayer(new TestSpecies()));
+        }
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
+        g.increaseBodySize(3, 0, new TestCard());
+    }
+
+    @Test (expected = IllegalCardDiscardException.class)
+    public void testDiscardToIncreaseBodySize3() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, IllegalPlayerIndexException,
+            IllegalSpeciesIndexException, SpeciesBodySizeException {
+        Deck<ICard> drawPile = new Deck<>();
+        for(int i = 0; i < 4; i ++) {
+            ICard card = new TestCard();
+            drawPile.discard(card);
+        }
+        Player player = new Player(new Species());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
+        for (int i = 0; i < 3; i++) {
+            g.dealToPlayer(i);
+        }
+        g.increaseBodySize(0, 0, new TestCard());
+    }
+
+    @Test (expected = IllegalSpeciesIndexException.class)
+    public void testDiscardToIncreaseBodySize4() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, IllegalPlayerIndexException,
+            IllegalSpeciesIndexException, SpeciesBodySizeException {
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(new Player(new TestSpecies()));
+        }
+        Deck<ICard> drawPile = new Deck<>();
+        for(int i = 0; i < 4; i ++) {
+            ICard card = new TestCard();
+            drawPile.discard(card);
+        }
+        Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
+        g.dealToPlayer(0);
+        g.increaseBodySize(0, 1, playerList.get(0).getCards().get(0));
+    }
 }

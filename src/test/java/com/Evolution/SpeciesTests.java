@@ -72,22 +72,6 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testDecreaseBodySize() throws SpeciesBodySizeException {
-        Species s = new Species();
-        s.decreaseBodySize();
-        assertEquals(0, s.getBodySize());
-    }
-
-    @Test
-    public void testMultiIncreaseDecreaseBodySize() throws SpeciesBodySizeException {
-        Species s = new Species();
-        s.increaseBodySize();
-        s.increaseBodySize();
-        s.decreaseBodySize();
-        assertEquals(2, s.getBodySize());
-    }
-
-    @Test
     public void testIsDeadWithPopulationAndBody() {
         Species s = new Species();
         assertFalse(s.isDead());
@@ -97,13 +81,6 @@ public class SpeciesTests {
     public void testIsDeadWOPopulation() throws SpeciesPopulationException {
         Species s = new Species();
         s.decreasePopulation();
-        assertTrue(s.isDead());
-    }
-
-    @Test
-    public void testIsDeadWOBody() throws SpeciesBodySizeException {
-        Species s = new Species();
-        s.decreaseBodySize();
         assertTrue(s.isDead());
     }
 
@@ -136,12 +113,5 @@ public class SpeciesTests {
         Species s = new Species();
         s.decreasePopulation();
         s.decreasePopulation();
-    }
-
-    @Test(expected = SpeciesBodySizeException.class)
-    public void testTooSmallSize() throws SpeciesBodySizeException {
-        Species s = new Species();
-        s.decreaseBodySize();
-        s.decreaseBodySize();
     }
 }
