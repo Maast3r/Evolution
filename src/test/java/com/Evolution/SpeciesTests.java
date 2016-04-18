@@ -1,6 +1,7 @@
 package com.Evolution;
 
 import com.Evolution.exceptions.SpeciesBodySizeException;
+import com.Evolution.exceptions.SpeciesNumberTraitsException;
 import com.Evolution.exceptions.SpeciesPopulationException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Species;
@@ -120,7 +121,7 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testAddFirstTrait() throws Exception {
+    public void testAddFirstTrait() throws SpeciesNumberTraitsException {
         Species s = new Species();
         ICard c = new TestCard();
         s.addTrait(c);
@@ -128,7 +129,7 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testAddThreeTraits() throws Exception {
+    public void testAddThreeTraits() throws SpeciesNumberTraitsException {
         Species s = new Species();
         for(int i = 0; i < 3; i++) {
             ICard c = new TestCard();
@@ -138,9 +139,9 @@ public class SpeciesTests {
     }
 
     @Test(expected = Exception.class)
-    public void testAddFourTraits() throws Exception {
+    public void testAddFourTraits() throws SpeciesNumberTraitsException {
         Species s = new Species();
-        for(int i = 0; i < 4; i++) {
+        for (int i = 0; i < 4; i++) {
             ICard c = new TestCard();
             s.addTrait(c);
         }

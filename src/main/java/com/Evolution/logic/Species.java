@@ -1,6 +1,7 @@
 package com.Evolution.logic;
 
 import com.Evolution.exceptions.SpeciesBodySizeException;
+import com.Evolution.exceptions.SpeciesNumberTraitsException;
 import com.Evolution.exceptions.SpeciesPopulationException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.ISpecies;
@@ -65,9 +66,9 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public void addTrait(ICard c) throws Exception {
+    public void addTrait(ICard c) throws SpeciesNumberTraitsException {
         if(this.traits.size() == 3){
-            throw new Exception("To many traits");
+            throw new SpeciesNumberTraitsException("To many traits");
         }
         this.traits.add(c);
     }
