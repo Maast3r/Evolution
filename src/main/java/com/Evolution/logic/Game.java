@@ -247,4 +247,9 @@ public class Game {
         this.discardPile.discard(card);
         this.players.get(playerIndex).addSpeciesLeft(species);
     }
+
+    public void discardForRightSpecies(int playersIndex, ICard card, ISpecies species) {
+        this.discardPile.discard(card);
+        this.players.get(0).addSpeciesRight(species);
+    }
 }
