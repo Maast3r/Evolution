@@ -6,10 +6,13 @@ import com.Evolution.exceptions.IllegalNumberOfPlayers;
 import com.Evolution.exceptions.InvalidPlayerSelectException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IDeck;
+import com.Evolution.interfaces.IPlayer;
 import com.Evolution.interfaces.IWateringHole;
 import com.Evolution.logic.*;
 import org.easymock.EasyMock;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -18,15 +21,33 @@ import static org.junit.Assert.assertEquals;
  */
 public class PhaseThreeTests {
 
+    private ArrayList<IPlayer> generateNumPlayers(int num) {
+        ArrayList<IPlayer> players = new ArrayList<>();
+        for (int i = 0; i < num; i++) {
+            players.add(new Player(new Species()));
+        }
+        return players;
+    }
+
+    @Test
     public void testNextPhase() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException, InvalidPlayerSelectException {
-        Game g = EasyMock.niceMock(Game.class);
-        PhaseTwo p = new PhaseTwo(g);
-        EasyMock.expect(g.getTurn()).andReturn(2);
-        EasyMock.replay(g);
+        IDeck<ICard> drawPile = new Deck<>();
+        IDeck<ICard> discardPile = new Deck<>();
+        IWateringHole wh = new WateringHole();
+        for (int i = 0; i < 3; i++) {
+            try{
+                wh.addCard(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        Game g = new Game(generateNumPlayers(3), wh, drawPile, discardPile);
+        PhaseThree p = new PhaseThree(g);
         g.setPhase(p);
-        p.execute();
+        for(int i = 0; i < 3; i++){
+            g.getPhase().execute();
+        }
         assertEquals(PhaseFour.class, g.getPhase().getClass());
-        EasyMock.verify(g);
     }
 
     @Test
