@@ -6,30 +6,27 @@ import com.Evolution.exceptions.InvalidPlayerSelectException;
 import com.Evolution.interfaces.IPhases;
 
 /**
- * Logic class for all logic for the third phase of the game
+ * Logic for the fourth phase of the game
  */
-public class PhaseThree implements IPhases{
+public class PhaseFour implements IPhases{
     private Game game;
 
-    public PhaseThree(Game g){
+    public PhaseFour(Game g){
         this.game = g;
     }
 
     @Override
     public void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException {
-        this.game.nextTurn();
-        if(this.game.getTurn() == 1){
-            this.game.setPhase(new PhaseFour(this.game));
-        }
+
     }
 
     @Override
     public String getName() {
-        return "Play Cards";
+        return null;
     }
 
     @Override
     public int getNumber() {
-        return 3;
+        return 0;
     }
 }

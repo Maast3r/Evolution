@@ -224,7 +224,6 @@ class SpeciesBoard extends VBox {
                 openCardWindow(Actions.DISCARD_TO_WATERINGHOLE);
                 if (this.selectedCard != null) {
                     this.game.discardToWateringHole(this.playerIndex, this.selectedCard);
-                    this.game.nextTurn();
                     try {
                         this.game.getPhase().execute();
                     } catch (IllegalCardDirectionException | InvalidPlayerSelectException | DeckEmptyException e) {
