@@ -51,6 +51,27 @@ public class PhaseThreeTests {
     }
 
     @Test
+    public void testNoNextPhase() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException, InvalidPlayerSelectException {
+        IDeck<ICard> drawPile = new Deck<>();
+        IDeck<ICard> discardPile = new Deck<>();
+        IWateringHole wh = new WateringHole();
+        for (int i = 0; i < 3; i++) {
+            try{
+                wh.addCard(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        Game g = new Game(generateNumPlayers(3), wh, drawPile, discardPile);
+        PhaseThree p = new PhaseThree(g);
+        g.setPhase(p);
+        for(int i = 0; i < 2; i++){
+            g.getPhase().execute();
+        }
+        assertEquals(PhaseThree.class, g.getPhase().getClass());
+    }
+
+    @Test
     public void testGetPhaseName() {
         Game g = EasyMock.niceMock(Game.class);
         PhaseThree p = new PhaseThree(g);
