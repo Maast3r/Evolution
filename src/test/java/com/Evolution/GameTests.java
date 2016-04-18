@@ -460,7 +460,7 @@ public class GameTests {
 
     @Test
     public void testDiscardToIncreasePopulation() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException {
+            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, IllegalPlayerIndexException {
         Deck<ICard> drawPile = new Deck<>();
         for(int i = 0; i < 4; i ++) {
             ICard card = new TestCard();
@@ -480,7 +480,8 @@ public class GameTests {
 
     @Test (expected = IllegalCardDiscardException.class)
     public void testDiscardToIncreasePopulation2() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException {
+            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
+            IllegalPlayerIndexException {
         Deck<ICard> drawPile = new Deck<>();
         for(int i = 0; i < 4; i ++) {
             ICard card = new TestCard();
@@ -500,9 +501,13 @@ public class GameTests {
 
     @Test (expected = IllegalPlayerIndexException.class)
     public void testDiscardToIncreasePopulation3() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException {
+            SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
+            IllegalPlayerIndexException {
         ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(new TestPlayer(new TestSpecies()));
+        }
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
-        g.increasePopulation(0, 0, new TestCard());
+        g.increasePopulation(4, 0, new TestCard());
     }
 }
