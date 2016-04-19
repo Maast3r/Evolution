@@ -25,11 +25,10 @@ public class Game {
      * @param wateringHole food available to species
      * @param drawPile     cards available to draw from
      * @param discardPile  cards that have been discarded
-     * @throws IllegalNumberOfPlayers
-     * @throws IllegalCardDirectionException
+     * @throws IllegalNumberOfPlayers when an ArrayList is passed in with too many or too few player objects
      */
     public Game(ArrayList<IPlayer> players, IWateringHole wateringHole, IDeck<ICard> drawPile, IDeck<ICard> discardPile)
-            throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+            throws IllegalNumberOfPlayers {
         if (players.size() < 3 || players.size() > 5) {
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
         }
@@ -246,15 +245,16 @@ public class Game {
     /**
      * Increases the population of the species with the given index
      * for the player with the given index
-     * @param playerIndex index of the player
+     *
+     * @param playerIndex  index of the player
      * @param speciesIndex index of the species
-     * @param card the card to remove from the player's hand
-     * @throws SpeciesPopulationException propagated from {@link Species#increasePopulation()}
-     * @throws IllegalCardDiscardException thrown when the given card is not in the specified
-     *        player's hand
-     * @throws IllegalPlayerIndexException thrown when the given player index is greater than the number of players
+     * @param card         the card to remove from the player's hand
+     * @throws SpeciesPopulationException   propagated from {@link Species#increasePopulation()}
+     * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
+     *                                      player's hand
+     * @throws IllegalPlayerIndexException  thrown when the given player index is greater than the number of players
      * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
-     *        for the given player
+     *                                      for the given player
      */
     public void increasePopulation(int playerIndex, int speciesIndex, ICard card) throws SpeciesPopulationException,
             IllegalCardDiscardException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
@@ -275,15 +275,16 @@ public class Game {
     /**
      * Increases the body size of the species with the given index
      * for the player with the given index
-     * @param playerIndex index of the player
+     *
+     * @param playerIndex  index of the player
      * @param speciesIndex index of the species
-     * @param card the card to remove from the player's hand
-     * @throws SpeciesBodySizeException propagated from {@link Species#increaseBodySize()}
-     * @throws IllegalCardDiscardException thrown when the given card is not in the specified
-     *        player's hand
-     * @throws IllegalPlayerIndexException thrown when the given player index is greater than the number of players
+     * @param card         the card to remove from the player's hand
+     * @throws SpeciesBodySizeException     propagated from {@link Species#increaseBodySize()}
+     * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
+     *                                      player's hand
+     * @throws IllegalPlayerIndexException  thrown when the given player index is greater than the number of players
      * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
-     *        for the given player
+     *                                      for the given player
      */
     public void increaseBodySize(int playerIndex, int speciesIndex, ICard card) throws SpeciesBodySizeException,
             IllegalPlayerIndexException, IllegalCardDiscardException, IllegalSpeciesIndexException {
