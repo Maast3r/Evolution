@@ -198,6 +198,7 @@ class SpeciesBoard extends VBox {
                 openCardWindow(Actions.ADD_TRAIT);
                 if (this.selectedCard != null) {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+                    // this
                     this.playerPane.updateGameScreen();
                     this.selectedCard = null;
                 }
@@ -247,7 +248,6 @@ class SpeciesBoard extends VBox {
             case ATTACK_SPECIES:
                 break;
             case END_TURN:
-                System.out.println("ads;lkfjalsdfla;sdf;sja;lsdfjdlas;jf");
                 this.game.getPhase().execute();
                 this.playerPane.updateGameScreen();
                 this.gameController.toggleChoiceBox();
