@@ -332,7 +332,14 @@ public class Game {
      * @param card        Card from player's hand that is being discarded
      * @param species     Species being added to player
      */
-    public void discardForRightSpecies(int playerIndex, ICard card, ISpecies species) {
+    public void discardForRightSpecies(int playerIndex, ICard card, ISpecies species) throws
+            InvalidPlayerSelectException, IllegalCardDiscardException {
+        if (playerIndex > this.players.size() - 1) {
+            throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
+        }
+        if (!this.players.get(playerIndex).getCards().contains(card)) {
+            throw new IllegalCardDiscardException("Selected card is not in this players hand.");
+        }
         this.discardPile.discard(card);
         this.players.get(playerIndex).addSpeciesRight(species);
     }

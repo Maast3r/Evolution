@@ -502,7 +502,8 @@ public class GameTests {
     }
 
     @Test
-    public void testDiscardForRightSpecies() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+    public void testDiscardForRightSpecies() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            InvalidPlayerSelectException, IllegalCardDiscardException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
@@ -514,6 +515,41 @@ public class GameTests {
         g.discardForRightSpecies(this.playerIndex, fakeCard, fakeSpecies);
         EasyMock.verify(players.get(this.playerIndex), this.discardPile, fakeSpecies, fakeCard);
     }
+
+    @Test (expected = InvalidPlayerSelectException.class)
+    public void testDiscardForRightSpeciesInvalidPlayer() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            InvalidPlayerSelectException, IllegalCardDiscardException {
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(new TestPlayer(new TestSpecies()));
+        }
+        ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
+        ICard fakeCard = EasyMock.niceMock(Card.class);
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
+        g.discardForRightSpecies(3, fakeCard, fakeSpecies);
+    }
+
+    @Test (expected = IllegalCardDiscardException.class)
+    public void testDiscardForRightSpeciesInvalidCard() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException {
+        Deck<ICard> drawPile = new Deck<>();
+        for(int i = 0; i < 4; i ++) {
+            ICard card = new TestCard();
+            drawPile.discard(card);
+        }
+        Player player = new Player(new Species());
+        ArrayList<IPlayer> playerList = new ArrayList<>();
+        for (int j = 0; j < 3; j++) {
+            playerList.add(player);
+        }
+        Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
+        for (int i = 0; i < 3; i++) {
+            g.dealToPlayer(i);
+        }
+        ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
+        g.discardForRightSpecies(0, new TestCard(), fakeSpecies);
+    }
+
     @Test
     public void testDiscardToIncreasePopulation() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             SpeciesPopulationException, DeckEmptyException, IllegalCardDiscardException,
