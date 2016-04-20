@@ -35,7 +35,7 @@ public class Player implements IPlayer {
     public void removeSpecies(int i) throws InvalidPlayerSpeciesRemovalException {
         if(speciesList.size() == 0 ||
                 i < 0 || i >= speciesList.size()){
-            throw new InvalidPlayerSpeciesRemovalException("Remova Species index is wrong.\n");
+            throw new InvalidPlayerSpeciesRemovalException("Removal Species index is wrong.\n");
         } else {
             this.speciesList.remove(i);
         }

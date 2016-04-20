@@ -25,11 +25,10 @@ public class Game {
      * @param wateringHole food available to species
      * @param drawPile     cards available to draw from
      * @param discardPile  cards that have been discarded
-     * @throws IllegalNumberOfPlayers
-     * @throws IllegalCardDirectionException
+     * @throws IllegalNumberOfPlayers when an ArrayList is passed in with too many or too few player objects
      */
     public Game(ArrayList<IPlayer> players, IWateringHole wateringHole, IDeck<ICard> drawPile, IDeck<ICard> discardPile)
-            throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+            throws IllegalNumberOfPlayers {
         if (players.size() < 3 || players.size() > 5) {
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
         }
@@ -229,9 +228,9 @@ public class Game {
      *
      * @param index The index of the player
      * @param card  The card to discard
-     * @throws InvalidAddToWateringHoleException propagated from {@link IWateringHole#addCard(ICard)}
+     * @throws InvalidAddToWateringHoleException     propagated from {@link IWateringHole#addCard(ICard)}
      * @throws InvalidDiscardToWateringHoleException trying to discard to watering hole when it already has the
-     * maximum number of cards
+     *                                               maximum number of cards
      */
     public void discardToWateringHole(int index, ICard card) throws InvalidDiscardToWateringHoleException,
             InvalidAddToWateringHoleException {
@@ -241,5 +240,89 @@ public class Game {
         }
         this.wateringHole.addCard(card);
         this.players.get(index).removeCardFromHand(card);
+    }
+
+    /**
+     * Increases the population of the species with the given index
+     * for the player with the given index
+     *
+     * @param playerIndex  index of the player
+     * @param speciesIndex index of the species
+     * @param card         the card to remove from the player's hand
+     * @throws SpeciesPopulationException   propagated from {@link Species#increasePopulation()}
+     * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
+     *                                      player's hand
+     * @throws IllegalPlayerIndexException  thrown when the given player index is greater than the number of players
+     * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
+     *                                      for the given player
+     */
+    public void increasePopulation(int playerIndex, int speciesIndex, ICard card) throws SpeciesPopulationException,
+            IllegalCardDiscardException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+        if (playerIndex > this.players.size() - 1) {
+            throw new IllegalPlayerIndexException("The given player index is greater than the number of players.");
+        }
+        if (!this.players.get(playerIndex).getCards().contains(card)) {
+            throw new IllegalCardDiscardException("Selected card is not in this players hand.");
+        }
+        if (speciesIndex > this.players.get(playerIndex).getSpecies().size() - 1) {
+            throw new IllegalSpeciesIndexException("The given species index is greater than the number of species for" +
+                    " player " + playerIndex + 1);
+        }
+        this.players.get(playerIndex).getSpecies().get(speciesIndex).increasePopulation();
+        this.players.get(playerIndex).removeCardFromHand(card);
+    }
+
+    /**
+     * Increases the body size of the species with the given index
+     * for the player with the given index
+     *
+     * @param playerIndex  index of the player
+     * @param speciesIndex index of the species
+     * @param card         the card to remove from the player's hand
+     * @throws SpeciesBodySizeException     propagated from {@link Species#increaseBodySize()}
+     * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
+     *                                      player's hand
+     * @throws IllegalPlayerIndexException  thrown when the given player index is greater than the number of players
+     * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
+     *                                      for the given player
+     */
+    public void increaseBodySize(int playerIndex, int speciesIndex, ICard card) throws SpeciesBodySizeException,
+            IllegalPlayerIndexException, IllegalCardDiscardException, IllegalSpeciesIndexException {
+        if (playerIndex > this.players.size() - 1) {
+            throw new IllegalPlayerIndexException("The given player index is greater than the number of players.");
+        }
+        if (!this.players.get(playerIndex).getCards().contains(card)) {
+            throw new IllegalCardDiscardException("Selected card is not in this players hand.");
+        }
+        if (speciesIndex > this.players.get(playerIndex).getSpecies().size() - 1) {
+            throw new IllegalSpeciesIndexException("The given species index is greater than the number of species for" +
+                    " player " + playerIndex + 1);
+        }
+        this.players.get(playerIndex).getSpecies().get(speciesIndex).increaseBodySize();
+        this.discardFromPlayer(playerIndex, card);
+    }
+
+    /**
+     * Adds a given species to the left of a player's Species
+     *
+     * @param playerIndex position in player list of player to add to
+     * @param card        Card from player's hand that is being discarded
+     * @param species     Species being added to player
+     */
+    public void discardForLeftSpecies(int playerIndex, ICard card, ISpecies species) {
+        this.discardPile.discard(card);
+        this.players.get(playerIndex).addSpeciesLeft(species);
+    }
+
+    /**
+     * Adds a given species to the right of a player's Species
+     *
+     * @param playerIndex position in player list of player to add to
+     * @param card        Card from player's hand that is being discarded
+     * @param species     Species being added to player
+     */
+    public void discardForRightSpecies(int playerIndex, ICard card, ISpecies species) {
+        this.discardPile.discard(card);
+        this.players.get(playerIndex).addSpeciesRight(species);
     }
 }
