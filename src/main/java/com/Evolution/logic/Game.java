@@ -308,8 +308,14 @@ public class Game {
      * @param playerIndex position in player list of player to add to
      * @param card        Card from player's hand that is being discarded
      * @param species     Species being added to player
+     * @throws InvalidPlayerSelectException  thrown when the given player index is greater than the number of players
+     *
      */
-    public void discardForLeftSpecies(int playerIndex, ICard card, ISpecies species) {
+    public void discardForLeftSpecies(int playerIndex, ICard card, ISpecies species) throws
+            InvalidPlayerSelectException {
+        if (playerIndex > this.players.size() - 1) {
+            throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
+        }
         this.discardPile.discard(card);
         this.players.get(playerIndex).addSpeciesLeft(species);
     }

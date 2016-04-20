@@ -453,7 +453,8 @@ public class GameTests {
     }
 
     @Test
-    public void testDiscardForLeftSpecies() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+    public void testDiscardForLeftSpecies() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            InvalidPlayerSelectException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
@@ -467,8 +468,7 @@ public class GameTests {
 
     @Test (expected = InvalidPlayerSelectException.class)
     public void testDiscardForLeftSpeciesInvalidPlayer() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            SpeciesPopulationException, DeckEmptyException, IllegalCardDiscardException,
-            InvalidPlayerSelectException, IllegalSpeciesIndexException {
+            InvalidPlayerSelectException {
         ArrayList<IPlayer> playerList = new ArrayList<>();
         for (int j = 0; j < 3; j++) {
             playerList.add(new TestPlayer(new TestSpecies()));
