@@ -170,4 +170,11 @@ public class SpeciesTests {
         assertTrue(s.getTraits().size() == 0);
         assertTrue(!s.getTraits().contains(c));
     }
+
+    @Test(expected = SpeciesTraitNotFoundException.class)
+    public void testRemoveFails() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException {
+        Species s = new Species();
+        ICard c = EasyMock.niceMock(Card.class);
+        s.removeTrait(c);
+    }
 }

@@ -54,6 +54,6 @@ public class TestSpecies implements ISpecies {
 
     @Override
     public void removeTrait(ICard c) {
-        
+
     }
 }
