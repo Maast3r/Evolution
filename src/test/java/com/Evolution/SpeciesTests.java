@@ -158,4 +158,16 @@ public class SpeciesTests {
         s.addTrait(c);
         s.addTrait(c2);
     }
+
+    @Test
+    public void testRemoveSuccessful() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException {
+        Species s = new Species();
+        ICard c = EasyMock.niceMock(Card.class);
+        s.addTrait(c);
+        assertTrue(s.getTraits().size() == 1);
+        assertTrue(s.getTraits().contains(c));
+        s.removeTrait(c);
+        assertTrue(s.getTraits().size() == 0);
+        assertTrue(!s.getTraits().contains(c));
+    }
 }
