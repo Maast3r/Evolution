@@ -158,7 +158,12 @@ class SpeciesBoard extends VBox {
                             performAction(Actions.values()[val]);
                         }
                         break;
+                    case 3:
+                        if(newValue.equals(7)) {
+                            performAction(Actions.values()[9]);
+                        }
                     default:
+                        System.out.println(Actions.values()[val] + " ---- " + val + " ++++ " + newValue);
                         performAction(Actions.values()[val]);
                         break;
                 }
@@ -201,9 +206,9 @@ class SpeciesBoard extends VBox {
                 openCardWindow(Actions.ADD_SPECIES_LEFT);
                 if (this.selectedCard != null) {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
-//                    this.game.getPlayerObjects().get(this.playerIndex).addSpeciesLeft(new Species());
                     this.playerPane.updateGameScreen();
                     this.playerPane.addSpecies(0);
+                    this.game.getPlayerObjects().get(this.playerIndex).addSpeciesLeft(new Species());
                     this.selectedCard = null;
                 }
                 break;
@@ -211,9 +216,9 @@ class SpeciesBoard extends VBox {
                 openCardWindow(Actions.ADD_SPECIES_RIGHT);
                 if (this.selectedCard != null) {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
-                    this.game.getPlayerObjects().get(this.playerIndex).addSpeciesRight(new Species());
                     this.playerPane.updateGameScreen();
                     this.playerPane.addSpecies(1);
+                    this.game.getPlayerObjects().get(this.playerIndex).addSpeciesRight(new Species());
                     this.selectedCard = null;
                 }
                 break;
