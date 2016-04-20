@@ -36,7 +36,9 @@ public class SpeciesTests {
     @Parameterized.Parameters
     public static Collection playersToCheck() {
         return Arrays.asList(new Object[][]{
-                {1, 1, 1}, {2, 2, 2}, {1, 2, 3}, {2, 1, 4}, {6, 1, 1}, {1, 1, 6}, {0, 2, 2}, {2, 4, 3}
+                {1, 1, 1}, {2, 2, 2}, {1, 2, 3},
+                {2, 1, 4}, {6, 1, 1}, {1, 1, 6},
+                {0, 2, 2}, {2, 4, 3}
         });
     }
 
@@ -61,7 +63,7 @@ public class SpeciesTests {
             }
             assertEquals(this.popIncrease + 1, s.getPopulation());
         }  catch (SpeciesPopulationException e) {
-            if(!(this.popIncrease > 5) && !(this.popIncrease - this.popDecrease + 1 < 0)){
+            if(!(this.popIncrease > 5)){
                 fail();
             }
         }
@@ -156,12 +158,18 @@ public class SpeciesTests {
             SpeciesTraitNotFoundException {
         Species s = new Species();
         ICard c = EasyMock.niceMock(Card.class);
+        EasyMock.expect(c.getName()).andReturn("FOO");
+        EasyMock.expect(c.getName()).andReturn("FOO");
+        EasyMock.expect(c.getName()).andReturn("FOO");
+        EasyMock.expect(c.getName()).andReturn("FOO");
+        EasyMock.replay(c);
         s.addTrait(c);
         assertTrue(s.getTraits().size() == 1);
         assertTrue(s.getTraits().contains(c));
         s.removeTrait(c);
         assertTrue(s.getTraits().size() == 0);
         assertTrue(!s.getTraits().contains(c));
+        EasyMock.verify(c);
     }
 
     @Test(expected = SpeciesTraitNotFoundException.class)
