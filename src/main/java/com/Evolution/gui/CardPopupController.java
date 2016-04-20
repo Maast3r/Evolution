@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
@@ -32,6 +33,8 @@ class CardPopupController implements Initializable {
     private Label infoLabel;
     @FXML
     private GridPane gridPane;
+    @FXML
+    private Pane infoPane;
 
     /**
      * Set the current player hand after initializing the controller
@@ -52,6 +55,7 @@ class CardPopupController implements Initializable {
      */
     void setAddTrait(boolean addTrait) {
         this.addTrait = addTrait;
+        displayCards();
     }
 
     /**
@@ -63,10 +67,9 @@ class CardPopupController implements Initializable {
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
         assert this.gridPane != null : "fx:id=\"gridPane\" was not injected: check your FXML file 'card_popup.fxml'.";
         assert this.infoLabel != null : "fx:id=\"infoLabel\" was not injected: check your FXML file 'card_popup.fxml'.";
+        assert this.infoPane != null : "fx:id=\"infoPane\" was not injected: check your FXML file 'card_popup.fxml'.";
 
         gridSetup();
-
-        displayCards();
     }
 
     /**
@@ -87,16 +90,25 @@ class CardPopupController implements Initializable {
                 } else {
                     this.board.setSelectedCard(card);
                     if (this.addTrait) {
+                        System.out.println("adding trait");
                         // TODO show this box to let player choose
-                        ChoiceBox<String> choices = new ChoiceBox<>();
-                        choices.setItems(FXCollections.observableArrayList("Trait 1", "Trait 2",
+                        ChoiceBox traitBox = new ChoiceBox(FXCollections.observableArrayList("Trait 1", "Trait 2",
                                 "Trait 3"));
-                        choices.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue)
+                        traitBox.getSelectionModel().selectFirst();
+                        traitBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue,
+                                                                                           newValue)
                                 -> {
                             this.board.setTraitSelection(newValue.intValue());
+
+                            this.gridPane.getScene().getWindow().hide();
                         });
+                        traitBox.show();
+                        System.out.println(traitBox.isShowing());
+                        this.infoPane.getChildren().add(traitBox);
+                    } else {
+                        this.gridPane.getScene().getWindow().hide();
                     }
-                    this.gridPane.getScene().getWindow().hide();
+
                 }
             });
             VBox cardPane = new VBox();

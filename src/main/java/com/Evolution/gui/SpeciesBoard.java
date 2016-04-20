@@ -152,14 +152,14 @@ class SpeciesBoard extends VBox {
                 switch (this.game.getPhase().getNumber()) {
                     // TODO: This block will need edited as future phases are implemented
                     case 2:
-                        if (newValue.equals(2)) {
+                        if (val == 2) {
                             performAction(Actions.values()[10]);
                         } else {
                             performAction(Actions.values()[val]);
                         }
                         break;
                     case 3:
-                        if(newValue.equals(7)) {
+                        if(val == 7) {
                             performAction(Actions.values()[9]);
                         }
                     default:
@@ -198,7 +198,6 @@ class SpeciesBoard extends VBox {
                 openCardWindow(Actions.ADD_TRAIT);
                 if (this.selectedCard != null) {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
-                    // this
                     this.playerPane.updateGameScreen();
                     this.selectedCard = null;
                 }
@@ -264,8 +263,8 @@ class SpeciesBoard extends VBox {
                         e.printStackTrace();
                     }
                     this.playerPane.updateGameScreen();
-                    this.gameController.toggleChoiceBox();
                     this.gameController.changeChoiceBox();
+                    this.gameController.toggleChoiceBox();
                     this.selectedCard = null;
                 }
                 break;
@@ -282,6 +281,8 @@ class SpeciesBoard extends VBox {
                     new CardPopupController(this.game.getPlayerObjects().get(this.playerIndex).getCards(), this);
             if (action == Actions.ADD_TRAIT) {
                 controller.setAddTrait(true);
+            } else {
+                controller.setAddTrait(false);
             }
             loader.setController(controller);
             Parent p = loader.load();
@@ -317,9 +318,9 @@ class SpeciesBoard extends VBox {
      */
     void setChoiceBoxPhase(int phaseNum) {
         switch (phaseNum) {
-            case 1:
-                this.actionChoiceBox.setItems(this.phase2Options);
-                break;
+//            case 1:
+//                this.actionChoiceBox.setItems(this.phase2Options);
+//                break;
             case 2:
                 this.actionChoiceBox.setItems(this.phase2Options);
                 break;
