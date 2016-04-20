@@ -50,7 +50,7 @@ class SpeciesBoard extends VBox {
     private ObservableList<String> phase3Options = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
             Actions.VIEW_CARDS.getName(), Actions.ADD_TRAIT.getName(), Actions.ADD_SPECIES_LEFT.getName(),
             Actions.ADD_SPECIES_RIGHT.getName(), Actions.INCREASE_POPULATION.getName(),
-            Actions.INCREASE_BODY_SIZE.getName());
+            Actions.INCREASE_BODY_SIZE.getName(), Actions.END_TURN.getName());
 
     /**
      * Enum for the actions in the choiceBox
@@ -64,6 +64,7 @@ class SpeciesBoard extends VBox {
         ADD_SPECIES_RIGHT("Add Species (Right)"),
         INCREASE_POPULATION("Increase Population"),
         INCREASE_BODY_SIZE("Increase Body Size"),
+        END_TURN("End Your Turn"),
         DISCARD_TO_WATERINGHOLE("Discard to Watering Hole");
 
         private String name;
@@ -145,7 +146,7 @@ class SpeciesBoard extends VBox {
                     // TODO: This block will need edited as future phases are implemented
                     case 2:
                         if (newValue.equals(2)) {
-                            performAction(Actions.values()[7]);
+                            performAction(Actions.values()[8]);
                         } else {
                             performAction(Actions.values()[val]);
                         }
@@ -154,7 +155,10 @@ class SpeciesBoard extends VBox {
                         performAction(Actions.values()[val]);
                         break;
                 }
-            } catch (InvalidDiscardToWateringHoleException | InvalidAddToWateringHoleException e) {
+            } catch (InvalidDiscardToWateringHoleException | InvalidAddToWateringHoleException
+                    | IllegalPlayerIndexException | SpeciesPopulationException | IllegalSpeciesIndexException
+                    | IllegalCardDiscardException | SpeciesBodySizeException | DeckEmptyException
+                    | IllegalCardDirectionException | InvalidPlayerSelectException e) {
                 e.printStackTrace();
             }
         };
@@ -166,7 +170,9 @@ class SpeciesBoard extends VBox {
      * @param action the selected action
      */
     private void performAction(Actions action) throws InvalidDiscardToWateringHoleException,
-            InvalidAddToWateringHoleException {
+            InvalidAddToWateringHoleException, IllegalPlayerIndexException, SpeciesPopulationException,
+            IllegalSpeciesIndexException, IllegalCardDiscardException, SpeciesBodySizeException,
+            InvalidPlayerSelectException, IllegalCardDirectionException, DeckEmptyException {
         // perform selected action
         switch (action) {
             case ACTIONS:
@@ -205,18 +211,20 @@ class SpeciesBoard extends VBox {
             case INCREASE_POPULATION:
                 openCardWindow(Actions.INCREASE_POPULATION);
                 if (this.selectedCard != null) {
-                    this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+                    this.game.increasePopulation(this.playerIndex, this.speciesNum, this.selectedCard);
                     this.playerPane.updateGameScreen();
-                    setPopulationSize(1);
+                    setPopulationSize(this.game.getPlayerObjects()
+                            .get(this.playerIndex).getSpecies().get(this.speciesNum).getPopulation());
                     this.selectedCard = null;
                 }
                 break;
             case INCREASE_BODY_SIZE:
                 openCardWindow(Actions.INCREASE_BODY_SIZE);
                 if (this.selectedCard != null) {
-                    this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+                    this.game.increaseBodySize(this.playerIndex, this.speciesNum, this.selectedCard);
                     this.playerPane.updateGameScreen();
-                    setBodySize(1);
+                    setBodySize(this.game.getPlayerObjects()
+                            .get(this.playerIndex).getSpecies().get(this.speciesNum).getBodySize());
                     this.selectedCard = null;
                 }
                 break;
@@ -234,6 +242,13 @@ class SpeciesBoard extends VBox {
                     this.gameController.changeChoiceBox();
                     this.selectedCard = null;
                 }
+                break;
+            case END_TURN:
+                this.game.getPhase().execute();
+                this.playerPane.updateGameScreen();
+                this.gameController.toggleChoiceBox();
+                this.gameController.changeChoiceBox();
+                this.selectedCard = null;
                 break;
         }
     }
@@ -340,7 +355,7 @@ class SpeciesBoard extends VBox {
      */
     private void setPopulationSize(int amount) {
         // Set the population size on player then update label
-        this.game.getPlayerObjects().get(this.playerIndex).getSpecies();
+        this.populationSize.setText("Population: " + amount);
     }
 
 
@@ -351,6 +366,7 @@ class SpeciesBoard extends VBox {
      */
     private void setBodySize(int amount) {
         // Set the body size on player then update label
+        this.bodySize.setText("Body Size: " + amount);
     }
 
     /**
