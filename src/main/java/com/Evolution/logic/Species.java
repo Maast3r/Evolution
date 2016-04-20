@@ -77,7 +77,13 @@ public class Species implements ISpecies {
     }
 
     @Override
+    public void removeTrait(ICard c) {
+        this.traits.remove(c);
+    }
+
+    @Override
     public ArrayList<ICard> getTraits(){
         return this.traits;
     }
+
 }

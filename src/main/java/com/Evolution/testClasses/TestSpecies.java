@@ -51,4 +51,9 @@ public class TestSpecies implements ISpecies {
     public ArrayList<ICard> getTraits() {
         return null;
     }
+
+    @Override
+    public void removeTrait(ICard c) {
+        
+    }
 }

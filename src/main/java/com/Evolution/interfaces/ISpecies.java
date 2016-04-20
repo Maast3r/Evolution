@@ -64,4 +64,10 @@ public interface ISpecies {
      * @return The list of traits
      */
     ArrayList<ICard> getTraits();
+
+    /**
+     * Removes the given trait from the species
+     * @param c the trait to remove
+     */
+    void removeTrait(ICard c);
 }
