@@ -252,7 +252,7 @@ public class Game {
      * @throws SpeciesPopulationException   propagated from {@link Species#increasePopulation()}
      * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
      *                                      player's hand
-     * @throws IllegalPlayerIndexException  thrown when the given player index is greater than the number of players
+     * @throws InvalidPlayerSelectException  thrown when the given player index is greater than the number of players
      * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
      *                                      for the given player
      */
@@ -282,7 +282,7 @@ public class Game {
      * @throws SpeciesBodySizeException     propagated from {@link Species#increaseBodySize()}
      * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
      *                                      player's hand
-     * @throws IllegalPlayerIndexException  thrown when the given player index is greater than the number of players
+     * @throws InvalidPlayerSelectException  thrown when the given player index is greater than the number of players
      * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
      *                                      for the given player
      */
