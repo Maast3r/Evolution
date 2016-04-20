@@ -40,9 +40,9 @@ public class GameTests {
     @Parameterized.Parameters
     public static Collection playersToCheck() {
         return Arrays.asList(new Object[][]{
-                {3, 0, 4}, {3, 1, 4}, {3, 2, 4},
-                {4, 0, 5}, {4, 1, 5}, {4, 2, 5}, {4, 3, 5},
-                {5, 0, 6}, {5, 1, 6}, {5, 2, 6}, {5, 3, 6}, {5, 4, 6}
+                {3, 0, 3}, {3, 1, 3}, {3, 2, 3},
+                {4, 0, 4}, {4, 1, 4}, {4, 2, 4}, {4, 3, 4},
+                {5, 0, 5}, {5, 1, 5}, {5, 2, 5}, {5, 3, 5}, {5, 4, 5}
         });
     }
 
@@ -454,11 +454,12 @@ public class GameTests {
 
     @Test
     public void testDiscardForLeftSpecies() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            InvalidPlayerSelectException {
+            InvalidPlayerSelectException, IllegalCardDiscardException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
+        EasyMock.expect(players.get(this.playerIndex).getCards()).andReturn(new ArrayList<>(Arrays.asList(fakeCard)));
         players.get(this.playerIndex).addSpeciesLeft(fakeSpecies);
         this.discardPile.discard(fakeCard);
         EasyMock.replay(players.get(this.playerIndex), this.discardPile, fakeSpecies, fakeCard);
@@ -468,7 +469,7 @@ public class GameTests {
 
     @Test (expected = InvalidPlayerSelectException.class)
     public void testDiscardForLeftSpeciesInvalidPlayer() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            InvalidPlayerSelectException {
+            InvalidPlayerSelectException, IllegalCardDiscardException {
         ArrayList<IPlayer> playerList = new ArrayList<>();
         for (int j = 0; j < 3; j++) {
             playerList.add(new TestPlayer(new TestSpecies()));
@@ -481,7 +482,7 @@ public class GameTests {
 
     @Test (expected = IllegalCardDiscardException.class)
     public void testDiscardForLeftSpeciesInvalidCard() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            InvalidPlayerSelectException, DeckEmptyException {
+            InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException {
         Deck<ICard> drawPile = new Deck<>();
         for(int i = 0; i < 4; i ++) {
             ICard card = new TestCard();
@@ -506,6 +507,7 @@ public class GameTests {
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
+        EasyMock.expect(players.get(this.playerIndex).getCards()).andReturn(new ArrayList<>(Arrays.asList(fakeCard)));
         players.get(this.playerIndex).addSpeciesRight(fakeSpecies);
         this.discardPile.discard(fakeCard);
         EasyMock.replay(players.get(this.playerIndex), this.discardPile, fakeSpecies, fakeCard);
