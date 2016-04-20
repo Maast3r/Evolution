@@ -65,9 +65,9 @@ public class Species implements ISpecies {
 
     @Override
     public void addTrait(ICard c) throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException {
-        if(this.traits.size() == 3){
+        if(this.getTraits().size() == 3){
             throw new SpeciesNumberTraitsException("To many traits");
-        } else if(this.traits.stream().filter(t -> t.getName().equals(c.getName())).count() > 0){
+        } else if(this.getTraits().stream().filter(t -> t.getName().equals(c.getName())).count() > 0){
             throw new SpeciesDuplicateTraitException("Duplicate trait tried to be added");
         }
         this.traits.add(c);
@@ -75,7 +75,7 @@ public class Species implements ISpecies {
 
     @Override
     public void removeTrait(ICard c) throws SpeciesTraitNotFoundException {
-        if(!this.traits.contains(c)){
+        if(!this.getTraits().contains(c)){
             throw new SpeciesTraitNotFoundException("The trait can't be removed as it is not a trait of the species");
         }
         this.traits.remove(c);
