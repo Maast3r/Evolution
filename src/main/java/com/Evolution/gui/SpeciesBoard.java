@@ -2,7 +2,9 @@ package com.Evolution.gui;
 
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
+import com.Evolution.interfaces.ISpecies;
 import com.Evolution.logic.Game;
+import com.Evolution.logic.Species;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -52,6 +54,9 @@ class SpeciesBoard extends VBox {
             Actions.ADD_SPECIES_RIGHT.getName(), Actions.INCREASE_POPULATION.getName(),
             Actions.INCREASE_BODY_SIZE.getName(), Actions.END_TURN.getName());
 
+    private ObservableList<String> phase4Options = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
+            Actions.VIEW_CARDS.getName(), Actions.FEED_SPECIES.getName(), Actions.ATTACK_SPECIES.getName());
+
     /**
      * Enum for the actions in the choiceBox
      * Name is the string to show in drop down
@@ -64,6 +69,8 @@ class SpeciesBoard extends VBox {
         ADD_SPECIES_RIGHT("Add Species (Right)"),
         INCREASE_POPULATION("Increase Population"),
         INCREASE_BODY_SIZE("Increase Body Size"),
+        FEED_SPECIES("Adds a Food to the Species"),
+        ATTACK_SPECIES("Attacks Another Species"),
         END_TURN("End Your Turn"),
         DISCARD_TO_WATERINGHOLE("Discard to Watering Hole");
 
@@ -146,7 +153,7 @@ class SpeciesBoard extends VBox {
                     // TODO: This block will need edited as future phases are implemented
                     case 2:
                         if (newValue.equals(2)) {
-                            performAction(Actions.values()[8]);
+                            performAction(Actions.values()[10]);
                         } else {
                             performAction(Actions.values()[val]);
                         }
@@ -194,6 +201,7 @@ class SpeciesBoard extends VBox {
                 openCardWindow(Actions.ADD_SPECIES_LEFT);
                 if (this.selectedCard != null) {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+//                    this.game.getPlayerObjects().get(this.playerIndex).addSpeciesLeft(new Species());
                     this.playerPane.updateGameScreen();
                     this.playerPane.addSpecies(0);
                     this.selectedCard = null;
@@ -203,6 +211,7 @@ class SpeciesBoard extends VBox {
                 openCardWindow(Actions.ADD_SPECIES_RIGHT);
                 if (this.selectedCard != null) {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+                    this.game.getPlayerObjects().get(this.playerIndex).addSpeciesRight(new Species());
                     this.playerPane.updateGameScreen();
                     this.playerPane.addSpecies(1);
                     this.selectedCard = null;
@@ -228,6 +237,18 @@ class SpeciesBoard extends VBox {
                     this.selectedCard = null;
                 }
                 break;
+            case FEED_SPECIES:
+                break;
+            case ATTACK_SPECIES:
+                break;
+            case END_TURN:
+                System.out.println("ads;lkfjalsdfla;sdf;sja;lsdfjdlas;jf");
+                this.game.getPhase().execute();
+                this.playerPane.updateGameScreen();
+                this.gameController.toggleChoiceBox();
+                this.gameController.changeChoiceBox();
+                this.selectedCard = null;
+                break;
             case DISCARD_TO_WATERINGHOLE:
                 openCardWindow(Actions.DISCARD_TO_WATERINGHOLE);
                 if (this.selectedCard != null) {
@@ -242,13 +263,6 @@ class SpeciesBoard extends VBox {
                     this.gameController.changeChoiceBox();
                     this.selectedCard = null;
                 }
-                break;
-            case END_TURN:
-                this.game.getPhase().execute();
-                this.playerPane.updateGameScreen();
-                this.gameController.toggleChoiceBox();
-                this.gameController.changeChoiceBox();
-                this.selectedCard = null;
                 break;
         }
     }
@@ -308,6 +322,7 @@ class SpeciesBoard extends VBox {
                 this.actionChoiceBox.setItems(this.phase3Options);
                 break;
             case 4:
+                this.actionChoiceBox.setItems(this.phase4Options);
                 break;
             default:
                 ObservableList<String> options = FXCollections.observableArrayList();
