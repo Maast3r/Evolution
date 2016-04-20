@@ -1,6 +1,7 @@
 package com.Evolution.logic;
 
 import com.Evolution.exceptions.SpeciesBodySizeException;
+import com.Evolution.exceptions.SpeciesDuplicateTraitException;
 import com.Evolution.exceptions.SpeciesNumberTraitsException;
 import com.Evolution.exceptions.SpeciesPopulationException;
 import com.Evolution.interfaces.ICard;
@@ -66,9 +67,11 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public void addTrait(ICard c) throws SpeciesNumberTraitsException {
+    public void addTrait(ICard c) throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException {
         if(this.traits.size() == 3){
             throw new SpeciesNumberTraitsException("To many traits");
+        } else if(this.traits.stream().filter(t -> t.getName().equals(c.getName())).count() > 0){
+            throw new SpeciesDuplicateTraitException("Duplicate trait tried to be added");
         }
         this.traits.add(c);
     }

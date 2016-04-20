@@ -5,7 +5,10 @@ import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Card;
 import com.Evolution.logic.Species;
 import com.Evolution.testClasses.TestCard;
+import org.easymock.EasyMock;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -120,7 +123,7 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testAddFirstTrait() throws SpeciesNumberTraitsException {
+    public void testAddFirstTrait() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException {
         Species s = new Species();
         ICard c = new TestCard();
         s.addTrait(c);
@@ -128,25 +131,26 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testAddThreeTraits() throws SpeciesNumberTraitsException {
+    public void testAddThreeTraits() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException, IllegalCardFoodException, IllegalCardDirectionException {
         Species s = new Species();
-        for(int i = 0; i < 3; i++) {
-            ICard c = new TestCard();
+        for (int i = 0; i < 3; i++) {
+            ICard c = new Card(Integer.toString(i), "bar", "foobar", 1, 1);
             s.addTrait(c);
             assertTrue(s.getTraits().contains(c));
         }
+        assertTrue(s.getTraits().size() == 3);
     }
 
     @Test(expected = SpeciesNumberTraitsException.class)
-    public void testAddFourTraits() throws SpeciesNumberTraitsException {
+    public void testAddFourTraits() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException, IllegalCardFoodException, IllegalCardDirectionException {
         Species s = new Species();
         for (int i = 0; i < 4; i++) {
-            ICard c = new TestCard();
+            ICard c = new Card(Integer.toString(i), "bar", "foobar", 1, 1);
             s.addTrait(c);
         }
     }
 
-    @Test(expcected = SpeciesDuplicateTraitException.class)
+    @Test(expected = SpeciesDuplicateTraitException.class)
     public void testAddDuplicateTraits() throws SpeciesDuplicateTraitException, IllegalCardFoodException, IllegalCardDirectionException, SpeciesNumberTraitsException {
         Species s = new Species();
         ICard c = new Card("foo", "bar", "foobar", 1, 1);
