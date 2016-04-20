@@ -331,6 +331,10 @@ public class Game {
      * @param playerIndex position in player list of player to add to
      * @param card        Card from player's hand that is being discarded
      * @param species     Species being added to player
+     * @throws InvalidPlayerSelectException  thrown when the given player index is greater than the number of players
+     * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
+     *                                      player's hand
+     *
      */
     public void discardForRightSpecies(int playerIndex, ICard card, ISpecies species) throws
             InvalidPlayerSelectException, IllegalCardDiscardException {
