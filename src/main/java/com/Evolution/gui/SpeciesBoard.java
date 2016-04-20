@@ -209,7 +209,7 @@ class SpeciesBoard extends VBox {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
                     this.playerPane.updateGameScreen();
                     this.playerPane.addSpecies(0);
-                    this.game.getPlayerObjects().get(this.playerIndex).addSpeciesLeft(new Species());
+                    this.game.discardForLeftSpecies(this.playerIndex, this.selectedCard, new Species());
                     this.selectedCard = null;
                 }
                 break;
@@ -219,7 +219,7 @@ class SpeciesBoard extends VBox {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
                     this.playerPane.updateGameScreen();
                     this.playerPane.addSpecies(1);
-                    this.game.getPlayerObjects().get(this.playerIndex).addSpeciesRight(new Species());
+                    this.game.discardForRightSpecies(this.playerIndex, this.selectedCard, new Species());
                     this.selectedCard = null;
                 }
                 break;
