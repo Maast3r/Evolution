@@ -334,9 +334,13 @@ public class Game {
      * @param card        Card being added to species
      * @throws SpeciesNumberTraitsException
      * @throws SpeciesDuplicateTraitException
+     * @throws IllegalPlayerIndexException
      */
     public void addTraitToSpecies(int playerIndex, int i, Card card) throws SpeciesNumberTraitsException,
-            SpeciesDuplicateTraitException {
+            SpeciesDuplicateTraitException, IllegalPlayerIndexException {
+        if(playerIndex < 0) {
+            throw new IllegalPlayerIndexException("The given player index cannot be below zero");
+        }
         if (this.players.get(playerIndex).removeCardFromHand(card)) {
             this.players.get(playerIndex).getSpecies().get(i).addTrait(card);
         }
