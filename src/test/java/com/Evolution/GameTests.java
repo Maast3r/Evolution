@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -618,5 +619,22 @@ public class GameTests {
         Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
         g.dealToPlayer(0);
         g.increaseBodySize(0, 1, playerList.get(0).getCards().get(0));
+    }
+
+    @Test
+    public void testRemoveTrait() throws IllegalNumberOfPlayers {
+        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
+        ICard fakeCard = EasyMock.niceMock(Card.class);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        EasyMock.expect(fakeSpecies.removeTrait(fakeCard)).andExpect(fakeCard);
+        this.discardPile.discard(fakeCard);
+        EasyMock.replay(fakeCard);
+        EasyMock.replay(fakeSpecies);
+        EasyMock.replay(this.discardPile);
+        g.removeTraitFromSpecies(this.playerIndex, 0, fakeCard);
+        EasyMock.verify(fakeCard);
+        EasyMock.verify(fakeSpecies);
+        EasyMock.verify(this.discardPile);
     }
 }
