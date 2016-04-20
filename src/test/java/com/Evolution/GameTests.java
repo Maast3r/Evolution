@@ -627,11 +627,14 @@ public class GameTests {
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         Card fakeCard = EasyMock.niceMock(Card.class);
         Species fakeSpecies = EasyMock.niceMock(Species.class);
+        EasyMock.expect(players.get(this.playerIndex).removeCardFromHand(fakeCard)).andReturn(true);
         EasyMock.expect(players.get(this.playerIndex).getSpecies()).andReturn(new ArrayList<>(Arrays.asList
                 (fakeSpecies)));
         fakeSpecies.addTrait(fakeCard);
-        EasyMock.replay(players, this.wateringHole, this.drawPile, this.discardPile, fakeCard, fakeSpecies);
+        EasyMock.replay(players.get(this.playerIndex), this.wateringHole, this.drawPile, this.discardPile, fakeCard,
+                fakeSpecies);
         g.addTraitToSpecies(this.playerIndex, 0, fakeCard);
-        EasyMock.verify(players, this.wateringHole, this.drawPile, this.discardPile, fakeCard, fakeSpecies);
+        EasyMock.verify(players.get(this.playerIndex), this.wateringHole, this.drawPile, this.discardPile, fakeCard,
+                fakeSpecies);
     }
 }

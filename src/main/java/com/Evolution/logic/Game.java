@@ -325,4 +325,20 @@ public class Game {
         this.discardPile.discard(card);
         this.players.get(playerIndex).addSpeciesRight(species);
     }
+
+    /**
+     * Adds the provided Card to a player's species
+     *
+     * @param playerIndex position in player list of player to add to
+     * @param i           position in species list of species to add to
+     * @param card        Card being added to species
+     * @throws SpeciesNumberTraitsException
+     * @throws SpeciesDuplicateTraitException
+     */
+    public void addTraitToSpecies(int playerIndex, int i, Card card) throws SpeciesNumberTraitsException,
+            SpeciesDuplicateTraitException {
+        if (this.players.get(playerIndex).removeCardFromHand(card)) {
+            this.players.get(playerIndex).getSpecies().get(i).addTrait(card);
+        }
+    }
 }
