@@ -160,7 +160,8 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testRemoveSuccessful() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException {
+    public void testRemoveSuccessful() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException,
+            SpeciesTraitNotFoundException {
         Species s = new Species();
         ICard c = EasyMock.niceMock(Card.class);
         s.addTrait(c);
@@ -172,7 +173,8 @@ public class SpeciesTests {
     }
 
     @Test(expected = SpeciesTraitNotFoundException.class)
-    public void testRemoveFails() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException {
+    public void testRemoveFails() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException,
+            SpeciesTraitNotFoundException {
         Species s = new Species();
         ICard c = EasyMock.niceMock(Card.class);
         s.removeTrait(c);

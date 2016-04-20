@@ -1,9 +1,6 @@
 package com.Evolution.logic;
 
-import com.Evolution.exceptions.SpeciesBodySizeException;
-import com.Evolution.exceptions.SpeciesDuplicateTraitException;
-import com.Evolution.exceptions.SpeciesNumberTraitsException;
-import com.Evolution.exceptions.SpeciesPopulationException;
+import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.ISpecies;
 
@@ -77,7 +74,10 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public void removeTrait(ICard c) {
+    public void removeTrait(ICard c) throws SpeciesTraitNotFoundException {
+        if(!this.traits.contains(c)){
+            throw new SpeciesTraitNotFoundException("The trait can't be removed as it is not a trait of the species");
+        }
         this.traits.remove(c);
     }
 

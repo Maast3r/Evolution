@@ -2,6 +2,7 @@ package com.Evolution.interfaces;
 
 import com.Evolution.exceptions.SpeciesBodySizeException;
 import com.Evolution.exceptions.SpeciesPopulationException;
+import com.Evolution.exceptions.SpeciesTraitNotFoundException;
 
 import java.util.ArrayList;
 
@@ -69,5 +70,5 @@ public interface ISpecies {
      * Removes the given trait from the species
      * @param c the trait to remove
      */
-    void removeTrait(ICard c);
+    void removeTrait(ICard c) throws SpeciesTraitNotFoundException;
 }
