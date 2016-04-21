@@ -668,6 +668,17 @@ public class GameTests {
                 .andReturn(new ArrayList<>(Arrays.asList(fakeSpecies)));
         EasyMock.replay(players.get(this.playerIndex));
         g.removeTraitFromSpecies(this.playerIndex, -1, fakeCard);
+    }
 
+    @Test(expected = IllegalSpeciesIndexException.class)
+    public void testRemoveInvalidSpeciesIndexTooHigh() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
+        ICard fakeCard = EasyMock.niceMock(Card.class);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        EasyMock.expect(players.get(this.playerIndex).getSpecies())
+                .andReturn(new ArrayList<>(Arrays.asList(fakeSpecies)));
+        EasyMock.replay(players.get(this.playerIndex));
+        g.removeTraitFromSpecies(this.playerIndex, 1, fakeCard);
     }
 }
