@@ -654,4 +654,19 @@ public class GameTests {
         Card fakeCard = EasyMock.niceMock(Card.class);
         g.addTraitToSpecies(this.overHighBound, 0, fakeCard);
     }
+
+    @Test(expected = IllegalSpeciesIndexException.class)
+    public void testAddTraitLowSpecies() throws IllegalNumberOfPlayers, SpeciesNumberTraitsException,
+            SpeciesDuplicateTraitException, IllegalPlayerIndexException {
+        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        Card fakeCard = EasyMock.niceMock(Card.class);
+        Species fakeSpecies = EasyMock.niceMock(Species.class);
+        EasyMock.expect(players.get(this.playerIndex).removeCardFromHand(fakeCard)).andReturn(true);
+        EasyMock.expect(players.get(this.playerIndex).getSpecies()).andReturn(new ArrayList<>(Arrays.asList
+                (fakeSpecies)));
+        EasyMock.replay(players.get(this.playerIndex), this.wateringHole, this.drawPile, this.discardPile, fakeCard);
+        g.addTraitToSpecies(this.playerIndex, -1, fakeCard);
+        EasyMock.verify(players.get(this.playerIndex), this.wateringHole, this.drawPile, this.discardPile, fakeCard);
+    }
 }
