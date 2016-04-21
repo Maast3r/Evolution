@@ -1,5 +1,6 @@
 package com.Evolution;
 
+import com.Evolution.exceptions.IllegalCardRemovalException;
 import com.Evolution.exceptions.InvalidPlayerSpeciesRemovalException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Player;
@@ -149,21 +150,20 @@ public class PlayerTests {
     }
 
     @Test
-    public void testDiscard(){
+    public void testDiscard() throws IllegalCardRemovalException {
         Player p = new Player(new TestSpecies());
         ICard card = new TestCard();
         p.addCardToHand(card);
         assertTrue(p.getCards().contains(card));
-        assertTrue(p.removeCardFromHand(card));
+        p.removeCardFromHand(card);
         assertTrue(!p.getCards().contains(card));
     }
 
-    @Test
-    public void testInvalidDiscard(){
+    @Test(expected = IllegalCardRemovalException.class)
+    public void testInvalidDiscard() throws IllegalCardRemovalException {
         Player p = new Player(new TestSpecies());
         ICard card = new TestCard();
         assertTrue(!p.getCards().contains(card));
-        assertTrue(!p.removeCardFromHand(card));
-        assertTrue(!p.getCards().contains(card));
+        p.removeCardFromHand(card);
     }
 }

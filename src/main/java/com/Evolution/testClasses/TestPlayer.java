@@ -48,7 +48,6 @@ public class TestPlayer implements IPlayer {
     public void addCardToHand(ICard card) {}
 
     @Override
-    public boolean removeCardFromHand(ICard card) {
-        return false;
+    public void removeCardFromHand(ICard card) {
     }
 }

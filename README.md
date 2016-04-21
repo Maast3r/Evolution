@@ -120,6 +120,7 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * BVA Testing
     * 50+ LOC
     * NO GUI calls
+
 # Sprint 5
 * Jeremiah Goist
     * Player discard for a Left or Right species
@@ -127,6 +128,20 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Input validation testing
     * 50+ LOC
 * Brooke Brown
+    * Finished card input file
+    * Increase body size & population
+    * Added new exceptions
+    * Refactored game/tests with missing input validation
+    * Used paramaterized tests
+    * Performed code reviews
+    * 50+ LOC
+    * No GUI calls
 * Trevor Burch
     * Fixed issues found with unneeded methods in Species
+    * Wrote Phase 3 Logic
+    * Updated Phase 2 to automatically call nextTurn
+    * Wrote logic for adding and removing traits from a species at the species level
+    * Wrote logic for removing traits from a species at the game level
+    * Fixed issue with branch coverage - Added IllegalCardRemovalException w/ Jeremiah
+    * 50+ LOC
 * Andrew Ma

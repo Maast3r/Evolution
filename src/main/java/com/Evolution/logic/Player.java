@@ -1,5 +1,6 @@
 package com.Evolution.logic;
 
+import com.Evolution.exceptions.IllegalCardRemovalException;
 import com.Evolution.exceptions.InvalidPlayerSpeciesRemovalException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IPlayer;
@@ -51,7 +52,9 @@ public class Player implements IPlayer {
     }
 
     @Override
-    public boolean removeCardFromHand(ICard card) {
-        return cardList.remove(card);
+    public void removeCardFromHand(ICard card) throws IllegalCardRemovalException {
+        if(!cardList.remove(card)){
+            throw new IllegalCardRemovalException("Card not contained in hand!");
+        }
     }
 }
