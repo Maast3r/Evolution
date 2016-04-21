@@ -697,7 +697,7 @@ public class GameTests {
     }
 
     @Test
-    public void testRemoveTrait() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+    public void testRemoveTrait() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
@@ -720,7 +720,7 @@ public class GameTests {
     }
 
     @Test(expected = IllegalPlayerIndexException.class)
-    public void testRemoveTraitInvalidPlayerNegative() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+    public void testRemoveTraitInvalidPlayerNegative() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         ICard fakeCard = EasyMock.niceMock(Card.class);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
@@ -728,7 +728,7 @@ public class GameTests {
     }
 
     @Test(expected = IllegalPlayerIndexException.class)
-    public void testRemoveTraitInvalidPlayerTooHigh() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+    public void testRemoveTraitInvalidPlayerTooHigh() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         ICard fakeCard = EasyMock.niceMock(Card.class);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
@@ -736,7 +736,7 @@ public class GameTests {
     }
 
     @Test(expected = IllegalSpeciesIndexException.class)
-    public void testRemoveTraitInvalidSpeciesIndexNegative() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+    public void testRemoveTraitInvalidSpeciesIndexNegative() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
@@ -748,7 +748,7 @@ public class GameTests {
     }
 
     @Test(expected = IllegalSpeciesIndexException.class)
-    public void testRemoveTraitInvalidSpeciesIndexTooHigh() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+    public void testRemoveTraitInvalidSpeciesIndexTooHigh() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
@@ -760,7 +760,7 @@ public class GameTests {
     }
 
     @Test(expected = NullGameObjectException.class)
-    public void testRemoveTraitInvalidNullTrait() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+    public void testRemoveTraitInvalidNullTrait() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         g.removeTraitFromSpecies(this.playerIndex, 1, null);

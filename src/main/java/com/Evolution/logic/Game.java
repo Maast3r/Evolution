@@ -355,21 +355,26 @@ public class Game {
 
     /**
      * Removes the given trait from the given species from the given player and puts the card on the discard pile
-     * @param playerIndex Index of the player in the player list
-     * @param speciesIndex Index of the speices for the player
-     * @param traitCard Card representing the trait to remove
      *
+     * @param playerIndex  Index of the player in the player list
+     * @param speciesIndex Index of the speices for the player
+     * @param traitCard    Card representing the trait to remove
      * @throws SpeciesTraitNotFoundException propagated from {@link ISpecies#removeTrait(ICard)}
-     * @throws IllegalPlayerIndexException if the player index is not in the valid range
-     * @throws IllegalSpeciesIndexException if the species index is not in the valid range
+     * @throws java.lang.ref.ReferenceQueue.Null if the trait card passed in is null
+     * @throws IllegalPlayerIndexException   if the player index is not in the valid range
+     * @throws IllegalSpeciesIndexException  if the species index is not in the valid range
      */
     public void removeTraitFromSpecies(int playerIndex, int speciesIndex, ICard traitCard) throws
-            SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
-        if(this.players.size() <= playerIndex || playerIndex < 0){
+            SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
+        if (traitCard == null) {
+            throw new NullGameObjectException("Trait card is null!");
+        } else if (this.players.size() <= playerIndex || playerIndex < 0) {
             throw new IllegalPlayerIndexException("Player index is out of range!");
-        } else if(speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()){
+        } else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
             throw new IllegalSpeciesIndexException("Species index is out of range!");
         }
+
+
         ICard removedCard = this.players.get(playerIndex).getSpecies().get(speciesIndex).removeTrait(traitCard);
         this.getDiscardPile().discard(removedCard);
     }
