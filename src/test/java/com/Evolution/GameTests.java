@@ -374,7 +374,7 @@ public class GameTests {
         Game g = new Game(playerList, this.wateringHole, this.drawPile, discardPile);
         player.addCardToHand(card);
         assertTrue(player.getCards().get(0).equals(card));
-        assertTrue(g.discardFromPlayer(0, card));
+        g.discardFromPlayer(0, card);
         assertTrue(discardPile.contains(card));
 
     }
