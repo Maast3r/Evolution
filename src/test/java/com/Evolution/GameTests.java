@@ -6,7 +6,6 @@ import com.Evolution.logic.*;
 import com.Evolution.testClasses.TestCard;
 import com.Evolution.testClasses.TestPlayer;
 import com.Evolution.testClasses.TestSpecies;
-import com.Evolution.testClasses.TestWateringHole;
 import org.easymock.EasyMock;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,7 +13,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,20 +28,18 @@ public class GameTests {
     private IDeck<ICard> discardPile;
     private int numPlayers;
     private int playerIndex;
-    private int overHighBound;
 
-    public GameTests(int numPlayers, int playerIndex, int overHighBound) {
+    public GameTests(int numPlayers, int playerIndex) {
         this.numPlayers = numPlayers;
         this.playerIndex = playerIndex;
-        this.overHighBound = overHighBound;
     }
 
     @Parameterized.Parameters
     public static Collection playersToCheck() {
         return Arrays.asList(new Object[][]{
-                {3, 0, 4}, {3, 1, 4}, {3, 2, 4},
-                {4, 0, 5}, {4, 1, 5}, {4, 2, 5}, {4, 3, 5},
-                {5, 0, 6}, {5, 1, 6}, {5, 2, 6}, {5, 3, 6}, {5, 4, 6}
+                {3, 0}, {3, 1}, {3, 2},
+                {4, 0}, {4, 1}, {4, 2}, {4, 3},
+                {5, 0}, {5, 1}, {5, 2}, {5, 3}, {5, 4}
         });
     }
 
@@ -359,7 +355,7 @@ public class GameTests {
             playerList.add(player);
         }
         Game g = new Game(playerList, this.wateringHole, this.drawPile, discardPile);
-        g.dealToPlayer(this.overHighBound);
+        g.dealToPlayer(this.numPlayers);
     }
 
     @Test(expected = InvalidPlayerSelectException.class)
@@ -655,7 +651,7 @@ public class GameTests {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         Card fakeCard = EasyMock.niceMock(Card.class);
-        g.addTraitToSpecies(this.overHighBound, 0, fakeCard);
+        g.addTraitToSpecies(this.numPlayers, 0, fakeCard);
     }
 
     @Test(expected = IllegalSpeciesIndexException.class)
@@ -763,6 +759,6 @@ public class GameTests {
     public void testRemoveTraitInvalidNullTrait() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
-        g.removeTraitFromSpecies(this.playerIndex, 1, null);
+        g.removeTraitFromSpecies(this.playerIndex, 0, null);
     }
 }

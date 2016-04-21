@@ -335,6 +335,7 @@ public class Game {
      * @throws SpeciesNumberTraitsException   propagated from {@link ISpecies#addTrait(ICard)}
      * @throws SpeciesDuplicateTraitException propagated from {@link ISpecies#addTrait(ICard)}
      * @throws IllegalPlayerIndexException    when the provided player index is not in [0, numPlayers)
+     * @throws IllegalSpeciesIndexException   when the provided species index is not in [0, numSpecies)
      * @throws NullGameObjectException        when the provided Card is NULL
      */
     public void addTraitToSpecies(int playerIndex, int speciesIndex, Card card) throws SpeciesNumberTraitsException,
@@ -360,7 +361,7 @@ public class Game {
      * @param speciesIndex Index of the speices for the player
      * @param traitCard    Card representing the trait to remove
      * @throws SpeciesTraitNotFoundException propagated from {@link ISpecies#removeTrait(ICard)}
-     * @throws java.lang.ref.ReferenceQueue.Null if the trait card passed in is null
+     * @throws NullGameObjectException if the trait card passed in is null
      * @throws IllegalPlayerIndexException   if the player index is not in the valid range
      * @throws IllegalSpeciesIndexException  if the species index is not in the valid range
      */
@@ -373,7 +374,6 @@ public class Game {
         } else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
             throw new IllegalSpeciesIndexException("Species index is out of range!");
         }
-
 
         ICard removedCard = this.players.get(playerIndex).getSpecies().get(speciesIndex).removeTrait(traitCard);
         this.getDiscardPile().discard(removedCard);
