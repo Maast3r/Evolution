@@ -167,6 +167,9 @@ class SpeciesBoard extends VBox {
                     case 3:
                         if(val == 8) {
                             performAction(Actions.values()[10]);
+                        } else {
+                            System.out.println("PLS SATAN WHYYYYYYYYYYYYYYYYYYYYY");
+                            performAction(Actions.values()[val]);
                         }
                     default:
                         System.out.println(Actions.values()[val] + " ---- " + val + " ++++ " + newValue);
@@ -177,7 +180,7 @@ class SpeciesBoard extends VBox {
                     | SpeciesPopulationException | IllegalSpeciesIndexException | IllegalCardDiscardException
                     | SpeciesBodySizeException | DeckEmptyException | IllegalCardDirectionException
                     | InvalidPlayerSelectException | SpeciesTraitNotFoundException | SpeciesNumberTraitsException
-                    | SpeciesDuplicateTraitException | NullGameObjectException e) {
+                    | SpeciesDuplicateTraitException | NullGameObjectException | IllegalCardRemovalException e) {
                 e.printStackTrace();
             }
         };
@@ -193,7 +196,7 @@ class SpeciesBoard extends VBox {
             IllegalSpeciesIndexException, IllegalCardDiscardException, SpeciesBodySizeException,
             InvalidPlayerSelectException, IllegalCardDirectionException, DeckEmptyException,
             SpeciesTraitNotFoundException, NullGameObjectException, SpeciesNumberTraitsException,
-            SpeciesDuplicateTraitException {
+            SpeciesDuplicateTraitException, IllegalCardRemovalException {
         // perform selected action
         switch (action) {
             case ACTIONS:
@@ -275,10 +278,11 @@ class SpeciesBoard extends VBox {
             case DISCARD_TO_WATERINGHOLE:
                 openCardWindow(Actions.DISCARD_TO_WATERINGHOLE);
                 if (this.selectedCard != null) {
-                    this.game.discardToWateringHole(this.playerIndex, this.selectedCard);
                     try {
+                        this.game.discardToWateringHole(this.playerIndex, this.selectedCard);
                         this.game.getPhase().execute();
-                    } catch (IllegalCardDirectionException | InvalidPlayerSelectException | DeckEmptyException e) {
+                    } catch (IllegalCardDirectionException | InvalidPlayerSelectException | DeckEmptyException
+                            | IllegalCardRemovalException e) {
                         e.printStackTrace();
                     }
                     this.playerPane.updateGameScreen();

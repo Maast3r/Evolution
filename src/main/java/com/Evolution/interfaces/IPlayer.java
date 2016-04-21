@@ -1,5 +1,6 @@
 package com.Evolution.interfaces;
 
+import com.Evolution.exceptions.IllegalCardRemovalException;
 import com.Evolution.exceptions.InvalidPlayerSpeciesRemovalException;
 
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public interface IPlayer {
      * Removes the given card from the players hand
      *
      * @param card the card to remove
-     * @return If the removal was successful
+     * @throws IllegalCardRemovalException if the Card is not contained in the Player's hand
      */
-    boolean removeCardFromHand(ICard card);
+    void removeCardFromHand(ICard card) throws IllegalCardRemovalException;
 }

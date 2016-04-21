@@ -97,7 +97,6 @@ class CardPopupController implements Initializable {
             this.infoLabel.setText("No cards in your hand");
             return;
         }
-        System.out.println(this.hand.toString());
         for (ICard card : this.hand) {
             ImageView cardView = new ImageView("/images/card_images/" + (card.getImgPath()));
             Label cardFoodLabel = new Label("Food value: " + card.getFood());
