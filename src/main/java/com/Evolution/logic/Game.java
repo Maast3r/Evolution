@@ -330,19 +330,22 @@ public class Game {
      * Adds the provided Card to a player's species
      *
      * @param playerIndex position in player list of player to add to
-     * @param i           position in species list of species to add to
+     * @param speciesIndex           position in species list of species to add to
      * @param card        Card being added to species
      * @throws SpeciesNumberTraitsException
      * @throws SpeciesDuplicateTraitException
      * @throws IllegalPlayerIndexException
      */
-    public void addTraitToSpecies(int playerIndex, int i, Card card) throws SpeciesNumberTraitsException,
-            SpeciesDuplicateTraitException, IllegalPlayerIndexException {
+    public void addTraitToSpecies(int playerIndex, int speciesIndex, Card card) throws SpeciesNumberTraitsException,
+            SpeciesDuplicateTraitException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
         if (playerIndex < 0 || playerIndex >= this.players.size()) {
             throw new IllegalPlayerIndexException("The given player index must be within [0,numPlayers)");
         }
         if (this.players.get(playerIndex).removeCardFromHand(card)) {
-            this.players.get(playerIndex).getSpecies().get(i).addTrait(card);
+            if(speciesIndex < 0) {
+                throw new IllegalSpeciesIndexException("The given species index must be within [0, numSpecies)");
+            }
+            this.players.get(playerIndex).getSpecies().get(speciesIndex).addTrait(card);
         }
     }
 }
