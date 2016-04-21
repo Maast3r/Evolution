@@ -622,17 +622,21 @@ public class GameTests {
     }
 
     @Test
-    public void testRemoveTrait() throws IllegalNumberOfPlayers {
+    public void testRemoveTrait() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
-        EasyMock.expect(fakeSpecies.removeTrait(fakeCard)).andExpect(fakeCard);
+        EasyMock.expect(players.get(this.playerIndex).getSpecies())
+                .andReturn(new ArrayList<>(Arrays.asList(fakeSpecies)));
+        EasyMock.expect(fakeSpecies.removeTrait(fakeCard)).andReturn(fakeCard);
         this.discardPile.discard(fakeCard);
+        EasyMock.replay(players.get(this.playerIndex));
         EasyMock.replay(fakeCard);
         EasyMock.replay(fakeSpecies);
         EasyMock.replay(this.discardPile);
         g.removeTraitFromSpecies(this.playerIndex, 0, fakeCard);
+        EasyMock.verify(players.get(this.playerIndex));
         EasyMock.verify(fakeCard);
         EasyMock.verify(fakeSpecies);
         EasyMock.verify(this.discardPile);

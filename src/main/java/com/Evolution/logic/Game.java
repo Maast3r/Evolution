@@ -325,4 +325,17 @@ public class Game {
         this.discardPile.discard(card);
         this.players.get(playerIndex).addSpeciesRight(species);
     }
+
+    /**
+     * Removes the given trait from the given species from the given player and puts the card on the discard pile
+     * @param playerIndex Index of the player in the player list
+     * @param speciesIndex Index of the speices for the player
+     * @param traitCard Card representing the trait to remove
+     *
+     * @throws SpeciesTraitNotFoundException propagated from {@link ISpecies#removeTrait(ICard)}
+     */
+    public void removeTraitFromSpecies(int playerIndex, int speciesIndex, ICard traitCard) throws SpeciesTraitNotFoundException {
+        ICard removedCard = this.players.get(playerIndex).getSpecies().get(speciesIndex).removeTrait(traitCard);
+        this.getDiscardPile().discard(removedCard);
+    }
 }

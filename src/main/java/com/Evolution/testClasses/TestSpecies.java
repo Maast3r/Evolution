@@ -53,7 +53,7 @@ public class TestSpecies implements ISpecies {
     }
 
     @Override
-    public void removeTrait(ICard c) {
-
+    public ICard removeTrait(ICard c) {
+        return null;
     }
 }
