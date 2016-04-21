@@ -758,4 +758,11 @@ public class GameTests {
         EasyMock.replay(players.get(this.playerIndex));
         g.removeTraitFromSpecies(this.playerIndex, 1, fakeCard);
     }
+
+    @Test(expected = NullGameObjectException.class)
+    public void testRemoveTraitInvalidNullTrait() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        g.removeTraitFromSpecies(this.playerIndex, 1, null);
+    }
 }
