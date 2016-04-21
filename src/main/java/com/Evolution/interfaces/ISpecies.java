@@ -1,7 +1,8 @@
 package com.Evolution.interfaces;
 
-import com.Evolution.exceptions.SpeciesBodySizeException;
-import com.Evolution.exceptions.SpeciesPopulationException;
+import com.Evolution.exceptions.*;
+
+import java.util.ArrayList;
 
 /**
  * Interface for Species
@@ -51,4 +52,26 @@ public interface ISpecies {
      */
     boolean isDead();
 
+    /**
+     * Adds the given card as a trait on the species
+     * @param c The card which to add as a trait
+     *
+     * @throws SpeciesNumberTraitsException when the {@link ISpecies#getTraits()} size is already at 3
+     * @throws SpeciesDuplicateTraitException when the {@link ISpecies#getTraits()} already contains the trait
+     */
+    void addTrait(ICard c) throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException;
+
+    /**
+     * Gets the list of all traits on the species
+     * @return The list of traits
+     */
+    ArrayList<ICard> getTraits();
+
+    /**
+     * Removes the given trait from the species
+     * @param c the trait to remove
+     *
+     * @throws SpeciesTraitNotFoundException when the {@link ISpecies#getTraits()} does not contain the trait
+     */
+    void removeTrait(ICard c) throws SpeciesTraitNotFoundException;
 }

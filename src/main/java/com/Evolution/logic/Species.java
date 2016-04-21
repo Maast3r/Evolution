@@ -1,8 +1,12 @@
 package com.Evolution.logic;
 
-import com.Evolution.exceptions.SpeciesBodySizeException;
-import com.Evolution.exceptions.SpeciesPopulationException;
+import com.Evolution.exceptions.*;
+import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.ISpecies;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Logic class for handling the logic behind Species during gameplay
@@ -11,6 +15,7 @@ import com.Evolution.interfaces.ISpecies;
 public class Species implements ISpecies {
     private int bodySize;
     private int population;
+    private ArrayList<ICard> traits = new ArrayList<>();
 
     /**
      * Creates a species defaulted with body size and population equal to 0.
@@ -58,4 +63,28 @@ public class Species implements ISpecies {
     public boolean isDead() {
         return this.population == 0;
     }
+
+    @Override
+    public void addTrait(ICard c) throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException {
+        if(this.getTraits().size() == 3){
+            throw new SpeciesNumberTraitsException("Too many traits");
+        } else if(this.getTraits().stream().filter(t -> t.getName().equals(c.getName())).count() > 0){
+            throw new SpeciesDuplicateTraitException("Duplicate trait tried to be added");
+        }
+        this.traits.add(c);
+    }
+
+    @Override
+    public void removeTrait(ICard c) throws SpeciesTraitNotFoundException {
+        if(!(this.getTraits().stream().filter(t -> t.getName().equals(c.getName())).count() > 0)){
+            throw new SpeciesTraitNotFoundException("The trait can't be removed as it is not a trait of the species");
+        }
+        this.traits.remove(this.traits.stream().filter(t -> t.getName().equals(c.getName())).iterator().next());
+    }
+
+    @Override
+    public ArrayList<ICard> getTraits(){
+        return this.traits;
+    }
+
 }

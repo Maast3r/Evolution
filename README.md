@@ -122,6 +122,9 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * NO GUI calls
 # Sprint 5
 * Jeremiah Goist
+    * Player discard for a Left or Right species
+    * Parameterization of GameTests
+    * 50+ LOC
 * Brooke Brown
 * Trevor Burch
     * Fixed issues found with unneeded methods in Species
