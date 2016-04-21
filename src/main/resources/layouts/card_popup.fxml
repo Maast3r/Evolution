@@ -14,7 +14,7 @@
            orientation="VERTICAL" prefHeight="700.0" prefWidth="800.0" stylesheets="@../styles/card_popup.css"
            xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
     <items>
-        <Pane fx:id='infoPanel' maxHeight="-Infinity" minHeight="50.0" prefHeight="75.0">
+        <Pane fx:id='infoPane' maxHeight="-Infinity" minHeight="50.0" prefHeight="75.0">
             <Label fx:id="infoLabel" contentDisplay="CENTER" maxWidth="800.0" text="" textAlignment="CENTER"
                    wrapText="true">
                 <font>
