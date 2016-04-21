@@ -155,7 +155,7 @@ class SpeciesBoard extends VBox {
                         break;
                 }
             } catch (InvalidDiscardToWateringHoleException | InvalidAddToWateringHoleException |
-                    InvalidPlayerSelectException e) {
+                    InvalidPlayerSelectException | IllegalCardDiscardException e) {
                 e.printStackTrace();
             }
         };
@@ -167,7 +167,7 @@ class SpeciesBoard extends VBox {
      * @param action the selected action
      */
     private void performAction(Actions action) throws InvalidDiscardToWateringHoleException,
-            InvalidAddToWateringHoleException, InvalidPlayerSelectException {
+            InvalidAddToWateringHoleException, InvalidPlayerSelectException, IllegalCardDiscardException {
         // perform selected action
         switch (action) {
             case ACTIONS:

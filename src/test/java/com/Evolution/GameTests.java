@@ -403,7 +403,7 @@ public class GameTests {
     @Test
     public void testDiscardToWateringHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             InvalidPlayerSelectException, DeckEmptyException, InvalidDiscardToWateringHoleException,
-            InvalidAddToWateringHoleException {
+            InvalidAddToWateringHoleException, IllegalCardDiscardException {
         Deck<ICard> drawPile = new Deck<>();
         WateringHole wateringHole = new WateringHole();
         ICard card = new TestCard();
@@ -439,7 +439,8 @@ public class GameTests {
             drawPile.discard(card);
         }
         ArrayList<IPlayer> playerList = generateNumRealPlayers(this.numPlayers);
-        Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
+        WateringHole wateringHole = new WateringHole();
+        Game g = new Game(playerList, wateringHole, drawPile, this.discardPile);
         for (int i = 0; i < this.numPlayers; i++) {
             g.dealToPlayer(i);
         }
@@ -453,14 +454,13 @@ public class GameTests {
     @Test(expected = InvalidDiscardToWateringHoleException.class)
     public void testDiscardExtraToWateringHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             InvalidPlayerSelectException, DeckEmptyException, InvalidDiscardToWateringHoleException,
-            InvalidAddToWateringHoleException {
+            InvalidAddToWateringHoleException, IllegalCardDiscardException {
         Deck<ICard> drawPile = new Deck<>();
         WateringHole wateringHole = new WateringHole();
         for (int i = 0; i < this.numPlayers + 1; i++) {
             ICard card = new TestCard();
             drawPile.discard(card);
         }
-        Player player = new Player(new TestSpecies());
         ArrayList<IPlayer> playerList = generateNumRealPlayers(this.numPlayers);
         Game g = new Game(playerList, wateringHole, drawPile, this.discardPile);
         for (int k = 0; k < this.numPlayers + 1; k++) {
