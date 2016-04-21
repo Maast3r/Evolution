@@ -332,12 +332,16 @@ public class Game {
      * @param playerIndex  position in player list of player to add to
      * @param speciesIndex position in species list of species to add to
      * @param card         Card being added to species
-     * @throws SpeciesNumberTraitsException
-     * @throws SpeciesDuplicateTraitException
-     * @throws IllegalPlayerIndexException
+     * @throws SpeciesNumberTraitsException   propagated from {@link ISpecies#addTrait(ICard)}
+     * @throws SpeciesDuplicateTraitException propagated from {@link ISpecies#addTrait(ICard)}
+     * @throws IllegalPlayerIndexException    when the provided player index is not in [0, numPlayers)
+     * @throws NullGameObjectException        when the provided Card is NULL
      */
     public void addTraitToSpecies(int playerIndex, int speciesIndex, Card card) throws SpeciesNumberTraitsException,
-            SpeciesDuplicateTraitException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+            SpeciesDuplicateTraitException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
+        if (card == null) {
+            throw new NullGameObjectException("The given Card object cannot be NULL");
+        }
         if (playerIndex < 0 || playerIndex >= this.players.size()) {
             throw new IllegalPlayerIndexException("The given player index must be within [0,numPlayers)");
         }

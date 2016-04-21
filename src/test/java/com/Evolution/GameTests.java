@@ -622,7 +622,7 @@ public class GameTests {
     }
 
     @Test
-    public void testAddTrait() throws IllegalNumberOfPlayers, SpeciesNumberTraitsException, SpeciesDuplicateTraitException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+    public void testAddTrait() throws IllegalNumberOfPlayers, SpeciesNumberTraitsException, SpeciesDuplicateTraitException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         Card fakeCard = EasyMock.niceMock(Card.class);
@@ -641,7 +641,7 @@ public class GameTests {
     }
 
     @Test(expected = IllegalPlayerIndexException.class)
-    public void testAddTraitLowPlayer() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException, IllegalNumberOfPlayers, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+    public void testAddTraitLowPlayer() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException, IllegalNumberOfPlayers, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         Card fakeCard = EasyMock.niceMock(Card.class);
@@ -650,7 +650,7 @@ public class GameTests {
 
     @Test(expected = IllegalPlayerIndexException.class)
     public void testAddTraitHighPlayer() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException,
-            IllegalNumberOfPlayers, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+            IllegalNumberOfPlayers, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         Card fakeCard = EasyMock.niceMock(Card.class);
@@ -659,7 +659,7 @@ public class GameTests {
 
     @Test(expected = IllegalSpeciesIndexException.class)
     public void testAddTraitLowSpecies() throws IllegalNumberOfPlayers, SpeciesNumberTraitsException,
-            SpeciesDuplicateTraitException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+            SpeciesDuplicateTraitException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         Card fakeCard = EasyMock.niceMock(Card.class);
@@ -674,7 +674,7 @@ public class GameTests {
 
     @Test(expected = IllegalSpeciesIndexException.class)
     public void testAddTraitHighSpecies() throws IllegalNumberOfPlayers, SpeciesNumberTraitsException,
-            SpeciesDuplicateTraitException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+            SpeciesDuplicateTraitException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         Card fakeCard = EasyMock.niceMock(Card.class);
@@ -689,9 +689,9 @@ public class GameTests {
 
     @Test(expected = NullGameObjectException.class)
     public void testAddTraitNullCard() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException,
-            IllegalNumberOfPlayers, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+            IllegalNumberOfPlayers, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
-        g.addTraitToSpecies(this.overHighBound, 0, null);
+        g.addTraitToSpecies(this.playerIndex, 0, null);
     }
 }
