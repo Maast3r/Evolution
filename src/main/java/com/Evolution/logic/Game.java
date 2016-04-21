@@ -206,7 +206,10 @@ public class Game {
      * @param card to remove
      * @return successful discard
      */
-    public boolean discardFromPlayer(int i, ICard card) {
+    public boolean discardFromPlayer(int i, ICard card) throws InvalidPlayerSelectException {
+        if (i > this.players.size() - 1) {
+            throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
+        }
         if (this.players.get(i).removeCardFromHand(card)) {
             this.discardPile.discard(card);
             return true;

@@ -312,7 +312,7 @@ public class GameTests {
     }
 
     @Test
-    public void testRemovePlayerValid() throws IllegalNumberOfPlayers, IllegalCardDirectionException, NoSuchFieldException, IllegalAccessException {
+    public void testRemovePlayerValid() throws IllegalNumberOfPlayers, IllegalCardDirectionException, NoSuchFieldException, IllegalAccessException, InvalidPlayerSelectException {
         Game g = new Game(generateNumPlayers(4), this.wateringHole, this.drawPile, this.discardPile);
         IPlayer fakePlayer = EasyMock.niceMock(Player.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
@@ -345,7 +345,7 @@ public class GameTests {
     }
 
     @Test
-    public void testRemoveFromPlayerResults() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+    public void testRemoveFromPlayerResults() throws IllegalNumberOfPlayers, IllegalCardDirectionException, InvalidPlayerSelectException {
         Deck<ICard> discardPile = new Deck<>();
         ICard card = new TestCard();
         assertTrue(!discardPile.contains(card));
