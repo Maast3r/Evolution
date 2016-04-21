@@ -686,4 +686,12 @@ public class GameTests {
         g.addTraitToSpecies(this.playerIndex, 1, fakeCard);
         EasyMock.verify(players.get(this.playerIndex), this.wateringHole, this.drawPile, this.discardPile, fakeCard);
     }
+
+    @Test(expected = NullGameObjectException.class)
+    public void testAddTraitNullCard() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException,
+            IllegalNumberOfPlayers, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        g.addTraitToSpecies(this.overHighBound, 0, null);
+    }
 }
