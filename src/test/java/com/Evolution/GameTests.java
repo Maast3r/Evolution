@@ -336,6 +336,14 @@ public class GameTests {
         EasyMock.verify(fakeCard);
     }
 
+    @Test(expected = InvalidPlayerSelectException.class)
+    public void testDiscardFromPlayerInvalidPlayer() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+    DeckEmptyException, InvalidPlayerSelectException {
+        ArrayList<IPlayer> playerList = generateNumPlayers(this.numPlayers);
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, discardPile);
+        g.discardFromPlayer(this.numPlayers, new TestCard());
+    }
+
     @Test
     public void testRemoveFromPlayerResults() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
         Deck<ICard> discardPile = new Deck<>();
@@ -446,7 +454,6 @@ public class GameTests {
         }
         g.discardToWateringHole(this.playerIndex, new TestCard());
     }
-
 
     /**
      * BVA - Can only add card to the watering hole equal to the number of players
