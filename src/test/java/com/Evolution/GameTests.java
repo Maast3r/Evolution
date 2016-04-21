@@ -645,7 +645,7 @@ public class GameTests {
     }
 
     @Test(expected = IllegalPlayerIndexException.class)
-    public void testRemoveInvalidPlayerNegative() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+    public void testRemoveTraitInvalidPlayerNegative() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         ICard fakeCard = EasyMock.niceMock(Card.class);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
@@ -653,7 +653,7 @@ public class GameTests {
     }
 
     @Test(expected = IllegalPlayerIndexException.class)
-    public void testRemoveInvalidPlayerToHigh() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+    public void testRemoveTraitInvalidPlayerTooHigh() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         ICard fakeCard = EasyMock.niceMock(Card.class);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
@@ -661,7 +661,7 @@ public class GameTests {
     }
 
     @Test(expected = IllegalSpeciesIndexException.class)
-    public void testRemoveInvalidSpeciesIndexNegative() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+    public void testRemoveTraitInvalidSpeciesIndexNegative() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
@@ -673,7 +673,7 @@ public class GameTests {
     }
 
     @Test(expected = IllegalSpeciesIndexException.class)
-    public void testRemoveInvalidSpeciesIndexTooHigh() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+    public void testRemoveTraitInvalidSpeciesIndexTooHigh() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
