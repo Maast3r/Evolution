@@ -630,6 +630,8 @@ public class GameTests {
         EasyMock.expect(players.get(this.playerIndex).removeCardFromHand(fakeCard)).andReturn(true);
         EasyMock.expect(players.get(this.playerIndex).getSpecies()).andReturn(new ArrayList<>(Arrays.asList
                 (fakeSpecies)));
+        EasyMock.expect(players.get(this.playerIndex).getSpecies()).andReturn(new ArrayList<>(Arrays.asList
+                (fakeSpecies)));
         fakeSpecies.addTrait(fakeCard);
         EasyMock.replay(players.get(this.playerIndex), this.wateringHole, this.drawPile, this.discardPile, fakeCard,
                 fakeSpecies);
