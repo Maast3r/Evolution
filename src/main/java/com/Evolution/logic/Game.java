@@ -383,10 +383,10 @@ public class Game {
         if (playerIndex < 0 || playerIndex >= this.players.size()) {
             throw new InvalidPlayerSelectException("The given player index must be within [0,numPlayers)");
         }
-        this.players.get(playerIndex).removeCardFromHand(card);
         if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
             throw new IllegalSpeciesIndexException("The given species index must be within [0, numSpecies)");
         }
+        this.players.get(playerIndex).removeCardFromHand(card);
         this.players.get(playerIndex).getSpecies().get(speciesIndex).addTrait(card);
 
     }
