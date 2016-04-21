@@ -4,9 +4,7 @@ import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.ISpecies;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Logic class for handling the logic behind Species during gameplay
@@ -75,11 +73,13 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public void removeTrait(ICard c) throws SpeciesTraitNotFoundException {
+    public ICard removeTrait(ICard c) throws SpeciesTraitNotFoundException {
         if(!(this.getTraits().stream().filter(t -> t.getName().equals(c.getName())).count() > 0)){
             throw new SpeciesTraitNotFoundException("The trait can't be removed as it is not a trait of the species");
         }
-        this.traits.remove(this.traits.stream().filter(t -> t.getName().equals(c.getName())).iterator().next());
+        ICard cardToRemove = this.traits.stream().filter(t -> t.getName().equals(c.getName())).iterator().next();
+        this.traits.remove(cardToRemove);
+        return cardToRemove;
     }
 
     @Override

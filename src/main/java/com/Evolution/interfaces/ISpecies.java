@@ -73,5 +73,5 @@ public interface ISpecies {
      *
      * @throws SpeciesTraitNotFoundException when the {@link ISpecies#getTraits()} does not contain the trait
      */
-    void removeTrait(ICard c) throws SpeciesTraitNotFoundException;
+    ICard removeTrait(ICard c) throws SpeciesTraitNotFoundException;
 }
