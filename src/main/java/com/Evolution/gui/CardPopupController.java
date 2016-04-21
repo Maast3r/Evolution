@@ -1,5 +1,9 @@
 package com.Evolution.gui;
 
+import com.Evolution.exceptions.IllegalSpeciesIndexException;
+import com.Evolution.exceptions.InvalidPlayerSelectException;
+import com.Evolution.exceptions.NullGameObjectException;
+import com.Evolution.exceptions.SpeciesTraitNotFoundException;
 import com.Evolution.interfaces.ICard;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
@@ -117,7 +121,12 @@ class CardPopupController implements Initializable {
                                     -> {
                                 if (newValue.intValue() > 0) {
                                     if(this.board.getTraits()[newValue.intValue()] != null) {
-                                        this.board.overwriteTrait(newValue.intValue());
+                                        try {
+                                            this.board.overwriteTrait(newValue.intValue());
+                                        } catch (IllegalSpeciesIndexException | InvalidPlayerSelectException
+                                                | SpeciesTraitNotFoundException | NullGameObjectException e) {
+                                            e.printStackTrace();
+                                        }
                                     }
                                     this.board.setTraitSelection(newValue.intValue());
                                     this.gridPane.getScene().getWindow().hide();
