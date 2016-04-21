@@ -145,3 +145,8 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Fixed issue with branch coverage - Added IllegalCardRemovalException w/ Jeremiah
     * 50+ LOC
 * Andrew Ma
+    * Add/Remove trait card
+    * End turn
+    * Increase population/body size
+    * Add species left/right
+    * 50+ LOC

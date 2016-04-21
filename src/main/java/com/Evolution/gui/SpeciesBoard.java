@@ -211,14 +211,13 @@ class SpeciesBoard extends VBox {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
                     this.playerPane.updateGameScreen();
                     this.game.addTraitToSpecies(this.playerIndex, this.speciesNum, this.selectedCard);
-
                     this.selectedCard = null;
                 }
                 break;
             case REMOVE_TRAIT:
                 openTraitWindow();
                 if (this.selectedCard != null) {
-                     this.game.removeTraitFromSpecies(this.playerIndex, this.speciesNum, this.selectedCard);
+                    this.game.removeTraitFromSpecies(this.playerIndex, this.speciesNum, this.selectedCard);
                     this.playerPane.updateGameScreen();
                     this.selectedCard = null;
                 }
@@ -416,17 +415,17 @@ class SpeciesBoard extends VBox {
             case 1:
                 System.out.println("added to trait 1");
                 this.traits[0] = this.selectedCard;
-                setTrait1(this.selectedCard.getName());
+//                setTrait1(this.selectedCard.getName());
                 break;
             case 2:
                 System.out.println("added to trait 2");
                 this.traits[1] = this.selectedCard;
-                setTrait2(this.selectedCard.getName());
+//                setTrait2(this.selectedCard.getName());
                 break;
             case 3:
                 System.out.println("added to trait 3");
                 this.traits[2] = this.selectedCard;
-                setTrait3(this.selectedCard.getName());
+//                setTrait3(this.selectedCard.getName());
                 break;
         }
     }
@@ -532,5 +531,21 @@ class SpeciesBoard extends VBox {
      */
     void setSpeciesNum(int num) {
         this.speciesNum = num;
+    }
+
+    /**
+     * Returns the array of traits
+     * @return this.traits
+     */
+    public ICard[] getTraits(){
+        return this.traits;
+    }
+
+    /**
+     * Overwrites trait at index i
+     */
+    public void overwriteTrait(int i) throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
+            NullGameObjectException, SpeciesTraitNotFoundException {
+        this.game.removeTraitFromSpecies(this.playerIndex, this.speciesNum, this.traits[i]);
     }
 }
