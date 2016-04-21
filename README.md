@@ -120,12 +120,21 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * BVA Testing
     * 50+ LOC
     * NO GUI calls
+
 # Sprint 5
 * Jeremiah Goist
     * Player discard for a Left or Right species
     * Parameterization of GameTests
     * 50+ LOC
 * Brooke Brown
+    * Finished card input file
+    * Increase body size & population
+    * Added new exceptions
+    * Refactored game/tests with missing input validation
+    * Used paramaterized tests
+    * Performed code reviews
+    * 50+ LOC
+    * No GUI calls
 * Trevor Burch
     * Fixed issues found with unneeded methods in Species
 * Andrew Ma
