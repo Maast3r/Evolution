@@ -333,6 +333,8 @@ public class Game {
      * @param traitCard Card representing the trait to remove
      *
      * @throws SpeciesTraitNotFoundException propagated from {@link ISpecies#removeTrait(ICard)}
+     * @throws IllegalPlayerIndexException if the player index is not in the valid range
+     * @throws IllegalSpeciesIndexException if the species index is not in the valid range
      */
     public void removeTraitFromSpecies(int playerIndex, int speciesIndex, ICard traitCard) throws
             SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
