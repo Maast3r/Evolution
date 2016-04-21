@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by brownba1 on 3/28/2016.
@@ -173,9 +174,10 @@ class SpeciesBoard extends VBox {
                         break;
                 }
             } catch (InvalidDiscardToWateringHoleException | InvalidAddToWateringHoleException
-                    | IllegalPlayerIndexException | SpeciesPopulationException | IllegalSpeciesIndexException
-                    | IllegalCardDiscardException | SpeciesBodySizeException | DeckEmptyException
-                    | IllegalCardDirectionException | InvalidPlayerSelectException e) {
+                    | SpeciesPopulationException | IllegalSpeciesIndexException | IllegalCardDiscardException
+                    | SpeciesBodySizeException | DeckEmptyException | IllegalCardDirectionException
+                    | InvalidPlayerSelectException | SpeciesTraitNotFoundException | SpeciesNumberTraitsException
+                    | SpeciesDuplicateTraitException | NullGameObjectException e) {
                 e.printStackTrace();
             }
         };
@@ -187,9 +189,11 @@ class SpeciesBoard extends VBox {
      * @param action the selected action
      */
     private void performAction(Actions action) throws InvalidDiscardToWateringHoleException,
-            InvalidAddToWateringHoleException, IllegalPlayerIndexException, SpeciesPopulationException,
+            InvalidAddToWateringHoleException, SpeciesPopulationException,
             IllegalSpeciesIndexException, IllegalCardDiscardException, SpeciesBodySizeException,
-            InvalidPlayerSelectException, IllegalCardDirectionException, DeckEmptyException {
+            InvalidPlayerSelectException, IllegalCardDirectionException, DeckEmptyException,
+            SpeciesTraitNotFoundException, NullGameObjectException, SpeciesNumberTraitsException,
+            SpeciesDuplicateTraitException {
         // perform selected action
         switch (action) {
             case ACTIONS:
@@ -200,11 +204,11 @@ class SpeciesBoard extends VBox {
                 this.selectedCard = null;
                 break;
             case ADD_TRAIT:
-                openCardWindow(Actions.ADD_TRAIT);
-                if (this.selectedCard != null) {
+                boolean add = openCardWindow(Actions.ADD_TRAIT);
+                if (this.selectedCard != null && add) {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
                     this.playerPane.updateGameScreen();
-                    // this.game.addTraitToSpecies(this.player, this.speciesNum, this.selectedCard);
+                    this.game.addTraitToSpecies(this.playerIndex, this.speciesNum, this.selectedCard);
 
                     this.selectedCard = null;
                 }
@@ -212,7 +216,7 @@ class SpeciesBoard extends VBox {
             case REMOVE_TRAIT:
                 openTraitWindow();
                 if (this.selectedCard != null) {
-                    // this.game.removeTrait(this.player, this.speciesNum, this.selectedCard);
+                     this.game.removeTraitFromSpecies(this.playerIndex, this.speciesNum, this.selectedCard);
                     this.playerPane.updateGameScreen();
                     this.selectedCard = null;
                 }
@@ -289,7 +293,7 @@ class SpeciesBoard extends VBox {
     /**
      * Opens up the card window for the player to view their cards
      */
-    private void openCardWindow(Actions action) {
+    private boolean openCardWindow(Actions action) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/card_popup.fxml"));
             CardPopupController controller =
@@ -309,10 +313,13 @@ class SpeciesBoard extends VBox {
                     this.actionChoiceBox.getSelectionModel().selectFirst();
                 }
             });
+
             s.showAndWait();
+            return controller.getSuccessfulAdd();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
     /**
@@ -322,7 +329,9 @@ class SpeciesBoard extends VBox {
         try {
             ArrayList<ICard> traitCards = new ArrayList<>();
             for(int i=0; i<this.traits.length; i++){
-                traitCards.add(this.traits[i]);
+                if(this.traits[i] != null) {
+                    traitCards.add(this.traits[i]);
+                }
             }
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/card_popup.fxml"));
             CardPopupController controller =

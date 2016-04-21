@@ -377,7 +377,7 @@ public class Game {
      * @throws IllegalSpeciesIndexException   when the provided species index is not in [0, numSpecies)
      * @throws NullGameObjectException        when the provided Card is NULL
      */
-    public void addTraitToSpecies(int playerIndex, int speciesIndex, Card card) throws SpeciesNumberTraitsException,
+    public void addTraitToSpecies(int playerIndex, int speciesIndex, ICard card) throws SpeciesNumberTraitsException,
             SpeciesDuplicateTraitException, InvalidPlayerSelectException, IllegalSpeciesIndexException, NullGameObjectException {
         if (card == null) {
             throw new NullGameObjectException("The given Card object cannot be NULL");

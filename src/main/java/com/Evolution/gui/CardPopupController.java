@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 /**
@@ -33,6 +34,7 @@ class CardPopupController implements Initializable {
     private SpeciesBoard board;
     private boolean addTrait = false;
     private boolean removeTrait = false;
+    private boolean successfulAdd = false;
 
     @FXML
     private Label infoLabel;
@@ -95,6 +97,7 @@ class CardPopupController implements Initializable {
             this.infoLabel.setText("No cards in your hand");
             return;
         }
+        System.out.println(this.hand.toString());
         for (ICard card : this.hand) {
             ImageView cardView = new ImageView("/images/card_images/" + (card.getImgPath()));
             Label cardFoodLabel = new Label("Food value: " + card.getFood());
@@ -147,9 +150,11 @@ class CardPopupController implements Initializable {
                     if (newValue.intValue() > 0) {
                         this.board.removeTrait(newValue.intValue());
                         this.gridPane.getScene().getWindow().hide();
+                        this.successfulAdd = true;
                     }
 
                 });
+                this.infoPane.getChildren().add(traitBox);
                 traitBox.show();
             }
             VBox cardPane = new VBox();
@@ -194,4 +199,14 @@ class CardPopupController implements Initializable {
             this.gridPane.getRowConstraints().add(rowConst);
         }
     }
+
+    /**
+     * Returns whether or not the add was successful
+     * @return successfulAdd
+     */
+    public boolean getSuccessfulAdd() {
+        return this.successfulAdd;
+    }
+
+
 }
