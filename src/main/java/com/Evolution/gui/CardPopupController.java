@@ -2,19 +2,25 @@ package com.Evolution.gui;
 
 import com.Evolution.interfaces.ICard;
 import javafx.collections.FXCollections;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 /**
@@ -27,11 +33,15 @@ class CardPopupController implements Initializable {
     private int numCards = 0;
     private SpeciesBoard board;
     private boolean addTrait = false;
+    private boolean removeTrait = false;
+    private boolean successfulAdd = false;
 
     @FXML
     private Label infoLabel;
     @FXML
     private GridPane gridPane;
+    @FXML
+    private Pane infoPane;
 
     /**
      * Set the current player hand after initializing the controller
@@ -55,6 +65,16 @@ class CardPopupController implements Initializable {
     }
 
     /**
+     * Sets the boolean to true if the action that opened this window was
+     * the REMOVE_TRAIT action
+     *
+     * @param removeTrait boolean value
+     */
+    void setRemoveTrait(boolean removeTrait) {
+        this.removeTrait = removeTrait;
+    }
+
+    /**
      * Initialize the card controller and popup
      *
      * @param fxmlFileLocation fxml file this controller is for (card_popup.fxml)
@@ -63,9 +83,8 @@ class CardPopupController implements Initializable {
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
         assert this.gridPane != null : "fx:id=\"gridPane\" was not injected: check your FXML file 'card_popup.fxml'.";
         assert this.infoLabel != null : "fx:id=\"infoLabel\" was not injected: check your FXML file 'card_popup.fxml'.";
-
+        assert this.infoPane != null : "fx:id=\"infoPane\" was not injected: check your FXML file 'card_popup.fxml'.";
         gridSetup();
-
         displayCards();
     }
 
@@ -81,24 +100,62 @@ class CardPopupController implements Initializable {
         for (ICard card : this.hand) {
             ImageView cardView = new ImageView("/images/card_images/" + (card.getImgPath()));
             Label cardFoodLabel = new Label("Food value: " + card.getFood());
-            cardView.setOnMouseClicked(event -> {
-                if (event.getButton() == MouseButton.SECONDARY) {
-                    this.infoLabel.setText(card.getName() + ": " + card.getDesc());
-                } else {
-                    this.board.setSelectedCard(card);
-                    if (this.addTrait) {
-                        // TODO show this box to let player choose
-                        ChoiceBox<String> choices = new ChoiceBox<>();
-                        choices.setItems(FXCollections.observableArrayList("Trait 1", "Trait 2",
-                                "Trait 3"));
-                        choices.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue, newValue)
-                                -> {
-                            this.board.setTraitSelection(newValue.intValue());
-                        });
+            if(!this.removeTrait) {
+                cardView.setOnMouseClicked(event -> {
+                    if (event.getButton() == MouseButton.SECONDARY) {
+                        this.infoLabel.setText(card.getName() + ": " + card.getDesc());
+                    } else {
+                        this.board.setSelectedCard(card);
+                        if (this.addTrait) {
+                            ChoiceBox traitBox = new ChoiceBox(FXCollections.observableArrayList("Please select one",
+                                    "Trait 1",
+                                    "Trait 2",
+                                    "Trait 3"));
+                            traitBox.getSelectionModel().selectFirst();
+                            traitBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue,
+                                                                                              newValue)
+                                    -> {
+                                if (newValue.intValue() > 0) {
+                                    this.board.setTraitSelection(newValue.intValue());
+                                    this.gridPane.getScene().getWindow().hide();
+                                }
+
+                            });
+                            traitBox.show();
+                            this.infoPane.getChildren().add(traitBox);
+
+                            //                        Button closeButton = new Button();
+                            //                        closeButton.setText("Add Trait");
+                            //                        closeButton.setOnAction(new EventHandler<ActionEvent>() {
+                            //                            @Override public void handle(ActionEvent e) {
+                            //                                System.out.println("close window");
+                            //                        }
+                            //                        });
+                            //                        this.infoPane.getChildren().add(closeButton);
+                        } else {
+                            this.gridPane.getScene().getWindow().hide();
+                        }
                     }
-                    this.gridPane.getScene().getWindow().hide();
-                }
-            });
+                });
+            } else {
+                ChoiceBox traitBox = new ChoiceBox(FXCollections.observableArrayList("Please select one",
+                        "Trait 1",
+                        "Trait 2",
+                        "Trait 3"));
+                traitBox.getSelectionModel().selectFirst();
+                traitBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue,
+                                                                                  newValue)
+                        -> {
+                    if (newValue.intValue() > 0) {
+                        this.board.removeTrait(newValue.intValue());
+                        this.gridPane.getScene().getWindow().hide();
+                        this.successfulAdd = true;
+                    }
+
+                });
+                this.infoPane.getChildren().add(traitBox);
+                traitBox.show();
+            }
             VBox cardPane = new VBox();
             cardPane.setAlignment(Pos.CENTER);
             cardPane.getChildren().addAll(cardView, cardFoodLabel);
@@ -121,7 +178,7 @@ class CardPopupController implements Initializable {
             col = cardNum;
         } else {
             col = cardNum % 3;
-        }
+        };
         this.gridPane.add(cardPane, col, row);
     }
 
@@ -141,4 +198,14 @@ class CardPopupController implements Initializable {
             this.gridPane.getRowConstraints().add(rowConst);
         }
     }
+
+    /**
+     * Returns whether or not the add was successful
+     * @return successfulAdd
+     */
+    public boolean getSuccessfulAdd() {
+        return this.successfulAdd;
+    }
+
+
 }

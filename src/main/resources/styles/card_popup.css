@@ -19,3 +19,21 @@
     -fx-alignment: center;
 }
 
+.choice-box {
+    -fx-min-width: 150;
+    -fx-max-width: 200;
+    -fx-text-fill: darkorange;
+    -fx-background-color: #333333;
+    -fx-alignment: center;
+    -fx-content-display: center;
+    -fx-text-alignment: center;
+}
+
+.choice-box .context-menu {
+    -fx-min-width: 150;
+    -fx-max-width: 200;
+    -fx-x: 50;
+    -fx-background-color: #333333;
+    -fx-text-alignment: center;
+    -fx-text-fill: darkorange;
+}

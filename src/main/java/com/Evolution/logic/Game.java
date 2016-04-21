@@ -376,7 +376,8 @@ public class Game {
      * @throws IllegalCardRemovalException    propagated from {@link IPlayer#removeCardFromHand(ICard)}
      */
     public void addTraitToSpecies(int playerIndex, int speciesIndex, ICard card) throws SpeciesNumberTraitsException,
-            SpeciesDuplicateTraitException, InvalidPlayerSelectException, IllegalSpeciesIndexException, NullGameObjectException, IllegalCardRemovalException {
+            SpeciesDuplicateTraitException, InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            NullGameObjectException, IllegalCardRemovalException {
         if (card == null) {
             throw new NullGameObjectException("The given Card object cannot be NULL");
         }
