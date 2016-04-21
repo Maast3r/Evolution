@@ -204,14 +204,22 @@ public class Game {
      *
      * @param i    player index
      * @param card to remove
-     * @return successful discard
+     * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
+     *                                      player's hand
+     * @throws InvalidPlayerSelectException  thrown when the given player index is greater than the number of players
+     *
      */
-    public boolean discardFromPlayer(int i, ICard card) {
+    public void discardFromPlayer(int i, ICard card) throws InvalidPlayerSelectException,
+            IllegalCardDiscardException {
+        if (i > this.players.size() - 1) {
+            throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
+        }
+        if (!this.players.get(i).getCards().contains(card)) {
+            throw new IllegalCardDiscardException("Selected card is not in this players hand.");
+        }
         if (this.players.get(i).removeCardFromHand(card)) {
             this.discardPile.discard(card);
-            return true;
         }
-        return false;
     }
 
     /**
@@ -231,12 +239,21 @@ public class Game {
      * @throws InvalidAddToWateringHoleException     propagated from {@link IWateringHole#addCard(ICard)}
      * @throws InvalidDiscardToWateringHoleException trying to discard to watering hole when it already has the
      *                                               maximum number of cards
+     * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
+     *                                      player's hand
+     * @throws InvalidPlayerSelectException  thrown when the given player index is greater than the number of players
      */
     public void discardToWateringHole(int index, ICard card) throws InvalidDiscardToWateringHoleException,
-            InvalidAddToWateringHoleException {
+            InvalidAddToWateringHoleException, InvalidPlayerSelectException, IllegalCardDiscardException {
         if (this.wateringHole.getCards().size() == this.players.size()) {
             throw new InvalidDiscardToWateringHoleException("You can not discard more cards to the watering hole " +
                     "than the number of players.");
+        }
+        if (index > this.players.size() - 1) {
+            throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
+        }
+        if (!this.players.get(index).getCards().contains(card)) {
+            throw new IllegalCardDiscardException("Selected card is not in this players hand.");
         }
         this.wateringHole.addCard(card);
         this.players.get(index).removeCardFromHand(card);
@@ -252,14 +269,14 @@ public class Game {
      * @throws SpeciesPopulationException   propagated from {@link Species#increasePopulation()}
      * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
      *                                      player's hand
-     * @throws IllegalPlayerIndexException  thrown when the given player index is greater than the number of players
+     * @throws InvalidPlayerSelectException  thrown when the given player index is greater than the number of players
      * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
      *                                      for the given player
      */
     public void increasePopulation(int playerIndex, int speciesIndex, ICard card) throws SpeciesPopulationException,
-            IllegalCardDiscardException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
+            IllegalCardDiscardException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
         if (playerIndex > this.players.size() - 1) {
-            throw new IllegalPlayerIndexException("The given player index is greater than the number of players.");
+            throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }
         if (!this.players.get(playerIndex).getCards().contains(card)) {
             throw new IllegalCardDiscardException("Selected card is not in this players hand.");
@@ -282,14 +299,14 @@ public class Game {
      * @throws SpeciesBodySizeException     propagated from {@link Species#increaseBodySize()}
      * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
      *                                      player's hand
-     * @throws IllegalPlayerIndexException  thrown when the given player index is greater than the number of players
+     * @throws InvalidPlayerSelectException  thrown when the given player index is greater than the number of players
      * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
      *                                      for the given player
      */
     public void increaseBodySize(int playerIndex, int speciesIndex, ICard card) throws SpeciesBodySizeException,
-            IllegalPlayerIndexException, IllegalCardDiscardException, IllegalSpeciesIndexException {
+            InvalidPlayerSelectException, IllegalCardDiscardException, IllegalSpeciesIndexException {
         if (playerIndex > this.players.size() - 1) {
-            throw new IllegalPlayerIndexException("The given player index is greater than the number of players.");
+            throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }
         if (!this.players.get(playerIndex).getCards().contains(card)) {
             throw new IllegalCardDiscardException("Selected card is not in this players hand.");
@@ -308,8 +325,19 @@ public class Game {
      * @param playerIndex position in player list of player to add to
      * @param card        Card from player's hand that is being discarded
      * @param species     Species being added to player
+     * @throws InvalidPlayerSelectException  thrown when the given player index is greater than the number of players
+     * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
+     *                                      player's hand
+     *
      */
-    public void discardForLeftSpecies(int playerIndex, ICard card, ISpecies species) {
+    public void discardForLeftSpecies(int playerIndex, ICard card, ISpecies species) throws
+            InvalidPlayerSelectException, IllegalCardDiscardException {
+        if (playerIndex > this.players.size() - 1) {
+            throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
+        }
+        if (!this.players.get(playerIndex).getCards().contains(card)) {
+            throw new IllegalCardDiscardException("Selected card is not in this players hand.");
+        }
         this.discardPile.discard(card);
         this.players.get(playerIndex).addSpeciesLeft(species);
     }
@@ -320,8 +348,19 @@ public class Game {
      * @param playerIndex position in player list of player to add to
      * @param card        Card from player's hand that is being discarded
      * @param species     Species being added to player
+     * @throws InvalidPlayerSelectException  thrown when the given player index is greater than the number of players
+     * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
+     *                                      player's hand
+     *
      */
-    public void discardForRightSpecies(int playerIndex, ICard card, ISpecies species) {
+    public void discardForRightSpecies(int playerIndex, ICard card, ISpecies species) throws
+            InvalidPlayerSelectException, IllegalCardDiscardException {
+        if (playerIndex > this.players.size() - 1) {
+            throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
+        }
+        if (!this.players.get(playerIndex).getCards().contains(card)) {
+            throw new IllegalCardDiscardException("Selected card is not in this players hand.");
+        }
         this.discardPile.discard(card);
         this.players.get(playerIndex).addSpeciesRight(species);
     }
@@ -334,17 +373,17 @@ public class Game {
      * @param card         Card being added to species
      * @throws SpeciesNumberTraitsException   propagated from {@link ISpecies#addTrait(ICard)}
      * @throws SpeciesDuplicateTraitException propagated from {@link ISpecies#addTrait(ICard)}
-     * @throws IllegalPlayerIndexException    when the provided player index is not in [0, numPlayers)
+     * @throws InvalidPlayerSelectException    when the provided player index is not in [0, numPlayers)
      * @throws IllegalSpeciesIndexException   when the provided species index is not in [0, numSpecies)
      * @throws NullGameObjectException        when the provided Card is NULL
      */
     public void addTraitToSpecies(int playerIndex, int speciesIndex, Card card) throws SpeciesNumberTraitsException,
-            SpeciesDuplicateTraitException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
+            SpeciesDuplicateTraitException, InvalidPlayerSelectException, IllegalSpeciesIndexException, NullGameObjectException {
         if (card == null) {
             throw new NullGameObjectException("The given Card object cannot be NULL");
         }
         if (playerIndex < 0 || playerIndex >= this.players.size()) {
-            throw new IllegalPlayerIndexException("The given player index must be within [0,numPlayers)");
+            throw new InvalidPlayerSelectException("The given player index must be within [0,numPlayers)");
         }
         if (this.players.get(playerIndex).removeCardFromHand(card)) {
             if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
@@ -362,15 +401,15 @@ public class Game {
      * @param traitCard    Card representing the trait to remove
      * @throws SpeciesTraitNotFoundException propagated from {@link ISpecies#removeTrait(ICard)}
      * @throws NullGameObjectException if the trait card passed in is null
-     * @throws IllegalPlayerIndexException   if the player index is not in the valid range
+     * @throws InvalidPlayerSelectException   if the player index is not in the valid range
      * @throws IllegalSpeciesIndexException  if the species index is not in the valid range
      */
     public void removeTraitFromSpecies(int playerIndex, int speciesIndex, ICard traitCard) throws
-            SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
+            SpeciesTraitNotFoundException, InvalidPlayerSelectException, IllegalSpeciesIndexException, NullGameObjectException {
         if (traitCard == null) {
             throw new NullGameObjectException("Trait card is null!");
         } else if (this.players.size() <= playerIndex || playerIndex < 0) {
-            throw new IllegalPlayerIndexException("Player index is out of range!");
+            throw new InvalidPlayerSelectException("Player index is out of range!");
         } else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
             throw new IllegalSpeciesIndexException("Species index is out of range!");
         }
