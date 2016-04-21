@@ -334,7 +334,11 @@ public class Game {
      *
      * @throws SpeciesTraitNotFoundException propagated from {@link ISpecies#removeTrait(ICard)}
      */
-    public void removeTraitFromSpecies(int playerIndex, int speciesIndex, ICard traitCard) throws SpeciesTraitNotFoundException {
+    public void removeTraitFromSpecies(int playerIndex, int speciesIndex, ICard traitCard) throws
+            SpeciesTraitNotFoundException, IllegalPlayerIndexException {
+        if(this.players.size() <= playerIndex || playerIndex < 0){
+            throw new IllegalPlayerIndexException("Player index is out of range!");
+        }
         ICard removedCard = this.players.get(playerIndex).getSpecies().get(speciesIndex).removeTrait(traitCard);
         this.getDiscardPile().discard(removedCard);
     }

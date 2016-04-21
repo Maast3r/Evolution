@@ -622,7 +622,7 @@ public class GameTests {
     }
 
     @Test
-    public void testRemoveTrait() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException {
+    public void testRemoveTrait() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
@@ -643,7 +643,7 @@ public class GameTests {
     }
 
     @Test(expected = IllegalPlayerIndexException.class)
-    public void testRemoveInvalidPlayer() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException {
+    public void testRemoveInvalidPlayerNegative() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         ICard fakeCard = EasyMock.niceMock(Card.class);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
