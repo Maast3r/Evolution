@@ -155,7 +155,6 @@ class SpeciesBoard extends VBox {
         this.actionListener = (ObservableValue observable, Object oldValue, Object newValue) -> {
             int val = ((int) newValue < 0) ? 0 : (int) newValue;
             try {
-                System.out.println("------- " + this.game.getPhase().getNumber());
                 switch (this.game.getPhase().getNumber()) {
                     // TODO: This block will need edited as future phases are implemented
                     case 2:
@@ -173,7 +172,6 @@ class SpeciesBoard extends VBox {
                         }
                         break;
                     default:
-                        System.out.println(Actions.values()[val] + " ---- " + val + " ++++ " + newValue);
                         performAction(Actions.values()[val]);
                         break;
                 }
