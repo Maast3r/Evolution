@@ -116,6 +116,9 @@ class CardPopupController implements Initializable {
                                                                                               newValue)
                                     -> {
                                 if (newValue.intValue() > 0) {
+                                    if(this.board.getTraits()[newValue.intValue()] != null) {
+                                        this.board.overwriteTrait(newValue.intValue());
+                                    }
                                     this.board.setTraitSelection(newValue.intValue());
                                     this.gridPane.getScene().getWindow().hide();
                                 }
