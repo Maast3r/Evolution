@@ -1,6 +1,9 @@
 package com.Evolution.testClasses;
 
+import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.ISpecies;
+
+import java.util.ArrayList;
 
 /**
  * Test version of Species that is used for testing
@@ -37,5 +40,20 @@ public class TestSpecies implements ISpecies {
     @Override
     public boolean isDead() {
         return false;
+    }
+
+    @Override
+    public void addTrait(ICard c) {
+
+    }
+
+    @Override
+    public ArrayList<ICard> getTraits() {
+        return null;
+    }
+
+    @Override
+    public ICard removeTrait(ICard c) {
+        return null;
     }
 }
