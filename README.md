@@ -124,6 +124,7 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 * Jeremiah Goist
     * Player discard for a Left or Right species
     * Parameterization of GameTests
+    * Input validation testing
     * 50+ LOC
 * Brooke Brown
 * Trevor Burch
