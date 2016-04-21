@@ -233,11 +233,15 @@ public class Game {
      *                                               maximum number of cards
      */
     public void discardToWateringHole(int index, ICard card) throws InvalidDiscardToWateringHoleException,
-            InvalidAddToWateringHoleException {
+            InvalidAddToWateringHoleException, InvalidPlayerSelectException {
         if (this.wateringHole.getCards().size() == this.players.size()) {
             throw new InvalidDiscardToWateringHoleException("You can not discard more cards to the watering hole " +
                     "than the number of players.");
         }
+        if (index > this.players.size() - 1) {
+            throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
+        }
+
         this.wateringHole.addCard(card);
         this.players.get(index).removeCardFromHand(card);
     }

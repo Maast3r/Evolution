@@ -422,9 +422,10 @@ public class GameTests {
     public void testDiscardToWateringHoleInvalidPlayer() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             InvalidPlayerSelectException, IllegalCardDiscardException, InvalidDiscardToWateringHoleException,
             InvalidAddToWateringHoleException {
+        WateringHole wateringHole = new WateringHole();
         ArrayList<IPlayer> playerList = generateNumPlayers(this.numPlayers);
         ICard fakeCard = EasyMock.niceMock(Card.class);
-        Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
+        Game g = new Game(playerList, wateringHole, this.drawPile, this.discardPile);
         g.discardToWateringHole(this.numPlayers, fakeCard);
     }
 
