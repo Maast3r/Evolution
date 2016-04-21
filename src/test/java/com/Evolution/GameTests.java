@@ -649,4 +649,12 @@ public class GameTests {
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         g.removeTraitFromSpecies(-1, 0, fakeCard);
     }
+
+    @Test(expected = IllegalPlayerIndexException.class)
+    public void testRemoveInvalidPlayerToHigh() throws IllegalNumberOfPlayers, SpeciesTraitNotFoundException, IllegalPlayerIndexException {
+        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        ICard fakeCard = EasyMock.niceMock(Card.class);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        g.removeTraitFromSpecies(this.numPlayers, 0, fakeCard);
+    }
 }
