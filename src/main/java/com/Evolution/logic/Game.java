@@ -327,6 +327,33 @@ public class Game {
     }
 
     /**
+     * Adds the provided Card to a player's species
+     *
+     * @param playerIndex  position in player list of player to add to
+     * @param speciesIndex position in species list of species to add to
+     * @param card         Card being added to species
+     * @throws SpeciesNumberTraitsException   propagated from {@link ISpecies#addTrait(ICard)}
+     * @throws SpeciesDuplicateTraitException propagated from {@link ISpecies#addTrait(ICard)}
+     * @throws IllegalPlayerIndexException    when the provided player index is not in [0, numPlayers)
+     * @throws NullGameObjectException        when the provided Card is NULL
+     */
+    public void addTraitToSpecies(int playerIndex, int speciesIndex, Card card) throws SpeciesNumberTraitsException,
+            SpeciesDuplicateTraitException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
+        if (card == null) {
+            throw new NullGameObjectException("The given Card object cannot be NULL");
+        }
+        if (playerIndex < 0 || playerIndex >= this.players.size()) {
+            throw new IllegalPlayerIndexException("The given player index must be within [0,numPlayers)");
+        }
+        if (this.players.get(playerIndex).removeCardFromHand(card)) {
+            if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
+                throw new IllegalSpeciesIndexException("The given species index must be within [0, numSpecies)");
+            }
+            this.players.get(playerIndex).getSpecies().get(speciesIndex).addTrait(card);
+        }
+    }
+
+    /**
      * Removes the given trait from the given species from the given player and puts the card on the discard pile
      * @param playerIndex Index of the player in the player list
      * @param speciesIndex Index of the speices for the player

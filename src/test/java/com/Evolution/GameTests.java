@@ -478,11 +478,12 @@ public class GameTests {
         g.discardForRightSpecies(this.playerIndex, fakeCard, fakeSpecies);
         EasyMock.verify(players.get(this.playerIndex), this.discardPile, fakeSpecies, fakeCard);
     }
+
     @Test
     public void testDiscardToIncreasePopulation() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, IllegalPlayerIndexException, IllegalSpeciesIndexException {
         Deck<ICard> drawPile = new Deck<>();
-        for(int i = 0; i < 4; i ++) {
+        for (int i = 0; i < 4; i++) {
             ICard card = new TestCard();
             drawPile.discard(card);
         }
@@ -498,12 +499,12 @@ public class GameTests {
         g.increasePopulation(0, 0, g.getPlayerObjects().get(0).getCards().get(0));
     }
 
-    @Test (expected = IllegalCardDiscardException.class)
+    @Test(expected = IllegalCardDiscardException.class)
     public void testDiscardToIncreasePopulation2() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
             IllegalPlayerIndexException, IllegalSpeciesIndexException {
         Deck<ICard> drawPile = new Deck<>();
-        for(int i = 0; i < 4; i ++) {
+        for (int i = 0; i < 4; i++) {
             ICard card = new TestCard();
             drawPile.discard(card);
         }
@@ -519,7 +520,7 @@ public class GameTests {
         g.increasePopulation(0, 0, new TestCard());
     }
 
-    @Test (expected = IllegalPlayerIndexException.class)
+    @Test(expected = IllegalPlayerIndexException.class)
     public void testDiscardToIncreasePopulation3() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
             IllegalPlayerIndexException, IllegalSpeciesIndexException {
@@ -531,7 +532,7 @@ public class GameTests {
         g.increasePopulation(3, 0, new TestCard());
     }
 
-    @Test (expected = IllegalSpeciesIndexException.class)
+    @Test(expected = IllegalSpeciesIndexException.class)
     public void testDiscardToIncreasePopulation4() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             SpeciesPopulationException, InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException,
             IllegalPlayerIndexException, IllegalSpeciesIndexException {
@@ -540,7 +541,7 @@ public class GameTests {
             playerList.add(new Player(new TestSpecies()));
         }
         Deck<ICard> drawPile = new Deck<>();
-        for(int i = 0; i < 4; i ++) {
+        for (int i = 0; i < 4; i++) {
             ICard card = new TestCard();
             drawPile.discard(card);
         }
@@ -554,7 +555,7 @@ public class GameTests {
             InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, IllegalPlayerIndexException,
             IllegalSpeciesIndexException, SpeciesBodySizeException {
         Deck<ICard> drawPile = new Deck<>();
-        for(int i = 0; i < 4; i ++) {
+        for (int i = 0; i < 4; i++) {
             ICard card = new TestCard();
             drawPile.discard(card);
         }
@@ -570,7 +571,7 @@ public class GameTests {
         g.increaseBodySize(0, 0, playerList.get(0).getCards().get(0));
     }
 
-    @Test (expected = IllegalPlayerIndexException.class)
+    @Test(expected = IllegalPlayerIndexException.class)
     public void testDiscardToIncreaseBodySize2() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, IllegalPlayerIndexException,
             IllegalSpeciesIndexException, SpeciesBodySizeException {
@@ -582,12 +583,12 @@ public class GameTests {
         g.increaseBodySize(3, 0, new TestCard());
     }
 
-    @Test (expected = IllegalCardDiscardException.class)
+    @Test(expected = IllegalCardDiscardException.class)
     public void testDiscardToIncreaseBodySize3() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, IllegalPlayerIndexException,
             IllegalSpeciesIndexException, SpeciesBodySizeException {
         Deck<ICard> drawPile = new Deck<>();
-        for(int i = 0; i < 4; i ++) {
+        for (int i = 0; i < 4; i++) {
             ICard card = new TestCard();
             drawPile.discard(card);
         }
@@ -603,7 +604,7 @@ public class GameTests {
         g.increaseBodySize(0, 0, new TestCard());
     }
 
-    @Test (expected = IllegalSpeciesIndexException.class)
+    @Test(expected = IllegalSpeciesIndexException.class)
     public void testDiscardToIncreaseBodySize4() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, IllegalPlayerIndexException,
             IllegalSpeciesIndexException, SpeciesBodySizeException {
@@ -612,13 +613,87 @@ public class GameTests {
             playerList.add(new Player(new TestSpecies()));
         }
         Deck<ICard> drawPile = new Deck<>();
-        for(int i = 0; i < 4; i ++) {
+        for (int i = 0; i < 4; i++) {
             ICard card = new TestCard();
             drawPile.discard(card);
         }
         Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
         g.dealToPlayer(0);
         g.increaseBodySize(0, 1, playerList.get(0).getCards().get(0));
+    }
+
+    @Test
+    public void testAddTrait() throws IllegalNumberOfPlayers, SpeciesNumberTraitsException, SpeciesDuplicateTraitException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
+        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        Card fakeCard = EasyMock.niceMock(Card.class);
+        Species fakeSpecies = EasyMock.niceMock(Species.class);
+        EasyMock.expect(players.get(this.playerIndex).removeCardFromHand(fakeCard)).andReturn(true);
+        EasyMock.expect(players.get(this.playerIndex).getSpecies()).andReturn(new ArrayList<>(Arrays.asList
+                (fakeSpecies)));
+        EasyMock.expect(players.get(this.playerIndex).getSpecies()).andReturn(new ArrayList<>(Arrays.asList
+                (fakeSpecies)));
+        fakeSpecies.addTrait(fakeCard);
+        EasyMock.replay(players.get(this.playerIndex), this.wateringHole, this.drawPile, this.discardPile, fakeCard,
+                fakeSpecies);
+        g.addTraitToSpecies(this.playerIndex, 0, fakeCard);
+        EasyMock.verify(players.get(this.playerIndex), this.wateringHole, this.drawPile, this.discardPile, fakeCard,
+                fakeSpecies);
+    }
+
+    @Test(expected = IllegalPlayerIndexException.class)
+    public void testAddTraitLowPlayer() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException, IllegalNumberOfPlayers, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
+        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        Card fakeCard = EasyMock.niceMock(Card.class);
+        g.addTraitToSpecies(-1, 0, fakeCard);
+    }
+
+    @Test(expected = IllegalPlayerIndexException.class)
+    public void testAddTraitHighPlayer() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException,
+            IllegalNumberOfPlayers, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
+        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        Card fakeCard = EasyMock.niceMock(Card.class);
+        g.addTraitToSpecies(this.overHighBound, 0, fakeCard);
+    }
+
+    @Test(expected = IllegalSpeciesIndexException.class)
+    public void testAddTraitLowSpecies() throws IllegalNumberOfPlayers, SpeciesNumberTraitsException,
+            SpeciesDuplicateTraitException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
+        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        Card fakeCard = EasyMock.niceMock(Card.class);
+        Species fakeSpecies = EasyMock.niceMock(Species.class);
+        EasyMock.expect(players.get(this.playerIndex).removeCardFromHand(fakeCard)).andReturn(true);
+        EasyMock.expect(players.get(this.playerIndex).getSpecies()).andReturn(new ArrayList<>(Arrays.asList
+                (fakeSpecies)));
+        EasyMock.replay(players.get(this.playerIndex), this.wateringHole, this.drawPile, this.discardPile, fakeCard);
+        g.addTraitToSpecies(this.playerIndex, -1, fakeCard);
+        EasyMock.verify(players.get(this.playerIndex), this.wateringHole, this.drawPile, this.discardPile, fakeCard);
+    }
+
+    @Test(expected = IllegalSpeciesIndexException.class)
+    public void testAddTraitHighSpecies() throws IllegalNumberOfPlayers, SpeciesNumberTraitsException,
+            SpeciesDuplicateTraitException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
+        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        Card fakeCard = EasyMock.niceMock(Card.class);
+        Species fakeSpecies = EasyMock.niceMock(Species.class);
+        EasyMock.expect(players.get(this.playerIndex).removeCardFromHand(fakeCard)).andReturn(true);
+        EasyMock.expect(players.get(this.playerIndex).getSpecies()).andReturn(new ArrayList<>(Arrays.asList
+                (fakeSpecies)));
+        EasyMock.replay(players.get(this.playerIndex), this.wateringHole, this.drawPile, this.discardPile, fakeCard);
+        g.addTraitToSpecies(this.playerIndex, 1, fakeCard);
+        EasyMock.verify(players.get(this.playerIndex), this.wateringHole, this.drawPile, this.discardPile, fakeCard);
+    }
+
+    @Test(expected = NullGameObjectException.class)
+    public void testAddTraitNullCard() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException,
+            IllegalNumberOfPlayers, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
+        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        g.addTraitToSpecies(this.playerIndex, 0, null);
     }
 
     @Test
