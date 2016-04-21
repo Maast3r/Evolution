@@ -312,7 +312,7 @@ public class GameTests {
     }
 
     @Test
-    public void testRemovePlayerValid() throws IllegalNumberOfPlayers, IllegalCardDirectionException, NoSuchFieldException, IllegalAccessException, InvalidPlayerSelectException {
+    public void testRemovePlayerValid() throws IllegalNumberOfPlayers, IllegalCardDirectionException, NoSuchFieldException, IllegalAccessException, InvalidPlayerSelectException, IllegalCardDiscardException {
         Game g = new Game(generateNumPlayers(4), this.wateringHole, this.drawPile, this.discardPile);
         IPlayer fakePlayer = EasyMock.niceMock(Player.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
@@ -322,6 +322,7 @@ public class GameTests {
         ArrayList<IPlayer> fakePlayerList = new ArrayList<>();
         fakePlayerList.add(fakePlayer);
         playerList.set(g, fakePlayerList);
+        EasyMock.expect(fakePlayer.getCards()).andReturn(new ArrayList<>(Arrays.asList(fakeCard)));
         EasyMock.expect(fakePlayer.removeCardFromHand(fakeCard)).andReturn(true);
         this.discardPile.discard(fakeCard);
 
@@ -338,7 +339,7 @@ public class GameTests {
 
     @Test(expected = InvalidPlayerSelectException.class)
     public void testDiscardFromPlayerInvalidPlayer() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-    DeckEmptyException, InvalidPlayerSelectException {
+            DeckEmptyException, InvalidPlayerSelectException, IllegalCardDiscardException {
         ArrayList<IPlayer> playerList = generateNumPlayers(this.numPlayers);
         Game g = new Game(playerList, this.wateringHole, this.drawPile, discardPile);
         g.discardFromPlayer(this.numPlayers, new TestCard());
@@ -363,7 +364,7 @@ public class GameTests {
 
 
     @Test
-    public void testRemoveFromPlayerResults() throws IllegalNumberOfPlayers, IllegalCardDirectionException, InvalidPlayerSelectException {
+    public void testRemoveFromPlayerResults() throws IllegalNumberOfPlayers, IllegalCardDirectionException, InvalidPlayerSelectException, IllegalCardDiscardException {
         Deck<ICard> discardPile = new Deck<>();
         ICard card = new TestCard();
         assertTrue(!discardPile.contains(card));

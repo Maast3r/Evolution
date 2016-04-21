@@ -205,10 +205,18 @@ public class Game {
      * @param i    player index
      * @param card to remove
      * @return successful discard
+     * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
+     *                                      player's hand
+     * @throws InvalidPlayerSelectException  thrown when the given player index is greater than the number of players
+     *
      */
-    public boolean discardFromPlayer(int i, ICard card) throws InvalidPlayerSelectException {
+    public boolean discardFromPlayer(int i, ICard card) throws InvalidPlayerSelectException,
+            IllegalCardDiscardException {
         if (i > this.players.size() - 1) {
             throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
+        }
+        if (!this.players.get(i).getCards().contains(card)) {
+            throw new IllegalCardDiscardException("Selected card is not in this players hand.");
         }
         if (this.players.get(i).removeCardFromHand(card)) {
             this.discardPile.discard(card);
