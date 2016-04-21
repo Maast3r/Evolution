@@ -376,17 +376,17 @@ public class Game {
      * @param card         Card being added to species
      * @throws SpeciesNumberTraitsException   propagated from {@link ISpecies#addTrait(ICard)}
      * @throws SpeciesDuplicateTraitException propagated from {@link ISpecies#addTrait(ICard)}
-     * @throws IllegalPlayerIndexException    when the provided player index is not in [0, numPlayers)
+     * @throws InvalidPlayerSelectException    when the provided player index is not in [0, numPlayers)
      * @throws IllegalSpeciesIndexException   when the provided species index is not in [0, numSpecies)
      * @throws NullGameObjectException        when the provided Card is NULL
      */
     public void addTraitToSpecies(int playerIndex, int speciesIndex, Card card) throws SpeciesNumberTraitsException,
-            SpeciesDuplicateTraitException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
+            SpeciesDuplicateTraitException, InvalidPlayerSelectException, IllegalSpeciesIndexException, NullGameObjectException {
         if (card == null) {
             throw new NullGameObjectException("The given Card object cannot be NULL");
         }
         if (playerIndex < 0 || playerIndex >= this.players.size()) {
-            throw new IllegalPlayerIndexException("The given player index must be within [0,numPlayers)");
+            throw new InvalidPlayerSelectException("The given player index must be within [0,numPlayers)");
         }
         if (this.players.get(playerIndex).removeCardFromHand(card)) {
             if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
@@ -404,15 +404,15 @@ public class Game {
      * @param traitCard    Card representing the trait to remove
      * @throws SpeciesTraitNotFoundException propagated from {@link ISpecies#removeTrait(ICard)}
      * @throws NullGameObjectException if the trait card passed in is null
-     * @throws IllegalPlayerIndexException   if the player index is not in the valid range
+     * @throws InvalidPlayerSelectException   if the player index is not in the valid range
      * @throws IllegalSpeciesIndexException  if the species index is not in the valid range
      */
     public void removeTraitFromSpecies(int playerIndex, int speciesIndex, ICard traitCard) throws
-            SpeciesTraitNotFoundException, IllegalPlayerIndexException, IllegalSpeciesIndexException, NullGameObjectException {
+            SpeciesTraitNotFoundException, InvalidPlayerSelectException, IllegalSpeciesIndexException, NullGameObjectException {
         if (traitCard == null) {
             throw new NullGameObjectException("Trait card is null!");
         } else if (this.players.size() <= playerIndex || playerIndex < 0) {
-            throw new IllegalPlayerIndexException("Player index is out of range!");
+            throw new InvalidPlayerSelectException("Player index is out of range!");
         } else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
             throw new IllegalSpeciesIndexException("Species index is out of range!");
         }
