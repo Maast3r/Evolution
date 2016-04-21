@@ -418,6 +418,17 @@ public class GameTests {
         assertTrue(g.getWateringHole().getCards().contains(card));
     }
 
+    @Test (expected = InvalidPlayerSelectException.class)
+    public void testDiscardToWateringHoleInvalidPlayer() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
+            InvalidPlayerSelectException, IllegalCardDiscardException, InvalidDiscardToWateringHoleException,
+            InvalidAddToWateringHoleException {
+        ArrayList<IPlayer> playerList = generateNumPlayers(this.numPlayers);
+        ICard fakeCard = EasyMock.niceMock(Card.class);
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
+        g.discardToWateringHole(this.numPlayers, fakeCard);
+    }
+
+
     /**
      * BVA - Can only add card to the watering hole equal to the number of players
      */
