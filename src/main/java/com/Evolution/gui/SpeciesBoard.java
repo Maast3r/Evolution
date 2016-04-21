@@ -20,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by brownba1 on 3/28/2016.
@@ -43,6 +44,7 @@ class SpeciesBoard extends VBox {
     private int speciesNum;
     private ICard selectedCard;
     private String traitSelection;
+    private ICard[] traits = new ICard[3];
 
     private ChangeListener actionListener;
 
@@ -50,12 +52,14 @@ class SpeciesBoard extends VBox {
             Actions.VIEW_CARDS.getName(), Actions.DISCARD_TO_WATERINGHOLE.getName());
 
     private ObservableList<String> phase3Options = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
-            Actions.VIEW_CARDS.getName(), Actions.ADD_TRAIT.getName(), Actions.ADD_SPECIES_LEFT.getName(),
+            Actions.VIEW_CARDS.getName(), Actions.ADD_TRAIT.getName(), Actions.REMOVE_TRAIT.getName(),
+            Actions.ADD_SPECIES_LEFT.getName(),
             Actions.ADD_SPECIES_RIGHT.getName(), Actions.INCREASE_POPULATION.getName(),
             Actions.INCREASE_BODY_SIZE.getName(), Actions.END_TURN.getName());
 
     private ObservableList<String> phase4Options = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
             Actions.VIEW_CARDS.getName(), Actions.FEED_SPECIES.getName(), Actions.ATTACK_SPECIES.getName());
+
 
     /**
      * Enum for the actions in the choiceBox
@@ -65,6 +69,7 @@ class SpeciesBoard extends VBox {
         ACTIONS("Actions"),
         VIEW_CARDS("View Cards"),
         ADD_TRAIT("Add Trait"),
+        REMOVE_TRAIT("Remove Trait"),
         ADD_SPECIES_LEFT("Add Species (Left)"),
         ADD_SPECIES_RIGHT("Add Species (Right)"),
         INCREASE_POPULATION("Increase Population"),
@@ -153,14 +158,14 @@ class SpeciesBoard extends VBox {
                     // TODO: This block will need edited as future phases are implemented
                     case 2:
                         if (val == 2) {
-                            performAction(Actions.values()[10]);
+                            performAction(Actions.values()[11]);
                         } else {
                             performAction(Actions.values()[val]);
                         }
                         break;
                     case 3:
-                        if(val == 7) {
-                            performAction(Actions.values()[9]);
+                        if(val == 8) {
+                            performAction(Actions.values()[10]);
                         }
                     default:
                         System.out.println(Actions.values()[val] + " ---- " + val + " ++++ " + newValue);
@@ -198,6 +203,16 @@ class SpeciesBoard extends VBox {
                 openCardWindow(Actions.ADD_TRAIT);
                 if (this.selectedCard != null) {
                     this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
+                    this.playerPane.updateGameScreen();
+                    // this.game.addTraitToSpecies(this.player, this.speciesNum, this.selectedCard);
+
+                    this.selectedCard = null;
+                }
+                break;
+            case REMOVE_TRAIT:
+                openTraitWindow();
+                if (this.selectedCard != null) {
+                    // this.game.removeTrait(this.player, this.speciesNum, this.selectedCard);
                     this.playerPane.updateGameScreen();
                     this.selectedCard = null;
                 }
@@ -272,7 +287,7 @@ class SpeciesBoard extends VBox {
     }
 
     /**
-     * Opens up the card window for the player to view their hand
+     * Opens up the card window for the player to view their cards
      */
     private void openCardWindow(Actions action) {
         try {
@@ -281,9 +296,38 @@ class SpeciesBoard extends VBox {
                     new CardPopupController(this.game.getPlayerObjects().get(this.playerIndex).getCards(), this);
             if (action == Actions.ADD_TRAIT) {
                 controller.setAddTrait(true);
-            } else {
-                controller.setAddTrait(false);
             }
+            loader.setController(controller);
+            Parent p = loader.load();
+            Stage s = new Stage();
+            s.setTitle("Evolution!");
+            s.getIcons().add(new Image("/images/icon.png"));
+            s.setScene(new Scene(p, Color.BLACK));
+            s.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    s.hide();
+                    this.actionChoiceBox.getSelectionModel().selectFirst();
+                }
+            });
+            s.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Opens up the trait window for the player to view their species' traits
+     */
+    private void openTraitWindow() {
+        try {
+            ArrayList<ICard> traitCards = new ArrayList<>();
+            for(int i=0; i<this.traits.length; i++){
+                traitCards.add(this.traits[i]);
+            }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/card_popup.fxml"));
+            CardPopupController controller =
+                    new CardPopupController(traitCards, this);
+            controller.setRemoveTrait(true);
             loader.setController(controller);
             Parent p = loader.load();
             Stage s = new Stage();
@@ -357,17 +401,48 @@ class SpeciesBoard extends VBox {
      */
     void setTraitSelection(int trait) {
         switch (trait) {
-            case 0:
+            case 1:
+                System.out.println("added to trait 1");
+                this.traits[0] = this.selectedCard;
                 setTrait1(this.selectedCard.getName());
                 break;
-            case 1:
+            case 2:
+                System.out.println("added to trait 2");
+                this.traits[1] = this.selectedCard;
                 setTrait2(this.selectedCard.getName());
                 break;
-            case 2:
+            case 3:
+                System.out.println("added to trait 3");
+                this.traits[2] = this.selectedCard;
                 setTrait3(this.selectedCard.getName());
                 break;
         }
     }
+
+    /**
+     * Remove trait at index i
+     * @param i
+     */
+    public void removeTrait(int i) {
+        switch (i) {
+            case 1:
+                System.out.println("removed trait 1");
+                this.traits[0] = null;
+                setTrait1("");
+                break;
+            case 2:
+                System.out.println("removed trait 2");
+                this.traits[1] = null;
+                setTrait2("");
+                break;
+            case 3:
+                System.out.println("removed trait 3");
+                this.traits[2] = null;
+                setTrait3("");
+                break;
+        }
+    }
+
 
     /**
      * Sets the value of the population size label for this species
@@ -406,6 +481,7 @@ class SpeciesBoard extends VBox {
      */
     private void setTrait1(String trait) {
         // Set trait 1 for this species then update label
+        this.traitLabel1.setText("Trait 1: " + trait);
     }
 
     /**
@@ -415,6 +491,7 @@ class SpeciesBoard extends VBox {
      */
     private void setTrait2(String trait) {
         // Set trait 2 for this species then update label
+        this.traitLabel2.setText("Trait 2: " + trait);
     }
 
     /**
@@ -424,6 +501,7 @@ class SpeciesBoard extends VBox {
      */
     private void setTrait3(String trait) {
         // Set trait 3 for this species then update label
+        this.traitLabel3.setText("Trait 3: " + trait);
     }
 
     /**
