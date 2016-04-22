@@ -179,4 +179,10 @@ public class SpeciesTests {
         ICard c = EasyMock.niceMock(Card.class);
         s.removeTrait(c);
     }
+
+    @Test(expected = NullGameObjectException.class)
+    public void testAddNullTrait() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException {
+        Species s = new Species();
+        s.addTrait(null);
+    }
 }
