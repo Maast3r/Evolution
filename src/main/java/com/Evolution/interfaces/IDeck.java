@@ -1,6 +1,7 @@
 package com.Evolution.interfaces;
 
 import com.Evolution.exceptions.DeckEmptyException;
+import com.Evolution.exceptions.NullGameObjectException;
 
 /**
  * Interface for decks
@@ -26,8 +27,9 @@ public interface IDeck<T> {
      * Discards an object onto the deck
      *
      * @param object The object to discard onto the deck
+     * @throws NullGameObjectException if a null object is passed to be discarded
      */
-    void discard(T object);
+    void discard(T object) throws NullGameObjectException;
 
     /**
      * Shuffles the contents of the deck into a new order

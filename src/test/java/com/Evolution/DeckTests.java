@@ -39,7 +39,7 @@ public class DeckTests {
     }
 
     @Test
-    public void testDiscard() throws IllegalCardDirectionException{
+    public void testDiscard() throws IllegalCardDirectionException, NullGameObjectException {
         Deck<ICard> testDeck = new Deck<>();
         ICard testCard = new TestCard();
         assertFalse(testDeck.contains(testCard));
@@ -48,7 +48,7 @@ public class DeckTests {
     }
 
     @Test(expected = NullGameObjectException.class)
-    public void testDiscardNull() {
+    public void testDiscardNull() throws NullGameObjectException {
         Deck<ICard> d = new Deck<>();
         d.discard(null);
     }

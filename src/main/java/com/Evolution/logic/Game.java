@@ -207,9 +207,10 @@ public class Game {
      * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
      *                                      player's hand
      * @throws InvalidPlayerSelectException thrown when the given player index is greater than the number of players
+     * @throws NullGameObjectException      propagated from {@link Deck#discard(Object)}
      */
     public void discardFromPlayer(int i, ICard card) throws InvalidPlayerSelectException,
-            IllegalCardDiscardException {
+            IllegalCardDiscardException, NullGameObjectException {
         if (i > this.players.size() - 1) {
             throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }
@@ -301,9 +302,10 @@ public class Game {
      * @throws InvalidPlayerSelectException thrown when the given player index is greater than the number of players
      * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
      *                                      for the given player
+     * @throws NullGameObjectException      propagated from {@link #discardPile}
      */
     public void increaseBodySize(int playerIndex, int speciesIndex, ICard card) throws SpeciesBodySizeException,
-            InvalidPlayerSelectException, IllegalCardDiscardException, IllegalSpeciesIndexException {
+            InvalidPlayerSelectException, IllegalCardDiscardException, IllegalSpeciesIndexException, NullGameObjectException {
         if (playerIndex > this.players.size() - 1) {
             throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }
@@ -327,9 +329,10 @@ public class Game {
      * @throws InvalidPlayerSelectException thrown when the given player index is greater than the number of players
      * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
      *                                      player's hand
+     * @throws NullGameObjectException      propagated from {@link Deck#discard(Object)}
      */
     public void discardForLeftSpecies(int playerIndex, ICard card, ISpecies species) throws
-            InvalidPlayerSelectException, IllegalCardDiscardException {
+            InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException {
         if (playerIndex > this.players.size() - 1) {
             throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }
@@ -349,9 +352,10 @@ public class Game {
      * @throws InvalidPlayerSelectException thrown when the given player index is greater than the number of players
      * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
      *                                      player's hand
+     * @throws NullGameObjectException      propagated from {@link Deck#discard(Object)}
      */
     public void discardForRightSpecies(int playerIndex, ICard card, ISpecies species) throws
-            InvalidPlayerSelectException, IllegalCardDiscardException {
+            InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException {
         if (playerIndex > this.players.size() - 1) {
             throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }

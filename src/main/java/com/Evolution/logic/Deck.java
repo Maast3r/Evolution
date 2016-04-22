@@ -31,10 +31,10 @@ public class Deck<T> extends Stack<T> implements IDeck<T> {
     }
 
     @Override
-    public void discard(T object) {
-//        if(object == null) {
-//            throw new NullGameObjectException("Unable to discard a NULL object to Deck");
-//        }
+    public void discard(T object) throws NullGameObjectException {
+        if(object == null) {
+            throw new NullGameObjectException("Unable to discard a NULL object to Deck");
+        }
         this.push(object);
     }
 
