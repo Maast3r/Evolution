@@ -248,9 +248,10 @@ public class Game {
      *                                               player's hand
      * @throws InvalidPlayerSelectException          thrown when the given player index is greater than the number of players
      * @throws IllegalCardRemovalException           propagated from {@link IPlayer#removeCardFromHand(ICard)}
+     * @throws NullGameObjectException               propagated from {@link IPlayer#removeCardFromHand(ICard)}
      */
     public void discardToWateringHole(int index, ICard card) throws InvalidDiscardToWateringHoleException,
-            InvalidAddToWateringHoleException, InvalidPlayerSelectException, IllegalCardDiscardException, IllegalCardRemovalException {
+            InvalidAddToWateringHoleException, InvalidPlayerSelectException, IllegalCardDiscardException, IllegalCardRemovalException, NullGameObjectException {
         if (this.wateringHole.getCards().size() == this.players.size()) {
             throw new InvalidDiscardToWateringHoleException("You can not discard more cards to the watering hole " +
                     "than the number of players.");
@@ -279,9 +280,10 @@ public class Game {
      * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
      *                                      for the given player
      * @throws IllegalCardRemovalException  propagated from {@link IPlayer#removeCardFromHand(ICard)}
+     * @throws NullGameObjectException      propagated from {@link IPlayer#removeCardFromHand(ICard)}
      */
     public void increasePopulation(int playerIndex, int speciesIndex, ICard card) throws SpeciesPopulationException,
-            IllegalCardDiscardException, InvalidPlayerSelectException, IllegalSpeciesIndexException, IllegalCardRemovalException {
+            IllegalCardDiscardException, InvalidPlayerSelectException, IllegalSpeciesIndexException, IllegalCardRemovalException, NullGameObjectException {
         if (playerIndex > this.players.size() - 1) {
             throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }

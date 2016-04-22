@@ -163,7 +163,7 @@ public class PlayerTests {
     }
 
     @Test(expected = IllegalCardRemovalException.class)
-    public void testInvalidDiscard() throws IllegalCardRemovalException {
+    public void testInvalidDiscard() throws IllegalCardRemovalException, NullGameObjectException {
         Player p = new Player(new TestSpecies());
         ICard card = new TestCard();
         assertTrue(!p.getCards().contains(card));

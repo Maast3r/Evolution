@@ -447,7 +447,7 @@ public class GameTests {
     @Test (expected = InvalidPlayerSelectException.class)
     public void testDiscardToWateringHoleInvalidPlayer() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             InvalidPlayerSelectException, IllegalCardDiscardException, InvalidDiscardToWateringHoleException,
-            InvalidAddToWateringHoleException, IllegalCardRemovalException {
+            InvalidAddToWateringHoleException, IllegalCardRemovalException, NullGameObjectException {
         WateringHole wateringHole = new WateringHole();
         ArrayList<IPlayer> playerList = generateNumPlayers(this.numPlayers);
         ICard fakeCard = EasyMock.niceMock(Card.class);
@@ -615,7 +615,7 @@ public class GameTests {
     @Test(expected = InvalidPlayerSelectException.class)
     public void testDiscardToIncreasePopulation3() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             SpeciesPopulationException, DeckEmptyException, IllegalCardDiscardException,
-            InvalidPlayerSelectException, IllegalSpeciesIndexException, IllegalCardRemovalException {
+            InvalidPlayerSelectException, IllegalSpeciesIndexException, IllegalCardRemovalException, NullGameObjectException {
         ArrayList<IPlayer> playerList = generateNumPlayers(this.numPlayers);
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
         g.increasePopulation(this.numPlayers, 0, new TestCard());

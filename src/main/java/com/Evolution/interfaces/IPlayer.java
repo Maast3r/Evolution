@@ -66,6 +66,7 @@ public interface IPlayer {
      *
      * @param card the card to remove
      * @throws IllegalCardRemovalException if the Card is not contained in the Player's hand
+     * @throws NullGameObjectException if the Card is null
      */
-    void removeCardFromHand(ICard card) throws IllegalCardRemovalException;
+    void removeCardFromHand(ICard card) throws IllegalCardRemovalException, NullGameObjectException;
 }

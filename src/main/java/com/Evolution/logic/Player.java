@@ -50,13 +50,16 @@ public class Player implements IPlayer {
     @Override
     public void addCardToHand(ICard card) throws NullGameObjectException {
         if(card == null) {
-            throw new NullGameObjectException("Unable o add a null Card to player hand");
+            throw new NullGameObjectException("Unable to add a null Card to player hand");
         }
         cardList.add(card);
     }
 
     @Override
-    public void removeCardFromHand(ICard card) throws IllegalCardRemovalException {
+    public void removeCardFromHand(ICard card) throws IllegalCardRemovalException, NullGameObjectException {
+        if(card == null) {
+            throw new NullGameObjectException("Unable to remove a null Card from Player");
+        }
         if(!cardList.remove(card)){
             throw new IllegalCardRemovalException("Card not contained in hand!");
         }
