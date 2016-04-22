@@ -101,5 +101,10 @@ public class CardTests {
     public void testNullName() throws IllegalCardFoodException, IllegalCardDirectionException, NullGameObjectException {
         Card testCard = new Card(null, "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
     }
+
+    @Test(expected = NullGameObjectException.class)
+    public void testNullDescription() throws NullGameObjectException, IllegalCardFoodException, IllegalCardDirectionException {
+        Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
+    }
     
 }
