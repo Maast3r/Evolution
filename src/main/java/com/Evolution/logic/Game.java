@@ -18,6 +18,8 @@ public class Game {
     private int foodBank = 240;
     private IPhases currentPhase = new PhaseOne(this);
 
+    //TODO: Add Null check for every single method that takes in an Object
+
     /**
      * Evolution Game constructor which contains main logic to interact with players, species, and cards
      *
