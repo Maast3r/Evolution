@@ -63,7 +63,10 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public void addTrait(ICard c) throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException {
+    public void addTrait(ICard c) throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException, NullGameObjectException {
+        if(c==null) {
+            throw new NullGameObjectException("The provided ICard must not be null");
+        }
         if(this.getTraits().size() == 3){
             throw new SpeciesNumberTraitsException("Too many traits");
         } else if(this.getTraits().stream().filter(t -> t.getName().equals(c.getName())).count() > 0){

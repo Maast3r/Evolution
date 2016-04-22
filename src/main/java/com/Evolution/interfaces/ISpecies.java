@@ -54,23 +54,25 @@ public interface ISpecies {
 
     /**
      * Adds the given card as a trait on the species
-     * @param c The card which to add as a trait
      *
-     * @throws SpeciesNumberTraitsException when the {@link ISpecies#getTraits()} size is already at 3
+     * @param c The card which to add as a trait
+     * @throws SpeciesNumberTraitsException   when the {@link ISpecies#getTraits()} size is already at 3
      * @throws SpeciesDuplicateTraitException when the {@link ISpecies#getTraits()} already contains the trait
+     * @throws NullGameObjectException        when the provided ICard is null
      */
-    void addTrait(ICard c) throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException;
+    void addTrait(ICard c) throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException, NullGameObjectException;
 
     /**
      * Gets the list of all traits on the species
+     *
      * @return The list of traits
      */
     ArrayList<ICard> getTraits();
 
     /**
      * Removes the given trait from the species
-     * @param c the trait to remove
      *
+     * @param c the trait to remove
      * @throws SpeciesTraitNotFoundException when the {@link ISpecies#getTraits()} does not contain the trait
      */
     ICard removeTrait(ICard c) throws SpeciesTraitNotFoundException;

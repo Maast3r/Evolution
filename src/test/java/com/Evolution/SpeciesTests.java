@@ -117,7 +117,7 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testAddFirstTrait() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException {
+    public void testAddFirstTrait() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException, NullGameObjectException {
         Species s = new Species();
         ICard c = new TestCard();
         s.addTrait(c);
@@ -155,7 +155,7 @@ public class SpeciesTests {
 
     @Test
     public void testRemoveSuccessful() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException,
-            SpeciesTraitNotFoundException {
+            SpeciesTraitNotFoundException, NullGameObjectException {
         Species s = new Species();
         ICard c = EasyMock.niceMock(Card.class);
         EasyMock.expect(c.getName()).andReturn("FOO");
@@ -181,7 +181,7 @@ public class SpeciesTests {
     }
 
     @Test(expected = NullGameObjectException.class)
-    public void testAddNullTrait() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException {
+    public void testAddNullTrait() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException, NullGameObjectException {
         Species s = new Species();
         s.addTrait(null);
     }
