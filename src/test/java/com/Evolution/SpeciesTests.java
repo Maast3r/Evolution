@@ -185,4 +185,11 @@ public class SpeciesTests {
         Species s = new Species();
         s.addTrait(null);
     }
+
+    @Test(expected = NullGameObjectException.class)
+    public void testRemoveNullTrait() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException,
+            NullGameObjectException, SpeciesTraitNotFoundException {
+        Species s = new Species();
+        s.removeTrait(null);
+    }
 }
