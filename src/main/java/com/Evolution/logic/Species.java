@@ -76,7 +76,10 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public ICard removeTrait(ICard c) throws SpeciesTraitNotFoundException {
+    public ICard removeTrait(ICard c) throws SpeciesTraitNotFoundException, NullGameObjectException {
+        if(c==null) {
+            throw new NullGameObjectException("Cannot remove a null Card from a species");
+        }
         if(!(this.getTraits().stream().filter(t -> t.getName().equals(c.getName())).count() > 0)){
             throw new SpeciesTraitNotFoundException("The trait can't be removed as it is not a trait of the species");
         }

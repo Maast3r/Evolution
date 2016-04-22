@@ -74,6 +74,7 @@ public interface ISpecies {
      *
      * @param c the trait to remove
      * @throws SpeciesTraitNotFoundException when the {@link ISpecies#getTraits()} does not contain the trait
+     * @throws NullGameObjectException       when the provided ICard is null
      */
-    ICard removeTrait(ICard c) throws SpeciesTraitNotFoundException;
+    ICard removeTrait(ICard c) throws SpeciesTraitNotFoundException, NullGameObjectException;
 }

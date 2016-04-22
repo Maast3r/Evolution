@@ -174,7 +174,7 @@ public class SpeciesTests {
 
     @Test(expected = SpeciesTraitNotFoundException.class)
     public void testRemoveFails() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException,
-            SpeciesTraitNotFoundException {
+            SpeciesTraitNotFoundException, NullGameObjectException {
         Species s = new Species();
         ICard c = EasyMock.niceMock(Card.class);
         s.removeTrait(c);
