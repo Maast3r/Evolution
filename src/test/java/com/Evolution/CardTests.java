@@ -2,6 +2,7 @@ package com.Evolution;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalCardFoodException;
+import com.Evolution.exceptions.NullGameObjectException;
 import com.Evolution.logic.Card;
 import org.junit.Test;
 
@@ -94,6 +95,11 @@ public class CardTests {
     @Test(expected = IllegalCardDirectionException.class)
     public void testValidCardDirection4() throws IllegalCardDirectionException, IllegalCardFoodException {
     	Card testCard = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 234);
+    }
+
+    @Test(expected = NullGameObjectException.class)
+    public void testNullName() throws IllegalCardFoodException, IllegalCardDirectionException {
+        Card testCard = new Card(null, "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
     }
     
 }
