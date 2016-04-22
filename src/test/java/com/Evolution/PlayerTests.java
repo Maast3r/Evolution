@@ -181,4 +181,9 @@ public class PlayerTests {
         Player p = new Player(EasyMock.niceMock(Species.class));
         p.removeCardFromHand(null);
     }
+
+    @Test(expected = NullGameObjectException.class)
+    public void testInitNull() {
+        Player p = new Player(null);
+    }
 }
