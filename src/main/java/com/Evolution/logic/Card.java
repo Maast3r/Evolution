@@ -39,6 +39,9 @@ public class Card implements ICard {
         if (desc == null) {
             throw new NullGameObjectException("The Card description must not be NULL");
         }
+        if(imgPath == null) {
+            throw new NullGameObjectException("The Card imgPath must not be NULL");
+        }
         if (direction != 0 && direction != 1 && direction != 2) {
             throw new IllegalCardDirectionException("The direction is not 0, 1, or 2.\n");
         }
