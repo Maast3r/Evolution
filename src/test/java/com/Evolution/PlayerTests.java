@@ -2,10 +2,13 @@ package com.Evolution;
 
 import com.Evolution.exceptions.IllegalCardRemovalException;
 import com.Evolution.exceptions.InvalidPlayerSpeciesRemovalException;
+import com.Evolution.exceptions.NullGameObjectException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Player;
+import com.Evolution.logic.Species;
 import com.Evolution.testClasses.TestCard;
 import com.Evolution.testClasses.TestSpecies;
+import org.easymock.EasyMock;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -165,5 +168,11 @@ public class PlayerTests {
         ICard card = new TestCard();
         assertTrue(!p.getCards().contains(card));
         p.removeCardFromHand(card);
+    }
+
+    @Test(expected = NullGameObjectException.class)
+    public void testAddNullCardToHand() {
+        Player p = new Player(EasyMock.niceMock(Species.class));
+        p.addCardToHand(null);
     }
 }
