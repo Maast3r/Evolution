@@ -3,6 +3,7 @@ package com.Evolution;
 
 import com.Evolution.exceptions.DeckEmptyException;
 import com.Evolution.exceptions.IllegalCardDirectionException;
+import com.Evolution.exceptions.NullGameObjectException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Deck;
 import com.Evolution.testClasses.TestCard;
@@ -44,6 +45,12 @@ public class DeckTests {
         assertFalse(testDeck.contains(testCard));
         testDeck.discard(testCard);
         assertTrue(testDeck.contains(testCard));
+    }
+
+    @Test(expected = NullGameObjectException.class)
+    public void testDiscardNull() {
+        Deck<ICard> d = new Deck<>();
+        d.discard(null);
     }
 
     @Test
