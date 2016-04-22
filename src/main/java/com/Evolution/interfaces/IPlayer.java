@@ -17,8 +17,9 @@ public interface IPlayer {
      * held by the player
      *
      * @param species to add
+     * @throws NullGameObjectException if the ISpecies is null
      */
-    void addSpeciesRight(ISpecies species);
+    void addSpeciesRight(ISpecies species) throws NullGameObjectException;
 
     /**
      * Add the provided species to the left of the list of species
@@ -66,7 +67,7 @@ public interface IPlayer {
      *
      * @param card the card to remove
      * @throws IllegalCardRemovalException if the Card is not contained in the Player's hand
-     * @throws NullGameObjectException if the Card is null
+     * @throws NullGameObjectException     if the Card is null
      */
     void removeCardFromHand(ICard card) throws IllegalCardRemovalException, NullGameObjectException;
 }

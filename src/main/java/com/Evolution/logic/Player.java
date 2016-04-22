@@ -30,7 +30,10 @@ public class Player implements IPlayer {
         speciesList.add(species);
     }
 
-    public void addSpeciesRight(ISpecies species) {
+    public void addSpeciesRight(ISpecies species) throws NullGameObjectException {
+        if(species == null) {
+            throw new NullGameObjectException("Cannot add a null species to Player");
+        }
         this.speciesList.add(species);
     }
 
