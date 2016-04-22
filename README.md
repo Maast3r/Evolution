@@ -124,6 +124,7 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 # Sprint 5
 * Jeremiah Goist
     * Player discard for a Left or Right species
+    * Game level add trait to species & remove from player
     * Parameterization of GameTests
     * Input validation testing
     * 50+ LOC
