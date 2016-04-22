@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 
 public class PhaseOneTests {
 
-    private ArrayList<IPlayer> generateNumPlayers(int num) {
+    private ArrayList<IPlayer> generateNumPlayers(int num) throws NullGameObjectException {
         ArrayList<IPlayer> players = new ArrayList<>();
         for (int i = 0; i < num; i++) {
             players.add(new Player(new Species()));
@@ -25,7 +25,7 @@ public class PhaseOneTests {
     }
 
     @Test
-    public void testInit() throws IllegalNumberOfPlayers, IllegalCardDirectionException {
+    public void testInit() throws IllegalNumberOfPlayers, IllegalCardDirectionException, NullGameObjectException {
         IDeck<ICard> drawPile = new Deck<>();
         IDeck<ICard> discardPile = new Deck<>();
 

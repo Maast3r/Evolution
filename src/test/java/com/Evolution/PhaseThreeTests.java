@@ -21,7 +21,11 @@ public class PhaseThreeTests {
     private ArrayList<IPlayer> generateNumPlayers(int num) {
         ArrayList<IPlayer> players = new ArrayList<>();
         for (int i = 0; i < num; i++) {
-            players.add(new Player(new Species()));
+            try {
+                players.add(new Player(new Species()));
+            } catch (NullGameObjectException e) {
+                e.printStackTrace();
+            }
         }
         return players;
     }

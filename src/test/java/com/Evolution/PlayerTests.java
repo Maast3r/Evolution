@@ -23,21 +23,21 @@ import static org.junit.Assert.*;
 public class PlayerTests {
 
     @Test
-    public void testPlayerInit() {
+    public void testPlayerInit() throws NullGameObjectException {
         TestSpecies s = new TestSpecies();
         Player p = new Player(s);
         assertNotNull(p);
     }
 
     @Test
-    public void testPlayerInitWSpecies() {
+    public void testPlayerInitWSpecies() throws NullGameObjectException {
         TestSpecies s = new TestSpecies();
         Player p = new Player(s);
         assertEquals(1, p.getSpecies().size());
     }
 
     @Test
-    public void testPlayerAddSpeciesRight() {
+    public void testPlayerAddSpeciesRight() throws NullGameObjectException {
         TestSpecies s = new TestSpecies();
         Player p = new Player(s);
         TestSpecies s2 = new TestSpecies();
@@ -46,7 +46,7 @@ public class PlayerTests {
     }
 
     @Test
-    public void testPlayerAddSpeciesLeft() {
+    public void testPlayerAddSpeciesLeft() throws NullGameObjectException {
         TestSpecies s = new TestSpecies();
         Player p = new Player(s);
         p.addSpeciesRight(new TestSpecies());
@@ -56,7 +56,7 @@ public class PlayerTests {
     }
 
     @Test
-    public void testPlayerAddMultiSpecies() {
+    public void testPlayerAddMultiSpecies() throws NullGameObjectException {
         TestSpecies s = new TestSpecies();
         Player p = new Player(s);
         p.addSpeciesRight(new TestSpecies());
@@ -65,7 +65,7 @@ public class PlayerTests {
     }
 
     @Test
-    public void testPlayerRemSpecies() throws InvalidPlayerSpeciesRemovalException {
+    public void testPlayerRemSpecies() throws InvalidPlayerSpeciesRemovalException, NullGameObjectException {
         TestSpecies s = new TestSpecies();
         Player p = new Player(s);
         p.addSpeciesRight(new TestSpecies());
@@ -74,7 +74,7 @@ public class PlayerTests {
     }
 
     @Test
-    public void testPlayerRemMultiSpecies() throws InvalidPlayerSpeciesRemovalException {
+    public void testPlayerRemMultiSpecies() throws InvalidPlayerSpeciesRemovalException, NullGameObjectException {
         TestSpecies s = new TestSpecies();
         Player p = new Player(s);
         for (int i = 0; i < 3; i++) {
@@ -87,51 +87,51 @@ public class PlayerTests {
     }
 
     @Test(expected = InvalidPlayerSpeciesRemovalException.class)
-    public void testInvalidRemovalIndexNone() throws InvalidPlayerSpeciesRemovalException {
+    public void testInvalidRemovalIndexNone() throws InvalidPlayerSpeciesRemovalException, NullGameObjectException {
         Player p = new Player(new TestSpecies());
         p.removeSpecies(0);
         p.removeSpecies(0);
     }
 
     @Test(expected = InvalidPlayerSpeciesRemovalException.class)
-    public void testInvalidRemovalIndexNegative() throws InvalidPlayerSpeciesRemovalException {
+    public void testInvalidRemovalIndexNegative() throws InvalidPlayerSpeciesRemovalException, NullGameObjectException {
         Player p = new Player(new TestSpecies());
         p.removeSpecies(-1);
     }
 
     @Test(expected = InvalidPlayerSpeciesRemovalException.class)
-    public void testInvalidRemovalIndexNegative2() throws InvalidPlayerSpeciesRemovalException {
+    public void testInvalidRemovalIndexNegative2() throws InvalidPlayerSpeciesRemovalException, NullGameObjectException {
         Player p = new Player(new TestSpecies());
         p.removeSpecies(-45);
     }
 
     @Test(expected = InvalidPlayerSpeciesRemovalException.class)
-    public void testInvalidRemovalIndexHigh() throws InvalidPlayerSpeciesRemovalException {
+    public void testInvalidRemovalIndexHigh() throws InvalidPlayerSpeciesRemovalException, NullGameObjectException {
         Player p = new Player(new TestSpecies());
         p.removeSpecies(2);
     }
 
     @Test(expected = InvalidPlayerSpeciesRemovalException.class)
-    public void testInvalidRemovalIndexHigh2() throws InvalidPlayerSpeciesRemovalException {
+    public void testInvalidRemovalIndexHigh2() throws InvalidPlayerSpeciesRemovalException, NullGameObjectException {
         Player p = new Player(new TestSpecies());
         p.removeSpecies(2990);
     }
 
     @Test(expected = InvalidPlayerSpeciesRemovalException.class)
-    public void testInvalidRemovalIndexWithOne() throws InvalidPlayerSpeciesRemovalException {
+    public void testInvalidRemovalIndexWithOne() throws InvalidPlayerSpeciesRemovalException, NullGameObjectException {
         Player p = new Player(new TestSpecies());
         p.removeSpecies(1);
     }
 
     @Test(expected = InvalidPlayerSpeciesRemovalException.class)
-    public void testInvalidRemovalIndexWithOne2() throws InvalidPlayerSpeciesRemovalException {
+    public void testInvalidRemovalIndexWithOne2() throws InvalidPlayerSpeciesRemovalException, NullGameObjectException {
         Player p = new Player(new TestSpecies());
         p.removeSpecies(0);
         p.removeSpecies(0);
     }
 
     @Test
-    public void testGetNoCards(){
+    public void testGetNoCards() throws NullGameObjectException {
         Player p = new Player(new TestSpecies());
         assertTrue(p.getCards().size() == 0);
     }
@@ -183,7 +183,7 @@ public class PlayerTests {
     }
 
     @Test(expected = NullGameObjectException.class)
-    public void testInitNull() {
+    public void testInitNull() throws NullGameObjectException {
         Player p = new Player(null);
     }
 }

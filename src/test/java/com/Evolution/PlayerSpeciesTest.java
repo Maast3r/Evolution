@@ -1,6 +1,7 @@
 package com.Evolution;
 
 import com.Evolution.exceptions.InvalidPlayerSpeciesRemovalException;
+import com.Evolution.exceptions.NullGameObjectException;
 import com.Evolution.logic.Player;
 import com.Evolution.logic.Species;
 import org.junit.Test;
@@ -15,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 public class PlayerSpeciesTest {
 	
 	@Test
-	public void testAddOneSpeciesLeft(){
+	public void testAddOneSpeciesLeft() throws NullGameObjectException {
 		Player test = new Player(new Species());
 		Species s = new Species();
 		test.addSpeciesLeft(s);
@@ -23,7 +24,7 @@ public class PlayerSpeciesTest {
 	}
 
 	@Test
-	public void testAddOneSpeciesRight(){
+	public void testAddOneSpeciesRight() throws NullGameObjectException {
 		Player test = new Player(new Species());
 		Species s = new Species();
 		test.addSpeciesLeft(s);
@@ -31,7 +32,7 @@ public class PlayerSpeciesTest {
 	}
 	
 	@Test
-	public void testAddTwoSpeciesLeft(){
+	public void testAddTwoSpeciesLeft() throws NullGameObjectException {
 		Player test = new Player(new Species());
 		Species s = new Species();
 		test.addSpeciesLeft(s);
@@ -40,7 +41,7 @@ public class PlayerSpeciesTest {
 	}
 
 	@Test
-	public void testAddTwoSpeciesRight(){
+	public void testAddTwoSpeciesRight() throws NullGameObjectException {
 		Player test = new Player(new Species());
 		Species s = new Species();
 		test.addSpeciesRight(s);
@@ -49,7 +50,7 @@ public class PlayerSpeciesTest {
 	}
 	
 	@Test
-	public void testAddManySpeciesLeft(){
+	public void testAddManySpeciesLeft() throws NullGameObjectException {
 		Player test = new Player(new Species());
 		Species s = new Species();
 		int testAmount = 1023;
@@ -60,7 +61,7 @@ public class PlayerSpeciesTest {
 	}
 
 	@Test
-	public void testAddManySpeciesRight(){
+	public void testAddManySpeciesRight() throws NullGameObjectException {
 		Player test = new Player(new Species());
 		Species s = new Species();
 		int testAmount = 1023;
@@ -71,7 +72,7 @@ public class PlayerSpeciesTest {
 	}
 	
 	@Test
-	public void testRemoveOneSpecies() throws InvalidPlayerSpeciesRemovalException {
+	public void testRemoveOneSpecies() throws InvalidPlayerSpeciesRemovalException, NullGameObjectException {
 		Player test = new Player(new Species());
 		Species s = new Species();
 		test.removeSpecies(0);
@@ -79,7 +80,7 @@ public class PlayerSpeciesTest {
 	}
 	
 	@Test
-	public void testRemoveTwoSpecies() throws InvalidPlayerSpeciesRemovalException {
+	public void testRemoveTwoSpecies() throws InvalidPlayerSpeciesRemovalException, NullGameObjectException {
 		Player test = new Player(new Species());
 		Species s = new Species();
 		test.addSpeciesLeft(s);
@@ -90,7 +91,7 @@ public class PlayerSpeciesTest {
 	}
 	
 	@Test
-	public void testRemoveManySpecies() throws InvalidPlayerSpeciesRemovalException {
+	public void testRemoveManySpecies() throws InvalidPlayerSpeciesRemovalException, NullGameObjectException {
 		Player test = new Player(new Species());
 		Species s = new Species();
 		int testAmount = 1023;

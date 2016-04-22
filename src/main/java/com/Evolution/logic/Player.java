@@ -17,7 +17,16 @@ public class Player implements IPlayer {
     private ArrayList<ISpecies> speciesList = new ArrayList<>();
     private ArrayList<ICard> cardList = new ArrayList<>();
 
-    public Player(ISpecies species) {
+    /**
+     * Creates a new player object with an initial {@link ISpecies}
+     *
+     * @param species initial ISpecies a Player starts with
+     * @throws NullGameObjectException if the ISpecies is null
+     */
+    public Player(ISpecies species) throws NullGameObjectException {
+        if (species == null) {
+            throw new NullGameObjectException("A player cannot be initialized with a null species");
+        }
         speciesList.add(species);
     }
 
@@ -35,8 +44,8 @@ public class Player implements IPlayer {
     }
 
     public void removeSpecies(int i) throws InvalidPlayerSpeciesRemovalException {
-        if(speciesList.size() == 0 ||
-                i < 0 || i >= speciesList.size()){
+        if (speciesList.size() == 0 ||
+                i < 0 || i >= speciesList.size()) {
             throw new InvalidPlayerSpeciesRemovalException("Removal Species index is wrong.\n");
         } else {
             this.speciesList.remove(i);
@@ -49,7 +58,7 @@ public class Player implements IPlayer {
 
     @Override
     public void addCardToHand(ICard card) throws NullGameObjectException {
-        if(card == null) {
+        if (card == null) {
             throw new NullGameObjectException("Unable to add a null Card to player hand");
         }
         cardList.add(card);
@@ -57,10 +66,10 @@ public class Player implements IPlayer {
 
     @Override
     public void removeCardFromHand(ICard card) throws IllegalCardRemovalException, NullGameObjectException {
-        if(card == null) {
+        if (card == null) {
             throw new NullGameObjectException("Unable to remove a null Card from Player");
         }
-        if(!cardList.remove(card)){
+        if (!cardList.remove(card)) {
             throw new IllegalCardRemovalException("Card not contained in hand!");
         }
     }

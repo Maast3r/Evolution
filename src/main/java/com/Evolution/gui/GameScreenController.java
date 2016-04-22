@@ -87,7 +87,11 @@ class GameScreenController implements Initializable {
                 "'game_screen.fxml'.";
 
         for (int i = 0; i < this.numPlayers; i++) {
-            this.players.add(new Player(new Species()));
+            try {
+                this.players.add(new Player(new Species()));
+            } catch (NullGameObjectException e) {
+                e.printStackTrace();
+            }
         }
 
         try {

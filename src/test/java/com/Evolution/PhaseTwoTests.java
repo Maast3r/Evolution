@@ -1,9 +1,6 @@
 package com.Evolution;
 
-import com.Evolution.exceptions.DeckEmptyException;
-import com.Evolution.exceptions.IllegalCardDirectionException;
-import com.Evolution.exceptions.IllegalNumberOfPlayers;
-import com.Evolution.exceptions.InvalidPlayerSelectException;
+import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IDeck;
 import com.Evolution.interfaces.IPlayer;
@@ -22,7 +19,11 @@ public class PhaseTwoTests {
     private ArrayList<IPlayer> generateNumPlayers(int num) {
         ArrayList<IPlayer> players = new ArrayList<>();
         for (int i = 0; i < num; i++) {
-            players.add(new Player(new Species()));
+            try {
+                players.add(new Player(new Species()));
+            } catch (NullGameObjectException e) {
+                e.printStackTrace();
+            }
         }
         return players;
     }

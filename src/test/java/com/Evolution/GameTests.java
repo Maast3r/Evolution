@@ -56,7 +56,11 @@ public class GameTests {
     private ArrayList<IPlayer> generateNumRealPlayers(int num) {
         ArrayList<IPlayer> players = new ArrayList<>();
         for (int i = 0; i < num; i++) {
-            players.add(new Player(new Species()));
+            try {
+                players.add(new Player(new Species()));
+            } catch (NullGameObjectException e) {
+                e.printStackTrace();
+            }
         }
         return players;
     }
