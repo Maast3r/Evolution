@@ -78,9 +78,9 @@ public class DeckFactory {
      */
     public IDeck<ICard> generateDrawPile(InputStream s) throws IOException, IllegalCardDirectionException,
             WrongFileException, IllegalCardFoodException, NullGameObjectException {
-//        if (s == null) {
-//            throw new NullGameObjectException("The provided Input Stream must not be null");
-//        }
+        if (s == null) {
+            throw new NullGameObjectException("The provided Input Stream must not be null");
+        }
         Deck<ICard> drawPile = new Deck<>();
         drawPile.addAll(readFile(s));
         return drawPile;
