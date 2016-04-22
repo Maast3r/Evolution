@@ -47,11 +47,15 @@ public class DeckFactory {
      * @throws IllegalCardDirectionException propagated from {@link #readLineToCard(String)}
      * @throws IOException                   thrown if the BufferedReader is unable to read a line from the InputStream
      * @throws WrongFileException            propagated from {@link #readLineToCard(String)}
-     * @throws NullGameObjectException       propagated from {@link #readLineToCard(String)}
+     * @throws NullGameObjectException       propagated from {@link #readLineToCard(String)} || when the provided
+     *                                       InputStream is null
      * @throws IllegalCardFoodException      propagated from {@link #readLineToCard(String)}
      */
     public ArrayList<ICard> readFile(InputStream input) throws IllegalCardDirectionException, IOException,
             WrongFileException, IllegalCardFoodException, NullGameObjectException {
+        if (input == null) {
+            throw new NullGameObjectException("The provided Input Stream must not be null");
+        }
         ArrayList<ICard> cards = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(input));
 
