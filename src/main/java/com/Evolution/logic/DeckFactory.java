@@ -72,11 +72,15 @@ public class DeckFactory {
      * @throws IOException                   propagated from {@link #readFile(InputStream)}
      * @throws IllegalCardDirectionException propagated from {@link Card#Card(String, String, String, int, int)}
      * @throws WrongFileException            propagated from {@link #readFile(InputStream)}
-     * @throws NullGameObjectException       propagated from {@link #readFile(InputStream)}
+     * @throws NullGameObjectException       propagated from {@link #readFile(InputStream)} || when the InputStream
+     *                                       is null
      * @throws IllegalCardFoodException      propagated from {@link #readFile(InputStream)}
      */
     public IDeck<ICard> generateDrawPile(InputStream s) throws IOException, IllegalCardDirectionException,
             WrongFileException, IllegalCardFoodException, NullGameObjectException {
+//        if (s == null) {
+//            throw new NullGameObjectException("The provided Input Stream must not be null");
+//        }
         Deck<ICard> drawPile = new Deck<>();
         drawPile.addAll(readFile(s));
         return drawPile;

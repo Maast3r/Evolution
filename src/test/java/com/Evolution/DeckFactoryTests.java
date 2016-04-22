@@ -127,4 +127,10 @@ public class DeckFactoryTests {
         DeckFactory df = new DeckFactory();
         df.readLineToCard("asdf;adsf;asdf;asdf;asdf;adff");
     }
+
+    @Test(expected = NullGameObjectException.class)
+    public void testNullStream() throws IllegalCardFoodException, IllegalCardDirectionException, NullGameObjectException, WrongFileException, IOException {
+        DeckFactory df = new DeckFactory();
+        df.generateDrawPile(null);
+    }
 }
