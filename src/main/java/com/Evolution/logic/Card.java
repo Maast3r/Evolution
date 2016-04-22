@@ -28,13 +28,16 @@ public class Card implements ICard {
      *                  {@link com.Evolution.interfaces.ISpecies} when it is attached to a
      *                  {@link com.Evolution.interfaces.ISpecies}
      * @throws IllegalCardDirectionException when the direction is not within the integer interval [0, 2]
-     * @throws IllegalCardFoodException when the input food value does not fall between -3 and 9
-     * @throws NullGameObjectException if name == null
+     * @throws IllegalCardFoodException      when the input food value does not fall between -3 and 9
+     * @throws NullGameObjectException       if name == null || desc == null
      */
     public Card(String name, String desc, String imgPath, int food, int direction) throws
             IllegalCardDirectionException, IllegalCardFoodException, NullGameObjectException {
-        if(name == null) {
+        if (name == null) {
             throw new NullGameObjectException("The Card name must not be NULL");
+        }
+        if (desc == null) {
+            throw new NullGameObjectException("The Card description must not be NULL");
         }
         if (direction != 0 && direction != 1 && direction != 2) {
             throw new IllegalCardDirectionException("The direction is not 0, 1, or 2.\n");
