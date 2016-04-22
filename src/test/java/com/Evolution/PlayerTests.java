@@ -175,4 +175,10 @@ public class PlayerTests {
         Player p = new Player(EasyMock.niceMock(Species.class));
         p.addCardToHand(null);
     }
+
+    @Test(expected = NullGameObjectException.class)
+    public void testRemoveNullCardToHand() throws NullGameObjectException, IllegalCardRemovalException {
+        Player p = new Player(EasyMock.niceMock(Species.class));
+        p.removeCardFromHand(null);
+    }
 }
