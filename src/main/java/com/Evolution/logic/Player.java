@@ -31,14 +31,17 @@ public class Player implements IPlayer {
     }
 
     public void addSpeciesRight(ISpecies species) throws NullGameObjectException {
-        if(species == null) {
+        if (species == null) {
             throw new NullGameObjectException("Cannot add a null species to Player");
         }
         this.speciesList.add(species);
     }
 
     @Override
-    public void addSpeciesLeft(ISpecies species) {
+    public void addSpeciesLeft(ISpecies species) throws NullGameObjectException {
+        if (species == null) {
+            throw new NullGameObjectException("Cannot add a null species to Player");
+        }
         this.speciesList.add(0, species);
     }
 

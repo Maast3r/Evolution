@@ -26,8 +26,9 @@ public interface IPlayer {
      * held by the player
      *
      * @param species to add
+     * @throws NullGameObjectException if the ISpecies is null
      */
-    void addSpeciesLeft(ISpecies species);
+    void addSpeciesLeft(ISpecies species) throws NullGameObjectException;
 
     /**
      * Returns the list of all species currently held by the player
