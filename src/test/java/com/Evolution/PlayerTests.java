@@ -192,4 +192,10 @@ public class PlayerTests {
         Player p = new Player(EasyMock.niceMock(Species.class));
         p.addSpeciesRight(null);
     }
+
+    @Test(expected = NullGameObjectException.class)
+    public void testAddLeftNullSpecies() throws NullGameObjectException {
+        Player p = new Player(EasyMock.niceMock(Species.class));
+        p.addSpeciesLeft(null);
+    }
 }
