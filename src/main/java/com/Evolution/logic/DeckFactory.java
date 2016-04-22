@@ -26,10 +26,14 @@ public class DeckFactory {
      * @throws IllegalCardDirectionException propagated from {@link Card#Card(String, String, String, int, int)}
      * @throws WrongFileException            thrown when string format does not match the specified pattern
      * @throws IllegalCardFoodException      propagated from {@link Card#Card(String, String, String, int, int)}
-     * @throws NullGameObjectException       propagated from {@link Card#Card(String, String, String, int, int)}
+     * @throws NullGameObjectException       propagated from {@link Card#Card(String, String, String, int, int)} ||
+     *                                       when the provided input string is null
      */
     public ICard readLineToCard(String input) throws IllegalCardDirectionException, WrongFileException,
             IllegalCardFoodException, NullGameObjectException {
+        if (input == null) {
+            throw new NullGameObjectException("The input must not be null");
+        }
         String pattern = "^.{0,150};.{0,175};.{0,150}png;-?[0-9]+;[0-9]+$";
         if (!input.matches(pattern)) {
             throw new WrongFileException("You are reading from a bad file.");
