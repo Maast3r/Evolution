@@ -175,7 +175,7 @@ public class WateringHoleTests {
      */
     @Test
     public void testCountCardFood1() throws InvalidWateringHoleCardCountException, IllegalCardDirectionException,
-            InvalidAddToWateringHoleException, IllegalCardFoodException {
+            InvalidAddToWateringHoleException, IllegalCardFoodException, NullGameObjectException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 2; i++) {
             ICard card = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", -3, 0);
@@ -195,7 +195,7 @@ public class WateringHoleTests {
      */
     @Test
     public void testCountCardFood2() throws InvalidAddToWateringHoleException, IllegalCardDirectionException,
-            InvalidWateringHoleCardCountException, IllegalCardFoodException {
+            InvalidWateringHoleCardCountException, IllegalCardFoodException, NullGameObjectException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 2; i++) {
             ICard card = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 7, 0);
@@ -364,7 +364,7 @@ public class WateringHoleTests {
      */
     @Test
     public void addCardFoodToCount3() throws InvalidAddToWateringHoleException, IllegalCardDirectionException,
-            InvalidWateringHoleCardCountException, IllegalCardFoodException {
+            InvalidWateringHoleCardCountException, IllegalCardFoodException, NullGameObjectException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 4; i++) {
             ICard card = new Card("","","",-3, 0);
@@ -382,7 +382,7 @@ public class WateringHoleTests {
      */
     @Test
     public void addCardFoodToCount4() throws InvalidAddToWateringHoleException, IllegalCardDirectionException,
-            InvalidWateringHoleCardCountException, IllegalCardFoodException {
+            InvalidWateringHoleCardCountException, IllegalCardFoodException, NullGameObjectException {
         WateringHole w = new WateringHole();
         for (int i = 0; i < 4; i++) {
             ICard card = new Card("","","",8, 0);

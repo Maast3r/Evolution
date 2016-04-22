@@ -125,7 +125,7 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testAddThreeTraits() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException, IllegalCardFoodException, IllegalCardDirectionException {
+    public void testAddThreeTraits() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException, IllegalCardFoodException, IllegalCardDirectionException, NullGameObjectException {
         Species s = new Species();
         for (int i = 0; i < 3; i++) {
             ICard c = new Card(Integer.toString(i), "bar", "foobar", 1, 1);
@@ -136,7 +136,7 @@ public class SpeciesTests {
     }
 
     @Test(expected = SpeciesNumberTraitsException.class)
-    public void testAddFourTraits() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException, IllegalCardFoodException, IllegalCardDirectionException {
+    public void testAddFourTraits() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException, IllegalCardFoodException, IllegalCardDirectionException, NullGameObjectException {
         Species s = new Species();
         for (int i = 0; i < 4; i++) {
             ICard c = new Card(Integer.toString(i), "bar", "foobar", 1, 1);
@@ -145,7 +145,7 @@ public class SpeciesTests {
     }
 
     @Test(expected = SpeciesDuplicateTraitException.class)
-    public void testAddDuplicateTraits() throws SpeciesDuplicateTraitException, IllegalCardFoodException, IllegalCardDirectionException, SpeciesNumberTraitsException {
+    public void testAddDuplicateTraits() throws SpeciesDuplicateTraitException, IllegalCardFoodException, IllegalCardDirectionException, SpeciesNumberTraitsException, NullGameObjectException {
         Species s = new Species();
         ICard c = new Card("foo", "bar", "foobar", 1, 1);
         ICard c2 = new Card("foo", "bar", "foobar", 1, 1);

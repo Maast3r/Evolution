@@ -1,9 +1,6 @@
 package com.Evolution;
 
-import com.Evolution.exceptions.DeckEmptyException;
-import com.Evolution.exceptions.IllegalCardDirectionException;
-import com.Evolution.exceptions.IllegalCardFoodException;
-import com.Evolution.exceptions.WrongFileException;
+import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IDeck;
 import com.Evolution.logic.DeckFactory;
@@ -20,7 +17,7 @@ public class DeckFactoryDeckTests {
 
     @Test
     public void testGenerateDrawPile() throws IOException, IllegalCardDirectionException, WrongFileException,
-            DeckEmptyException, IllegalCardFoodException {
+            DeckEmptyException, IllegalCardFoodException, NullGameObjectException {
         DeckFactory df = new DeckFactory();
         InputStream input = new ByteArrayInputStream(("asdf2;asdf2 random stuff;./asdf2.png;2;1\n" +
                 "Random;Does random stuff;./random.png;6;2").getBytes());

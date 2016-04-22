@@ -103,7 +103,8 @@ class GameScreenController implements Initializable {
 
             System.out.println("game initialized");
         } catch (IllegalNumberOfPlayers | IllegalCardDirectionException | IOException | WrongFileException |
-                DeckEmptyException | InvalidPlayerSelectException | IllegalCardFoodException exception) {
+                DeckEmptyException | InvalidPlayerSelectException | IllegalCardFoodException |
+                NullGameObjectException exception) {
             exception.printStackTrace();
         }
 

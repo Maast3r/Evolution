@@ -2,6 +2,7 @@ package com.Evolution.logic;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalCardFoodException;
+import com.Evolution.exceptions.NullGameObjectException;
 import com.Evolution.exceptions.WrongFileException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IDeck;
@@ -25,9 +26,10 @@ public class DeckFactory {
      * @throws IllegalCardDirectionException propagated from {@link Card#Card(String, String, String, int, int)}
      * @throws WrongFileException            thrown when string format does not match the specified pattern
      * @throws IllegalCardFoodException      propagated from {@link Card#Card(String, String, String, int, int)}
+     * @throws NullGameObjectException       propagated from {@link Card#Card(String, String, String, int, int)}
      */
     public ICard readLineToCard(String input) throws IllegalCardDirectionException, WrongFileException,
-            IllegalCardFoodException {
+            IllegalCardFoodException, NullGameObjectException {
         String pattern = "^.{0,150};.{0,175};.{0,150}png;-?[0-9]+;[0-9]+$";
         if (!input.matches(pattern)) {
             throw new WrongFileException("You are reading from a bad file.");
@@ -45,9 +47,11 @@ public class DeckFactory {
      * @throws IllegalCardDirectionException propagated from {@link #readLineToCard(String)}
      * @throws IOException                   thrown if the BufferedReader is unable to read a line from the InputStream
      * @throws WrongFileException            propagated from {@link #readLineToCard(String)}
+     * @throws NullGameObjectException       propagated from {@link #readLineToCard(String)}
+     * @throws IllegalCardFoodException      propagated from {@link #readLineToCard(String)}
      */
     public ArrayList<ICard> readFile(InputStream input) throws IllegalCardDirectionException, IOException,
-            WrongFileException, IllegalCardFoodException {
+            WrongFileException, IllegalCardFoodException, NullGameObjectException {
         ArrayList<ICard> cards = new ArrayList<>();
         BufferedReader br = new BufferedReader(new InputStreamReader(input));
 
@@ -67,10 +71,12 @@ public class DeckFactory {
      * @return IDeck<ICard>
      * @throws IOException                   propagated from {@link #readFile(InputStream)}
      * @throws IllegalCardDirectionException propagated from {@link Card#Card(String, String, String, int, int)}
-     * @throws WrongFileException            propagated from {@link #readLineToCard(String)}
+     * @throws WrongFileException            propagated from {@link #readFile(InputStream)}
+     * @throws NullGameObjectException       propagated from {@link #readFile(InputStream)}
+     * @throws IllegalCardFoodException      propagated from {@link #readFile(InputStream)}
      */
     public IDeck<ICard> generateDrawPile(InputStream s) throws IOException, IllegalCardDirectionException,
-            WrongFileException, IllegalCardFoodException {
+            WrongFileException, IllegalCardFoodException, NullGameObjectException {
         Deck<ICard> drawPile = new Deck<>();
         drawPile.addAll(readFile(s));
         return drawPile;

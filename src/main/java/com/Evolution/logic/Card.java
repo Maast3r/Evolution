@@ -2,6 +2,7 @@ package com.Evolution.logic;
 
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.IllegalCardFoodException;
+import com.Evolution.exceptions.NullGameObjectException;
 import com.Evolution.interfaces.ICard;
 
 /**
@@ -28,9 +29,13 @@ public class Card implements ICard {
      *                  {@link com.Evolution.interfaces.ISpecies}
      * @throws IllegalCardDirectionException when the direction is not within the integer interval [0, 2]
      * @throws IllegalCardFoodException when the input food value does not fall between -3 and 9
+     * @throws NullGameObjectException if name == null
      */
     public Card(String name, String desc, String imgPath, int food, int direction) throws
-            IllegalCardDirectionException, IllegalCardFoodException {
+            IllegalCardDirectionException, IllegalCardFoodException, NullGameObjectException {
+        if(name == null) {
+            throw new NullGameObjectException("The Card name must not be NULL");
+        }
         if (direction != 0 && direction != 1 && direction != 2) {
             throw new IllegalCardDirectionException("The direction is not 0, 1, or 2.\n");
         }
