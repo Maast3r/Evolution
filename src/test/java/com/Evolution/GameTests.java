@@ -146,7 +146,7 @@ public class GameTests {
 
     @Test
     public void testStartPhase() throws IllegalNumberOfPlayers,
-            IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException {
+            IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
         IPhases fakePhaseOne = EasyMock.niceMock(PhaseOne.class);
         fakePhaseOne.execute();
         EasyMock.replay(fakePhaseOne);
@@ -264,7 +264,7 @@ public class GameTests {
     }
 
     @Test
-    public void testDealToPlayerValid() throws IllegalNumberOfPlayers, IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException {
+    public void testDealToPlayerValid() throws IllegalNumberOfPlayers, IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
         Game g = new Game(generateNumPlayers(4), this.wateringHole, this.drawPile, this.discardPile);
         IPlayer fakePlayer = EasyMock.niceMock(Player.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
@@ -381,7 +381,7 @@ public class GameTests {
     }
 
     @Test(expected = InvalidPlayerSelectException.class)
-    public void testInvalidPlayerSelect1() throws IllegalNumberOfPlayers, IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException {
+    public void testInvalidPlayerSelect1() throws IllegalNumberOfPlayers, IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
         Deck<ICard> discardPile = new Deck<>();
         ICard card = new TestCard();
         assertTrue(!discardPile.contains(card));
@@ -396,7 +396,7 @@ public class GameTests {
 
     @Test(expected = InvalidPlayerSelectException.class)
     public void testInvalidPlayerSelect2() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            DeckEmptyException, InvalidPlayerSelectException {
+            DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
         Deck<ICard> discardPile = new Deck<>();
         ICard card = new TestCard();
         assertTrue(!discardPile.contains(card));

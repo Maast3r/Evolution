@@ -2,6 +2,7 @@ package com.Evolution.interfaces;
 
 import com.Evolution.exceptions.IllegalCardRemovalException;
 import com.Evolution.exceptions.InvalidPlayerSpeciesRemovalException;
+import com.Evolution.exceptions.NullGameObjectException;
 
 import java.util.ArrayList;
 
@@ -56,8 +57,9 @@ public interface IPlayer {
      * Adds a card to a player's hand
      *
      * @param card The card to add
+     * @throws NullGameObjectException if a null ICard is passed in
      */
-    void addCardToHand(ICard card);
+    void addCardToHand(ICard card) throws NullGameObjectException;
 
     /**
      * Removes the given card from the players hand

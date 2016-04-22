@@ -2,6 +2,7 @@ package com.Evolution.logic;
 
 import com.Evolution.exceptions.IllegalCardRemovalException;
 import com.Evolution.exceptions.InvalidPlayerSpeciesRemovalException;
+import com.Evolution.exceptions.NullGameObjectException;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IPlayer;
 import com.Evolution.interfaces.ISpecies;
@@ -47,7 +48,10 @@ public class Player implements IPlayer {
     }
 
     @Override
-    public void addCardToHand(ICard card) {
+    public void addCardToHand(ICard card) throws NullGameObjectException {
+        if(card == null) {
+            throw new NullGameObjectException("Unable o add a null Card to player hand");
+        }
         cardList.add(card);
     }
 

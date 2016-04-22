@@ -85,8 +85,13 @@ public class Game {
     /**
      * Starts the game with Phase 1.
      * Calls currentPhase.execute()
+     *
+     * @throws IllegalCardDirectionException propagated from {@link IPhases#execute()}
+     * @throws DeckEmptyException            propagated from {@link IPhases#execute()}
+     * @throws InvalidPlayerSelectException  propagated from {@link IPhases#execute()}
+     * @throws NullGameObjectException       propagated from {@link IPhases#execute()}
      */
-    public void startGame() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException {
+    public void startGame() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
         this.currentPhase.execute();
     }
 
@@ -166,8 +171,9 @@ public class Game {
      * @param i the index of the player
      * @throws DeckEmptyException           propagated from {@link Deck#draw()}
      * @throws InvalidPlayerSelectException if the index provided is outside of [0, size) of {@link #getPlayerObjects()}
+     * @throws NullGameObjectException      propagated from {@link Player#addCardToHand(ICard)}
      */
-    public void dealToPlayer(int i) throws DeckEmptyException, InvalidPlayerSelectException {
+    public void dealToPlayer(int i) throws DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
         if (i >= this.players.size() || i < 0) {
             throw new InvalidPlayerSelectException("You selected an invalid player to deal to.");
         }
@@ -190,8 +196,9 @@ public class Game {
      *
      * @throws DeckEmptyException           propagated from {@link #dealToPlayer(int)}
      * @throws InvalidPlayerSelectException propagated from {@link #dealToPlayer(int)}
+     * @throws NullGameObjectException      propagated from {@link #dealToPlayer(int)}
      */
-    public void drawForPlayers() throws DeckEmptyException, InvalidPlayerSelectException {
+    public void drawForPlayers() throws DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
         for (int i = 0; i < this.players.size(); i++) {
             for (int j = 0; j < this.players.get(i).getSpecies().size() + 3; j++) {
                 dealToPlayer(i);

@@ -137,7 +137,7 @@ public class PlayerTests {
     }
 
     @Test
-    public void testGetAllPlayerCards(){
+    public void testGetAllPlayerCards() throws NullGameObjectException {
         Player p = new Player(new TestSpecies());
         ArrayList<ICard> expected = new ArrayList<>();
         ICard card1 = new TestCard();
@@ -153,7 +153,7 @@ public class PlayerTests {
     }
 
     @Test
-    public void testDiscard() throws IllegalCardRemovalException {
+    public void testDiscard() throws IllegalCardRemovalException, NullGameObjectException {
         Player p = new Player(new TestSpecies());
         ICard card = new TestCard();
         p.addCardToHand(card);
@@ -171,7 +171,7 @@ public class PlayerTests {
     }
 
     @Test(expected = NullGameObjectException.class)
-    public void testAddNullCardToHand() {
+    public void testAddNullCardToHand() throws NullGameObjectException {
         Player p = new Player(EasyMock.niceMock(Species.class));
         p.addCardToHand(null);
     }

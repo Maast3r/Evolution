@@ -3,6 +3,7 @@ package com.Evolution.interfaces;
 import com.Evolution.exceptions.DeckEmptyException;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.InvalidPlayerSelectException;
+import com.Evolution.exceptions.NullGameObjectException;
 
 /**
  * Interface for Phases
@@ -18,17 +19,20 @@ public interface IPhases {
      *                                       {@link com.Evolution.logic.Card#Card(String, String, String, int, int)}
      * @throws DeckEmptyException            propagated from {@link IDeck#draw()}
      * @throws InvalidPlayerSelectException  propagated from {@link com.Evolution.logic.Game#dealToPlayer(int)}
+     * @throws NullGameObjectException       propagated from {@link com.Evolution.logic.Game#dealToPlayer(int)}
      */
-    void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException;
+    void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException;
 
     /**
      * Returns the name of the current phase
+     *
      * @return phase name
      */
     String getName();
 
     /**
      * Returns the number of the phase
+     *
      * @return phase number
      */
     int getNumber();
