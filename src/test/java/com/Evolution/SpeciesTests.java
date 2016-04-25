@@ -206,4 +206,10 @@ public class SpeciesTests {
         s.eat();
         s.eat();
     }
+
+    @Test
+    public void testIsFull() throws SpeciesFullException {
+        Species s = new Species();
+        assertFalse(s.isFull());
+    }
 }
