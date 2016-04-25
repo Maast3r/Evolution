@@ -199,4 +199,11 @@ public class SpeciesTests {
         s.eat();
         assertEquals(1, s.getEatenFood());
     }
+
+    @Test (expected = SpeciesFullException.class)
+    public void testEatInvalid() throws SpeciesPopulationException, SpeciesFullException {
+        Species s = new Species();
+        s.eat();
+        s.eat();
+    }
 }
