@@ -90,4 +90,10 @@ public interface ISpecies {
      * @return eatenFood
      */
     int getEatenFood();
+
+    /**
+     * Returns whether or not the species entire population is fed
+     * @return if the species is full
+     */
+    boolean isFull();
 }

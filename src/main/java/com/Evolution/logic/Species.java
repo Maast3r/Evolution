@@ -15,6 +15,7 @@ public class Species implements ISpecies {
     private int population;
     private ArrayList<ICard> traits = new ArrayList<>();
     private int eatenFood;
+    private boolean full;
 
     /**
      * Creates a species defaulted with body size and population equal to 0.
@@ -101,6 +102,11 @@ public class Species implements ISpecies {
     @Override
     public int getEatenFood() {
         return this.eatenFood;
+    }
+
+    @Override
+    public boolean isFull() {
+        return this.full;
     }
 
     @Override

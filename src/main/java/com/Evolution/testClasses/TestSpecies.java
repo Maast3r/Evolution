@@ -66,4 +66,9 @@ public class TestSpecies implements ISpecies {
     public int getEatenFood() {
         return 0;
     }
+
+    @Override
+    public boolean isFull() {
+        return false;
+    }
 }
