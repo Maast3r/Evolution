@@ -91,7 +91,10 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public void eat() {
+    public void eat() throws SpeciesFullException {
+        if (this.population == this.eatenFood) {
+            throw new SpeciesFullException("This species' population has already been fed.");
+        }
         this.eatenFood++;
     }
 

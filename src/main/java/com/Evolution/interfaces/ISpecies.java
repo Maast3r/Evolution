@@ -80,8 +80,10 @@ public interface ISpecies {
 
     /**
      * This species eats one food, increasing its eatenFood count
+     * @throws SpeciesFullException when the player tries to eat more food when the population is already
+     *  fed (eatenFood = population)
      */
-    void eat();
+    void eat() throws SpeciesFullException;
 
     /**
      * returns the amount of food this species has eaten this round

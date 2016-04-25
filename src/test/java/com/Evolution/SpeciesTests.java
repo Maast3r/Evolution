@@ -194,7 +194,7 @@ public class SpeciesTests {
     }
 
     @Test
-    public void testEat() {
+    public void testEat() throws SpeciesFullException {
         Species s = new Species();
         s.eat();
         assertEquals(1, s.getEatenFood());
