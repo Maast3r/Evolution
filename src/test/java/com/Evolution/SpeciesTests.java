@@ -192,4 +192,11 @@ public class SpeciesTests {
         Species s = new Species();
         s.removeTrait(null);
     }
+
+    @Test
+    public void testEat() {
+        Species s = new Species();
+        s.eat();
+        assertEquals(1, s.getEatenFood());
+    }
 }
