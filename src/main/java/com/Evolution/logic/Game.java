@@ -298,6 +298,7 @@ public class Game {
         }
         this.players.get(playerIndex).getSpecies().get(speciesIndex).increasePopulation();
         this.players.get(playerIndex).removeCardFromHand(card);
+        this.discardPile.discard(card);
     }
 
     /**
