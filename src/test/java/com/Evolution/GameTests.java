@@ -597,6 +597,7 @@ public class GameTests {
             g.dealToPlayer(i);
         }
         g.increasePopulation(this.playerIndex, 0, g.getPlayerObjects().get(this.playerIndex).getCards().get(0));
+
     }
 
     @Test(expected = IllegalCardDiscardException.class)
@@ -638,6 +639,23 @@ public class GameTests {
         Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
         g.dealToPlayer(this.playerIndex);
         g.increasePopulation(this.playerIndex, 1, playerList.get(this.playerIndex).getCards().get(0));
+    }
+
+    @Test
+    public void testDiscardToIncreasePopulation5() throws NullGameObjectException,
+            IllegalNumberOfPlayers, InvalidPlayerSelectException,
+            IllegalSpeciesIndexException, SpeciesPopulationException,
+            IllegalCardRemovalException, IllegalCardDiscardException {
+        ArrayList<IPlayer> playerList = generateNumRealPlayers(this.numPlayers);
+        Deck<ICard> drawPile = new Deck<>();
+        for(int i = 0; i < this.numPlayers; i ++) {
+            ICard card = new TestCard();
+            drawPile.discard(card);
+        }
+        Game g = new Game(playerList, this.wateringHole, drawPile, this.discardPile);
+        g.increasePopulation(this.playerIndex, 1, playerList.get(this.playerIndex).getCards()
+            .get(0));
+        assertEquals(1, g.getDiscardPile().getSize());
     }
 
     @Test

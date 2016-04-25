@@ -59,7 +59,7 @@ public class Player implements IPlayer {
     }
 
     public ArrayList<ICard> getCards() {
-        return cardList;
+        return this.cardList;
     }
 
     @Override
@@ -67,7 +67,7 @@ public class Player implements IPlayer {
         if (card == null) {
             throw new NullGameObjectException("Unable to add a null Card to player hand");
         }
-        cardList.add(card);
+        this.cardList.add(card);
     }
 
     @Override
@@ -75,7 +75,7 @@ public class Player implements IPlayer {
         if (card == null) {
             throw new NullGameObjectException("Unable to remove a null Card from Player");
         }
-        if (!cardList.remove(card)) {
+        if (!this.cardList.remove(card)) {
             throw new IllegalCardRemovalException("Card not contained in hand!");
         }
     }
