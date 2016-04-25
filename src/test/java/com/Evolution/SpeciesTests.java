@@ -212,4 +212,11 @@ public class SpeciesTests {
         Species s = new Species();
         assertFalse(s.isFull());
     }
+
+    @Test
+    public void isFullTrue() throws SpeciesFullException {
+        Species s = new Species();
+        s.eat();
+        assertTrue(s.isFull());
+    }
 }
