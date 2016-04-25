@@ -77,4 +77,15 @@ public interface ISpecies {
      * @throws NullGameObjectException       when the provided ICard is null
      */
     ICard removeTrait(ICard c) throws SpeciesTraitNotFoundException, NullGameObjectException;
+
+    /**
+     * This species eats one food, increasing its eatenFood count
+     */
+    void eat();
+
+    /**
+     * returns the amount of food this species has eaten this round
+     * @return eatenFood
+     */
+    int getEatenFood();
 }
