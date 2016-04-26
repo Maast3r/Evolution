@@ -358,7 +358,7 @@ public class Game {
      * @throws NullGameObjectException      propagated from {@link Deck#discard(Object)}
      */
     public void discardForLeftSpecies(int playerIndex, ICard card, ISpecies species) throws
-            InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException {
+            InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException, IllegalCardRemovalException {
         if(card == null) {
             throw new NullGameObjectException("Unable to discard a null card");
         }
@@ -389,7 +389,6 @@ public class Game {
     public void discardForRightSpecies(int playerIndex, ICard card, ISpecies species) throws
             InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException,
             IllegalCardRemovalException {
-            InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException {
         if(card == null) {
             throw new NullGameObjectException("Unable to discard a null card");
         }

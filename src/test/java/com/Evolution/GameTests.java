@@ -547,23 +547,20 @@ public class GameTests {
         players.get(this.playerIndex).addSpeciesLeft(fakeSpecies);
         this.discardPile.discard(fakeCard);
         EasyMock.replay(players.get(this.playerIndex), this.discardPile, fakeSpecies, fakeCard);
-        System.out.println("------- " + this.playerIndex);
-        System.out.println("+++++++ " + fakeCard);
-        System.out.println("~~~~~~~ " + fakeSpecies);
         g.discardForLeftSpecies(this.playerIndex, fakeCard, fakeSpecies);
         EasyMock.verify(players.get(this.playerIndex), this.discardPile, fakeSpecies, fakeCard);
     }
 
     @Test(expected = NullGameObjectException.class)
     public void testDiscardForLeftNullCard() throws InvalidPlayerSelectException, NullGameObjectException,
-            IllegalCardDiscardException, IllegalNumberOfPlayers {
+            IllegalCardDiscardException, IllegalNumberOfPlayers, IllegalCardRemovalException {
         Game g = new Game(generateNumPlayers(3), this.wateringHole, this.drawPile, this.discardPile);
         g.discardForLeftSpecies(0, null, EasyMock.niceMock(Species.class));
     }
 
     @Test(expected = NullGameObjectException.class)
     public void testDiscardForLeftNullSpecies() throws InvalidPlayerSelectException, NullGameObjectException,
-            IllegalCardDiscardException, IllegalNumberOfPlayers {
+            IllegalCardDiscardException, IllegalNumberOfPlayers, IllegalCardRemovalException {
         Game g = new Game(generateNumPlayers(3), this.wateringHole, this.drawPile, this.discardPile);
         g.discardForLeftSpecies(0, EasyMock.niceMock(Card.class), null);
     }
@@ -613,14 +610,14 @@ public class GameTests {
 
     @Test(expected = NullGameObjectException.class)
     public void testDiscardForRightNullCard() throws InvalidPlayerSelectException, NullGameObjectException,
-            IllegalCardDiscardException, IllegalNumberOfPlayers {
+            IllegalCardDiscardException, IllegalNumberOfPlayers, IllegalCardRemovalException {
         Game g = new Game(generateNumPlayers(3), this.wateringHole, this.drawPile, this.discardPile);
         g.discardForRightSpecies(0, null, EasyMock.niceMock(Species.class));
     }
 
     @Test(expected = NullGameObjectException.class)
     public void testDiscardForRightNullSpecies() throws InvalidPlayerSelectException, NullGameObjectException,
-            IllegalCardDiscardException, IllegalNumberOfPlayers {
+            IllegalCardDiscardException, IllegalNumberOfPlayers, IllegalCardRemovalException {
         Game g = new Game(generateNumPlayers(3), this.wateringHole, this.drawPile, this.discardPile);
         g.discardForRightSpecies(0, EasyMock.niceMock(Card.class), null);
     }
