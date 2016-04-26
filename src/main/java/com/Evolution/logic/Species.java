@@ -99,6 +99,11 @@ public class Species implements ISpecies {
     }
 
     @Override
+    public void resetEatenFood() {
+        this.eatenFood = 0;
+    }
+
+    @Override
     public int getEatenFood() {
         return this.eatenFood;
     }

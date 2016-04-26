@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class Player implements IPlayer {
     private ArrayList<ISpecies> speciesList = new ArrayList<>();
     private ArrayList<ICard> cardList = new ArrayList<>();
+    private int foodBag = 0;
 
     /**
      * Creates a new player object with an initial {@link ISpecies}
@@ -59,7 +60,7 @@ public class Player implements IPlayer {
     }
 
     public ArrayList<ICard> getCards() {
-        return cardList;
+        return this.cardList;
     }
 
     @Override
@@ -67,7 +68,7 @@ public class Player implements IPlayer {
         if (card == null) {
             throw new NullGameObjectException("Unable to add a null Card to player hand");
         }
-        cardList.add(card);
+        this.cardList.add(card);
     }
 
     @Override
@@ -75,8 +76,21 @@ public class Player implements IPlayer {
         if (card == null) {
             throw new NullGameObjectException("Unable to remove a null Card from Player");
         }
-        if (!cardList.remove(card)) {
+        if (!this.cardList.remove(card)) {
             throw new IllegalCardRemovalException("Card not contained in hand!");
         }
+    }
+
+    @Override
+    public void moveFoodToFoodBag() {
+        for (ISpecies s : this.speciesList) {
+            this.foodBag += s.getEatenFood();
+            s.resetEatenFood();
+        }
+    }
+
+    @Override
+    public int getFoodBag() {
+        return this.foodBag;
     }
 }

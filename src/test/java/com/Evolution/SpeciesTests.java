@@ -240,6 +240,15 @@ public class SpeciesTests {
     }
 
     @Test
+    public void resetEatenFood() throws SpeciesFullException {
+        Species s = new Species();
+        s.eat();
+        assertEquals(1, s.getEatenFood());
+        s.resetEatenFood();
+        assertEquals(0, s.getEatenFood());
+    }
+
+    @Test
     public void testIsFull() throws SpeciesFullException {
         Species s = new Species();
         assertFalse(s.isFull());

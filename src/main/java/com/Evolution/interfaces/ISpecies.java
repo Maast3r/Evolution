@@ -86,6 +86,11 @@ public interface ISpecies {
     void eat() throws SpeciesFullException;
 
     /**
+     * resets the eatenFood variable to 0
+     */
+    void resetEatenFood();
+
+    /**
      * returns the amount of food this species has eaten this round
      * @return eatenFood
      */

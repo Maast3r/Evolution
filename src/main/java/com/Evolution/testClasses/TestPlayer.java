@@ -50,4 +50,14 @@ public class TestPlayer implements IPlayer {
     @Override
     public void removeCardFromHand(ICard card) {
     }
+
+    @Override
+    public void moveFoodToFoodBag() {
+
+    }
+
+    @Override
+    public int getFoodBag() {
+        return 0;
+    }
 }
