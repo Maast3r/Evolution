@@ -212,6 +212,17 @@ public class SpeciesTests {
     }
 
     @Test (expected = SpeciesFullException.class)
+    public void testEatOverMax() throws SpeciesFullException, SpeciesPopulationException {
+        Species s = new Species();
+        for (int i = 0; i < 5; i++) {
+            s.increasePopulation();
+        }
+        for (int i = 0; i < 7; i++) {
+            s.eat();
+        }
+    }
+
+    @Test (expected = SpeciesFullException.class)
     public void testEatInvalid() throws SpeciesPopulationException, SpeciesFullException {
         Species s = new Species();
         s.eat();
