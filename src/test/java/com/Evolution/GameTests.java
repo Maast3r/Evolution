@@ -500,7 +500,7 @@ public class GameTests {
 
     @Test
     public void testDiscardForLeftSpecies() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException {
+            InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException, IllegalCardRemovalException {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
@@ -515,7 +515,7 @@ public class GameTests {
 
     @Test (expected = InvalidPlayerSelectException.class)
     public void testDiscardForLeftSpeciesInvalidPlayer() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException {
+            InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException, IllegalCardRemovalException {
         ArrayList<IPlayer> playerList = generateNumPlayers(this.numPlayers);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
@@ -525,7 +525,7 @@ public class GameTests {
 
     @Test (expected = IllegalCardDiscardException.class)
     public void testDiscardForLeftSpeciesInvalidCard() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
-            InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, NullGameObjectException {
+            InvalidPlayerSelectException, DeckEmptyException, IllegalCardDiscardException, NullGameObjectException, IllegalCardRemovalException {
         Deck<ICard> drawPile = new Deck<>();
         for(int i = 0; i < this.numPlayers; i ++) {
             ICard card = new TestCard();

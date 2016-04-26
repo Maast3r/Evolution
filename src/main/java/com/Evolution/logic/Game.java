@@ -345,14 +345,14 @@ public class Game {
      * @throws NullGameObjectException      propagated from {@link Deck#discard(Object)}
      */
     public void discardForLeftSpecies(int playerIndex, ICard card, ISpecies species) throws
-            InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException {
+            InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException, IllegalCardRemovalException {
         if (playerIndex > this.players.size() - 1) {
             throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }
         if (!this.players.get(playerIndex).getCards().contains(card)) {
             throw new IllegalCardDiscardException("Selected card is not in this players hand.");
         }
-        this.discardPile.discard(card);
+        discardFromPlayer(playerIndex, card);
         this.players.get(playerIndex).addSpeciesLeft(species);
     }
 
