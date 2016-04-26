@@ -74,4 +74,22 @@ public class GameDiscardTests {
         assertEquals(expected, g.getDiscardPile().getSize());
     }
 
+    @Test
+    public void testDiscardToIncreaseBodyIntegration() throws NullGameObjectException,
+            IllegalNumberOfPlayers, InvalidPlayerSelectException,
+            IllegalSpeciesIndexException, SpeciesPopulationException,
+            IllegalCardRemovalException, IllegalCardDiscardException,
+            DeckEmptyException, IllegalCardDirectionException, IllegalCardFoodException,
+            SpeciesBodySizeException {
+
+        ArrayList<IPlayer> playerList = generateNumRealPlayers(5);
+        playerList = addCardsToPlayers(playerList, 3);
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
+        int expected = g.getDiscardPile().getSize() + 1;
+        g.increaseBodySize(0, 0, playerList.get(0).getCards()
+                .get(0));
+        assertEquals(expected, g.getDiscardPile().getSize());
+    }
+
+
 }
