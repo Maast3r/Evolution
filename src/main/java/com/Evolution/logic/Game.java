@@ -32,7 +32,7 @@ public class Game {
      */
     public Game(ArrayList<IPlayer> players, IWateringHole wateringHole, IDeck<ICard> drawPile, IDeck<ICard> discardPile)
             throws IllegalNumberOfPlayers, NullGameObjectException {
-        if(players == null) {
+        if(players == null || wateringHole == null) {
             throw new NullGameObjectException("Unable to initialize the game with NULL objects");
         }
         if (players.size() < 3 || players.size() > 5) {
