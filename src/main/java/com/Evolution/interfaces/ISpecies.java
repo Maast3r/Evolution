@@ -86,7 +86,7 @@ public interface ISpecies {
     void eat() throws SpeciesFullException;
 
     /**
-     * resets the eatenFood variable to 0 at the end of a round
+     * resets the eatenFood variable to 0
      */
     void resetEatenFood();
 
