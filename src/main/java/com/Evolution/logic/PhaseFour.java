@@ -22,7 +22,7 @@ public class PhaseFour implements IPhases{
 
     @Override
     public String getName() {
-        return null;
+        return "Feeding";
     }
 
     @Override
