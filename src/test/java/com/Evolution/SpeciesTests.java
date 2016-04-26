@@ -62,8 +62,8 @@ public class SpeciesTests {
                 s.increasePopulation();
             }
             assertEquals(this.popIncrease + 1, s.getPopulation());
-        }  catch (SpeciesPopulationException e) {
-            if(!(this.popIncrease > 5)){
+        } catch (SpeciesPopulationException e) {
+            if (!(this.popIncrease > 5)) {
                 fail();
             }
         }
@@ -81,8 +81,8 @@ public class SpeciesTests {
                 s.decreasePopulation();
             }
             assertEquals(1 + this.popIncrease - this.popDecrease, s.getPopulation());
-        } catch (SpeciesPopulationException e){
-            if(!(this.popIncrease > 5) && !(this.popIncrease - this.popDecrease + 1 < 0)){
+        } catch (SpeciesPopulationException e) {
+            if (!(this.popIncrease > 5) && !(this.popIncrease - this.popDecrease + 1 < 0)) {
                 fail();
             }
         }
@@ -96,8 +96,8 @@ public class SpeciesTests {
                 s.increaseBodySize();
             }
             assertEquals(1 + this.bodyIncrease, s.getBodySize());
-        }catch(SpeciesBodySizeException e){
-            if(!(this.bodyIncrease > 5)){
+        } catch (SpeciesBodySizeException e) {
+            if (!(this.bodyIncrease > 5)) {
                 fail();
             }
         }
@@ -170,6 +170,16 @@ public class SpeciesTests {
         assertTrue(s.getTraits().size() == 0);
         assertTrue(!s.getTraits().contains(c));
         EasyMock.verify(c);
+    }
+
+    @Test
+    public void testRemoveTraitSET() throws NullGameObjectException, IllegalCardFoodException,
+            IllegalCardDirectionException, SpeciesNumberTraitsException, SpeciesDuplicateTraitException, SpeciesTraitNotFoundException {
+        Species s = new Species();
+        ICard c = new Card("Fertile", "Before the food cards are revealed, this species gains 1 Population if there " +
+                "is food on the Watering Hole.", "fertile.png", 2, 0);
+        s.addTrait(c);
+        assertEquals(c, s.removeTrait(c));
     }
 
     @Test(expected = SpeciesTraitNotFoundException.class)
