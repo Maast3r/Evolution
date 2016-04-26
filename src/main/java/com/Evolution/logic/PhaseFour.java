@@ -27,6 +27,6 @@ public class PhaseFour implements IPhases{
 
     @Override
     public int getNumber() {
-        return 0;
+        return 4;
     }
 }
