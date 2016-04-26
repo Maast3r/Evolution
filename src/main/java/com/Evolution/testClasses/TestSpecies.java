@@ -63,6 +63,11 @@ public class TestSpecies implements ISpecies {
     }
 
     @Override
+    public void resetEatenFood() {
+
+    }
+
+    @Override
     public int getEatenFood() {
         return 0;
     }
