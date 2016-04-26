@@ -555,6 +555,13 @@ public class GameTests {
         g.discardForLeftSpecies(0, null, EasyMock.niceMock(Species.class));
     }
 
+    @Test(expected = NullGameObjectException.class)
+    public void testDiscardForLeftNullSpecies() throws InvalidPlayerSelectException, NullGameObjectException,
+            IllegalCardDiscardException, IllegalNumberOfPlayers {
+        Game g = new Game(generateNumPlayers(3), this.wateringHole, this.drawPile, this.discardPile);
+        g.discardForLeftSpecies(0, EasyMock.niceMock(Card.class), null);
+    }
+
     @Test(expected = InvalidPlayerSelectException.class)
     public void testDiscardForLeftSpeciesInvalidPlayer() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException {
