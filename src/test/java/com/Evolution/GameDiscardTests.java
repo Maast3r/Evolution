@@ -115,9 +115,13 @@ public class GameDiscardTests {
         playerList = addCardsToPlayers(playerList, 5);
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
         int expected = g.getDiscardPile().getSize() + 1;
+        int expected2 = playerList.get(4).getSpecies().get(0).getBodySize() + 1;
         g.increaseBodySize(4, 0, playerList.get(4).getCards()
                 .get(0));
         assertEquals(expected, g.getDiscardPile().getSize());
+        assertEquals(expected2,
+                g.getPlayerObjects().get(4).getSpecies().get(0)
+                        .getBodySize());
     }
 
 
@@ -133,8 +137,11 @@ public class GameDiscardTests {
         playerList = addCardsToPlayers(playerList, 5);
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
         int expected = g.getDiscardPile().getSize() + 1;
+        int expected2 = playerList.get(0).getSpecies().size() + 1;
         g.discardForLeftSpecies(0, playerList.get(0).getCards().get(0),
                 new Species());
         assertEquals(expected, g.getDiscardPile().getSize());
+        assertEquals(expected2,
+                g.getPlayerObjects().get(0).getSpecies().size());
     }
 }
