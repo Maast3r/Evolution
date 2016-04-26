@@ -53,9 +53,13 @@ public class GameDiscardTests {
         playerList = addCardsToPlayers(playerList, 3);
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
         int expected = g.getDiscardPile().getSize() + 1;
+        int expected2 = playerList.get(0).getSpecies().get(0).getPopulation() + 1;
         g.increasePopulation(0, 0, playerList.get(0).getCards()
                 .get(0));
         assertEquals(expected, g.getDiscardPile().getSize());
+        assertEquals(expected2,
+                g.getPlayerObjects().get(0).getSpecies().get(0)
+                        .getPopulation());
     }
 
     @Test
@@ -69,9 +73,13 @@ public class GameDiscardTests {
         playerList = addCardsToPlayers(playerList, 5);
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
         int expected = g.getDiscardPile().getSize() + 1;
+        int expected2 = playerList.get(4).getSpecies().get(0).getPopulation() + 1;
         g.increasePopulation(4, 0, playerList.get(4).getCards()
                 .get(0));
         assertEquals(expected, g.getDiscardPile().getSize());
+        assertEquals(expected2,
+                g.getPlayerObjects().get(4).getSpecies().get(0)
+                        .getPopulation());
     }
 
     @Test
@@ -86,9 +94,13 @@ public class GameDiscardTests {
         playerList = addCardsToPlayers(playerList, 3);
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
         int expected = g.getDiscardPile().getSize() + 1;
+        int expected2 = playerList.get(0).getSpecies().get(0).getBodySize() + 1;
         g.increaseBodySize(0, 0, playerList.get(0).getCards()
                 .get(0));
         assertEquals(expected, g.getDiscardPile().getSize());
+        assertEquals(expected2,
+                g.getPlayerObjects().get(0).getSpecies().get(0)
+                    .getBodySize());
     }
 
     @Test
@@ -108,4 +120,21 @@ public class GameDiscardTests {
         assertEquals(expected, g.getDiscardPile().getSize());
     }
 
+
+    @Test
+    public void testDiscardForLeftSpecies() throws NullGameObjectException,
+            IllegalNumberOfPlayers, InvalidPlayerSelectException,
+            IllegalSpeciesIndexException, SpeciesPopulationException,
+            IllegalCardRemovalException, IllegalCardDiscardException,
+            DeckEmptyException, IllegalCardDirectionException, IllegalCardFoodException,
+            SpeciesBodySizeException {
+
+        ArrayList<IPlayer> playerList = generateNumRealPlayers(5);
+        playerList = addCardsToPlayers(playerList, 5);
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
+        int expected = g.getDiscardPile().getSize() + 1;
+        g.discardForLeftSpecies(0, playerList.get(0).getCards().get(0),
+                new Species());
+        assertEquals(expected, g.getDiscardPile().getSize());
+    }
 }
