@@ -465,6 +465,12 @@ public class GameTests {
         assertEquals(PhaseTwo.class, g.getPhase().getClass());
     }
 
+    @Test(expected = NullGameObjectException.class)
+    public void testSetNullPhase() throws IllegalNumberOfPlayers, NullGameObjectException {
+        Game g = new Game(generateNumPlayers(3), this.wateringHole, this.drawPile, this.discardPile);
+        g.setPhase(null);
+    }
+
     @Test
     public void testDiscardToWateringHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             InvalidPlayerSelectException, DeckEmptyException, InvalidDiscardToWateringHoleException,
