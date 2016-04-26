@@ -198,4 +198,35 @@ public class PlayerTests {
         Player p = new Player(EasyMock.niceMock(Species.class));
         p.addSpeciesLeft(null);
     }
+
+    @Test
+    public void testMoveFood() throws NullGameObjectException {
+        Species s = EasyMock.niceMock(Species.class);
+        EasyMock.expect(s.getEatenFood()).andReturn(0);
+        s.resetEatenFood();
+        EasyMock.replay(s);
+        Player p = new Player(s);
+        p.moveFoodToFoodBag();
+        assertEquals(0, p.getFoodBag());
+        EasyMock.verify(s);
+    }
+
+    @Test
+    public void testMoveFoodMultiple() throws NullGameObjectException {
+        Species s = EasyMock.niceMock(Species.class);
+        EasyMock.expect(s.getEatenFood()).andReturn(1);
+        s.resetEatenFood();
+        EasyMock.replay(s);
+        Player p = new Player(s);
+        for (int i = 0; i < 2; i++) {
+            s = EasyMock.niceMock(Species.class);
+            EasyMock.expect(s.getEatenFood()).andReturn(1);
+            s.resetEatenFood();
+            EasyMock.replay(s);
+            p.addSpeciesLeft(s);
+        }
+        p.moveFoodToFoodBag();
+        assertEquals(3, p.getFoodBag());
+        EasyMock.verify();
+    }
 }

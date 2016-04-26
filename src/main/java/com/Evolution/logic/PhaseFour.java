@@ -22,11 +22,11 @@ public class PhaseFour implements IPhases{
 
     @Override
     public String getName() {
-        return null;
+        return "Feeding";
     }
 
     @Override
     public int getNumber() {
-        return 0;
+        return 4;
     }
 }
