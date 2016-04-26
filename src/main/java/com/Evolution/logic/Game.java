@@ -360,6 +360,9 @@ public class Game {
         if(card == null) {
             throw new NullGameObjectException("Unable to discard a null card");
         }
+        if(species == null) {
+            throw new NullGameObjectException("Unable to add a null species");
+        }
         if (playerIndex > this.players.size() - 1) {
             throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }
