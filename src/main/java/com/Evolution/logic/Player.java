@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class Player implements IPlayer {
     private ArrayList<ISpecies> speciesList = new ArrayList<>();
     private ArrayList<ICard> cardList = new ArrayList<>();
+    private int foodBag = 0;
 
     /**
      * Creates a new player object with an initial {@link ISpecies}
@@ -78,5 +79,18 @@ public class Player implements IPlayer {
         if (!cardList.remove(card)) {
             throw new IllegalCardRemovalException("Card not contained in hand!");
         }
+    }
+
+    @Override
+    public void moveFoodToFoodBag() {
+        for (ISpecies s : this.speciesList) {
+            this.foodBag += s.getEatenFood();
+            s.resetEatenFood();
+        }
+    }
+
+    @Override
+    public int getFoodBag() {
+        return this.foodBag;
     }
 }

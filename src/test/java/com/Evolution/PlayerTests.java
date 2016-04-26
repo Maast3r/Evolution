@@ -203,8 +203,11 @@ public class PlayerTests {
     public void testMoveFood() throws NullGameObjectException {
         Species s = EasyMock.niceMock(Species.class);
         EasyMock.expect(s.getEatenFood()).andReturn(0);
+        s.resetEatenFood();
+        EasyMock.replay(s);
         Player p = new Player(s);
         p.moveFoodToFoodBag();
         assertEquals(0, p.getFoodBag());
+        EasyMock.verify(s);
     }
 }

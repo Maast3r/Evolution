@@ -71,4 +71,14 @@ public interface IPlayer {
      * @throws NullGameObjectException     if the Card is null
      */
     void removeCardFromHand(ICard card) throws IllegalCardRemovalException, NullGameObjectException;
+
+    /**
+     * moves the food from each of the player's species to their food bag
+     */
+    void moveFoodToFoodBag();
+
+    /**
+     * returns the amount of food in this player's food bag
+     */
+    int getFoodBag();
 }
