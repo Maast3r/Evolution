@@ -1,5 +1,6 @@
 package com.Evolution.logic;
 
+import com.Evolution.exceptions.NullGameObjectException;
 import com.Evolution.interfaces.IPhases;
 
 
@@ -14,7 +15,7 @@ public class PhaseTwo implements IPhases {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws NullGameObjectException {
         this.game.nextTurn();
         if(this.game.getWateringHole().getCards().size() == this.game.getPlayerObjects().size()) {
             this.game.setPhase(new PhaseThree(this.game));

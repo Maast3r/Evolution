@@ -141,6 +141,8 @@ public class Game {
 
     /**
      * Decrements the food bank by one
+     *
+     * @throws FoodBankEmptyException if the food bank is empty and attempting to decrement
      */
     public void decrementFoodBank() throws FoodBankEmptyException {
         if (this.foodBank == 0) {
@@ -153,6 +155,8 @@ public class Game {
      * Decrements the food bank by i
      *
      * @param i food
+     * @throws FoodBankEmptyException if attempting to remove a negative amount or more food than is in the
+     *                                food bank
      */
     public void decrementFoodBank(int i) throws FoodBankEmptyException {
         if (i > this.foodBank || i < 0) {
@@ -165,6 +169,7 @@ public class Game {
      * Decrements the food bank by i and increments the wateringHole food by i
      *
      * @param i food
+     * @throws FoodBankEmptyException propagated from {@link #decrementFoodBank(int)}
      */
     public void moveFoodFromBankToHole(int i) throws FoodBankEmptyException {
         decrementFoodBank(i);
@@ -191,8 +196,12 @@ public class Game {
      * Changes the current phase to phase;
      *
      * @param phase The phase being set
+     * @throws NullGameObjectException if the provided phase is null
      */
-    public void setPhase(IPhases phase) {
+    public void setPhase(IPhases phase) throws NullGameObjectException {
+        if (phase == null) {
+            throw new NullGameObjectException("Cannot set the Game to a null Phase");
+        }
         this.currentPhase = phase;
     }
 
@@ -300,8 +309,8 @@ public class Game {
             throw new IllegalSpeciesIndexException("The given species index is greater than the number of species for" +
                     " player " + playerIndex + 1);
         }
-        this.players.get(playerIndex).getSpecies().get(speciesIndex).increasePopulation();
         this.players.get(playerIndex).removeCardFromHand(card);
+        this.players.get(playerIndex).getSpecies().get(speciesIndex).increasePopulation();
     }
 
     /**
@@ -331,8 +340,8 @@ public class Game {
             throw new IllegalSpeciesIndexException("The given species index is greater than the number of species for" +
                     " player " + playerIndex + 1);
         }
-        this.players.get(playerIndex).getSpecies().get(speciesIndex).increaseBodySize();
         this.discardFromPlayer(playerIndex, card);
+        this.players.get(playerIndex).getSpecies().get(speciesIndex).increaseBodySize();
     }
 
     /**
