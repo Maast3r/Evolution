@@ -32,9 +32,11 @@ public class GameDiscardTests {
     }
 
     private ArrayList<IPlayer> addCardsToPlayers(ArrayList<IPlayer> p, int i)
-            throws NullGameObjectException {
+            throws NullGameObjectException, IllegalCardFoodException,
+            IllegalCardDirectionException {
         for(int j=0; j < i; j++){
-            ICard card = EasyMock.niceMock(Card.class);
+            ICard card = new Card("Carnivore", "Makes a species a carnivore",
+                    "./carnivore.jpg", 3, 0);
             p.get(j).addCardToHand(card);
         }
         return p;
@@ -45,7 +47,8 @@ public class GameDiscardTests {
             IllegalNumberOfPlayers, InvalidPlayerSelectException,
             IllegalSpeciesIndexException, SpeciesPopulationException,
             IllegalCardRemovalException, IllegalCardDiscardException,
-            DeckEmptyException, IllegalCardDirectionException {
+            DeckEmptyException, IllegalCardDirectionException, IllegalCardFoodException {
+
         ArrayList<IPlayer> playerList = generateNumRealPlayers(3);
         playerList = addCardsToPlayers(playerList, 3);
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
@@ -60,13 +63,15 @@ public class GameDiscardTests {
             IllegalNumberOfPlayers, InvalidPlayerSelectException,
             IllegalSpeciesIndexException, SpeciesPopulationException,
             IllegalCardRemovalException, IllegalCardDiscardException,
-            DeckEmptyException, IllegalCardDirectionException {
+            DeckEmptyException, IllegalCardDirectionException, IllegalCardFoodException {
+
         ArrayList<IPlayer> playerList = generateNumRealPlayers(5);
         playerList = addCardsToPlayers(playerList, 5);
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
         int expected = g.getDiscardPile().getSize() + 1;
-        g.increasePopulation(0, 0, playerList.get(0).getCards()
+        g.increasePopulation(4, 0, playerList.get(4).getCards()
                 .get(0));
         assertEquals(expected, g.getDiscardPile().getSize());
     }
+
 }

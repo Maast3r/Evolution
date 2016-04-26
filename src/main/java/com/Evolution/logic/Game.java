@@ -219,13 +219,14 @@ public class Game {
      * @throws NullGameObjectException      propagated from {@link Deck#discard(Object)}
      */
     public void discardFromPlayer(int i, ICard card) throws InvalidPlayerSelectException,
-            IllegalCardDiscardException, NullGameObjectException {
+            IllegalCardDiscardException, NullGameObjectException, IllegalCardRemovalException {
         if (i > this.players.size() - 1) {
             throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }
         if (!this.players.get(i).getCards().contains(card)) {
             throw new IllegalCardDiscardException("Selected card is not in this players hand.");
         }
+        this.players.get(i).removeCardFromHand(card);
         this.discardPile.discard(card);
     }
 
@@ -285,20 +286,20 @@ public class Game {
      * @throws NullGameObjectException      propagated from {@link IPlayer#removeCardFromHand(ICard)}
      */
     public void increasePopulation(int playerIndex, int speciesIndex, ICard card) throws SpeciesPopulationException,
-            IllegalCardDiscardException, InvalidPlayerSelectException, IllegalSpeciesIndexException, IllegalCardRemovalException, NullGameObjectException {
+            IllegalCardDiscardException, InvalidPlayerSelectException,
+            IllegalSpeciesIndexException, IllegalCardRemovalException, NullGameObjectException {
         if (playerIndex > this.players.size() - 1) {
             throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }
         if (!this.players.get(playerIndex).getCards().contains(card)) {
-            throw new IllegalCardDiscardException("Selected card is not in this players hand.");
+            throw new IllegalCardDiscardException("Selected card is not in this player's hand.");
         }
         if (speciesIndex > this.players.get(playerIndex).getSpecies().size() - 1) {
             throw new IllegalSpeciesIndexException("The given species index is greater than the number of species for" +
                     " player " + playerIndex + 1);
         }
         this.players.get(playerIndex).getSpecies().get(speciesIndex).increasePopulation();
-        this.players.get(playerIndex).removeCardFromHand(card);
-        this.discardPile.discard(card);
+        this.discardFromPlayer(playerIndex, card);
     }
 
     /**
@@ -317,7 +318,7 @@ public class Game {
      * @throws NullGameObjectException      propagated from {@link #discardPile}
      */
     public void increaseBodySize(int playerIndex, int speciesIndex, ICard card) throws SpeciesBodySizeException,
-            InvalidPlayerSelectException, IllegalCardDiscardException, IllegalSpeciesIndexException, NullGameObjectException {
+            InvalidPlayerSelectException, IllegalCardDiscardException, IllegalSpeciesIndexException, NullGameObjectException, IllegalCardRemovalException {
         if (playerIndex > this.players.size() - 1) {
             throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }
