@@ -28,9 +28,13 @@ public class Game {
      * @param drawPile     cards available to draw from
      * @param discardPile  cards that have been discarded
      * @throws IllegalNumberOfPlayers when an ArrayList is passed in with too many or too few player objects
+     * @throws NullGameObjectException if any parameters are null
      */
     public Game(ArrayList<IPlayer> players, IWateringHole wateringHole, IDeck<ICard> drawPile, IDeck<ICard> discardPile)
-            throws IllegalNumberOfPlayers {
+            throws IllegalNumberOfPlayers, NullGameObjectException {
+        if(players == null) {
+            throw new NullGameObjectException("Unable to initialize the game with NULL objects");
+        }
         if (players.size() < 3 || players.size() > 5) {
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
         }
