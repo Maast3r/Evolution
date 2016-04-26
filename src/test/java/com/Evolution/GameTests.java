@@ -79,6 +79,11 @@ public class GameTests {
         assertEquals(this.numPlayers, g.getPlayerObjects().size());
     }
 
+    @Test(expected = NullGameObjectException.class)
+    public void testGameNullPlayers() throws IllegalNumberOfPlayers {
+        Game g = new Game(null, this.wateringHole, this.drawPile, this.discardPile);
+    }
+
     @Test(expected = IllegalNumberOfPlayers.class)
     public void testValidNumberOfPlayersSub3() throws IllegalNumberOfPlayers,
             IllegalCardDirectionException {
