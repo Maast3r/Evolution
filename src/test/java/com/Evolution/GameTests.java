@@ -81,19 +81,24 @@ public class GameTests {
 
     @Test(expected = NullGameObjectException.class)
     public void testGameNullPlayers() throws IllegalNumberOfPlayers, NullGameObjectException {
-        Game g = new Game(null, this.wateringHole, this.drawPile, this.discardPile);
+        new Game(null, this.wateringHole, this.drawPile, this.discardPile);
+    }
+
+    @Test(expected = NullGameObjectException.class)
+    public void testGameNullWH() throws IllegalNumberOfPlayers, NullGameObjectException {
+        new Game(generateNumPlayers(3), null, this.drawPile, this.discardPile);
     }
 
     @Test(expected = IllegalNumberOfPlayers.class)
     public void testValidNumberOfPlayersSub3() throws IllegalNumberOfPlayers,
             IllegalCardDirectionException, NullGameObjectException {
-        Game g = new Game(generateNumPlayers(0), wateringHole, this.drawPile, this.discardPile);
+        new Game(generateNumPlayers(0), wateringHole, this.drawPile, this.discardPile);
     }
 
     @Test(expected = IllegalNumberOfPlayers.class)
     public void testValidNumberOfPlayersGre6() throws IllegalNumberOfPlayers,
             IllegalCardDirectionException, NullGameObjectException {
-        Game g = new Game(generateNumPlayers(7), wateringHole, this.drawPile, this.discardPile);
+        new Game(generateNumPlayers(7), wateringHole, this.drawPile, this.discardPile);
     }
 
     @Test
