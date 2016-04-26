@@ -198,4 +198,13 @@ public class PlayerTests {
         Player p = new Player(EasyMock.niceMock(Species.class));
         p.addSpeciesLeft(null);
     }
+
+    @Test
+    public void testMoveFood() throws NullGameObjectException {
+        Species s = EasyMock.niceMock(Species.class);
+        EasyMock.expect(s.getEatenFood()).andReturn(0);
+        Player p = new Player(s);
+        p.moveFoodToFoodBag();
+
+    }
 }
