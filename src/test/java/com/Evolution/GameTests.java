@@ -548,7 +548,7 @@ public class GameTests {
         EasyMock.verify(players.get(this.playerIndex), this.discardPile, fakeSpecies, fakeCard);
     }
 
-    @Test
+    @Test(expected = NullGameObjectException.class)
     public void testDiscardForLeftNullCard() throws InvalidPlayerSelectException, NullGameObjectException,
             IllegalCardDiscardException, IllegalNumberOfPlayers {
         Game g = new Game(generateNumPlayers(3), this.wateringHole, this.drawPile, this.discardPile);

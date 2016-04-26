@@ -357,6 +357,9 @@ public class Game {
      */
     public void discardForLeftSpecies(int playerIndex, ICard card, ISpecies species) throws
             InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException {
+        if(card == null) {
+            throw new NullGameObjectException("Unable to discard a null card");
+        }
         if (playerIndex > this.players.size() - 1) {
             throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }
