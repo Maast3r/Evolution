@@ -18,4 +18,10 @@ public class PhaseFourTests {
         assertEquals(p.getName(), "Feeding");
     }
 
+    @Test
+    public void testGetPhaseNumber() {
+        Game g = EasyMock.niceMock(Game.class);
+        PhaseFour p = new PhaseFour(g);
+        assertEquals(p.getNumber(), 4);
+    }
 }
