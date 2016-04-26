@@ -168,10 +168,12 @@ public class GameDiscardTests {
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
         int expected = g.getDiscardPile().getSize() + 1;
         int expected2 = playerList.get(4).getSpecies().size() + 1;
+        int expected3 = playerList.get(4).getSpecies().size() - 1;
         g.discardForLeftSpecies(4, playerList.get(4).getCards().get(0),
                 new Species());
         assertEquals(expected, g.getDiscardPile().getSize());
         assertEquals(expected2,
                 g.getPlayerObjects().get(4).getSpecies().size());
+        assertEquals(expected3, g.getPlayerObjects().get(4).getCards().size());
     }
 }
