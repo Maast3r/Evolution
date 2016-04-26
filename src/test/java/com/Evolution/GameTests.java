@@ -94,6 +94,11 @@ public class GameTests {
         new Game(generateNumPlayers(3), this.wateringHole, null, this.discardPile);
     }
 
+    @Test(expected = NullGameObjectException.class)
+    public void testGameDiscardDeck() throws IllegalNumberOfPlayers, NullGameObjectException {
+        new Game(generateNumPlayers(3), this.wateringHole, this.drawPile, null);
+    }
+
     @Test(expected = IllegalNumberOfPlayers.class)
     public void testValidNumberOfPlayersSub3() throws IllegalNumberOfPlayers,
             IllegalCardDirectionException, NullGameObjectException {
