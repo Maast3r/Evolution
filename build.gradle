@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'eclipse'
+apply plugin: 'info.solidsoft.pitest'
 
 sourceCompatibility = 1.8
 version = '1.0'
@@ -36,6 +37,24 @@ test {
         append = false
     }
 }
+
+buildscript {
+    repositories {
+        mavenCentral()
+        //Needed only for SNAPSHOT versions
+        //maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
+    }
+    dependencies {
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.9'
+    }
+}
+
+pitest
+        {
+            println sourceSets.main
+            targetClasses = ['com.Evolution.logic.*']  //by default "${project.group}.*"
+            targetTests  = ['*Test*']
+        }
 
 test.finalizedBy(jacocoTestReport)
 

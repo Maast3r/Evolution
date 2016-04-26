@@ -105,6 +105,13 @@ public class WateringHoleTests {
         assertEquals(9, wateringHole.getFoodCount());
     }
 
+    @Test
+    public void testRemove0Food() throws WateringHoleEmptyException {
+        WateringHole wateringHole = new WateringHole();
+        wateringHole.removeFood(0);
+        assertEquals(0, wateringHole.getFoodCount());
+    }
+
     @Test(expected = WateringHoleEmptyException.class)
     public void testWateringHoleEmpty() throws WateringHoleEmptyException {
         WateringHole w = new WateringHole();

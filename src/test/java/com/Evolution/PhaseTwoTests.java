@@ -35,9 +35,9 @@ public class PhaseTwoTests {
         IDeck<ICard> discardPile = new Deck<>();
         IWateringHole wh = new WateringHole();
         for (int i = 0; i < 3; i++) {
-            try{
+            try {
                 wh.addCard(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -54,9 +54,9 @@ public class PhaseTwoTests {
         IDeck<ICard> discardPile = new Deck<>();
         IWateringHole wh = new WateringHole();
         for (int i = 0; i < 2; i++) {
-            try{
+            try {
                 wh.addCard(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
-            } catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
@@ -79,5 +79,22 @@ public class PhaseTwoTests {
         Game g = EasyMock.niceMock(Game.class);
         PhaseTwo p = new PhaseTwo(g);
         assertEquals(p.getNumber(), 2);
+    }
+
+    @Test
+    public void testVerifyTurnIncrement() throws IllegalNumberOfPlayers, DeckEmptyException, IllegalCardDirectionException, NullGameObjectException, InvalidPlayerSelectException {
+        IWateringHole wh = new WateringHole();
+        for (int i = 0; i < 2; i++) {
+            try {
+                wh.addCard(new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        Game g = new Game(generateNumPlayers(3), wh, EasyMock.niceMock(Deck.class), EasyMock.niceMock(Deck.class));
+        PhaseTwo p = new PhaseTwo(g);
+        g.setPhase(p);
+        g.getPhase().execute();
+        assertEquals(2, g.getTurn());
     }
 }
