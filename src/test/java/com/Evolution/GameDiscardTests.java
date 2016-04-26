@@ -58,6 +58,21 @@ public class GameDiscardTests {
     }
 
     @Test
+    public void testDiscardFromPlayerIntegration2() throws NullGameObjectException,
+            IllegalCardFoodException, IllegalCardDirectionException, IllegalNumberOfPlayers,
+            InvalidPlayerSelectException, IllegalCardRemovalException,
+            IllegalCardDiscardException {
+        ArrayList<IPlayer> playerList = generateNumRealPlayers(5);
+        playerList = addCardsToPlayers(playerList, 5);
+        Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
+        int expected = g.getDiscardPile().getSize() + 1;
+        int expected2 = playerList.get(4).getCards().size() - 1;
+        g.discardFromPlayer(4, g.getPlayerObjects().get(4).getCards().get(0));
+        assertEquals(expected, g.getDiscardPile().getSize());
+        assertEquals(expected2, g.getPlayerObjects().get(4).getCards().size());
+    }
+
+    @Test
     public void testDiscardToIncreasePopulationIntegration() throws NullGameObjectException,
             IllegalNumberOfPlayers, InvalidPlayerSelectException,
             IllegalSpeciesIndexException, SpeciesPopulationException,
