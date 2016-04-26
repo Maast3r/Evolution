@@ -202,4 +202,53 @@ public class SpeciesTests {
         Species s = new Species();
         s.removeTrait(null);
     }
+
+    @Test
+    public void testEat() throws SpeciesFullException {
+        Species s = new Species();
+        s.eat();
+        assertEquals(1, s.getEatenFood());
+    }
+
+    @Test
+    public void testEatMax() throws SpeciesFullException, SpeciesPopulationException {
+        Species s = new Species();
+        for (int i = 0; i < 5; i++) {
+            s.increasePopulation();
+            s.eat();
+        }
+        s.eat();
+        assertEquals(6, s.getEatenFood());
+    }
+
+    @Test (expected = SpeciesFullException.class)
+    public void testEatOverMax() throws SpeciesFullException, SpeciesPopulationException {
+        Species s = new Species();
+        for (int i = 0; i < 5; i++) {
+            s.increasePopulation();
+        }
+        for (int i = 0; i < 7; i++) {
+            s.eat();
+        }
+    }
+
+    @Test (expected = SpeciesFullException.class)
+    public void testEatInvalid() throws SpeciesPopulationException, SpeciesFullException {
+        Species s = new Species();
+        s.eat();
+        s.eat();
+    }
+
+    @Test
+    public void testIsFull() throws SpeciesFullException {
+        Species s = new Species();
+        assertFalse(s.isFull());
+    }
+
+    @Test
+    public void isFullTrue() throws SpeciesFullException {
+        Species s = new Species();
+        s.eat();
+        assertTrue(s.isFull());
+    }
 }

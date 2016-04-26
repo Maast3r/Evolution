@@ -77,4 +77,23 @@ public interface ISpecies {
      * @throws NullGameObjectException       when the provided ICard is null
      */
     ICard removeTrait(ICard c) throws SpeciesTraitNotFoundException, NullGameObjectException;
+
+    /**
+     * This species eats one food, increasing its eatenFood count
+     * @throws SpeciesFullException when the player tries to eat more food when the population is already
+     *  fed (eatenFood = population)
+     */
+    void eat() throws SpeciesFullException;
+
+    /**
+     * returns the amount of food this species has eaten this round
+     * @return eatenFood
+     */
+    int getEatenFood();
+
+    /**
+     * Returns whether or not the species entire population is fed
+     * @return if the species is full
+     */
+    boolean isFull();
 }

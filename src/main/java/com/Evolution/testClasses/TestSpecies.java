@@ -56,4 +56,19 @@ public class TestSpecies implements ISpecies {
     public ICard removeTrait(ICard c) {
         return null;
     }
+
+    @Override
+    public void eat() {
+
+    }
+
+    @Override
+    public int getEatenFood() {
+        return 0;
+    }
+
+    @Override
+    public boolean isFull() {
+        return false;
+    }
 }
