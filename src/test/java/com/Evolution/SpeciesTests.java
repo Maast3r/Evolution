@@ -62,8 +62,8 @@ public class SpeciesTests {
                 s.increasePopulation();
             }
             assertEquals(this.popIncrease + 1, s.getPopulation());
-        }  catch (SpeciesPopulationException e) {
-            if(!(this.popIncrease > 5)){
+        } catch (SpeciesPopulationException e) {
+            if (!(this.popIncrease > 5)) {
                 fail();
             }
         }
@@ -81,8 +81,8 @@ public class SpeciesTests {
                 s.decreasePopulation();
             }
             assertEquals(1 + this.popIncrease - this.popDecrease, s.getPopulation());
-        } catch (SpeciesPopulationException e){
-            if(!(this.popIncrease > 5) && !(this.popIncrease - this.popDecrease + 1 < 0)){
+        } catch (SpeciesPopulationException e) {
+            if (!(this.popIncrease > 5) && !(this.popIncrease - this.popDecrease + 1 < 0)) {
                 fail();
             }
         }
@@ -96,8 +96,8 @@ public class SpeciesTests {
                 s.increaseBodySize();
             }
             assertEquals(1 + this.bodyIncrease, s.getBodySize());
-        }catch(SpeciesBodySizeException e){
-            if(!(this.bodyIncrease > 5)){
+        } catch (SpeciesBodySizeException e) {
+            if (!(this.bodyIncrease > 5)) {
                 fail();
             }
         }
@@ -172,6 +172,16 @@ public class SpeciesTests {
         EasyMock.verify(c);
     }
 
+    @Test
+    public void testRemoveTraitSET() throws NullGameObjectException, IllegalCardFoodException,
+            IllegalCardDirectionException, SpeciesNumberTraitsException, SpeciesDuplicateTraitException, SpeciesTraitNotFoundException {
+        Species s = new Species();
+        ICard c = new Card("Fertile", "Before the food cards are revealed, this species gains 1 Population if there " +
+                "is food on the Watering Hole.", "fertile.png", 2, 0);
+        s.addTrait(c);
+        assertEquals(c, s.removeTrait(c));
+    }
+
     @Test(expected = SpeciesTraitNotFoundException.class)
     public void testRemoveFails() throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException,
             SpeciesTraitNotFoundException, NullGameObjectException {
@@ -191,5 +201,63 @@ public class SpeciesTests {
             NullGameObjectException, SpeciesTraitNotFoundException {
         Species s = new Species();
         s.removeTrait(null);
+    }
+
+    @Test
+    public void testEat() throws SpeciesFullException {
+        Species s = new Species();
+        s.eat();
+        assertEquals(1, s.getEatenFood());
+    }
+
+    @Test
+    public void testEatMax() throws SpeciesFullException, SpeciesPopulationException {
+        Species s = new Species();
+        for (int i = 0; i < 5; i++) {
+            s.increasePopulation();
+            s.eat();
+        }
+        s.eat();
+        assertEquals(6, s.getEatenFood());
+    }
+
+    @Test (expected = SpeciesFullException.class)
+    public void testEatOverMax() throws SpeciesFullException, SpeciesPopulationException {
+        Species s = new Species();
+        for (int i = 0; i < 5; i++) {
+            s.increasePopulation();
+        }
+        for (int i = 0; i < 7; i++) {
+            s.eat();
+        }
+    }
+
+    @Test (expected = SpeciesFullException.class)
+    public void testEatInvalid() throws SpeciesPopulationException, SpeciesFullException {
+        Species s = new Species();
+        s.eat();
+        s.eat();
+    }
+
+    @Test
+    public void resetEatenFood() throws SpeciesFullException {
+        Species s = new Species();
+        s.eat();
+        assertEquals(1, s.getEatenFood());
+        s.resetEatenFood();
+        assertEquals(0, s.getEatenFood());
+    }
+
+    @Test
+    public void testIsFull() throws SpeciesFullException {
+        Species s = new Species();
+        assertFalse(s.isFull());
+    }
+
+    @Test
+    public void isFullTrue() throws SpeciesFullException {
+        Species s = new Species();
+        s.eat();
+        assertTrue(s.isFull());
     }
 }
