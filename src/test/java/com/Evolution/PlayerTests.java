@@ -205,6 +205,6 @@ public class PlayerTests {
         EasyMock.expect(s.getEatenFood()).andReturn(0);
         Player p = new Player(s);
         p.moveFoodToFoodBag();
-
+        assertEquals(0, p.getFoodBag());
     }
 }
