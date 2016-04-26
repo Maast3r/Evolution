@@ -519,10 +519,16 @@ public class GameTests {
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
-        EasyMock.expect(players.get(this.playerIndex).getCards()).andReturn(new ArrayList<>(Arrays.asList(fakeCard)));
+        EasyMock.expect(players.get(this.playerIndex).getCards())
+                .andReturn(new ArrayList<>(Arrays.asList(fakeCard)));
+        EasyMock.expect(players.get(this.playerIndex).getCards())
+                .andReturn(new ArrayList<>(Arrays.asList(fakeCard)));
         players.get(this.playerIndex).addSpeciesLeft(fakeSpecies);
         this.discardPile.discard(fakeCard);
         EasyMock.replay(players.get(this.playerIndex), this.discardPile, fakeSpecies, fakeCard);
+        System.out.println("------- " + this.playerIndex);
+        System.out.println("+++++++ " + fakeCard);
+        System.out.println("~~~~~~~ " + fakeSpecies);
         g.discardForLeftSpecies(this.playerIndex, fakeCard, fakeSpecies);
         EasyMock.verify(players.get(this.playerIndex), this.discardPile, fakeSpecies, fakeCard);
     }
@@ -561,6 +567,7 @@ public class GameTests {
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
         ICard fakeCard = EasyMock.niceMock(Card.class);
+        EasyMock.expect(players.get(this.playerIndex).getCards()).andReturn(new ArrayList<>(Arrays.asList(fakeCard)));
         EasyMock.expect(players.get(this.playerIndex).getCards()).andReturn(new ArrayList<>(Arrays.asList(fakeCard)));
         players.get(this.playerIndex).addSpeciesRight(fakeSpecies);
         this.discardPile.discard(fakeCard);
