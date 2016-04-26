@@ -54,12 +54,14 @@ public class GameDiscardTests {
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
         int expected = g.getDiscardPile().getSize() + 1;
         int expected2 = playerList.get(0).getSpecies().get(0).getPopulation() + 1;
+        int expected3 = playerList.get(0).getCards().size() - 1;
         g.increasePopulation(0, 0, playerList.get(0).getCards()
                 .get(0));
         assertEquals(expected, g.getDiscardPile().getSize());
         assertEquals(expected2,
                 g.getPlayerObjects().get(0).getSpecies().get(0)
                         .getPopulation());
+        assertEquals(expected3, g.getPlayerObjects().get(0).getCards().size());
     }
 
     @Test
@@ -74,12 +76,14 @@ public class GameDiscardTests {
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
         int expected = g.getDiscardPile().getSize() + 1;
         int expected2 = playerList.get(4).getSpecies().get(0).getPopulation() + 1;
+        int expected3 = playerList.get(4).getCards().size() - 1;
         g.increasePopulation(4, 0, playerList.get(4).getCards()
                 .get(0));
         assertEquals(expected, g.getDiscardPile().getSize());
         assertEquals(expected2,
                 g.getPlayerObjects().get(4).getSpecies().get(0)
                         .getPopulation());
+        assertEquals(expected3, g.getPlayerObjects().get(4).getCards().size());
     }
 
     @Test
@@ -95,12 +99,14 @@ public class GameDiscardTests {
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
         int expected = g.getDiscardPile().getSize() + 1;
         int expected2 = playerList.get(0).getSpecies().get(0).getBodySize() + 1;
+        int expected3 = playerList.get(0).getCards().size() - 1;
         g.increaseBodySize(0, 0, playerList.get(0).getCards()
                 .get(0));
         assertEquals(expected, g.getDiscardPile().getSize());
         assertEquals(expected2,
                 g.getPlayerObjects().get(0).getSpecies().get(0)
                     .getBodySize());
+        assertEquals(expected3, g.getPlayerObjects().get(0).getCards().size());
     }
 
     @Test
@@ -116,12 +122,14 @@ public class GameDiscardTests {
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
         int expected = g.getDiscardPile().getSize() + 1;
         int expected2 = playerList.get(4).getSpecies().get(0).getBodySize() + 1;
+        int expected3 = playerList.get(4).getCards().size() - 1;
         g.increaseBodySize(4, 0, playerList.get(4).getCards()
                 .get(0));
         assertEquals(expected, g.getDiscardPile().getSize());
         assertEquals(expected2,
                 g.getPlayerObjects().get(4).getSpecies().get(0)
                         .getBodySize());
+        assertEquals(expected3, g.getPlayerObjects().get(4).getCards().size());
     }
 
 
@@ -138,11 +146,13 @@ public class GameDiscardTests {
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
         int expected = g.getDiscardPile().getSize() + 1;
         int expected2 = playerList.get(0).getSpecies().size() + 1;
+        int expected3 = playerList.get(0).getCards().size() - 1;
         g.discardForLeftSpecies(0, playerList.get(0).getCards().get(0),
                 new Species());
         assertEquals(expected, g.getDiscardPile().getSize());
         assertEquals(expected2,
                 g.getPlayerObjects().get(0).getSpecies().size());
+        assertEquals(expected3, g.getPlayerObjects().get(0).getCards().size());
     }
 
     @Test
