@@ -200,6 +200,17 @@ public class SpeciesTests {
         assertEquals(1, s.getEatenFood());
     }
 
+    @Test
+    public void testEatMax() throws SpeciesFullException, SpeciesPopulationException {
+        Species s = new Species();
+        for (int i = 0; i < 5; i++) {
+            s.increasePopulation();
+            s.eat();
+        }
+        s.eat();
+        assertEquals(6, s.getEatenFood());
+    }
+
     @Test (expected = SpeciesFullException.class)
     public void testEatInvalid() throws SpeciesPopulationException, SpeciesFullException {
         Species s = new Species();
