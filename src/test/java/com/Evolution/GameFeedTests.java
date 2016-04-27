@@ -200,15 +200,9 @@ public class GameFeedTests {
     @Test
     public void testGetSpeciesFood() throws IllegalNumberOfPlayers, SpeciesFullException, InvalidPlayerSelectException,
             IllegalSpeciesIndexException, WateringHoleEmptyException {
-        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        ArrayList<IPlayer> players = generateNumRealPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
-        ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
-        EasyMock.expect(players.get(this.playerIndex).getSpecies())
-                .andReturn(new ArrayList<>(Arrays.asList(fakeSpecies)));
-        EasyMock.expect(fakeSpecies.getEatenFood()).andReturn(1);
-        EasyMock.replay();
         int food = g.getSpeciesFood(this.playerIndex, 0);
-        EasyMock.verify();
-        assertEquals(1, food);
+        assertEquals(0, food);
     }
 }

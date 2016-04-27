@@ -459,4 +459,8 @@ public class Game {
         this.wateringHole.removeFood();
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
     }
+
+    public int getSpeciesFood(int playerIndex, int speciesIndex) {
+        return this.players.get(playerIndex).getSpecies().get(speciesIndex).getEatenFood();
+    }
 }
