@@ -932,4 +932,17 @@ public class GameTests {
         ArrayList<ICard> traits = g.getTraits(this.playerIndex, 0);
         assertTrue(traits.size() == 0);
     }
+
+    @Test
+    public void testGetTraits() throws IllegalNumberOfPlayers, NullGameObjectException, IllegalCardRemovalException,
+            IllegalSpeciesIndexException, InvalidPlayerSelectException, SpeciesDuplicateTraitException,
+            SpeciesNumberTraitsException, DeckEmptyException {
+        ArrayList<IPlayer> players = generateNumRealPlayers(this.numPlayers);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        ICard card = EasyMock.niceMock(Card.class);
+        players.get(this.playerIndex).getSpecies().get(0).addTrait(card);
+        ArrayList<ICard> traits = g.getTraits(this.playerIndex, 0);
+        assertTrue(traits.size() == 1);
+        assertEquals(traits.get(0), card);
+    }
 }
