@@ -945,4 +945,12 @@ public class GameTests {
         assertTrue(traits.size() == 1);
         assertEquals(traits.get(0), card);
     }
+
+    @Test (expected = InvalidPlayerSelectException.class)
+    public void testGetTraitsInvalidPlayer() throws IllegalNumberOfPlayers, NullGameObjectException, IllegalCardRemovalException,
+            IllegalSpeciesIndexException, InvalidPlayerSelectException, SpeciesDuplicateTraitException,
+            SpeciesNumberTraitsException, DeckEmptyException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.getTraits(this.playerIndex, 0);
+    }
 }
