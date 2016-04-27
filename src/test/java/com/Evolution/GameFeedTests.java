@@ -97,9 +97,9 @@ public class GameFeedTests {
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
             SpeciesFullException {
-        Game g = new Game(generateNumRealPlayers(4), this.wateringHole, this.drawPile,
+        Game g = new Game(generateNumRealPlayers(5), this.wateringHole, this.drawPile,
                 this.discardPile);
-        int expected = g.getPlayerObjects().get(4).getSpecies().get(4).getEatenFood() + 1;
+        int expected = g.getPlayerObjects().get(4).getSpecies().get(0).getEatenFood() + 1;
         g.feedPlayerSpecies(4, 0);
         assertEquals(expected, g.getPlayerObjects().get(4).getSpecies()
                 .get(0).getEatenFood());

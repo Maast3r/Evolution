@@ -453,6 +453,6 @@ public class Game {
             throw new IllegalSpeciesIndexException("Species index is out of range!");
         }
 
-        this.players.get(0).getSpecies().get(0).eat();
+        this.players.get(playerIndex).getSpecies().get(0).eat();
     }
 }
