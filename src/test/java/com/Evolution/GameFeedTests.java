@@ -137,7 +137,7 @@ public class GameFeedTests {
         ArrayList<IPlayer> p = generateNumRealPlayers(5);
         Game g = new Game(p, this.wateringHole, this.drawPile,
                 this.discardPile);
-        g.feedPlayerSpecies(4, 3);
+        g.feedPlayerSpecies(6, 3);
     }
 
     @Test (expected = IllegalSpeciesIndexException.class)
