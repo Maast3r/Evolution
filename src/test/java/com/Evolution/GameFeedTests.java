@@ -117,7 +117,7 @@ public class GameFeedTests {
         Game g = new Game(p, this.wateringHole, this.drawPile,
                 this.discardPile);
         int expected = g.getPlayerObjects().get(4).getSpecies().get(3).getEatenFood() + 1;
-        g.feedPlayerSpecies(4, 0);
+        g.feedPlayerSpecies(4, 3);
         assertEquals(expected, g.getPlayerObjects().get(4).getSpecies()
                 .get(3).getEatenFood());
     }
