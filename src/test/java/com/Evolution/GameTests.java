@@ -927,7 +927,7 @@ public class GameTests {
     }
 
     @Test
-    public void testEmptyGetTraits() throws IllegalNumberOfPlayers, NullGameObjectException, InvalidPlayerSelectException {
+    public void testEmptyGetTraits() throws IllegalNumberOfPlayers, NullGameObjectException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
         Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         ArrayList<ICard> traits = g.getTraits(this.playerIndex, 0);
         assertTrue(traits.size() == 0);
@@ -955,10 +955,10 @@ public class GameTests {
     }
 
     @Test (expected = IllegalSpeciesIndexException.class)
-    public void testGetTraitsInvalidSpecies() throws IllegalNumberOfPlayers, NullGameObjectException, IllegalCardRemovalException,
-            IllegalSpeciesIndexException, InvalidPlayerSelectException, SpeciesDuplicateTraitException,
-            SpeciesNumberTraitsException, DeckEmptyException {
-        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
-        g.getTraits(this.numPlayers, 1);
+    public void testGetTraitsInvalidSpecies() throws IllegalNumberOfPlayers, NullGameObjectException,
+            IllegalCardRemovalException, IllegalSpeciesIndexException, InvalidPlayerSelectException,
+            SpeciesDuplicateTraitException, SpeciesNumberTraitsException, DeckEmptyException {
+        Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.getTraits(this.playerIndex, 1);
     }
 }

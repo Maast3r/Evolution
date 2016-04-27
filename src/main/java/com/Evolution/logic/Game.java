@@ -447,7 +447,8 @@ public class Game {
      * @throws IllegalSpeciesIndexException  if the species index is not in the valid range
      */
     public void removeTraitFromSpecies(int playerIndex, int speciesIndex, ICard traitCard) throws
-            SpeciesTraitNotFoundException, InvalidPlayerSelectException, IllegalSpeciesIndexException, NullGameObjectException {
+            SpeciesTraitNotFoundException, InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            NullGameObjectException {
         if (traitCard == null) {
             throw new NullGameObjectException("Trait card is null!");
         } else if (this.players.size() <= playerIndex || playerIndex < 0) {
@@ -460,9 +461,12 @@ public class Game {
         this.getDiscardPile().discard(removedCard);
     }
 
-    public ArrayList<ICard> getTraits(int playerIndex, int speciesIndex) throws InvalidPlayerSelectException {
+    public ArrayList<ICard> getTraits(int playerIndex, int speciesIndex) throws InvalidPlayerSelectException,
+            IllegalSpeciesIndexException {
         if (this.players.size() <= playerIndex || playerIndex < 0) {
             throw new InvalidPlayerSelectException("Player index is out of range!");
+        } else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
+            throw new IllegalSpeciesIndexException("Species index is out of range!");
         }
         return this.players.get(playerIndex).getSpecies().get(speciesIndex).getTraits();
     }
