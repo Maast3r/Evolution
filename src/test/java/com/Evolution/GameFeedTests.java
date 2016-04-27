@@ -74,7 +74,7 @@ public class GameFeedTests {
 
     @Before
     public void initObjects() {
-        wateringHole = EasyMock.niceMock(WateringHole.class);
+        wateringHole = new WateringHole();
         drawPile = EasyMock.niceMock(Deck.class);
         discardPile = EasyMock.niceMock(Deck.class);
     }
@@ -98,9 +98,12 @@ public class GameFeedTests {
         Game g = new Game(generateNumRealPlayers(4), this.wateringHole, this.drawPile,
                 this.discardPile);
         int expected = g.getPlayerObjects().get(0).getSpecies().get(0).getEatenFood() + 1;
+        g.getWateringHole().addFood();
+        int expected2 = g.getWateringHole().getFoodCount() - 1;
         g.feedPlayerSpecies(0, 0);
         assertEquals(expected, g.getPlayerObjects().get(0).getSpecies()
             .get(0).getEatenFood());
+        assertEquals(expected2, g.getWateringHole().getFoodCount());
     }
 
     @Test
@@ -111,9 +114,12 @@ public class GameFeedTests {
         Game g = new Game(generateNumRealPlayers(5), this.wateringHole, this.drawPile,
                 this.discardPile);
         int expected = g.getPlayerObjects().get(4).getSpecies().get(0).getEatenFood() + 1;
+        g.getWateringHole().addFood();
+        int expected2 = g.getWateringHole().getFoodCount() - 1;
         g.feedPlayerSpecies(4, 0);
         assertEquals(expected, g.getPlayerObjects().get(4).getSpecies()
                 .get(0).getEatenFood());
+        assertEquals(expected2, g.getWateringHole().getFoodCount());
     }
 
     @Test
@@ -124,9 +130,12 @@ public class GameFeedTests {
         Game g = new Game(generateNumRealPlayers(5), this.wateringHole, this.drawPile,
                 this.discardPile);
         int expected = g.getPlayerObjects().get(4).getSpecies().get(0).getEatenFood() + 1;
+        g.getWateringHole().addFood();
+        int expected2 = g.getWateringHole().getFoodCount() - 1;
         g.feedPlayerSpecies(4, 0);
         assertEquals(expected, g.getPlayerObjects().get(4).getSpecies()
                 .get(0).getEatenFood());
+        assertEquals(expected2, g.getWateringHole().getFoodCount());
     }
 
     @Test (expected = InvalidPlayerSelectException.class)
@@ -150,6 +159,7 @@ public class GameFeedTests {
                 this.discardPile);
         g.feedPlayerSpecies(4, 3);
     }
+
 
     @Test
     public void testFeedPlayerUnit() throws IllegalNumberOfPlayers,
