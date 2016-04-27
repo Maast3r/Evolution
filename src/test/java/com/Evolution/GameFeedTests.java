@@ -2,10 +2,7 @@ package com.Evolution;
 
 
 import com.Evolution.exceptions.*;
-import com.Evolution.interfaces.ICard;
-import com.Evolution.interfaces.IDeck;
-import com.Evolution.interfaces.IPlayer;
-import com.Evolution.interfaces.IWateringHole;
+import com.Evolution.interfaces.*;
 import com.Evolution.logic.*;
 import org.easymock.EasyMock;
 import org.junit.Before;
@@ -26,6 +23,7 @@ public class GameFeedTests {
     private IDeck<ICard> discardPile;
     private int numPlayers;
     private int playerIndex;
+    private ArrayList<ISpecies> s;
 
     public GameFeedTests(int numPlayers, int playerIndex) {
         this.numPlayers = numPlayers;
@@ -44,11 +42,24 @@ public class GameFeedTests {
 
     private ArrayList<IPlayer> generateNumPlayers(int num) {
         ArrayList<IPlayer> players = new ArrayList<>();
+        generateMockSpecies(num);
         for (int i = 0; i < num; i++) {
-            players.add(EasyMock.niceMock(Player.class));
+            Player p = EasyMock.createMockBuilder(Player.class)
+                    .withConstructor(ISpecies.class)
+                    .withArgs(s.get(i))
+                    .createMock();
+            players.add(p);
         }
         return players;
     }
+
+    private void generateMockSpecies(int num) {
+        s = new ArrayList<>();
+        for(int i=0; i<num; i++) {
+            s.add(EasyMock.niceMock(Species.class));
+        }
+    }
+
     private ArrayList<IPlayer> generateNumRealPlayers(int num) {
         ArrayList<IPlayer> players = new ArrayList<>();
         for (int i = 0; i < num; i++) {
@@ -120,5 +131,20 @@ public class GameFeedTests {
         g.feedPlayerSpecies(4, 3);
         assertEquals(expected, g.getPlayerObjects().get(4).getSpecies()
                 .get(3).getEatenFood());
+    }
+
+    @Test
+    public void testFeedPlayerUnit() throws IllegalNumberOfPlayers,
+            InvalidPlayerSelectException, IllegalSpeciesIndexException, SpeciesFullException {
+
+        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        EasyMock.replay(players.get(this.playerIndex));
+        fakeSpecies.eat();
+        EasyMock.replay();
+        g.feedPlayerSpecies(this.playerIndex, 0);
+        EasyMock.verify(players.get(this.playerIndex));
+        EasyMock.verify();
     }
 }
