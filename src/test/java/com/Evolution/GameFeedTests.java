@@ -94,7 +94,7 @@ public class GameFeedTests {
     public void testFeedPlayer() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
-            SpeciesFullException {
+            SpeciesFullException, WateringHoleEmptyException {
         Game g = new Game(generateNumRealPlayers(4), this.wateringHole, this.drawPile,
                 this.discardPile);
         int expected = g.getPlayerObjects().get(0).getSpecies().get(0).getEatenFood() + 1;
@@ -110,7 +110,7 @@ public class GameFeedTests {
     public void testFeedPlayer2() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
-            SpeciesFullException {
+            SpeciesFullException, WateringHoleEmptyException {
         Game g = new Game(generateNumRealPlayers(5), this.wateringHole, this.drawPile,
                 this.discardPile);
         int expected = g.getPlayerObjects().get(4).getSpecies().get(0).getEatenFood() + 1;
@@ -126,7 +126,7 @@ public class GameFeedTests {
     public void testFeedPlayer3() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
-            SpeciesFullException {
+            SpeciesFullException, WateringHoleEmptyException {
         Game g = new Game(generateNumRealPlayers(5), this.wateringHole, this.drawPile,
                 this.discardPile);
         int expected = g.getPlayerObjects().get(4).getSpecies().get(0).getEatenFood() + 1;
@@ -142,7 +142,7 @@ public class GameFeedTests {
     public void testFeedPlayer4() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
-            SpeciesFullException {
+            SpeciesFullException, WateringHoleEmptyException {
         ArrayList<IPlayer> p = generateNumRealPlayers(5);
         Game g = new Game(p, this.wateringHole, this.drawPile,
                 this.discardPile);
@@ -153,7 +153,7 @@ public class GameFeedTests {
     public void testFeedPlayer5() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
-            SpeciesFullException {
+            SpeciesFullException, WateringHoleEmptyException {
         ArrayList<IPlayer> p = generateNumRealPlayers(5);
         Game g = new Game(p, this.wateringHole, this.drawPile,
                 this.discardPile);
@@ -163,7 +163,8 @@ public class GameFeedTests {
 
     @Test
     public void testFeedPlayerUnit() throws IllegalNumberOfPlayers,
-            InvalidPlayerSelectException, IllegalSpeciesIndexException, SpeciesFullException {
+            InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            SpeciesFullException, WateringHoleEmptyException {
 
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
