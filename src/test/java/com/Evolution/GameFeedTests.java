@@ -104,4 +104,21 @@ public class GameFeedTests {
         assertEquals(expected, g.getPlayerObjects().get(4).getSpecies()
                 .get(0).getEatenFood());
     }
+
+    @Test
+    public void testFeedPlayer3() throws NullGameObjectException, IllegalCardFoodException,
+            IllegalCardDirectionException, IllegalNumberOfPlayers,
+            InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            SpeciesFullException {
+        ArrayList<IPlayer> p = generateNumRealPlayers(5);
+        for(int i=0; i<4; i++){
+            p.get(4).addSpeciesLeft(new Species());
+        }
+        Game g = new Game(p, this.wateringHole, this.drawPile,
+                this.discardPile);
+        int expected = g.getPlayerObjects().get(4).getSpecies().get(3).getEatenFood() + 1;
+        g.feedPlayerSpecies(4, 0);
+        assertEquals(expected, g.getPlayerObjects().get(4).getSpecies()
+                .get(3).getEatenFood());
+    }
 }
