@@ -927,7 +927,7 @@ public class GameTests {
     }
 
     @Test
-    public void testEmptyGetTraits() throws IllegalNumberOfPlayers, NullGameObjectException {
+    public void testEmptyGetTraits() throws IllegalNumberOfPlayers, NullGameObjectException, InvalidPlayerSelectException {
         Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         ArrayList<ICard> traits = g.getTraits(this.playerIndex, 0);
         assertTrue(traits.size() == 0);
@@ -951,6 +951,6 @@ public class GameTests {
             IllegalSpeciesIndexException, InvalidPlayerSelectException, SpeciesDuplicateTraitException,
             SpeciesNumberTraitsException, DeckEmptyException {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
-        g.getTraits(this.playerIndex, 0);
+        g.getTraits(-1, 0);
     }
 }

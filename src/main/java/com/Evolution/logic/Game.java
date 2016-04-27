@@ -460,7 +460,10 @@ public class Game {
         this.getDiscardPile().discard(removedCard);
     }
 
-    public ArrayList<ICard> getTraits(int playerIndex, int speciesIndex) {
+    public ArrayList<ICard> getTraits(int playerIndex, int speciesIndex) throws InvalidPlayerSelectException {
+        if (this.players.size() <= playerIndex || playerIndex < 0) {
+            throw new InvalidPlayerSelectException("Player index is out of range!");
+        }
         return this.players.get(playerIndex).getSpecies().get(speciesIndex).getTraits();
     }
 
