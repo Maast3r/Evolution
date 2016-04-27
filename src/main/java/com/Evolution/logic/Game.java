@@ -439,7 +439,7 @@ public class Game {
      * Feeds the player's species
      *
      * @param playerIndex  Index of the player in the player list
-     * @param speciesIndex Index of the speices for the player
+     * @param speciesIndex Index of the species for the player
      * @throws InvalidPlayerSelectException  if the player index is not in the valid range
      * @throws IllegalSpeciesIndexException  if the species index is not in the valid range
      * @throws SpeciesFullException if the species' eaten is equal to species' population
@@ -460,9 +460,20 @@ public class Game {
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
     }
 
-    public int getSpeciesFood(int playerIndex, int speciesIndex) throws InvalidPlayerSelectException {
+    /**
+     * Returns the amount of food eaten by the given species of the given player during this round
+     * @param playerIndex the player index
+     * @param speciesIndex the species index
+     * @return the amount of food eaten
+     * @throws InvalidPlayerSelectException if the player index is not in the valid range
+     * @throws IllegalSpeciesIndexException  if the species index is not in the valid range
+     */
+    public int getSpeciesFood(int playerIndex, int speciesIndex) throws InvalidPlayerSelectException,
+            IllegalSpeciesIndexException {
         if (this.players.size() <= playerIndex || playerIndex < 0) {
             throw new InvalidPlayerSelectException("Player index is out of range!");
+        } else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
+            throw new IllegalSpeciesIndexException("Species index is out of range!");
         }
         return this.players.get(playerIndex).getSpecies().get(speciesIndex).getEatenFood();
     }
