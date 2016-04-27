@@ -1,26 +1,54 @@
 package com.Evolution;
 
 
-import com.Evolution.exceptions.IllegalCardDirectionException;
-import com.Evolution.exceptions.IllegalCardFoodException;
-import com.Evolution.exceptions.IllegalNumberOfPlayers;
-import com.Evolution.exceptions.NullGameObjectException;
+import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IDeck;
 import com.Evolution.interfaces.IPlayer;
 import com.Evolution.interfaces.IWateringHole;
 import com.Evolution.logic.*;
+import org.easymock.EasyMock;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 
 import static junit.framework.TestCase.assertEquals;
 
+@RunWith(Parameterized.class)
 public class GameFeedTests {
-    private IWateringHole wateringHole = new WateringHole();
-    private IDeck<ICard> drawPile = new Deck<>();
-    private IDeck<ICard> discardPile = new Deck<>();
+    private IWateringHole wateringHole;
+    private IDeck<ICard> drawPile;
+    private IDeck<ICard> discardPile;
+    private int numPlayers;
+    private int playerIndex;
 
+    public GameFeedTests(int numPlayers, int playerIndex) {
+        this.numPlayers = numPlayers;
+        this.playerIndex = playerIndex;
+    }
+
+
+    @Parameterized.Parameters
+    public static Collection playersToCheck() {
+        return Arrays.asList(new Object[][]{
+                {3, 0}, {3, 1}, {3, 2},
+                {4, 0}, {4, 1}, {4, 2}, {4, 3},
+                {5, 0}, {5, 1}, {5, 2}, {5, 3}, {5, 4}
+        });
+    }
+
+    private ArrayList<IPlayer> generateNumPlayers(int num) {
+        ArrayList<IPlayer> players = new ArrayList<>();
+        for (int i = 0; i < num; i++) {
+            players.add(EasyMock.niceMock(Player.class));
+        }
+        return players;
+    }
     private ArrayList<IPlayer> generateNumRealPlayers(int num) {
         ArrayList<IPlayer> players = new ArrayList<>();
         for (int i = 0; i < num; i++) {
@@ -31,6 +59,13 @@ public class GameFeedTests {
             }
         }
         return players;
+    }
+
+    @Before
+    public void initObjects() {
+        wateringHole = EasyMock.niceMock(WateringHole.class);
+        drawPile = EasyMock.niceMock(Deck.class);
+        discardPile = EasyMock.niceMock(Deck.class);
     }
 
     private ArrayList<IPlayer> addCardsToPlayers(ArrayList<IPlayer> p, int i)
@@ -46,7 +81,9 @@ public class GameFeedTests {
 
     @Test
     public void testFeedPlayer() throws NullGameObjectException, IllegalCardFoodException,
-            IllegalCardDirectionException, IllegalNumberOfPlayers {
+            IllegalCardDirectionException, IllegalNumberOfPlayers,
+            InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            SpeciesFullException {
         ArrayList<IPlayer> playerList = generateNumRealPlayers(3);
         playerList = addCardsToPlayers(playerList, 3);
         Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);

@@ -434,4 +434,25 @@ public class Game {
         ICard removedCard = this.players.get(playerIndex).getSpecies().get(speciesIndex).removeTrait(traitCard);
         this.getDiscardPile().discard(removedCard);
     }
+
+    /**
+     * Feeds the player's species
+     *
+     * @param playerIndex  Index of the player in the player list
+     * @param speciesIndex Index of the speices for the player
+     * @throws InvalidPlayerSelectException  if the player index is not in the valid range
+     * @throws IllegalSpeciesIndexException  if the species index is not in the valid range
+     * @throws SpeciesFullException if the species' eaten is equal to species' population
+     */
+    public void feedPlayerSpecies(int playerIndex, int speciesIndex)
+            throws InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            SpeciesFullException {
+        if (this.players.size() <= playerIndex || playerIndex < 0) {
+            throw new InvalidPlayerSelectException("Player index is out of range!");
+        } else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
+            throw new IllegalSpeciesIndexException("Species index is out of range!");
+        }
+
+        this.players.get(0).getSpecies().get(0).eat();
+    }
 }
