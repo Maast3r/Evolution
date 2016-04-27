@@ -461,6 +461,14 @@ public class Game {
         this.getDiscardPile().discard(removedCard);
     }
 
+    /**
+     * Returns a list of the traits for a given player's species
+     * @param playerIndex the index of the player
+     * @param speciesIndex the index of the species
+     * @return an ArrayList of trait cards for this species
+     * @throws InvalidPlayerSelectException if the player index is not in the valid range
+     * @throws IllegalSpeciesIndexException if the species index is not in the valid range
+     */
     public ArrayList<ICard> getTraits(int playerIndex, int speciesIndex) throws InvalidPlayerSelectException,
             IllegalSpeciesIndexException {
         if (this.players.size() <= playerIndex || playerIndex < 0) {
