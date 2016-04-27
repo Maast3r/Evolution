@@ -160,6 +160,16 @@ public class GameFeedTests {
         g.feedPlayerSpecies(4, 3);
     }
 
+    @Test (expected = WateringHoleEmptyException.class)
+    public void testFeedPlayer6() throws NullGameObjectException, IllegalCardFoodException,
+            IllegalCardDirectionException, IllegalNumberOfPlayers,
+            InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            SpeciesFullException, WateringHoleEmptyException {
+        ArrayList<IPlayer> p = generateNumRealPlayers(5);
+        Game g = new Game(p, this.wateringHole, this.drawPile,
+                this.discardPile);
+        g.feedPlayerSpecies(0, 0);
+    }
 
     @Test
     public void testFeedPlayerUnit() throws IllegalNumberOfPlayers,
