@@ -84,12 +84,24 @@ public class GameFeedTests {
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
             SpeciesFullException {
-        ArrayList<IPlayer> playerList = generateNumRealPlayers(3);
-        playerList = addCardsToPlayers(playerList, 3);
-        Game g = new Game(playerList, this.wateringHole, this.drawPile, this.discardPile);
+        Game g = new Game(generateNumRealPlayers(4), this.wateringHole, this.drawPile,
+                this.discardPile);
         int expected = g.getPlayerObjects().get(0).getSpecies().get(0).getEatenFood() + 1;
         g.feedPlayerSpecies(0, 0);
         assertEquals(expected, g.getPlayerObjects().get(0).getSpecies()
             .get(0).getEatenFood());
+    }
+
+    @Test
+    public void testFeedPlayer2() throws NullGameObjectException, IllegalCardFoodException,
+            IllegalCardDirectionException, IllegalNumberOfPlayers,
+            InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            SpeciesFullException {
+        Game g = new Game(generateNumRealPlayers(4), this.wateringHole, this.drawPile,
+                this.discardPile);
+        int expected = g.getPlayerObjects().get(4).getSpecies().get(4).getEatenFood() + 1;
+        g.feedPlayerSpecies(4, 0);
+        assertEquals(expected, g.getPlayerObjects().get(4).getSpecies()
+                .get(0).getEatenFood());
     }
 }
