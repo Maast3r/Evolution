@@ -205,4 +205,13 @@ public class GameFeedTests {
         int food = g.getSpeciesFood(this.playerIndex, 0);
         assertEquals(0, food);
     }
+
+    @Test (expected = InvalidPlayerSelectException.class)
+    public void testGetSpeciesFoodInvalidPlayer() throws IllegalNumberOfPlayers, SpeciesFullException, InvalidPlayerSelectException,
+            IllegalSpeciesIndexException, WateringHoleEmptyException {
+        ArrayList<IPlayer> players = generateNumRealPlayers(this.numPlayers);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        int food = g.getSpeciesFood(-1, 0);
+        assertEquals(0, food);
+    }
 }
