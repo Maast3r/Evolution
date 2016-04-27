@@ -183,7 +183,7 @@ public class GameFeedTests {
     @Test
     public void testFeedPlayerUnit() throws IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
-            SpeciesFullException, WateringHoleEmptyException {
+            SpeciesFullException, WateringHoleEmptyException, NullGameObjectException {
 
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
@@ -199,7 +199,7 @@ public class GameFeedTests {
 
     @Test
     public void testGetSpeciesFood() throws IllegalNumberOfPlayers, SpeciesFullException, InvalidPlayerSelectException,
-            IllegalSpeciesIndexException, WateringHoleEmptyException {
+            IllegalSpeciesIndexException, WateringHoleEmptyException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumRealPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         int food = g.getSpeciesFood(this.playerIndex, 0);
@@ -208,7 +208,7 @@ public class GameFeedTests {
 
     @Test (expected = InvalidPlayerSelectException.class)
     public void testGetSpeciesFoodInvalidPlayer() throws IllegalNumberOfPlayers, SpeciesFullException, InvalidPlayerSelectException,
-            IllegalSpeciesIndexException, WateringHoleEmptyException {
+            IllegalSpeciesIndexException, WateringHoleEmptyException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumRealPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         g.getSpeciesFood(-1, 0);
@@ -216,7 +216,7 @@ public class GameFeedTests {
 
     @Test (expected = IllegalSpeciesIndexException.class)
     public void testGetSpeciesFoodInvalidSpecies() throws IllegalNumberOfPlayers, SpeciesFullException,
-            InvalidPlayerSelectException, IllegalSpeciesIndexException, WateringHoleEmptyException {
+            InvalidPlayerSelectException, IllegalSpeciesIndexException, WateringHoleEmptyException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumRealPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         g.getSpeciesFood(this.playerIndex, 1);

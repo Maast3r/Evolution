@@ -460,6 +460,10 @@ public class Game {
         this.getDiscardPile().discard(removedCard);
     }
 
+    public ArrayList<ICard> getTraits(int playerIndex, int speciesIndex) {
+        return this.players.get(playerIndex).getSpecies().get(speciesIndex).getTraits();
+    }
+
     /**
      * Feeds the player's species
      *
