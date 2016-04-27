@@ -925,4 +925,11 @@ public class GameTests {
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         g.removeTraitFromSpecies(this.playerIndex, 0, null);
     }
+
+    @Test
+    public void testEmptyGetTraits() throws IllegalNumberOfPlayers, NullGameObjectException {
+        Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        ArrayList<ICard> traits = g.getTraits(this.playerIndex, 0);
+        assertTrue(traits.size() == 0);
+    }
 }
