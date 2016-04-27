@@ -27,10 +27,14 @@ public class Game {
      * @param wateringHole food available to species
      * @param drawPile     cards available to draw from
      * @param discardPile  cards that have been discarded
-     * @throws IllegalNumberOfPlayers when an ArrayList is passed in with too many or too few player objects
+     * @throws IllegalNumberOfPlayers  when an ArrayList is passed in with too many or too few player objects
+     * @throws NullGameObjectException if any parameters are null
      */
     public Game(ArrayList<IPlayer> players, IWateringHole wateringHole, IDeck<ICard> drawPile, IDeck<ICard> discardPile)
-            throws IllegalNumberOfPlayers {
+            throws IllegalNumberOfPlayers, NullGameObjectException {
+        if (players == null || wateringHole == null || drawPile == null || discardPile == null) {
+            throw new NullGameObjectException("Unable to initialize the game with NULL objects");
+        }
         if (players.size() < 3 || players.size() > 5) {
             throw new IllegalNumberOfPlayers("You must have between 3-5 players.\n");
         }
@@ -137,6 +141,8 @@ public class Game {
 
     /**
      * Decrements the food bank by one
+     *
+     * @throws FoodBankEmptyException if the food bank is empty and attempting to decrement
      */
     public void decrementFoodBank() throws FoodBankEmptyException {
         if (this.foodBank == 0) {
@@ -149,6 +155,8 @@ public class Game {
      * Decrements the food bank by i
      *
      * @param i food
+     * @throws FoodBankEmptyException if attempting to remove a negative amount or more food than is in the
+     *                                food bank
      */
     public void decrementFoodBank(int i) throws FoodBankEmptyException {
         if (i > this.foodBank || i < 0) {
@@ -161,6 +169,7 @@ public class Game {
      * Decrements the food bank by i and increments the wateringHole food by i
      *
      * @param i food
+     * @throws FoodBankEmptyException propagated from {@link #decrementFoodBank(int)}
      */
     public void moveFoodFromBankToHole(int i) throws FoodBankEmptyException {
         decrementFoodBank(i);
@@ -187,8 +196,12 @@ public class Game {
      * Changes the current phase to phase;
      *
      * @param phase The phase being set
+     * @throws NullGameObjectException if the provided phase is null
      */
-    public void setPhase(IPhases phase) {
+    public void setPhase(IPhases phase) throws NullGameObjectException {
+        if (phase == null) {
+            throw new NullGameObjectException("Cannot set the Game to a null Phase");
+        }
         this.currentPhase = phase;
     }
 
@@ -329,8 +342,8 @@ public class Game {
             throw new IllegalSpeciesIndexException("The given species index is greater than the number of species for" +
                     " player " + playerIndex + 1);
         }
-        this.players.get(playerIndex).getSpecies().get(speciesIndex).increaseBodySize();
         this.discardFromPlayer(playerIndex, card);
+        this.players.get(playerIndex).getSpecies().get(speciesIndex).increaseBodySize();
     }
 
     /**
@@ -346,6 +359,12 @@ public class Game {
      */
     public void discardForLeftSpecies(int playerIndex, ICard card, ISpecies species) throws
             InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException, IllegalCardRemovalException {
+        if(card == null) {
+            throw new NullGameObjectException("Unable to discard a null card");
+        }
+        if(species == null) {
+            throw new NullGameObjectException("Unable to add a null species");
+        }
         if (playerIndex > this.players.size() - 1) {
             throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }
@@ -370,6 +389,12 @@ public class Game {
     public void discardForRightSpecies(int playerIndex, ICard card, ISpecies species) throws
             InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException,
             IllegalCardRemovalException {
+        if(card == null) {
+            throw new NullGameObjectException("Unable to discard a null card");
+        }
+        if(species == null) {
+            throw new NullGameObjectException("Unable to add a null species");
+        }
         if (playerIndex > this.players.size() - 1) {
             throw new InvalidPlayerSelectException("The given player index is greater than the number of players.");
         }

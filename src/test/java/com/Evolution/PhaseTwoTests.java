@@ -30,7 +30,7 @@ public class PhaseTwoTests {
 
 
     @Test
-    public void testNextPhase() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException, InvalidPlayerSelectException {
+    public void testNextPhase() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
         IDeck<ICard> drawPile = new Deck<>();
         IDeck<ICard> discardPile = new Deck<>();
         IWateringHole wh = new WateringHole();
@@ -49,7 +49,7 @@ public class PhaseTwoTests {
     }
 
     @Test
-    public void textNotNextPhase() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException, InvalidPlayerSelectException {
+    public void textNotNextPhase() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
         IDeck<ICard> drawPile = new Deck<>();
         IDeck<ICard> discardPile = new Deck<>();
         IWateringHole wh = new WateringHole();
