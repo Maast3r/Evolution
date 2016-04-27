@@ -460,7 +460,10 @@ public class Game {
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
     }
 
-    public int getSpeciesFood(int playerIndex, int speciesIndex) {
+    public int getSpeciesFood(int playerIndex, int speciesIndex) throws InvalidPlayerSelectException {
+        if (this.players.size() <= playerIndex || playerIndex < 0) {
+            throw new InvalidPlayerSelectException("Player index is out of range!");
+        }
         return this.players.get(playerIndex).getSpecies().get(speciesIndex).getEatenFood();
     }
 }
