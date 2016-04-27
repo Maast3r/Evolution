@@ -172,6 +172,7 @@ public class GameFeedTests {
         EasyMock.replay(players.get(this.playerIndex));
         fakeSpecies.eat();
         EasyMock.replay();
+        g.getWateringHole().addFood();
         g.feedPlayerSpecies(this.playerIndex, 0);
         EasyMock.verify(players.get(this.playerIndex));
         EasyMock.verify();
