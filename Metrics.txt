@@ -7,7 +7,8 @@
         - Must have less than 6 nested block depth [Nested Block Depth] **NOTE: Event Listeners dynamically declared are exempt**
         - Must have a cyclomatic complexity must be <= 6 [Method Metric: Cyclomatic Complexity] **NOTE: GUI methods are exempt**
         - Must have lack of cohesion of methods <= 5 [Class Metric: Lack of Cohesion of Methods]
+        - Must have at least 1 JavaDoc line per method + Another Line for each Parameter, Return, and Thrown Exception
     4. Action Plan - refactor if method doesn't meet requirements
-    5. Collect Data - Use Intelij Metrics Reloaded Plugin
+    5. Collect Data - Use Intellij Metrics Reloaded Plugin
     6. Validate Proxy - http://programmers.stackexchange.com/questions/133404/what-is-the-ideal-length-of-a-method-for-you
     7. Change Your Behavior - Follow action plan. Repeat 5-7 until no more violations.
