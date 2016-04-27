@@ -447,11 +447,6 @@ public class Game {
     public void feedPlayerSpecies(int playerIndex, int speciesIndex)
             throws InvalidPlayerSelectException, IllegalSpeciesIndexException,
             SpeciesFullException {
-        if (this.players.size() <= playerIndex || playerIndex < 0) {
-            throw new InvalidPlayerSelectException("Player index is out of range!");
-        } else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
-            throw new IllegalSpeciesIndexException("Species index is out of range!");
-        }
 
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
     }

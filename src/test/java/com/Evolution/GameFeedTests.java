@@ -121,16 +121,34 @@ public class GameFeedTests {
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
             SpeciesFullException {
+        Game g = new Game(generateNumRealPlayers(5), this.wateringHole, this.drawPile,
+                this.discardPile);
+        int expected = g.getPlayerObjects().get(4).getSpecies().get(0).getEatenFood() + 1;
+        g.feedPlayerSpecies(4, 0);
+        assertEquals(expected, g.getPlayerObjects().get(4).getSpecies()
+                .get(0).getEatenFood());
+    }
+
+    @Test (expected = InvalidPlayerSelectException.class)
+    public void testFeedPlayer4() throws NullGameObjectException, IllegalCardFoodException,
+            IllegalCardDirectionException, IllegalNumberOfPlayers,
+            InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            SpeciesFullException {
         ArrayList<IPlayer> p = generateNumRealPlayers(5);
-        for(int i=0; i<4; i++){
-            p.get(4).addSpeciesLeft(new Species());
-        }
         Game g = new Game(p, this.wateringHole, this.drawPile,
                 this.discardPile);
-        int expected = g.getPlayerObjects().get(4).getSpecies().get(3).getEatenFood() + 1;
         g.feedPlayerSpecies(4, 3);
-        assertEquals(expected, g.getPlayerObjects().get(4).getSpecies()
-                .get(3).getEatenFood());
+    }
+
+    @Test (expected = IllegalSpeciesIndexException.class)
+    public void testFeedPlayer5() throws NullGameObjectException, IllegalCardFoodException,
+            IllegalCardDirectionException, IllegalNumberOfPlayers,
+            InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            SpeciesFullException {
+        ArrayList<IPlayer> p = generateNumRealPlayers(5);
+        Game g = new Game(p, this.wateringHole, this.drawPile,
+                this.discardPile);
+        g.feedPlayerSpecies(4, 3);
     }
 
     @Test
