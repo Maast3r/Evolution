@@ -122,7 +122,7 @@ public class GameFeedTests {
         assertEquals(expected2, g.getWateringHole().getFoodCount());
     }
 
-    @Test
+    @Test (expected = InvalidPlayerSelectException.class)
     public void testFeedPlayer3() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
@@ -132,10 +132,7 @@ public class GameFeedTests {
         int expected = g.getPlayerObjects().get(4).getSpecies().get(0).getEatenFood() + 1;
         g.getWateringHole().addFood();
         int expected2 = g.getWateringHole().getFoodCount() - 1;
-        g.feedPlayerSpecies(4, 0);
-        assertEquals(expected, g.getPlayerObjects().get(4).getSpecies()
-                .get(0).getEatenFood());
-        assertEquals(expected2, g.getWateringHole().getFoodCount());
+        g.feedPlayerSpecies(-1, 0);
     }
 
     @Test (expected = InvalidPlayerSelectException.class)
@@ -160,8 +157,19 @@ public class GameFeedTests {
         g.feedPlayerSpecies(4, 3);
     }
 
-    @Test (expected = WateringHoleEmptyException.class)
+    @Test (expected = IllegalSpeciesIndexException.class)
     public void testFeedPlayer6() throws NullGameObjectException, IllegalCardFoodException,
+            IllegalCardDirectionException, IllegalNumberOfPlayers,
+            InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            SpeciesFullException, WateringHoleEmptyException {
+        ArrayList<IPlayer> p = generateNumRealPlayers(5);
+        Game g = new Game(p, this.wateringHole, this.drawPile,
+                this.discardPile);
+        g.feedPlayerSpecies(4, -1);
+    }
+
+    @Test (expected = WateringHoleEmptyException.class)
+    public void testFeedPlayer7() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
             SpeciesFullException, WateringHoleEmptyException {
