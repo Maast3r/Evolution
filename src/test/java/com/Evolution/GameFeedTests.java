@@ -5,6 +5,7 @@ import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.*;
 import com.Evolution.logic.*;
 import org.easymock.EasyMock;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -194,5 +195,17 @@ public class GameFeedTests {
         g.feedPlayerSpecies(this.playerIndex, 0);
         EasyMock.verify(players.get(this.playerIndex));
         EasyMock.verify();
+    }
+
+    @Test
+    public void testGetSpeciesFood() throws IllegalNumberOfPlayers, SpeciesFullException, InvalidPlayerSelectException, IllegalSpeciesIndexException, WateringHoleEmptyException {
+        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        EasyMock.replay(players.get(this.playerIndex).getSpecies().get(0).getEatenFood());
+        g.getWateringHole().addFood();
+        g.feedPlayerSpecies(this.playerIndex, 0);
+        int food = g.getSpeciesFood(this.playerIndex, 0);
+        EasyMock.verify();
+        assertEquals(1, food);
     }
 }
