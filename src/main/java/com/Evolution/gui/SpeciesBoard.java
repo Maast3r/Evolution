@@ -215,7 +215,7 @@ class SpeciesBoard extends VBox {
                 break;
             case ADD_TRAIT:
                 boolean add = openCardWindow(Actions.ADD_TRAIT);
-                if (this.selectedCard != null) {
+                 if (this.selectedCard != null && add) {
                     this.game.addTraitToSpecies(this.playerIndex, this.speciesNum, this.selectedCard);
                     this.playerPane.updateGameScreen();
                     this.selectedCard = null;

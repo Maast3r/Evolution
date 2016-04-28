@@ -129,6 +129,7 @@ class CardPopupController implements Initializable {
                                         }
                                     }
                                     this.board.setTraitSelection(newValue.intValue());
+                                    this.successfulAdd = true;
                                     this.gridPane.getScene().getWindow().hide();
                                 }
 
