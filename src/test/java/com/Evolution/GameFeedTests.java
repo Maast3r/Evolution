@@ -196,6 +196,15 @@ public class GameFeedTests {
         g.getSpeciesFood(-1, 0);
     }
 
+    @Test (expected = InvalidPlayerSelectException.class)
+    public void testGetSpeciesFoodInvalidPlayerHighBound() throws IllegalNumberOfPlayers, SpeciesFullException,
+            InvalidPlayerSelectException,
+            IllegalSpeciesIndexException, WateringHoleEmptyException, NullGameObjectException {
+        ArrayList<IPlayer> players = generateNumRealPlayers(this.numPlayers);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        g.getSpeciesFood(this.numPlayers, 0);
+    }
+
     @Test (expected = IllegalSpeciesIndexException.class)
     public void testGetSpeciesFoodInvalidSpecies() throws IllegalNumberOfPlayers, SpeciesFullException,
             InvalidPlayerSelectException, IllegalSpeciesIndexException, WateringHoleEmptyException, NullGameObjectException {
