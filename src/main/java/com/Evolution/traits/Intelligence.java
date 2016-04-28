@@ -2,8 +2,8 @@ package com.Evolution.traits;
 
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ATrait;
-import com.Evolution.logic.Game;
 import com.Evolution.logic.Card;
+import com.Evolution.logic.Game;
 
 
 public class Intelligence extends ATrait {
