@@ -17,7 +17,9 @@ public class Foraging extends ATrait {
     public void executeTrait(int[] playerIndex, int[] speciesIndex)
             throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
             SpeciesFullException, WateringHoleEmptyException {
-
+        if(playerIndex[0] == 5) {
+            throw new InvalidPlayerSelectException("Invalid trait player select.");
+        }
         this.game.feedPlayerSpecies(playerIndex[0], speciesIndex[0]);
     }
 
