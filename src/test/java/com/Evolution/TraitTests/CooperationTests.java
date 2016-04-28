@@ -3,6 +3,7 @@ package com.Evolution.TraitTests;
 
 import com.Evolution.interfaces.ATrait;
 import com.Evolution.logic.Game;
+import com.Evolution.traits.Cooperation;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
