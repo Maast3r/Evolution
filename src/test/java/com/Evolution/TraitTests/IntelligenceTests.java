@@ -21,6 +21,18 @@ public class IntelligenceTests {
         assertEquals(g, t.getGame());
     }
 
+    /**
+     * soo this is an exception to traits. it needs to be selected from gui. so ignore
+     * @throws IllegalCardRemovalException
+     * @throws InvalidPlayerSelectException
+     * @throws NullGameObjectException
+     * @throws IllegalCardDiscardException
+     * @throws IllegalSpeciesIndexException
+     * @throws SpeciesFullException
+     * @throws WateringHoleEmptyException
+     * @throws IllegalCardFoodException
+     * @throws IllegalCardDirectionException
+     */
     @Test
     public void testDropCardForFood() throws IllegalCardRemovalException,
             InvalidPlayerSelectException, NullGameObjectException,
