@@ -540,7 +540,6 @@ public class Game {
 
     /**
      * Increases a species population without discarding a card
-     * TODO error handling
      *
      * @param playerIndex  the player index
      * @param speciesIndex the species index
@@ -548,7 +547,7 @@ public class Game {
      */
     public void increasePopulation(int playerIndex, int speciesIndex)
             throws SpeciesPopulationException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
-        if(playerIndex >= this.players.size() || playerIndex < 0) {
+        if (playerIndex >= this.players.size() || playerIndex < 0) {
             throw new InvalidPlayerSelectException("Player index is out of range!");
         }
         ArrayList<ISpecies> playerSpecies = this.players.get(playerIndex).getSpecies();

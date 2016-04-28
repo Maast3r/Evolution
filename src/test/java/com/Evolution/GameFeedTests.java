@@ -203,4 +203,10 @@ public class GameFeedTests {
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         g.getSpeciesFood(this.playerIndex, 1);
     }
+
+    @Test(expected = FoodBankEmptyException.class)
+    public void testFeedSpeciesEmptyBank() throws IllegalNumberOfPlayers, NullGameObjectException, SpeciesFullException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.feedPlayerSpeciesFromBank(this.playerIndex, 0);
+    }
 }
