@@ -30,7 +30,18 @@ public class ForagingTests {
         ATrait t = new Foraging(g);
         g.feedPlayerSpecies(0, 0);
         EasyMock.replay(g);
-        t.executeTrait(new int[]{0, -1}, new int[]{0, -1});
+        t.executeTrait(new int[]{0, 0}, new int[]{0, 0});
+        EasyMock.verify(g);
+    }
+
+    @Test(expceted = InvalidTraitPlayerIndicesException.class)
+    public void testCallGamemFeed2() throws IllegalSpeciesIndexException,
+            InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException {
+        Game g = EasyMock.niceMock(Game.class);
+        ATrait t = new Foraging(g);
+        g.feedPlayerSpecies(0, 0);
+        EasyMock.replay(g);
+        t.executeTrait(new int[]{-1, 0}, new int[]{-1, 0});
         EasyMock.verify(g);
     }
 }
