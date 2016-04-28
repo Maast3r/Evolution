@@ -573,7 +573,7 @@ public class Game {
         if (this.players.size() <= playerIndex || playerIndex < 0) {
             throw new InvalidPlayerSelectException("Player index is out of range!");
         }
-        if (speciesIndex < 0 /*|| speciesIndex >= this.players.get(playerIndex).getSpecies().size()*/) {
+        if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
             throw new IllegalSpeciesIndexException("Species index is out of range!");
         }
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
