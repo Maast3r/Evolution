@@ -7,6 +7,7 @@ import com.Evolution.exceptions.SpeciesFullException;
 import com.Evolution.exceptions.WateringHoleEmptyException;
 import com.Evolution.interfaces.ATrait;
 import com.Evolution.logic.Game;
+import com.Evolution.traits.Foraging;
 import com.Evolution.traits.LongNeck;
 import org.easymock.EasyMock;
 import org.junit.Test;
