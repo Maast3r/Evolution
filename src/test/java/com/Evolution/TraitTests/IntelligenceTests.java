@@ -1,7 +1,10 @@
 package com.Evolution.TraitTests;
 
 
+import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ATrait;
+import com.Evolution.interfaces.ICard;
+import com.Evolution.logic.Card;
 import com.Evolution.logic.Game;
 import com.Evolution.traits.Foraging;
 import com.Evolution.traits.Intelligence;
@@ -16,5 +19,20 @@ public class IntelligenceTests {
         Game g = EasyMock.niceMock(Game.class);
         ATrait t = new Intelligence(g);
         assertEquals(g, t.getGame());
+    }
+
+    @Test
+    public void testDropCardForFood() throws IllegalCardRemovalException,
+            InvalidPlayerSelectException, NullGameObjectException,
+            IllegalCardDiscardException, IllegalSpeciesIndexException,
+            SpeciesFullException, WateringHoleEmptyException {
+        Game g = EasyMock.niceMock(Game.class);
+        ICard c = EasyMock.niceMock(Card.class);
+        ATrait t = new Foraging(g);
+        g.discardFromPlayer(0, c);
+        g.feedPlayerSpecies(0, 0);
+        EasyMock.replay(g);
+        t.executeTrait(new int[]{0, 0}, new int[]{0, 0});
+        EasyMock.verify(g);
     }
 }
