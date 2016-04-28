@@ -56,7 +56,7 @@ public class GameFeedTests {
 
     private void generateMockSpecies(int num) {
         s = new ArrayList<>();
-        for(int i=0; i<num; i++) {
+        for (int i = 0; i < num; i++) {
             s.add(EasyMock.niceMock(Species.class));
         }
     }
@@ -83,7 +83,7 @@ public class GameFeedTests {
     private ArrayList<IPlayer> addCardsToPlayers(ArrayList<IPlayer> p, int i)
             throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException {
-        for(int j=0; j < i; j++){
+        for (int j = 0; j < i; j++) {
             ICard card = new Card("Carnivore", "Makes a species a carnivore",
                     "./carnivore.jpg", 3, 0);
             p.get(j).addCardToHand(card);
@@ -96,88 +96,72 @@ public class GameFeedTests {
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
             SpeciesFullException, WateringHoleEmptyException {
-        Game g = new Game(generateNumRealPlayers(4), this.wateringHole, this.drawPile,
+        Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile,
                 this.discardPile);
-        int expected = g.getPlayerObjects().get(0).getSpecies().get(0).getEatenFood() + 1;
+        int expected = g.getPlayerObjects().get(this.playerIndex).getSpecies().get(0).getEatenFood() + 1;
         g.getWateringHole().addFood();
         int expected2 = g.getWateringHole().getFoodCount() - 1;
-        g.feedPlayerSpecies(0, 0);
-        assertEquals(expected, g.getPlayerObjects().get(0).getSpecies()
-            .get(0).getEatenFood());
-        assertEquals(expected2, g.getWateringHole().getFoodCount());
-    }
-
-    @Test
-    public void testFeedPlayer2() throws NullGameObjectException, IllegalCardFoodException,
-            IllegalCardDirectionException, IllegalNumberOfPlayers,
-            InvalidPlayerSelectException, IllegalSpeciesIndexException,
-            SpeciesFullException, WateringHoleEmptyException {
-        Game g = new Game(generateNumRealPlayers(5), this.wateringHole, this.drawPile,
-                this.discardPile);
-        int expected = g.getPlayerObjects().get(4).getSpecies().get(0).getEatenFood() + 1;
-        g.getWateringHole().addFood();
-        int expected2 = g.getWateringHole().getFoodCount() - 1;
-        g.feedPlayerSpecies(4, 0);
-        assertEquals(expected, g.getPlayerObjects().get(4).getSpecies()
+        g.feedPlayerSpecies(this.playerIndex, 0);
+        assertEquals(expected, g.getPlayerObjects().get(this.playerIndex).getSpecies()
                 .get(0).getEatenFood());
         assertEquals(expected2, g.getWateringHole().getFoodCount());
     }
 
-    @Test (expected = InvalidPlayerSelectException.class)
+    @Test(expected = InvalidPlayerSelectException.class)
     public void testFeedPlayer3() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
             SpeciesFullException, WateringHoleEmptyException {
-        Game g = new Game(generateNumRealPlayers(5), this.wateringHole, this.drawPile,
+        Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile,
                 this.discardPile);
-        int expected = g.getPlayerObjects().get(4).getSpecies().get(0).getEatenFood() + 1;
+        int expected = g.getPlayerObjects().get(this.playerIndex).getSpecies().get(0).getEatenFood() + 1;
         g.getWateringHole().addFood();
         int expected2 = g.getWateringHole().getFoodCount() - 1;
         g.feedPlayerSpecies(-1, 0);
     }
 
-    @Test (expected = InvalidPlayerSelectException.class)
+    @Test(expected = InvalidPlayerSelectException.class)
     public void testFeedPlayer4() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
             SpeciesFullException, WateringHoleEmptyException {
-        ArrayList<IPlayer> p = generateNumRealPlayers(5);
+        ArrayList<IPlayer> p = generateNumRealPlayers(this.numPlayers);
         Game g = new Game(p, this.wateringHole, this.drawPile,
                 this.discardPile);
-        g.feedPlayerSpecies(6, 3);
+        g.feedPlayerSpecies(this.numPlayers, 0);
     }
 
-    @Test (expected = IllegalSpeciesIndexException.class)
+    @Test(expected = IllegalSpeciesIndexException.class)
     public void testFeedPlayer5() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
             SpeciesFullException, WateringHoleEmptyException {
-        ArrayList<IPlayer> p = generateNumRealPlayers(5);
+        ArrayList<IPlayer> p = generateNumRealPlayers(this.numPlayers);
         Game g = new Game(p, this.wateringHole, this.drawPile,
                 this.discardPile);
-        g.feedPlayerSpecies(4, 3);
+        g.feedPlayerSpecies(this.playerIndex, 1);
     }
 
-    @Test (expected = IllegalSpeciesIndexException.class)
+    @Test(expected = IllegalSpeciesIndexException.class)
     public void testFeedPlayer6() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
             SpeciesFullException, WateringHoleEmptyException {
-        ArrayList<IPlayer> p = generateNumRealPlayers(5);
+        ArrayList<IPlayer> p = generateNumRealPlayers(this.numPlayers);
         Game g = new Game(p, this.wateringHole, this.drawPile,
                 this.discardPile);
-        g.feedPlayerSpecies(4, -1);
+        g.feedPlayerSpecies(this.playerIndex, -1);
     }
 
-    @Test (expected = WateringHoleEmptyException.class)
+    @Test(expected = WateringHoleEmptyException.class)
     public void testFeedPlayer7() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
             SpeciesFullException, WateringHoleEmptyException {
-        ArrayList<IPlayer> p = generateNumRealPlayers(5);
+        ArrayList<IPlayer> p = generateNumRealPlayers(this.numPlayers);
         Game g = new Game(p, this.wateringHole, this.drawPile,
                 this.discardPile);
-        g.feedPlayerSpecies(0, 0);
+        g.feedPlayerSpecies(this.playerIndex, 0);
     }
 
     @Test
@@ -206,7 +190,7 @@ public class GameFeedTests {
         assertEquals(0, food);
     }
 
-    @Test (expected = InvalidPlayerSelectException.class)
+    @Test(expected = InvalidPlayerSelectException.class)
     public void testGetSpeciesFoodInvalidPlayer() throws IllegalNumberOfPlayers, SpeciesFullException, InvalidPlayerSelectException,
             IllegalSpeciesIndexException, WateringHoleEmptyException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumRealPlayers(this.numPlayers);
@@ -214,7 +198,15 @@ public class GameFeedTests {
         g.getSpeciesFood(-1, 0);
     }
 
-    @Test (expected = IllegalSpeciesIndexException.class)
+    @Test(expected = InvalidPlayerSelectException.class)
+    public void testGetSpeciesFoodInvalidPlayer2() throws IllegalNumberOfPlayers, SpeciesFullException,
+            InvalidPlayerSelectException, IllegalSpeciesIndexException, WateringHoleEmptyException, NullGameObjectException {
+        ArrayList<IPlayer> players = generateNumRealPlayers(this.numPlayers);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        g.getSpeciesFood(this.numPlayers, 0);
+    }
+
+    @Test(expected = IllegalSpeciesIndexException.class)
     public void testGetSpeciesFoodInvalidSpecies() throws IllegalNumberOfPlayers, SpeciesFullException,
             InvalidPlayerSelectException, IllegalSpeciesIndexException, WateringHoleEmptyException, NullGameObjectException {
         ArrayList<IPlayer> players = generateNumRealPlayers(this.numPlayers);
