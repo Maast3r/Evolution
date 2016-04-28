@@ -230,4 +230,16 @@ public class GameFeedTests {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         g.feedPlayerSpeciesFromBank(this.playerIndex, -1);
     }
+
+    @Test(expected = IllegalSpeciesIndexException.class)
+    public void testFeedSpeciesHighSpeciesBound() throws IllegalNumberOfPlayers, NullGameObjectException,
+            FoodBankEmptyException, SpeciesFullException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        ISpecies species = EasyMock.niceMock(Species.class);
+        EasyMock.expect(g.getPlayerObjects().get(this.playerIndex).getSpecies()).andReturn(new ArrayList<>(Arrays
+                .asList(species)));
+        EasyMock.replay(species);
+        g.feedPlayerSpeciesFromBank(this.playerIndex, 1);
+        EasyMock.verify(species);
+    }
 }
