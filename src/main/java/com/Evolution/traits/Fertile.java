@@ -21,7 +21,7 @@ public class Fertile extends ATrait {
      */
     @Override
     public void executeTrait(int[] playerIndex, int[] speciesIndex)
-            throws SpeciesPopulationException {
+            throws SpeciesPopulationException, InvalidPlayerSelectException {
         this.game.increasePopulation(playerIndex[0], speciesIndex[0]);
     }
 }
