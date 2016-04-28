@@ -974,7 +974,7 @@ public class GameTests {
     }
 
     @Test
-    public void testIncreasePopulation() throws SpeciesPopulationException, IllegalNumberOfPlayers, NullGameObjectException, InvalidPlayerSelectException {
+    public void testIncreasePopulation() throws SpeciesPopulationException, IllegalNumberOfPlayers, NullGameObjectException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
         EasyMock.expect(g.getPlayerObjects().get(this.playerIndex).getSpecies()).andReturn(new ArrayList<>(Arrays
@@ -987,21 +987,26 @@ public class GameTests {
 
     @Test(expected = InvalidPlayerSelectException.class)
     public void testIncreasePopulationHighPlayerBound() throws SpeciesPopulationException, IllegalNumberOfPlayers,
-            NullGameObjectException, InvalidPlayerSelectException {
+            NullGameObjectException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         g.increasePopulation(this.numPlayers, 0);
     }
 
     @Test(expected = InvalidPlayerSelectException.class)
     public void testIncreasePopulationLowPlayerBound() throws SpeciesPopulationException, IllegalNumberOfPlayers,
-            NullGameObjectException, InvalidPlayerSelectException {
+            NullGameObjectException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         g.increasePopulation(-1, 0);
     }
 
     @Test(expected = IllegalSpeciesIndexException.class)
-    public void testIncreasePopulationHighSpeciesBound() throws IllegalNumberOfPlayers, NullGameObjectException, InvalidPlayerSelectException, SpeciesPopulationException {
+    public void testIncreasePopulationHighSpeciesBound() throws IllegalNumberOfPlayers, NullGameObjectException, InvalidPlayerSelectException, SpeciesPopulationException, IllegalSpeciesIndexException {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
+        EasyMock.expect(g.getPlayerObjects().get(this.playerIndex).getSpecies()).andReturn(new ArrayList<>(Arrays
+                .asList(fakeSpecies)));
+        EasyMock.replay(g.getPlayerObjects().get(this.playerIndex), fakeSpecies);
         g.increasePopulation(this.playerIndex, 1);
+        EasyMock.verify(g.getPlayerObjects().get(this.playerIndex), fakeSpecies);
     }
 }

@@ -547,11 +547,15 @@ public class Game {
      * @throws SpeciesPopulationException {@link Species#increasePopulation()}
      */
     public void increasePopulation(int playerIndex, int speciesIndex)
-            throws SpeciesPopulationException, InvalidPlayerSelectException {
+            throws SpeciesPopulationException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
         if(playerIndex >= this.players.size() || playerIndex < 0) {
             throw new InvalidPlayerSelectException("Player index is out of range!");
         }
-        this.players.get(playerIndex).getSpecies().get(speciesIndex).increasePopulation();
+        ArrayList<ISpecies> playerSpecies = this.players.get(playerIndex).getSpecies();
+        if (speciesIndex >= playerSpecies.size()) {
+            throw new IllegalSpeciesIndexException("Species index is out of range!");
+        }
+        playerSpecies.get(speciesIndex).increasePopulation();
     }
 
     /**

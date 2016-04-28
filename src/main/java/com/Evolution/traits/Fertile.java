@@ -17,11 +17,13 @@ public class Fertile extends ATrait {
      *                     [1]: Player being affected
      * @param speciesIndex [0]: Species applying action
      *                     [1]: Species being affected
-     * @throws SpeciesPopulationException propagated from {@link Game#increasePopulation(int, int)}
+     * @throws SpeciesPopulationException   propagated from {@link Game#increasePopulation(int, int)}
+     * @throws InvalidPlayerSelectException propagated from {@link Game#increasePopulation(int, int)}
+     * @throws IllegalSpeciesIndexException propagated from {@link Game#increasePopulation(int, int)}
      */
     @Override
     public void executeTrait(int[] playerIndex, int[] speciesIndex)
-            throws SpeciesPopulationException, InvalidPlayerSelectException {
+            throws SpeciesPopulationException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
         this.game.increasePopulation(playerIndex[0], speciesIndex[0]);
     }
 }
