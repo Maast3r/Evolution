@@ -25,7 +25,8 @@ public class CooperationTests {
             InvalidPlayerSelectException, SpeciesFullException,
             WateringHoleEmptyException, IllegalCardFoodException,
             IllegalCardDirectionException, NullGameObjectException,
-            IllegalCardRemovalException, IllegalCardDiscardException {
+            IllegalCardRemovalException, IllegalCardDiscardException,
+            SpeciesPopulationException {
         Game g = EasyMock.niceMock(Game.class);
         ATrait t = new Cooperation(g);
         g.feedPlayerSpecies(0, 1);
@@ -39,7 +40,7 @@ public class CooperationTests {
             SpeciesFullException, WateringHoleEmptyException,
             IllegalCardFoodException, IllegalCardDirectionException,
             NullGameObjectException, IllegalCardRemovalException,
-            IllegalCardDiscardException {
+            IllegalCardDiscardException, SpeciesPopulationException {
         Game g = EasyMock.niceMock(Game.class);
         ATrait t = new Cooperation(g);
         g.feedPlayerSpecies(0, 2);

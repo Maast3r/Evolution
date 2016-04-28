@@ -22,12 +22,12 @@ public class FertileTests {
     }
 
     @Test
-    public void testIncreasePop() throws
-            IllegalCardRemovalException, NullGameObjectException,
-            SpeciesPopulationException, IllegalCardDiscardException,
-            InvalidPlayerSelectException, IllegalSpeciesIndexException,
-            IllegalCardFoodException, WateringHoleEmptyException,
-            SpeciesFullException, IllegalCardDirectionException {
+    public void testIncreasePop() throws SpeciesPopulationException,
+            SpeciesFullException, InvalidPlayerSelectException,
+            IllegalCardRemovalException, WateringHoleEmptyException,
+            IllegalSpeciesIndexException, IllegalCardDirectionException,
+            IllegalCardFoodException, NullGameObjectException,
+            IllegalCardDiscardException {
         Game g = EasyMock.niceMock(Game.class);
         ATrait t = new Fertile(g);
         g.increasePopulation(0, 0);

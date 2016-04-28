@@ -20,11 +20,12 @@ public class ForagingTests {
     }
 
     @Test
-    public void testCallGameFeed() throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
+    public void testCallGameFeed() throws IllegalSpeciesIndexException,
+            InvalidPlayerSelectException,
             SpeciesFullException, WateringHoleEmptyException,
             IllegalCardFoodException, IllegalCardDirectionException,
             NullGameObjectException, IllegalCardRemovalException,
-            IllegalCardDiscardException {
+            IllegalCardDiscardException, SpeciesPopulationException {
         Game g = EasyMock.niceMock(Game.class);
         ATrait t = new Foraging(g);
         g.feedPlayerSpecies(0, 0);
@@ -38,7 +39,8 @@ public class ForagingTests {
             InvalidPlayerSelectException, SpeciesFullException,
             WateringHoleEmptyException, IllegalCardFoodException,
             IllegalCardDirectionException, NullGameObjectException,
-            IllegalCardRemovalException, IllegalCardDiscardException {
+            IllegalCardRemovalException, IllegalCardDiscardException,
+            SpeciesPopulationException {
         Game g = EasyMock.niceMock(Game.class);
         ATrait t = new Foraging(g);
         g.feedPlayerSpecies(0, 0);
@@ -52,7 +54,8 @@ public class ForagingTests {
             InvalidPlayerSelectException, SpeciesFullException,
             WateringHoleEmptyException, IllegalCardFoodException,
             IllegalCardDirectionException, NullGameObjectException,
-            IllegalCardRemovalException, IllegalCardDiscardException {
+            IllegalCardRemovalException, IllegalCardDiscardException,
+            SpeciesPopulationException {
         Game g = EasyMock.niceMock(Game.class);
         ATrait t = new Foraging(g);
         g.feedPlayerSpecies(0, 0);

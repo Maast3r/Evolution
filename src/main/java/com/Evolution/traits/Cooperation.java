@@ -14,7 +14,7 @@ public class Cooperation extends ATrait {
 
     /**
      * Feeds the species to the right of this species
-     *
+     * TODO error handling
      * @param playerIndex  [0]: Player applying action
      *                     [1]: Player being affected
      * @param speciesIndex [0]: Species applying action

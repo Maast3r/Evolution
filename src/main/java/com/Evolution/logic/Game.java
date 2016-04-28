@@ -521,4 +521,17 @@ public class Game {
         }
         return this.players.get(playerIndex).getSpecies().get(speciesIndex).getEatenFood();
     }
+
+    /**
+     * Increases a species population without discarding a card
+     * TODO error handling
+     * @param playerIndex
+     * @param speciesIndex
+     * @throws SpeciesPopulationException
+     */
+    public void increasePopulation(int playerIndex, int speciesIndex)
+            throws SpeciesPopulationException {
+        this.players.get(playerIndex).getSpecies()
+                .get(speciesIndex).increasePopulation();
+    }
 }

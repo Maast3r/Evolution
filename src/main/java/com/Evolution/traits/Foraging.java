@@ -15,6 +15,7 @@ public class Foraging extends ATrait {
 
     /**
      * Eats an extra food from the watering hole
+     * TODO error handling
      * @param playerIndex  [0]: Player applying action
      *                     [1]: Player being affected
      * @param speciesIndex [0]: Species applying action

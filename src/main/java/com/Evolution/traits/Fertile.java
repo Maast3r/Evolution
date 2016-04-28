@@ -10,8 +10,19 @@ public class Fertile extends ATrait {
         super(g);
     }
 
-    @Override
-    public void executeTrait(int[] playerIndex, int[] speciesIndex) throws IllegalSpeciesIndexException, InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException, NullGameObjectException, IllegalCardFoodException, IllegalCardDirectionException, IllegalCardDiscardException, IllegalCardRemovalException {
 
+    /**
+     * Increases population by 1 before cards are revealed
+     * TODO error handling
+     * @param playerIndex  [0]: Player applying action
+     *                     [1]: Player being affected
+     * @param speciesIndex [0]: Species applying action
+     *                     [1]: Species being affected
+     * @throws SpeciesPopulationException propagated from {@link Game#increasePopulation(int, int)}
+     */
+    @Override
+    public void executeTrait(int[] playerIndex, int[] speciesIndex)
+            throws SpeciesPopulationException {
+        this.game.increasePopulation(playerIndex[0], speciesIndex[0]);
     }
 }
