@@ -17,6 +17,6 @@ public class Cooperation extends ATrait {
             throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
             SpeciesFullException, WateringHoleEmptyException {
 
-        
+        this.game.feedPlayerSpecies(playerIndex[0], speciesIndex[0]);
     }
 }
