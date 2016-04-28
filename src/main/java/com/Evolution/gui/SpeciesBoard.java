@@ -2,7 +2,6 @@ package com.Evolution.gui;
 
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
-import com.Evolution.interfaces.ISpecies;
 import com.Evolution.logic.Game;
 import com.Evolution.logic.Species;
 import javafx.beans.value.ChangeListener;
@@ -21,7 +20,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by brownba1 on 3/28/2016.
@@ -34,9 +32,9 @@ class SpeciesBoard extends VBox {
     private GameScreenController gameController;
     private VBox board;
     private MyHBox playerPane;
-    private Label populationSize;
-    private Label bodySize;
-    private Label foodOnBoard;
+    private Label populationSizeLabel;
+    private Label bodySizeLabel;
+    private Label foodLabel;
     private ChoiceBox<String> actionChoiceBox;
     private Label traitLabel1;
     private Label traitLabel2;
@@ -118,21 +116,21 @@ class SpeciesBoard extends VBox {
      *
      * @return the species pane
      */
-    VBox createSpeciesBoard() {
+    VBox createSpeciesBoard() throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
         VBox speciesBoard = new VBox();
 
         this.traitLabel1 = new Label("Trait 1: ");
         this.traitLabel2 = new Label("Trait 2: ");
         this.traitLabel3 = new Label("Trait 3: ");
 
-        this.populationSize = new Label("Population: " + 1);
-        this.populationSize.setStyle("-fx-text-fill: black;");
-        this.bodySize = new Label("Body Size: " + 1);
-        this.bodySize.setStyle("-fx-text-fill: black;");
-        this.foodOnBoard = new Label("Food: " + 0);
-        this.foodOnBoard.setStyle("-fx-text-fill: black;");
+        this.populationSizeLabel = new Label("Population: " + 1);
+        this.populationSizeLabel.setStyle("-fx-text-fill: black;");
+        this.bodySizeLabel = new Label("Body Size: " + 1);
+        this.bodySizeLabel.setStyle("-fx-text-fill: black;");
+        this.foodLabel = new Label("Food: " + 0);
+        this.foodLabel.setStyle("-fx-text-fill: black;");
 
-        speciesBoard.getChildren().addAll(this.populationSize, this.bodySize, this.foodOnBoard);
+        speciesBoard.getChildren().addAll(this.populationSizeLabel, this.bodySizeLabel, this.foodLabel);
         speciesBoard.setStyle("-fx-padding: 20, 0, 20, 0; -fx-min-width: 75;" +
                 " -fx-min-height: 150; -fx-background-color: burlywood; -fx-alignment: center;");
 
@@ -165,8 +163,17 @@ class SpeciesBoard extends VBox {
                         }
                         break;
                     case 3:
-                        if(val == 8) {
+                        if (val == 8) {
                             performAction(Actions.values()[10]);
+                        } else {
+                            performAction(Actions.values()[val]);
+                        }
+                        break;
+                    case 4:
+                        if (val == 2) {
+                            performAction(Actions.values()[8]);
+                        } else if (val == 3) {
+                            performAction(Actions.values()[9]);
                         } else {
                             performAction(Actions.values()[val]);
                         }
@@ -175,11 +182,12 @@ class SpeciesBoard extends VBox {
                         performAction(Actions.values()[val]);
                         break;
                 }
-            } catch (InvalidDiscardToWateringHoleException | InvalidAddToWateringHoleException
-                    | SpeciesPopulationException | IllegalSpeciesIndexException | IllegalCardDiscardException
-                    | SpeciesBodySizeException | DeckEmptyException | IllegalCardDirectionException
-                    | InvalidPlayerSelectException | SpeciesTraitNotFoundException | SpeciesNumberTraitsException
-                    | SpeciesDuplicateTraitException | NullGameObjectException | IllegalCardRemovalException e) {
+            } catch (InvalidDiscardToWateringHoleException | InvalidAddToWateringHoleException |
+                    SpeciesPopulationException | IllegalSpeciesIndexException | IllegalCardDiscardException |
+                    SpeciesBodySizeException | DeckEmptyException | IllegalCardDirectionException |
+                    InvalidPlayerSelectException | SpeciesTraitNotFoundException | SpeciesNumberTraitsException |
+                    SpeciesDuplicateTraitException | NullGameObjectException | IllegalCardRemovalException |
+                    WateringHoleEmptyException | SpeciesFullException e) {
                 e.printStackTrace();
             }
         };
@@ -195,7 +203,7 @@ class SpeciesBoard extends VBox {
             IllegalSpeciesIndexException, IllegalCardDiscardException, SpeciesBodySizeException,
             InvalidPlayerSelectException, IllegalCardDirectionException, DeckEmptyException,
             SpeciesTraitNotFoundException, NullGameObjectException, SpeciesNumberTraitsException,
-            SpeciesDuplicateTraitException, IllegalCardRemovalException {
+            SpeciesDuplicateTraitException, IllegalCardRemovalException, WateringHoleEmptyException, SpeciesFullException {
         // perform selected action
         switch (action) {
             case ACTIONS:
@@ -207,10 +215,9 @@ class SpeciesBoard extends VBox {
                 break;
             case ADD_TRAIT:
                 boolean add = openCardWindow(Actions.ADD_TRAIT);
-                if (this.selectedCard != null && add) {
-                    this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
-                    this.playerPane.updateGameScreen();
+                if (this.selectedCard != null) {
                     this.game.addTraitToSpecies(this.playerIndex, this.speciesNum, this.selectedCard);
+                    this.playerPane.updateGameScreen();
                     this.selectedCard = null;
                 }
                 break;
@@ -247,7 +254,7 @@ class SpeciesBoard extends VBox {
                 if (this.selectedCard != null) {
                     this.game.increasePopulation(this.playerIndex, this.speciesNum, this.selectedCard);
                     this.playerPane.updateGameScreen();
-                    setPopulationSize(this.game.getPlayerObjects()
+                    setPopulationSizeLabel(this.game.getPlayerObjects()
                             .get(this.playerIndex).getSpecies().get(this.speciesNum).getPopulation());
                     this.selectedCard = null;
                 }
@@ -257,14 +264,31 @@ class SpeciesBoard extends VBox {
                 if (this.selectedCard != null) {
                     this.game.increaseBodySize(this.playerIndex, this.speciesNum, this.selectedCard);
                     this.playerPane.updateGameScreen();
-                    setBodySize(this.game.getPlayerObjects()
+                    setBodySizeLabel(this.game.getPlayerObjects()
                             .get(this.playerIndex).getSpecies().get(this.speciesNum).getBodySize());
                     this.selectedCard = null;
                 }
                 break;
             case FEED_SPECIES:
+                this.game.feedPlayerSpecies(this.playerIndex, this.speciesNum);
+                this.game.getPhase().execute();
+                this.playerPane.updateGameScreen();
+                this.gameController.toggleChoiceBox();
+                this.gameController.changeChoiceBox();
+                this.gameController.staticElementsUpdate();
+                this.setFoodLabel(this.game.getSpeciesFood(this.playerIndex, this.speciesNum));
+                this.selectedCard = null;
                 break;
             case ATTACK_SPECIES:
+                //TODO FIX ME
+                //this.game.attackSpecies(this.playerIndex, this.speciesNum, otherIndex, otherNum);
+                this.game.getPhase().execute();
+                this.playerPane.updateGameScreen();
+                this.gameController.toggleChoiceBox();
+                this.gameController.changeChoiceBox();
+                this.gameController.staticElementsUpdate();
+                this.setFoodLabel(this.game.getSpeciesFood(this.playerIndex, this.speciesNum));
+                this.selectedCard = null;
                 break;
             case END_TURN:
                 this.game.getPhase().execute();
@@ -330,8 +354,8 @@ class SpeciesBoard extends VBox {
     private void openTraitWindow() {
         try {
             ArrayList<ICard> traitCards = new ArrayList<>();
-            for(int i=0; i<this.traits.length; i++){
-                if(this.traits[i] != null) {
+            for (int i = 0; i < this.traits.length; i++) {
+                if (this.traits[i] != null) {
                     traitCards.add(this.traits[i]);
                 }
             }
@@ -371,11 +395,8 @@ class SpeciesBoard extends VBox {
      *
      * @param phaseNum current phase
      */
-    void setChoiceBoxPhase(int phaseNum) {
+    void setChoiceBoxPhase(int phaseNum) throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
         switch (phaseNum) {
-//            case 1:
-//                this.actionChoiceBox.setItems(this.phase2Options);
-//                break;
             case 2:
                 this.actionChoiceBox.setItems(this.phase2Options);
                 break;
@@ -384,6 +405,11 @@ class SpeciesBoard extends VBox {
                 break;
             case 4:
                 this.actionChoiceBox.setItems(this.phase4Options);
+                this.gameController.staticElementsUpdate();
+                ArrayList<ICard> traits = this.game.getTraits(this.playerIndex, this.speciesNum);
+                setTraitLabel1(traits.size() >= 1 && traits.get(0) != null ? traits.get(0).getName() : "");
+                setTraitLabel2(traits.size() >= 2 && traits.get(1) != null ? traits.get(1).getName() : "");
+                setTraitLabel3(traits.size() >= 3 && traits.get(2) != null ? traits.get(2).getName() : "");
                 break;
             default:
                 ObservableList<String> options = FXCollections.observableArrayList();
@@ -415,23 +441,21 @@ class SpeciesBoard extends VBox {
             case 1:
                 System.out.println("added to trait 1");
                 this.traits[0] = this.selectedCard;
-//                setTrait1(this.selectedCard.getName());
                 break;
             case 2:
                 System.out.println("added to trait 2");
                 this.traits[1] = this.selectedCard;
-//                setTrait2(this.selectedCard.getName());
                 break;
             case 3:
                 System.out.println("added to trait 3");
                 this.traits[2] = this.selectedCard;
-//                setTrait3(this.selectedCard.getName());
                 break;
         }
     }
 
     /**
      * Remove trait at index i
+     *
      * @param i
      */
     public void removeTrait(int i) {
@@ -439,17 +463,17 @@ class SpeciesBoard extends VBox {
             case 1:
                 System.out.println("removed trait 1");
                 this.traits[0] = null;
-                setTrait1("");
+                setTraitLabel1("");
                 break;
             case 2:
                 System.out.println("removed trait 2");
                 this.traits[1] = null;
-                setTrait2("");
+                setTraitLabel2("");
                 break;
             case 3:
                 System.out.println("removed trait 3");
                 this.traits[2] = null;
-                setTrait3("");
+                setTraitLabel3("");
                 break;
         }
     }
@@ -458,31 +482,29 @@ class SpeciesBoard extends VBox {
     /**
      * Sets the value of the population size label for this species
      *
-     * @param amount amount to increase/decrease the population by
+     * @param amount the current population size
      */
-    private void setPopulationSize(int amount) {
-        // Set the population size on player then update label
-        this.populationSize.setText("Population: " + amount);
+    private void setPopulationSizeLabel(int amount) {
+        this.populationSizeLabel.setText("Population: " + amount);
     }
 
 
     /**
      * Sets the values of the body size label for this species
      *
-     * @param amount amount to increase/decrease the population by
+     * @param amount the current body size
      */
-    private void setBodySize(int amount) {
-        // Set the body size on player then update label
-        this.bodySize.setText("Body Size: " + amount);
+    private void setBodySizeLabel(int amount) {
+        this.bodySizeLabel.setText("Body Size: " + amount);
     }
 
     /**
      * Sets the value of the food label for this species
      *
-     * @param amount amount to increase/decrease the food count by
+     * @param amount amount of food on board
      */
-    public void setFoodOnBoard(int amount) {
-        // Set food for this species then reset label
+    public void setFoodLabel(int amount) {
+        this.foodLabel.setText("Food: " + amount);
     }
 
     /**
@@ -490,8 +512,9 @@ class SpeciesBoard extends VBox {
      *
      * @param trait the new trait to set for trait 1
      */
-    private void setTrait1(String trait) {
+    private void setTraitLabel1(String trait) {
         // Set trait 1 for this species then update label
+        System.out.println(trait);
         this.traitLabel1.setText("Trait 1: " + trait);
     }
 
@@ -500,7 +523,7 @@ class SpeciesBoard extends VBox {
      *
      * @param trait the new trait to set for trait 2
      */
-    private void setTrait2(String trait) {
+    private void setTraitLabel2(String trait) {
         // Set trait 2 for this species then update label
         this.traitLabel2.setText("Trait 2: " + trait);
     }
@@ -510,7 +533,7 @@ class SpeciesBoard extends VBox {
      *
      * @param trait the new trait to set for trait 3
      */
-    private void setTrait3(String trait) {
+    private void setTraitLabel3(String trait) {
         // Set trait 3 for this species then update label
         this.traitLabel3.setText("Trait 3: " + trait);
     }
@@ -535,9 +558,10 @@ class SpeciesBoard extends VBox {
 
     /**
      * Returns the array of traits
+     *
      * @return this.traits
      */
-    public ICard[] getTraits(){
+    public ICard[] getTraits() {
         return this.traits;
     }
 

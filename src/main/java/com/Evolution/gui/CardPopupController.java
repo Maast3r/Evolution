@@ -135,15 +135,6 @@ class CardPopupController implements Initializable {
                             });
                             traitBox.show();
                             this.infoPane.getChildren().add(traitBox);
-
-                            //                        Button closeButton = new Button();
-                            //                        closeButton.setText("Add Trait");
-                            //                        closeButton.setOnAction(new EventHandler<ActionEvent>() {
-                            //                            @Override public void handle(ActionEvent e) {
-                            //                                System.out.println("close window");
-                            //                        }
-                            //                        });
-                            //                        this.infoPane.getChildren().add(closeButton);
                         } else {
                             this.gridPane.getScene().getWindow().hide();
                         }

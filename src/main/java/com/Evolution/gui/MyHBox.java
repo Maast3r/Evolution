@@ -1,5 +1,7 @@
 package com.Evolution.gui;
 
+import com.Evolution.exceptions.IllegalSpeciesIndexException;
+import com.Evolution.exceptions.InvalidPlayerSelectException;
 import com.Evolution.logic.Game;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -41,7 +43,7 @@ class MyHBox extends HBox {
      *
      * @return the pane created for this player
      */
-    HBox createBox() {
+    HBox createBox() throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
         this.firstPlayerMarker = (this.playerIndex == 0) ? new ImageView("/images/first_player_marker.png") :
                 new ImageView("/images/empty.png");
 
@@ -108,7 +110,7 @@ class MyHBox extends HBox {
      *
      * @param side "left" or "right" - the side to add the new species to
      */
-    void addSpecies(int side) {
+    void addSpecies(int side) throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
         int numSpecies = this.game.getPlayerObjects().get(this.playerIndex).getSpecies().size();
         if (side == 0) {
             // TODO add species to player through game
@@ -151,7 +153,7 @@ class MyHBox extends HBox {
     /**
      * Commands each of this HBox's nested SpeciesBoards to update what their ChoiceBoxes are showing
      */
-    void updateChoices() {
+    void updateChoices() throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
         int phase = this.game.getPhase().getNumber();
         for (SpeciesBoard board : this.playerSpeciesBoards) {
             board.setChoiceBoxPhase(phase);
