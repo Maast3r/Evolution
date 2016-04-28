@@ -34,13 +34,24 @@ public class ForagingTests {
     }
 
     @Test(expected = InvalidPlayerSelectException.class)
-    public void testCallGamemFeed2() throws IllegalSpeciesIndexException,
+    public void testCallGameFeed2() throws IllegalSpeciesIndexException,
             InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException {
         Game g = EasyMock.niceMock(Game.class);
         ATrait t = new Foraging(g);
         g.feedPlayerSpecies(0, 0);
         EasyMock.replay(g);
         t.executeTrait(new int[]{5, 0}, new int[]{5, 0});
+        EasyMock.verify(g);
+    }
+
+    @Test(expected = InvalidPlayerSelectException.class)
+    public void testCallGameFeed3() throws IllegalSpeciesIndexException,
+            InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException {
+        Game g = EasyMock.niceMock(Game.class);
+        ATrait t = new Foraging(g);
+        g.feedPlayerSpecies(0, 0);
+        EasyMock.replay(g);
+        t.executeTrait(new int[]{-2, 0}, new int[]{-2, 0});
         EasyMock.verify(g);
     }
 }
