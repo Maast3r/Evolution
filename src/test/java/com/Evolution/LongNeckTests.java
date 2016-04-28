@@ -2,6 +2,7 @@ package com.Evolution;
 
 import com.Evolution.interfaces.ITrait;
 import com.Evolution.logic.Game;
+import com.Evolution.traits.LongNeck;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
