@@ -2,8 +2,13 @@ package com.Evolution.logic;
 
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.*;
+import com.Evolution.traits.Cooperation;
+import com.Evolution.traits.Fertile;
+import com.Evolution.traits.Foraging;
+import com.Evolution.traits.LongNeck;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Game logic controller class. Handles most interaction between related game objects.
@@ -17,6 +22,7 @@ public class Game {
     private IWateringHole wateringHole;
     private int foodBank = 240;
     private IPhases currentPhase = new PhaseOne(this);
+    private HashMap<String, Class> traitActions = new HashMap<>();
 
     //TODO: Add Null check for every single method that takes in an Object
 
@@ -43,6 +49,8 @@ public class Game {
 
         this.drawPile = drawPile;
         this.discardPile = discardPile;
+        this.traitActions.put("Cooperation", Cooperation.class);
+        this.traitActions.put("Foraging", Foraging.class);
     }
 
     /**
@@ -502,6 +510,7 @@ public class Game {
 
         this.wateringHole.removeFood();
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
+        // TODO: loop through species traits, get trait from hashmap, and executing
     }
 
     /**
