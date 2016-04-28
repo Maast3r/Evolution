@@ -954,6 +954,15 @@ public class GameTests {
         g.getTraits(-1, 0);
     }
 
+    @Test(expected = InvalidPlayerSelectException.class)
+    public void testGetTraitsInvalidPlayerHighBound() throws IllegalNumberOfPlayers, NullGameObjectException,
+            IllegalCardRemovalException,
+            IllegalSpeciesIndexException, InvalidPlayerSelectException, SpeciesDuplicateTraitException,
+            SpeciesNumberTraitsException, DeckEmptyException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.getTraits(this.numPlayers, 0);
+    }
+
     @Test(expected = IllegalSpeciesIndexException.class)
     public void testGetTraitsInvalidSpecies() throws IllegalNumberOfPlayers, NullGameObjectException,
             IllegalCardRemovalException, IllegalSpeciesIndexException, InvalidPlayerSelectException,
