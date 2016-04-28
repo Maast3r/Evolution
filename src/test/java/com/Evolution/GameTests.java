@@ -986,16 +986,22 @@ public class GameTests {
     }
 
     @Test(expected = InvalidPlayerSelectException.class)
-    public void testIncreasePopulationHighBound() throws SpeciesPopulationException, IllegalNumberOfPlayers,
+    public void testIncreasePopulationHighPlayerBound() throws SpeciesPopulationException, IllegalNumberOfPlayers,
             NullGameObjectException, InvalidPlayerSelectException {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         g.increasePopulation(this.numPlayers, 0);
     }
 
     @Test(expected = InvalidPlayerSelectException.class)
-    public void testIncreasePopulationLowBound() throws SpeciesPopulationException, IllegalNumberOfPlayers,
+    public void testIncreasePopulationLowPlayerBound() throws SpeciesPopulationException, IllegalNumberOfPlayers,
             NullGameObjectException, InvalidPlayerSelectException {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         g.increasePopulation(-1, 0);
+    }
+
+    @Test(expected = IllegalSpeciesIndexException.class)
+    public void testIncreasePopulationHighSpeciesBound() throws IllegalNumberOfPlayers, NullGameObjectException, InvalidPlayerSelectException, SpeciesPopulationException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.increasePopulation(this.playerIndex, 1);
     }
 }
