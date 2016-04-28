@@ -235,8 +235,8 @@ public class PlayerTests {
         Species s = EasyMock.niceMock(Species.class);
         Player p = new Player(s);
         EasyMock.expect(s.isFull()).andReturn(true);
-        EasyMock.replay();
+        EasyMock.replay(s);
         assertTrue(p.allSpeciesFull());
-        EasyMock.verify();
+        EasyMock.verify(s);
     }
 }

@@ -81,4 +81,11 @@ public interface IPlayer {
      * returns the amount of food in this player's food bag
      */
     int getFoodBag();
+
+    /**
+     * Returns is each species held by the player is full
+     *
+     * @return full ? true : false
+     */
+    boolean allSpeciesFull();
 }
