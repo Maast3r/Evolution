@@ -972,4 +972,16 @@ public class GameTests {
         assertTrue(g.allFull());
         g.getPlayerObjects().forEach(EasyMock::verify);
     }
+
+    @Test
+    public void testIncreasePopulation() throws SpeciesPopulationException, IllegalNumberOfPlayers, NullGameObjectException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
+        EasyMock.expect(g.getPlayerObjects().get(this.playerIndex).getSpecies()).andReturn(new ArrayList<>(Arrays
+                .asList(fakeSpecies)));
+        fakeSpecies.increasePopulation();
+        EasyMock.replay(g.getPlayerObjects().get(this.playerIndex), fakeSpecies);
+        g.increasePopulation(this.playerIndex, 0);
+        EasyMock.verify(g.getPlayerObjects().get(this.playerIndex), fakeSpecies);
+    }
 }
