@@ -252,4 +252,14 @@ public class PlayerTests {
         assertTrue(p.allSpeciesFull());
         EasyMock.verify(s, s2);
     }
+
+    @Test
+    public void testAllSpeciesNotFull() throws NullGameObjectException {
+        Species s = EasyMock.niceMock(Species.class);
+        Player p = new Player(s);
+        EasyMock.expect(s.isFull()).andReturn(false);
+        EasyMock.replay(s);
+        assertTrue(!p.allSpeciesFull());
+        EasyMock.verify(s);
+    }
 }
