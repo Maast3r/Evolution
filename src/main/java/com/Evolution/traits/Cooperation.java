@@ -13,7 +13,10 @@ public class Cooperation extends ATrait {
     }
 
     @Override
-    public void executeTrait(int[] playerIndex, int[] speciesIndex) throws IllegalSpeciesIndexException, InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException {
+    public void executeTrait(int[] playerIndex, int[] speciesIndex)
+            throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
+            SpeciesFullException, WateringHoleEmptyException {
 
+        
     }
 }
