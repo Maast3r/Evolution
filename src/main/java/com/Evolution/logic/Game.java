@@ -563,7 +563,10 @@ public class Game {
      *
      * @param playerIndex  the player index
      * @param speciesIndex the species index
-     * @throws SpeciesFullException propagated from {@link Species#eat()}
+     * @throws SpeciesFullException         propagated from {@link Species#eat()}
+     * @throws FoodBankEmptyException       if attempting to eat from an empty food bank
+     * @throws InvalidPlayerSelectException if the playerIndex is out of bounds
+     * @throws IllegalSpeciesIndexException if the speciesIndex is out of bounds
      */
     public void feedPlayerSpeciesFromBank(int playerIndex, int speciesIndex)
             throws SpeciesFullException, FoodBankEmptyException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
