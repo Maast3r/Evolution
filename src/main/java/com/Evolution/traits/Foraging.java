@@ -15,7 +15,7 @@ public class Foraging extends ATrait {
 
     /**
      * Eats an extra food from the watering hole
-     * TODO error handling
+     *
      * @param playerIndex  [0]: Player applying action
      *                     [1]: Player being affected
      * @param speciesIndex [0]: Species applying action
@@ -29,9 +29,6 @@ public class Foraging extends ATrait {
     public void executeTrait(int[] playerIndex, int[] speciesIndex)
             throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
             SpeciesFullException, WateringHoleEmptyException {
-        if(playerIndex[0] > 4 || playerIndex[0] < 0) {
-            throw new InvalidPlayerSelectException("Invalid trait player select.");
-        }
         this.game.feedPlayerSpecies(playerIndex[0], speciesIndex[0]);
     }
 

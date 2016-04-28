@@ -10,10 +10,9 @@ public class Fertile extends ATrait {
         super(g);
     }
 
-
     /**
      * Increases population by 1 before cards are revealed
-     * TODO error handling
+     *
      * @param playerIndex  [0]: Player applying action
      *                     [1]: Player being affected
      * @param speciesIndex [0]: Species applying action

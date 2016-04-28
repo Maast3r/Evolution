@@ -17,8 +17,8 @@ public class LongNeck extends ATrait {
     }
 
     /**
-     * Makes the species executing this action feed a second time
-     * TODO error handling
+     * Makes the species executing this action feed a second time from the food bank
+     *
      * @param playerIndex  [0]: Player applying action
      *                     [1]: Player being affected
      * @param speciesIndex [0]: Species applying action
