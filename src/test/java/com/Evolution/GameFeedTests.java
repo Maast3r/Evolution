@@ -223,4 +223,11 @@ public class GameFeedTests {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         g.feedPlayerSpeciesFromBank(this.numPlayers, 0);
     }
+
+    @Test(expected = IllegalSpeciesIndexException.class)
+    public void testFeedSpeciesLowSpeciesBound() throws IllegalNumberOfPlayers, NullGameObjectException,
+            FoodBankEmptyException, SpeciesFullException, InvalidPlayerSelectException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.feedPlayerSpeciesFromBank(this.playerIndex, -1);
+    }
 }
