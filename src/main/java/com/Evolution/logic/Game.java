@@ -566,13 +566,13 @@ public class Game {
      * @throws SpeciesFullException propagated from {@link Species#eat()}
      */
     public void feedPlayerSpeciesFromBank(int playerIndex, int speciesIndex)
-            throws SpeciesFullException, FoodBankEmptyException {
+            throws SpeciesFullException, FoodBankEmptyException, InvalidPlayerSelectException {
         if(this.foodBank == 0) {
             throw new FoodBankEmptyException("The food bank hs been depleted!");
         }
-//        if (this.players.size() <= playerIndex || playerIndex < 0) {
-//            throw new InvalidPlayerSelectException("Player index is out of range!");
-//        } else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
+        if (/*this.players.size() <= playerIndex ||*/ playerIndex < 0) {
+            throw new InvalidPlayerSelectException("Player index is out of range!");
+        } //else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
 //            throw new IllegalSpeciesIndexException("Species index is out of range!");
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
         this.foodBank--;

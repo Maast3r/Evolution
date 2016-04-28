@@ -205,14 +205,14 @@ public class GameFeedTests {
     }
 
     @Test(expected = FoodBankEmptyException.class)
-    public void testFeedSpeciesEmptyBank() throws IllegalNumberOfPlayers, NullGameObjectException, SpeciesFullException, FoodBankEmptyException {
+    public void testFeedSpeciesEmptyBank() throws IllegalNumberOfPlayers, NullGameObjectException, SpeciesFullException, FoodBankEmptyException, InvalidPlayerSelectException {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         g.decrementFoodBank(240);
         g.feedPlayerSpeciesFromBank(this.playerIndex, 0);
     }
 
     @Test(expected = InvalidPlayerSelectException.class)
-    public void testFeedSpeciesLowPlayerBound() throws IllegalNumberOfPlayers, NullGameObjectException, FoodBankEmptyException, SpeciesFullException {
+    public void testFeedSpeciesLowPlayerBound() throws IllegalNumberOfPlayers, NullGameObjectException, FoodBankEmptyException, SpeciesFullException, InvalidPlayerSelectException {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         g.feedPlayerSpeciesFromBank(-1, 0);
     }
