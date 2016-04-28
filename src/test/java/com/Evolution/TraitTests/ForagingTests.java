@@ -17,9 +17,20 @@ import static org.junit.Assert.assertEquals;
 public class ForagingTests {
 
     @Test
-    public void getGame() {
+    public void testGetGame() {
         Game g = EasyMock.niceMock(Game.class);
         ATrait t = new Foraging(g);
         assertEquals(g, t.getGame());
+    }
+
+    @Test
+    public void testCallGameFeed() throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
+            SpeciesFullException, WateringHoleEmptyException {
+        Game g = EasyMock.niceMock(Game.class);
+        ATrait t = new Foraging(g);
+        g.feedPlayerSpecies(0, 0);
+        EasyMock.replay(g);
+        t.executeTrait(new int[]{0, -1}, new int[]{0, -1});
+        EasyMock.verify(g);
     }
 }
