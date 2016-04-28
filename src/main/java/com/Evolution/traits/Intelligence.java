@@ -1,11 +1,9 @@
 package com.Evolution.traits;
 
-import com.Evolution.exceptions.IllegalSpeciesIndexException;
-import com.Evolution.exceptions.InvalidPlayerSelectException;
-import com.Evolution.exceptions.SpeciesFullException;
-import com.Evolution.exceptions.WateringHoleEmptyException;
+import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ATrait;
 import com.Evolution.logic.Game;
+import com.Evolution.logic.Card;
 
 
 public class Intelligence extends ATrait {
@@ -16,7 +14,13 @@ public class Intelligence extends ATrait {
     @Override
     public void executeTrait(int[] playerIndex, int[] speciesIndex)
             throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
-            SpeciesFullException, WateringHoleEmptyException {
+            SpeciesFullException, WateringHoleEmptyException,
+            NullGameObjectException, IllegalCardFoodException,
+            IllegalCardDirectionException, IllegalCardDiscardException, IllegalCardRemovalException {
 
+        this.game.discardFromPlayer(playerIndex[0], new Card("Carnivore",
+                "Makes a species a carnivore", "./carnivore.jpg", 3, 0));
+        this.game.feedPlayerSpecies(playerIndex[0], speciesIndex[0]);
+        this.game.feedPlayerSpecies(playerIndex[0], speciesIndex[0]);
     }
 }

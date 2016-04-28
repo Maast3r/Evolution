@@ -25,7 +25,8 @@ public class IntelligenceTests {
     public void testDropCardForFood() throws IllegalCardRemovalException,
             InvalidPlayerSelectException, NullGameObjectException,
             IllegalCardDiscardException, IllegalSpeciesIndexException,
-            SpeciesFullException, WateringHoleEmptyException {
+            SpeciesFullException, WateringHoleEmptyException,
+            IllegalCardFoodException, IllegalCardDirectionException {
         Game g = EasyMock.niceMock(Game.class);
         ICard c = EasyMock.niceMock(Card.class);
         ATrait t = new Foraging(g);

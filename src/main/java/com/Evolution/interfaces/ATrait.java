@@ -1,9 +1,6 @@
 package com.Evolution.interfaces;
 
-import com.Evolution.exceptions.IllegalSpeciesIndexException;
-import com.Evolution.exceptions.InvalidPlayerSelectException;
-import com.Evolution.exceptions.SpeciesFullException;
-import com.Evolution.exceptions.WateringHoleEmptyException;
+import com.Evolution.exceptions.*;
 import com.Evolution.logic.Game;
 
 /**
@@ -17,7 +14,7 @@ public abstract class ATrait {
         this.game = game;
     }
 
-    public abstract void executeTrait(int[] playerIndex, int[] speciesIndex) throws IllegalSpeciesIndexException, InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException;
+    public abstract void executeTrait(int[] playerIndex, int[] speciesIndex) throws IllegalSpeciesIndexException, InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException, NullGameObjectException, IllegalCardFoodException, IllegalCardDirectionException, IllegalCardDiscardException, IllegalCardRemovalException;
 
     public final Game getGame() {
         return this.game;
