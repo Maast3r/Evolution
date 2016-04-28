@@ -7,17 +7,14 @@ import com.Evolution.exceptions.WateringHoleEmptyException;
 import com.Evolution.interfaces.ATrait;
 import com.Evolution.logic.Game;
 
-/**
- * Created by goistjt on 4/27/2016.
- */
-public class LongNeck extends ATrait {
 
-    public LongNeck(Game game) {
-        super(game);
+public class Foraging extends ATrait {
+    public Foraging(Game g) {
+        super(g);
     }
 
     /**
-     * Makes the species executing this action feed a second time from the food bank
+     * Eats an extra food from the watering hole
      *
      * @param playerIndex  [0]: Player applying action
      *                     [1]: Player being affected
@@ -28,8 +25,11 @@ public class LongNeck extends ATrait {
      * @throws SpeciesFullException         propagated from {@link Game#feedPlayerSpecies(int, int)}
      * @throws WateringHoleEmptyException   propagated from {@link Game#feedPlayerSpecies(int, int)}
      */
-    public void executeTrait(int[] playerIndex, int[] speciesIndex) throws IllegalSpeciesIndexException,
-            InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException {
-        this.game.feedPlayerSpeciesFromBank(playerIndex[0], speciesIndex[0]);
+    @Override
+    public void executeTrait(int[] playerIndex, int[] speciesIndex)
+            throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
+            SpeciesFullException, WateringHoleEmptyException {
+        this.game.feedPlayerSpecies(playerIndex[0], speciesIndex[0]);
     }
+
 }

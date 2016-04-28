@@ -537,4 +537,30 @@ public class Game {
         }
         return true;
     }
+
+    /**
+     * Increases a species population without discarding a card
+     * TODO error handling
+     * @param playerIndex the player index
+     * @param speciesIndex the species index
+     * @throws SpeciesPopulationException {@link Species#increasePopulation()}
+     */
+    public void increasePopulation(int playerIndex, int speciesIndex)
+            throws SpeciesPopulationException {
+        this.players.get(playerIndex).getSpecies()
+                .get(speciesIndex).increasePopulation();
+    }
+
+    /**
+     * Feeds species from the food bank instead of the watering hold
+     * TODO error handling
+     * @param playerIndex the player index
+     * @param speciesIndex the species index
+     * @throws SpeciesFullException propagated from {@link Species#eat()}
+     */
+    public void feedPlayerSpeciesFromBank(int playerIndex, int speciesIndex)
+            throws SpeciesFullException {
+        this.foodBank--;
+        this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
+    }
 }
