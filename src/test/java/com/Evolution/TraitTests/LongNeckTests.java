@@ -1,4 +1,4 @@
-package com.Evolution;
+package com.Evolution.TraitTests;
 
 import com.Evolution.exceptions.IllegalSpeciesIndexException;
 import com.Evolution.exceptions.InvalidPlayerSelectException;
