@@ -213,7 +213,7 @@ public class Game {
      * @throws InvalidPlayerSelectException propagated from {@link #dealToPlayer(int)}
      * @throws NullGameObjectException      propagated from {@link #dealToPlayer(int)}
      */
-    public void drawForPlayers() throws DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
+    void drawForPlayers() throws DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
         for (int i = 0; i < this.players.size(); i++) {
             for (int j = 0; j < this.players.get(i).getSpecies().size() + 3; j++) {
                 dealToPlayer(i);
@@ -229,6 +229,7 @@ public class Game {
      * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
      *                                      player's hand
      * @throws InvalidPlayerSelectException thrown when the given player index is greater than the number of players
+     * @throws IllegalCardRemovalException  propagated from {@link IPlayer#removeCardFromHand(ICard)}
      * @throws NullGameObjectException      propagated from {@link Deck#discard(Object)}
      */
     public void discardFromPlayer(int i, ICard card) throws InvalidPlayerSelectException,
@@ -267,7 +268,8 @@ public class Game {
      * @throws NullGameObjectException               propagated from {@link IPlayer#removeCardFromHand(ICard)}
      */
     public void discardToWateringHole(int index, ICard card) throws InvalidDiscardToWateringHoleException,
-            InvalidAddToWateringHoleException, InvalidPlayerSelectException, IllegalCardDiscardException, IllegalCardRemovalException, NullGameObjectException {
+            InvalidAddToWateringHoleException, InvalidPlayerSelectException, IllegalCardDiscardException,
+            IllegalCardRemovalException, NullGameObjectException {
         if (this.wateringHole.getCards().size() == this.players.size()) {
             throw new InvalidDiscardToWateringHoleException("You can not discard more cards to the watering hole " +
                     "than the number of players.");
@@ -329,6 +331,7 @@ public class Game {
      * @throws IllegalSpeciesIndexException thrown when the given species index is greater than the number of species
      *                                      for the given player
      * @throws NullGameObjectException      propagated from {@link #discardPile}
+     * @throws IllegalCardRemovalException  propagated from {@link #discardFromPlayer(int, ICard)}
      */
     public void increaseBodySize(int playerIndex, int speciesIndex, ICard card) throws SpeciesBodySizeException,
             InvalidPlayerSelectException, IllegalCardDiscardException, IllegalSpeciesIndexException, NullGameObjectException, IllegalCardRemovalException {
@@ -356,6 +359,7 @@ public class Game {
      * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
      *                                      player's hand
      * @throws NullGameObjectException      propagated from {@link Deck#discard(Object)}
+     * @throws IllegalCardRemovalException  propagated from {@link #discardFromPlayer(int, ICard)}
      */
     public void discardForLeftSpecies(int playerIndex, ICard card, ISpecies species) throws
             InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException, IllegalCardRemovalException {
@@ -385,6 +389,7 @@ public class Game {
      * @throws IllegalCardDiscardException  thrown when the given card is not in the specified
      *                                      player's hand
      * @throws NullGameObjectException      propagated from {@link Deck#discard(Object)}
+     * @throws IllegalCardRemovalException  propagated from {@link #discardFromPlayer(int, ICard)}
      */
     public void discardForRightSpecies(int playerIndex, ICard card, ISpecies species) throws
             InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException,
@@ -543,7 +548,9 @@ public class Game {
      *
      * @param playerIndex  the player index
      * @param speciesIndex the species index
-     * @throws SpeciesPopulationException {@link Species#increasePopulation()}
+     * @throws SpeciesPopulationException   {@link Species#increasePopulation()}
+     * @throws InvalidPlayerSelectException if the playerIndex is out of bounds
+     * @throws IllegalSpeciesIndexException if the Species index is out of bounds
      */
     public void increasePopulation(int playerIndex, int speciesIndex)
             throws SpeciesPopulationException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
