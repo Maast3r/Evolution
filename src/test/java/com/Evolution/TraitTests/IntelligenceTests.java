@@ -21,31 +21,20 @@ public class IntelligenceTests {
         assertEquals(g, t.getGame());
     }
 
-    /**
-     * soo this is an exception to traits. it needs to be selected from gui. so ignore
-     * @throws IllegalCardRemovalException
-     * @throws InvalidPlayerSelectException
-     * @throws NullGameObjectException
-     * @throws IllegalCardDiscardException
-     * @throws IllegalSpeciesIndexException
-     * @throws SpeciesFullException
-     * @throws WateringHoleEmptyException
-     * @throws IllegalCardFoodException
-     * @throws IllegalCardDirectionException
-     */
-    @Test
-    public void testDropCardForFood() throws IllegalCardRemovalException,
-            InvalidPlayerSelectException, NullGameObjectException,
-            IllegalCardDiscardException, IllegalSpeciesIndexException,
-            SpeciesFullException, WateringHoleEmptyException,
-            IllegalCardFoodException, IllegalCardDirectionException {
-        Game g = EasyMock.niceMock(Game.class);
-        ICard c = EasyMock.niceMock(Card.class);
-        ATrait t = new Foraging(g);
-        g.discardFromPlayer(0, c);
-        g.feedPlayerSpecies(0, 0);
-        EasyMock.replay(g);
-        t.executeTrait(new int[]{0, 0}, new int[]{0, 0});
-        EasyMock.verify(g);
-    }
+
+//    @Test
+//    public void testDropCardForFood() throws IllegalCardRemovalException,
+//            InvalidPlayerSelectException, NullGameObjectException,
+//            IllegalCardDiscardException, IllegalSpeciesIndexException,
+//            SpeciesFullException, WateringHoleEmptyException,
+//            IllegalCardFoodException, IllegalCardDirectionException {
+//        Game g = EasyMock.niceMock(Game.class);
+//        ICard c = EasyMock.niceMock(Card.class);
+//        ATrait t = new Foraging(g);
+//        g.discardFromPlayer(0, c);
+//        g.feedPlayerSpecies(0, 0);
+//        EasyMock.replay(g);
+//        t.executeTrait(new int[]{0, 0}, new int[]{0, 0});
+//        EasyMock.verify(g);
+//    }
 }

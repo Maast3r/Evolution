@@ -30,7 +30,7 @@ public class CooperationTests {
         ATrait t = new Cooperation(g);
         g.feedPlayerSpecies(0, 1);
         EasyMock.replay(g);
-        t.executeTrait(new int[]{0, 0}, new int[]{1, 0});
+        t.executeTrait(new int[]{0, 0}, new int[]{0, 0});
         EasyMock.verify(g);
     }
 
@@ -44,7 +44,7 @@ public class CooperationTests {
         ATrait t = new Cooperation(g);
         g.feedPlayerSpecies(0, 2);
         EasyMock.replay(g);
-        t.executeTrait(new int[]{0, 0}, new int[]{2, 0});
+        t.executeTrait(new int[]{0, 0}, new int[]{1, 0});
         EasyMock.verify(g);
     }
 }

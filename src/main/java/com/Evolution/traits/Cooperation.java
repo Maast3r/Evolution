@@ -12,11 +12,23 @@ public class Cooperation extends ATrait {
         super(g);
     }
 
+    /**
+     * Feeds the species to the right of this species
+     *
+     * @param playerIndex  [0]: Player applying action
+     *                     [1]: Player being affected
+     * @param speciesIndex [0]: Species applying action
+     *                     [1]: Species being affected
+     * @throws IllegalSpeciesIndexException propagated from {@link Game#feedPlayerSpecies(int, int)}
+     * @throws InvalidPlayerSelectException propagated from {@link Game#feedPlayerSpecies(int, int)}
+     * @throws SpeciesFullException         propagated from {@link Game#feedPlayerSpecies(int, int)}
+     * @throws WateringHoleEmptyException   propagated from {@link Game#feedPlayerSpecies(int, int)}
+     */
     @Override
     public void executeTrait(int[] playerIndex, int[] speciesIndex)
             throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
             SpeciesFullException, WateringHoleEmptyException {
 
-        this.game.feedPlayerSpecies(playerIndex[0], speciesIndex[0]);
+        this.game.feedPlayerSpecies(playerIndex[0], speciesIndex[0] + 1);
     }
 }
