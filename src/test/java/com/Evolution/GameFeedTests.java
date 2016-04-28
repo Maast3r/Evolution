@@ -205,28 +205,28 @@ public class GameFeedTests {
     }
 
     @Test(expected = FoodBankEmptyException.class)
-    public void testFeedSpeciesEmptyBank() throws IllegalNumberOfPlayers, NullGameObjectException, SpeciesFullException, FoodBankEmptyException, InvalidPlayerSelectException {
+    public void testFeedSpeciesEmptyBank() throws IllegalNumberOfPlayers, NullGameObjectException, SpeciesFullException, FoodBankEmptyException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         g.decrementFoodBank(240);
         g.feedPlayerSpeciesFromBank(this.playerIndex, 0);
     }
 
     @Test(expected = InvalidPlayerSelectException.class)
-    public void testFeedSpeciesLowPlayerBound() throws IllegalNumberOfPlayers, NullGameObjectException, FoodBankEmptyException, SpeciesFullException, InvalidPlayerSelectException {
+    public void testFeedSpeciesLowPlayerBound() throws IllegalNumberOfPlayers, NullGameObjectException, FoodBankEmptyException, SpeciesFullException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         g.feedPlayerSpeciesFromBank(-1, 0);
     }
 
     @Test(expected = InvalidPlayerSelectException.class)
     public void testFeedSpeciesHighPlayerBound() throws IllegalNumberOfPlayers, NullGameObjectException,
-            FoodBankEmptyException, SpeciesFullException, InvalidPlayerSelectException {
+            FoodBankEmptyException, SpeciesFullException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         g.feedPlayerSpeciesFromBank(this.numPlayers, 0);
     }
 
     @Test(expected = IllegalSpeciesIndexException.class)
     public void testFeedSpeciesLowSpeciesBound() throws IllegalNumberOfPlayers, NullGameObjectException,
-            FoodBankEmptyException, SpeciesFullException, InvalidPlayerSelectException {
+            FoodBankEmptyException, SpeciesFullException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         g.feedPlayerSpeciesFromBank(this.playerIndex, -1);
     }
