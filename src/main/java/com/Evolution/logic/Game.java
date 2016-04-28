@@ -566,7 +566,10 @@ public class Game {
      * @throws SpeciesFullException propagated from {@link Species#eat()}
      */
     public void feedPlayerSpeciesFromBank(int playerIndex, int speciesIndex)
-            throws SpeciesFullException {
+            throws SpeciesFullException, FoodBankEmptyException {
+        if(this.foodBank == 0) {
+            throw new FoodBankEmptyException("The food bank hs been depleted!");
+        }
         this.foodBank--;
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
     }

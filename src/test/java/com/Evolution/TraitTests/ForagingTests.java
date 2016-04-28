@@ -25,7 +25,7 @@ public class ForagingTests {
             SpeciesFullException, WateringHoleEmptyException,
             IllegalCardFoodException, IllegalCardDirectionException,
             NullGameObjectException, IllegalCardRemovalException,
-            IllegalCardDiscardException, SpeciesPopulationException {
+            IllegalCardDiscardException, SpeciesPopulationException, FoodBankEmptyException {
         Game g = EasyMock.niceMock(Game.class);
         ATrait t = new Foraging(g);
         g.feedPlayerSpecies(0, 0);
