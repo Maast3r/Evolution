@@ -20,8 +20,9 @@ public class PhaseFour implements IPhases{
     public void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
         if(this.game.allFull()) {
             this.game.setPhase(new PhaseOne(this.game));
+        } else {
+            this.game.nextTurn();
         }
-
     }
 
     @Override

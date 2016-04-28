@@ -61,10 +61,7 @@ public class PhaseFourTests {
         PhaseFour p = new PhaseFour(g);
         g.setPhase(p);
         int initTurn = g.getTurn();
-        for (IPlayer player :
-                players) {
-            EasyMock.expect(player.allSpeciesFull()).andReturn(true);
-        }
+        EasyMock.expect(players.get(0).allSpeciesFull()).andReturn(false);
         players.forEach(EasyMock::replay);
 
         p.execute();
