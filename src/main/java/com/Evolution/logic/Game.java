@@ -570,7 +570,11 @@ public class Game {
         if(this.foodBank == 0) {
             throw new FoodBankEmptyException("The food bank hs been depleted!");
         }
-        this.foodBank--;
+//        if (this.players.size() <= playerIndex || playerIndex < 0) {
+//            throw new InvalidPlayerSelectException("Player index is out of range!");
+//        } else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
+//            throw new IllegalSpeciesIndexException("Species index is out of range!");
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
+        this.foodBank--;
     }
 }

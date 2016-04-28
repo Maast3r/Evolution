@@ -210,4 +210,10 @@ public class GameFeedTests {
         g.decrementFoodBank(240);
         g.feedPlayerSpeciesFromBank(this.playerIndex, 0);
     }
+
+    @Test(expected = InvalidPlayerSelectException.class)
+    public void testFeedSpeciesLowPlayerBound() throws IllegalNumberOfPlayers, NullGameObjectException, FoodBankEmptyException, SpeciesFullException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.feedPlayerSpeciesFromBank(-1, 0);
+    }
 }
