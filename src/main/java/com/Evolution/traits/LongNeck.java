@@ -23,10 +23,10 @@ public class LongNeck extends ATrait {
      *                     [1]: Player being affected
      * @param speciesIndex [0]: Species applying action
      *                     [1]: Species being affected
-     * @throws IllegalSpeciesIndexException
-     * @throws InvalidPlayerSelectException
-     * @throws SpeciesFullException
-     * @throws WateringHoleEmptyException
+     * @throws IllegalSpeciesIndexException propagated from {@link Game#feedPlayerSpecies(int, int)}
+     * @throws InvalidPlayerSelectException propagated from {@link Game#feedPlayerSpecies(int, int)}
+     * @throws SpeciesFullException         propagated from {@link Game#feedPlayerSpecies(int, int)}
+     * @throws WateringHoleEmptyException   propagated from {@link Game#feedPlayerSpecies(int, int)}
      */
     public void executeTrait(int[] playerIndex, int[] speciesIndex) throws IllegalSpeciesIndexException,
             InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException {
