@@ -51,7 +51,7 @@ public class ForagingTests {
         ATrait t = new Foraging(g);
         g.feedPlayerSpecies(0, 0);
         EasyMock.replay(g);
-        t.executeTrait(new int[]{-2, 0}, new int[]{-2, 0});
+        t.executeTrait(new int[]{-1, 0}, new int[]{-1, 0});
         EasyMock.verify(g);
     }
 }
