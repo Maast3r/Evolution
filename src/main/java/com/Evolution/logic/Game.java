@@ -552,7 +552,7 @@ public class Game {
             throw new InvalidPlayerSelectException("Player index is out of range!");
         }
         ArrayList<ISpecies> playerSpecies = this.players.get(playerIndex).getSpecies();
-        if (speciesIndex >= playerSpecies.size()) {
+        if (speciesIndex >= playerSpecies.size() || speciesIndex < 0) {
             throw new IllegalSpeciesIndexException("Species index is out of range!");
         }
         playerSpecies.get(speciesIndex).increasePopulation();
