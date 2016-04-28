@@ -524,6 +524,11 @@ public class Game {
         return this.players.get(playerIndex).getSpecies().get(speciesIndex).getEatenFood();
     }
 
+    /**
+     * Determines whether or not every species for each player has eaten enough food
+     *
+     * @return players.species.isFull() ? true : false
+     */
     public boolean allFull() {
         for (IPlayer p : this.players) {
             if (!p.allSpeciesFull()) {
