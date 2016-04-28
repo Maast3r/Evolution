@@ -984,4 +984,11 @@ public class GameTests {
         g.increasePopulation(this.playerIndex, 0);
         EasyMock.verify(g.getPlayerObjects().get(this.playerIndex), fakeSpecies);
     }
+
+    @Test(expected = InvalidPlayerSelectException.class)
+    public void testIncreasePopulationHighBound() throws SpeciesPopulationException, IllegalNumberOfPlayers,
+            NullGameObjectException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.increasePopulation(this.numPlayers, 0);
+    }
 }
