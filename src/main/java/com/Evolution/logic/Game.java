@@ -548,7 +548,7 @@ public class Game {
      */
     public void increasePopulation(int playerIndex, int speciesIndex)
             throws SpeciesPopulationException, InvalidPlayerSelectException {
-        if(playerIndex >= this.players.size()) {
+        if(playerIndex >= this.players.size() || playerIndex < 0) {
             throw new InvalidPlayerSelectException("Player index is out of range!");
         }
         this.players.get(playerIndex).getSpecies().get(speciesIndex).increasePopulation();
