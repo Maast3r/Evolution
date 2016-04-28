@@ -30,6 +30,6 @@ public class LongNeck extends ATrait {
      */
     public void executeTrait(int[] playerIndex, int[] speciesIndex) throws IllegalSpeciesIndexException,
             InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException {
-        this.game.feedPlayerSpecies(playerIndex[0], speciesIndex[0]);
+        this.game.feedPlayerSpeciesFromBank(playerIndex[0], speciesIndex[0]);
     }
 }
