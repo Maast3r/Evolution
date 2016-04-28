@@ -964,13 +964,12 @@ public class GameTests {
 
     @Test
     public void testAllFull() throws IllegalNumberOfPlayers, NullGameObjectException {
-        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
-        for (IPlayer p : players) {
+        for (IPlayer p : g.getPlayerObjects()) {
             EasyMock.expect(p.allSpeciesFull()).andReturn(true);
         }
-        players.forEach(EasyMock::replay);
+        g.getPlayerObjects().forEach(EasyMock::replay);
         assertTrue(g.allFull());
-        players.forEach(EasyMock::verify);
+        g.getPlayerObjects().forEach(EasyMock::verify);
     }
 }

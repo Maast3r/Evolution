@@ -359,10 +359,10 @@ public class Game {
      */
     public void discardForLeftSpecies(int playerIndex, ICard card, ISpecies species) throws
             InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException, IllegalCardRemovalException {
-        if(card == null) {
+        if (card == null) {
             throw new NullGameObjectException("Unable to discard a null card");
         }
-        if(species == null) {
+        if (species == null) {
             throw new NullGameObjectException("Unable to add a null species");
         }
         if (playerIndex > this.players.size() - 1) {
@@ -389,10 +389,10 @@ public class Game {
     public void discardForRightSpecies(int playerIndex, ICard card, ISpecies species) throws
             InvalidPlayerSelectException, IllegalCardDiscardException, NullGameObjectException,
             IllegalCardRemovalException {
-        if(card == null) {
+        if (card == null) {
             throw new NullGameObjectException("Unable to discard a null card");
         }
-        if(species == null) {
+        if (species == null) {
             throw new NullGameObjectException("Unable to add a null species");
         }
         if (playerIndex > this.players.size() - 1) {
@@ -463,7 +463,8 @@ public class Game {
 
     /**
      * Returns a list of the traits for a given player's species
-     * @param playerIndex the index of the player
+     *
+     * @param playerIndex  the index of the player
      * @param speciesIndex the index of the species
      * @return an ArrayList of trait cards for this species
      * @throws InvalidPlayerSelectException if the player index is not in the valid range
@@ -484,10 +485,10 @@ public class Game {
      *
      * @param playerIndex  Index of the player in the player list
      * @param speciesIndex Index of the species for the player
-     * @throws InvalidPlayerSelectException  if the player index is not in the valid range
-     * @throws IllegalSpeciesIndexException  if the species index is not in the valid range
-     * @throws SpeciesFullException if the species' eaten is equal to species' population
-     * @throws WateringHoleEmptyException if the food count in the watering hole is 0
+     * @throws InvalidPlayerSelectException if the player index is not in the valid range
+     * @throws IllegalSpeciesIndexException if the species index is not in the valid range
+     * @throws SpeciesFullException         if the species' eaten is equal to species' population
+     * @throws WateringHoleEmptyException   if the food count in the watering hole is 0
      */
     public void feedPlayerSpecies(int playerIndex, int speciesIndex)
             throws InvalidPlayerSelectException, IllegalSpeciesIndexException,
@@ -496,7 +497,7 @@ public class Game {
             throw new InvalidPlayerSelectException("Player index is out of range!");
         } else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
             throw new IllegalSpeciesIndexException("Species index is out of range!");
-        } else if (this.wateringHole.getFoodCount() == 0){
+        } else if (this.wateringHole.getFoodCount() == 0) {
             throw new WateringHoleEmptyException("Cannot feed. Watering hole is empty.");
         }
 
@@ -506,11 +507,12 @@ public class Game {
 
     /**
      * Returns the amount of food eaten by the given species of the given player during this round
-     * @param playerIndex the player index
+     *
+     * @param playerIndex  the player index
      * @param speciesIndex the species index
      * @return the amount of food eaten
      * @throws InvalidPlayerSelectException if the player index is not in the valid range
-     * @throws IllegalSpeciesIndexException  if the species index is not in the valid range
+     * @throws IllegalSpeciesIndexException if the species index is not in the valid range
      */
     public int getSpeciesFood(int playerIndex, int speciesIndex) throws InvalidPlayerSelectException,
             IllegalSpeciesIndexException {
@@ -520,5 +522,14 @@ public class Game {
             throw new IllegalSpeciesIndexException("Species index is out of range!");
         }
         return this.players.get(playerIndex).getSpecies().get(speciesIndex).getEatenFood();
+    }
+
+    public boolean allFull() {
+        for (IPlayer p : this.players) {
+            if (!p.allSpeciesFull()) {
+                return false;
+            }
+        }
+        return true;
     }
 }
