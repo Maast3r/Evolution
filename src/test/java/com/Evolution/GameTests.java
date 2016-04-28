@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -715,7 +716,6 @@ public class GameTests {
     }
 
 
-
     @Test
     public void testDiscardToIncreaseBodySize() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             DeckEmptyException, IllegalCardDiscardException, InvalidPlayerSelectException,
@@ -946,7 +946,7 @@ public class GameTests {
         assertEquals(traits.get(0), card);
     }
 
-    @Test (expected = InvalidPlayerSelectException.class)
+    @Test(expected = InvalidPlayerSelectException.class)
     public void testGetTraitsInvalidPlayer() throws IllegalNumberOfPlayers, NullGameObjectException, IllegalCardRemovalException,
             IllegalSpeciesIndexException, InvalidPlayerSelectException, SpeciesDuplicateTraitException,
             SpeciesNumberTraitsException, DeckEmptyException {
@@ -954,11 +954,23 @@ public class GameTests {
         g.getTraits(-1, 0);
     }
 
-    @Test (expected = IllegalSpeciesIndexException.class)
+    @Test(expected = IllegalSpeciesIndexException.class)
     public void testGetTraitsInvalidSpecies() throws IllegalNumberOfPlayers, NullGameObjectException,
             IllegalCardRemovalException, IllegalSpeciesIndexException, InvalidPlayerSelectException,
             SpeciesDuplicateTraitException, SpeciesNumberTraitsException, DeckEmptyException {
         Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         g.getTraits(this.playerIndex, 1);
+    }
+
+    @Test
+    public void testAllFull() throws IllegalNumberOfPlayers, NullGameObjectException {
+        ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        for (IPlayer p : players) {
+            EasyMock.expect(p.allSpeciesFull()).andReturn(true);
+        }
+        players.forEach(EasyMock::replay);
+        assertTrue(g.allFull());
+        players.forEach(EasyMock::verify);
     }
 }
