@@ -204,6 +204,14 @@ public class GameFeedTests {
         g.getSpeciesFood(this.playerIndex, 1);
     }
 
+    @Test
+    public void testFeedSpeciesBank() throws IllegalNumberOfPlayers, NullGameObjectException, SpeciesFullException, FoodBankEmptyException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
+        Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.feedPlayerSpeciesFromBank(this.playerIndex, 0);
+        assertEquals(239, g.getFoodBankCount());
+        assertEquals(1, g.getPlayerObjects().get(this.playerIndex).getSpecies().get(0).getEatenFood());
+    }
+
     @Test(expected = FoodBankEmptyException.class)
     public void testFeedSpeciesEmptyBank() throws IllegalNumberOfPlayers, NullGameObjectException, SpeciesFullException, FoodBankEmptyException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
         Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
