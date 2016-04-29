@@ -198,6 +198,23 @@ public class GameFeedTests {
         assertEquals(1, g.getSpeciesFood(this.playerIndex, 1));
     }
 
+    @Test
+    public void testFeedPlayerCardNotInHash() throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
+            SpeciesFullException, WateringHoleEmptyException, IllegalNumberOfPlayers, NullGameObjectException,
+            IllegalCardFoodException, IllegalCardDirectionException, SpeciesNumberTraitsException,
+            SpeciesDuplicateTraitException, IllegalCardRemovalException, SpeciesPopulationException, IllegalCardDiscardException {
+        ArrayList<IPlayer> players = generateNumRealPlayers(this.numPlayers);
+        ICard c = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
+        for (IPlayer p : players) {
+            p.getSpecies().get(0).addTrait(c);
+            p.getSpecies().add(new Species());
+        }
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        g.getWateringHole().addFood();
+        g.feedPlayerSpecies(this.playerIndex, 0);
+        assertEquals(1, g.getSpeciesFood(this.playerIndex, 0));
+    }
+
    /* @Test
     public void testFeedPlayerUnit() throws IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
