@@ -5,6 +5,7 @@ import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Card;
 import com.Evolution.logic.Species;
 import com.Evolution.testClasses.TestCard;
+import com.sun.prism.impl.ps.BaseShaderContext;
 import org.easymock.EasyMock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -259,5 +260,27 @@ public class SpeciesTests {
         Species s = new Species();
         s.eat();
         assertTrue(s.isFull());
+    }
+
+    @Test
+    public void testGetTempFood() {
+        Species s = new Species();
+        int expected = 0;
+        assertEquals(0, s.getTempFood());
+    }
+
+    @Test
+    public void testGetTempFood2() {
+        Species s = new Species();
+        s.eatTemp();
+        assertEquals(s.getBodySize(), s.getTempFood());
+    }
+
+    @Test
+    public void testResetTempFood(){
+        Species s = new Species();
+        int expected = 0;
+        s.resetEatenTempFood();
+        assertEquals(expected, s.getTempFood());
     }
 }

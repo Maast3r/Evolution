@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -465,6 +466,12 @@ public class GameTests {
         assertEquals(PhaseTwo.class, g.getPhase().getClass());
     }
 
+    @Test(expected = NullGameObjectException.class)
+    public void testSetNullPhase() throws IllegalNumberOfPlayers, NullGameObjectException {
+        Game g = new Game(generateNumPlayers(3), this.wateringHole, this.drawPile, this.discardPile);
+        g.setPhase(null);
+    }
+
     @Test
     public void testDiscardToWateringHole() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             InvalidPlayerSelectException, DeckEmptyException, InvalidDiscardToWateringHoleException,
@@ -709,7 +716,6 @@ public class GameTests {
     }
 
 
-
     @Test
     public void testDiscardToIncreaseBodySize() throws IllegalNumberOfPlayers, IllegalCardDirectionException,
             DeckEmptyException, IllegalCardDiscardException, InvalidPlayerSelectException,
@@ -918,5 +924,118 @@ public class GameTests {
         ArrayList<IPlayer> players = generateNumPlayers(this.numPlayers);
         Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
         g.removeTraitFromSpecies(this.playerIndex, 0, null);
+    }
+
+    @Test
+    public void testEmptyGetTraits() throws IllegalNumberOfPlayers, NullGameObjectException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
+        Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        ArrayList<ICard> traits = g.getTraits(this.playerIndex, 0);
+        assertTrue(traits.size() == 0);
+    }
+
+    @Test
+    public void testGetTraits() throws IllegalNumberOfPlayers, NullGameObjectException, IllegalCardRemovalException,
+            IllegalSpeciesIndexException, InvalidPlayerSelectException, SpeciesDuplicateTraitException,
+            SpeciesNumberTraitsException, DeckEmptyException {
+        ArrayList<IPlayer> players = generateNumRealPlayers(this.numPlayers);
+        Game g = new Game(players, this.wateringHole, this.drawPile, this.discardPile);
+        ICard card = EasyMock.niceMock(Card.class);
+        players.get(this.playerIndex).getSpecies().get(0).addTrait(card);
+        ArrayList<ICard> traits = g.getTraits(this.playerIndex, 0);
+        assertTrue(traits.size() == 1);
+        assertEquals(traits.get(0), card);
+    }
+
+    @Test(expected = InvalidPlayerSelectException.class)
+    public void testGetTraitsInvalidPlayer() throws IllegalNumberOfPlayers, NullGameObjectException, IllegalCardRemovalException,
+            IllegalSpeciesIndexException, InvalidPlayerSelectException, SpeciesDuplicateTraitException,
+            SpeciesNumberTraitsException, DeckEmptyException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.getTraits(-1, 0);
+    }
+
+    @Test(expected = InvalidPlayerSelectException.class)
+    public void testGetTraitsInvalidPlayerHighBound() throws IllegalNumberOfPlayers, NullGameObjectException,
+            IllegalCardRemovalException,
+            IllegalSpeciesIndexException, InvalidPlayerSelectException, SpeciesDuplicateTraitException,
+            SpeciesNumberTraitsException, DeckEmptyException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.getTraits(this.numPlayers, 0);
+    }
+
+    @Test(expected = IllegalSpeciesIndexException.class)
+    public void testGetTraitsInvalidSpecies() throws IllegalNumberOfPlayers, NullGameObjectException,
+            IllegalCardRemovalException, IllegalSpeciesIndexException, InvalidPlayerSelectException,
+            SpeciesDuplicateTraitException, SpeciesNumberTraitsException, DeckEmptyException {
+        Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.getTraits(this.playerIndex, 1);
+    }
+
+    @Test(expected = IllegalSpeciesIndexException.class)
+    public void testGetTraitsInvalidSpeciesLowBound() throws IllegalNumberOfPlayers, NullGameObjectException,
+            IllegalCardRemovalException, IllegalSpeciesIndexException, InvalidPlayerSelectException,
+            SpeciesDuplicateTraitException, SpeciesNumberTraitsException, DeckEmptyException {
+        Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.getTraits(this.playerIndex, -1);
+    }
+
+    @Test
+    public void testAllFull() throws IllegalNumberOfPlayers, NullGameObjectException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        for (IPlayer p : g.getPlayerObjects()) {
+            EasyMock.expect(p.allSpeciesFull()).andReturn(true);
+        }
+        g.getPlayerObjects().forEach(EasyMock::replay);
+        assertTrue(g.allFull());
+        g.getPlayerObjects().forEach(EasyMock::verify);
+    }
+
+    @Test
+    public void testIncreasePopulation() throws SpeciesPopulationException, IllegalNumberOfPlayers, NullGameObjectException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
+        EasyMock.expect(g.getPlayerObjects().get(this.playerIndex).getSpecies()).andReturn(new ArrayList<>(Arrays
+                .asList(fakeSpecies)));
+        fakeSpecies.increasePopulation();
+        EasyMock.replay(g.getPlayerObjects().get(this.playerIndex), fakeSpecies);
+        g.increasePopulation(this.playerIndex, 0);
+        EasyMock.verify(g.getPlayerObjects().get(this.playerIndex), fakeSpecies);
+    }
+
+    @Test(expected = InvalidPlayerSelectException.class)
+    public void testIncreasePopulationHighPlayerBound() throws SpeciesPopulationException, IllegalNumberOfPlayers,
+            NullGameObjectException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.increasePopulation(this.numPlayers, 0);
+    }
+
+    @Test(expected = InvalidPlayerSelectException.class)
+    public void testIncreasePopulationLowPlayerBound() throws SpeciesPopulationException, IllegalNumberOfPlayers,
+            NullGameObjectException, InvalidPlayerSelectException, IllegalSpeciesIndexException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.increasePopulation(-1, 0);
+    }
+
+    @Test(expected = IllegalSpeciesIndexException.class)
+    public void testIncreasePopulationHighSpeciesBound() throws IllegalNumberOfPlayers, NullGameObjectException, InvalidPlayerSelectException, SpeciesPopulationException, IllegalSpeciesIndexException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
+        EasyMock.expect(g.getPlayerObjects().get(this.playerIndex).getSpecies()).andReturn(new ArrayList<>(Arrays
+                .asList(fakeSpecies)));
+        EasyMock.replay(g.getPlayerObjects().get(this.playerIndex), fakeSpecies);
+        g.increasePopulation(this.playerIndex, 1);
+        EasyMock.verify(g.getPlayerObjects().get(this.playerIndex), fakeSpecies);
+    }
+
+    @Test(expected = IllegalSpeciesIndexException.class)
+    public void testIncreasePopulationLowSpeciesBound() throws IllegalNumberOfPlayers, NullGameObjectException,
+            InvalidPlayerSelectException, SpeciesPopulationException, IllegalSpeciesIndexException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
+        EasyMock.expect(g.getPlayerObjects().get(this.playerIndex).getSpecies()).andReturn(new ArrayList<>(Arrays
+                .asList(fakeSpecies)));
+        EasyMock.replay(g.getPlayerObjects().get(this.playerIndex), fakeSpecies);
+        g.increasePopulation(this.playerIndex, -1);
+        EasyMock.verify(g.getPlayerObjects().get(this.playerIndex), fakeSpecies);
     }
 }

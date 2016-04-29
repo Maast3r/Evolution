@@ -3,6 +3,7 @@ package com.Evolution.logic;
 import com.Evolution.exceptions.DeckEmptyException;
 import com.Evolution.exceptions.IllegalCardDirectionException;
 import com.Evolution.exceptions.InvalidPlayerSelectException;
+import com.Evolution.exceptions.NullGameObjectException;
 import com.Evolution.interfaces.IPhases;
 
 /**
@@ -16,8 +17,13 @@ public class PhaseFour implements IPhases{
     }
 
     @Override
-    public void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException {
-
+    public void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
+        if(this.game.allFull()) {
+            this.game.increaseRound();
+            this.game.setPhase(new PhaseOne(this.game));
+        } else {
+            this.game.nextTurn();
+        }
     }
 
     @Override

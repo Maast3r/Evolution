@@ -93,4 +93,14 @@ public class Player implements IPlayer {
     public int getFoodBag() {
         return this.foodBag;
     }
+
+    @Override
+    public boolean allSpeciesFull() {
+        for(ISpecies s : this.speciesList) {
+            if(!s.isFull()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -129,21 +129,13 @@ class CardPopupController implements Initializable {
                                         }
                                     }
                                     this.board.setTraitSelection(newValue.intValue());
+                                    this.successfulAdd = true;
                                     this.gridPane.getScene().getWindow().hide();
                                 }
 
                             });
                             traitBox.show();
                             this.infoPane.getChildren().add(traitBox);
-
-                            //                        Button closeButton = new Button();
-                            //                        closeButton.setText("Add Trait");
-                            //                        closeButton.setOnAction(new EventHandler<ActionEvent>() {
-                            //                            @Override public void handle(ActionEvent e) {
-                            //                                System.out.println("close window");
-                            //                        }
-                            //                        });
-                            //                        this.infoPane.getChildren().add(closeButton);
                         } else {
                             this.gridPane.getScene().getWindow().hide();
                         }

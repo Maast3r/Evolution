@@ -114,12 +114,16 @@ class GameScreenController implements Initializable {
 
         staticElementsUpdate();
 
-        if (this.numPlayers == 3) {
-            threePlayerSetup();
-        } else if (this.numPlayers == 4) {
-            fourPlayerSetup();
-        } else {
-            fivePlayerSetup();
+        try {
+            if (this.numPlayers == 3) {
+                threePlayerSetup();
+            } else if (this.numPlayers == 4) {
+                fourPlayerSetup();
+            } else {
+                fivePlayerSetup();
+            }
+        } catch (InvalidPlayerSelectException | IllegalSpeciesIndexException e) {
+            e.printStackTrace();
         }
 
         toggleChoiceBox();
@@ -156,14 +160,20 @@ class GameScreenController implements Initializable {
      * Commands each player pane to update the ChoiceBoxes under each of its SpeciesBoards
      */
     void changeChoiceBox() {
-        this.playerPanes.forEach(MyHBox::updateChoices);
+        this.playerPanes.forEach((myHBox) -> {
+            try {
+                myHBox.updateChoices();
+            } catch (InvalidPlayerSelectException | IllegalSpeciesIndexException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     /**
      * Set up the screen for three players
      * Each player gets assigned to a pane
      */
-    private void threePlayerSetup() {
+    private void threePlayerSetup() throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
         startingPaneSetup(this.bottomPane, 0);
         startingPaneSetup(this.leftPane, 1);
         startingPaneSetup(this.topPane, 2);
@@ -173,7 +183,7 @@ class GameScreenController implements Initializable {
      * Set up the screen for four players
      * The bottom pane must be split to handle two players
      */
-    private void fourPlayerSetup() {
+    private void fourPlayerSetup() throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
         HBox player1 = new HBox();
         player1.setAlignment(Pos.CENTER);
         HBox player2 = new HBox();
@@ -191,7 +201,7 @@ class GameScreenController implements Initializable {
      * Set up the screen for five players
      * The top and bottom panes must be split to handle two players each
      */
-    private void fivePlayerSetup() {
+    private void fivePlayerSetup() throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
         HBox player1 = new HBox();
         player1.setAlignment(Pos.CENTER);
         HBox player2 = new HBox();
@@ -217,7 +227,7 @@ class GameScreenController implements Initializable {
      * @param pane  player pane
      * @param index player index in the players array
      */
-    private void startingPaneSetup(HBox pane, int index) {
+    private void startingPaneSetup(HBox pane, int index) throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
         MyHBox hBox = new MyHBox(index, this.game, this);
         HBox playerPane = hBox.createBox();
         pane.getChildren().addAll(playerPane);
