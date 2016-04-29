@@ -15,6 +15,7 @@ public class Species implements ISpecies {
     private int population;
     private ArrayList<ICard> traits = new ArrayList<>();
     private int eatenFood;
+    private int tempFood;
 
     /**
      * Creates a species defaulted with body size and population equal to 0.
@@ -119,8 +120,18 @@ public class Species implements ISpecies {
         return this.traits;
     }
 
-
+    /**
+     * Returns the number of temp food
+     * @return tempFood
+     */
     public int getTempFood() {
-        return 0;
+        return this.tempFood;
+    }
+
+    /**
+     * Increment tempFood by 1
+     */
+    public void eatTemp() {
+        this.tempFood++;
     }
 }
