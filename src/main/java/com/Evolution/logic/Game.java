@@ -22,7 +22,7 @@ public class Game {
     private IWateringHole wateringHole;
     private int foodBank = 240;
     private IPhases currentPhase = new PhaseOne(this);
-    private HashMap<String, Class> traitActions = new HashMap<>();
+    private HashMap<String, ATrait> feedTraitActions = new HashMap<>();
 
     //TODO: Add Null check for every single method that takes in an Object
 
@@ -49,8 +49,8 @@ public class Game {
 
         this.drawPile = drawPile;
         this.discardPile = discardPile;
-        this.traitActions.put("Cooperation", Cooperation.class);
-        this.traitActions.put("Foraging", Foraging.class);
+        this.feedTraitActions.put("Cooperation", new Cooperation(this));
+        this.feedTraitActions.put("Foraging", new Foraging(this));
     }
 
     /**
@@ -488,7 +488,7 @@ public class Game {
     }
 
     /**
-     * Feeds the player's species
+     * * Feeds the player's species
      *
      * @param playerIndex  Index of the player in the player list
      * @param speciesIndex Index of the species for the player
@@ -496,10 +496,10 @@ public class Game {
      * @throws IllegalSpeciesIndexException  if the species index is not in the valid range
      * @throws SpeciesFullException if the species' eaten is equal to species' population
      * @throws WateringHoleEmptyException if the food count in the watering hole is 0
+     * @throws SpeciesPopulationException propagates from {@link ATrait#executeTrait(int[], int[])}
      */
-    public void feedPlayerSpecies(int playerIndex, int speciesIndex)
-            throws InvalidPlayerSelectException, IllegalSpeciesIndexException,
-            SpeciesFullException, WateringHoleEmptyException {
+    public void feedPlayerSpecies(int playerIndex, int speciesIndex) throws InvalidPlayerSelectException,
+            IllegalSpeciesIndexException, WateringHoleEmptyException, SpeciesFullException, SpeciesPopulationException {
         if (this.players.size() <= playerIndex || playerIndex < 0) {
             throw new InvalidPlayerSelectException("Player index is out of range!");
         } else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
@@ -511,6 +511,12 @@ public class Game {
         this.wateringHole.removeFood();
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
         // TODO: loop through species traits, get trait from hashmap, and executing
+        for (ICard c : this.players.get(playerIndex).getSpecies().get(speciesIndex).getTraits()) {
+            String name = c.getName();
+            if (feedTraitActions.containsKey(name)) {
+                feedTraitActions.get(name).executeTrait(new int[]{playerIndex, 0}, new int[]{speciesIndex, 0});
+            }
+        }
     }
 
     /**
