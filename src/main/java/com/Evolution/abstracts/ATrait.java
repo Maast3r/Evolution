@@ -1,10 +1,10 @@
-package com.Evolution.interfaces;
+package com.Evolution.abstracts;
 
 import com.Evolution.exceptions.*;
 import com.Evolution.logic.Game;
 
 /**
- * Method signatures for methods common amongst traits
+ * Method signatures for methods common amongst automatic traits
  */
 public abstract class ATrait {
 

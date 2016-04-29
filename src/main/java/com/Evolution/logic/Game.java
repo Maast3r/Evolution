@@ -1,5 +1,6 @@
 package com.Evolution.logic;
 
+import com.Evolution.abstracts.ATrait;
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.*;
 import com.Evolution.traits.Cooperation;

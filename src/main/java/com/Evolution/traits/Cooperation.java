@@ -1,7 +1,7 @@
 package com.Evolution.traits;
 
+import com.Evolution.abstracts.ATrait;
 import com.Evolution.exceptions.*;
-import com.Evolution.interfaces.ATrait;
 import com.Evolution.logic.Game;
 
 public class Cooperation extends ATrait {
@@ -26,7 +26,8 @@ public class Cooperation extends ATrait {
     @Override
     public void executeTrait(int[] playerIndex, int[] speciesIndex)
             throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
-            SpeciesFullException, WateringHoleEmptyException, SpeciesPopulationException, FoodBankEmptyException {
+            SpeciesFullException, WateringHoleEmptyException, FoodBankEmptyException,
+            SpeciesPopulationException {
 
         this.game.feedPlayerSpecies(playerIndex[0], speciesIndex[0] + 1);
     }

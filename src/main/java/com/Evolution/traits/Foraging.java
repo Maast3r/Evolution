@@ -1,7 +1,8 @@
 package com.Evolution.traits;
 
+
 import com.Evolution.exceptions.*;
-import com.Evolution.interfaces.ATrait;
+import com.Evolution.abstracts.ATrait;
 import com.Evolution.logic.Game;
 
 
