@@ -170,6 +170,12 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Performed code reviews
     * 50+ LOC
 * Trevor Burch
+    * Added logic for handling phase 4 actions on the GUI Side
+    * Debugged issue with cards not being removed from a player after adding a trait from the GUI
+    * Aided backend developers in designing calls to game which are used by the GUI in Phase 4
+    * Renamed methods in the GUI code to more accurately represent what they do
+    * Wrote logic for Phase 4 to show the new traits on a species after they are set in Phase 3
+    * 25+ LOC
 * Andrew Ma
     * Fixed remove cards backend
     * Designed trait handling with Jeremiah
