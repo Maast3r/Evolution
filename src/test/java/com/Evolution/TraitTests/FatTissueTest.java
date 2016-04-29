@@ -3,6 +3,7 @@ package com.Evolution.TraitTests;
 
 import com.Evolution.abstracts.CTrait;
 import com.Evolution.logic.Game;
+import com.Evolution.traits.FatTissue;
 import com.Evolution.traits.Intelligence;
 import org.easymock.EasyMock;
 import org.junit.Test;
@@ -16,5 +17,6 @@ public class FatTissueTest {
         CTrait t = new FatTissue(g);
         assertEquals(g, t.getGame());
     }
+
 
 }
