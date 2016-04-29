@@ -151,3 +151,28 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Increase population/body size
     * Add species left/right
     * 50+ LOC
+
+#Sprint 6
+* Jeremiah Goist
+    * Added Mutation Testing as part of gradle
+    * Determined how to generate JaCoCo coverage reports
+    * Began implementation of Trait actions
+    * Refactored for input validation
+    * Performed code reviews
+    * Wrote Basic Phase 4 Logic
+    * 50+ LOC
+* Brooke Brown
+    * Added eat to species
+    * Added moving food from all species boards to player's food bag
+    * Added trait card checks to feedPlayerSpecies in game
+    * Added getting the amount of eaten food for a specific species to game (for GUI)
+    * Wrote tests for branch coverage
+    * Performed code reviews
+    * 50+ LOC
+* Trevor Burch
+* Andrew Ma
+    * Fixed remove cards backend
+    * Designed trait handling with Jeremiah
+    * All traits and their interactions with game and species
+    * Wrote tests for branch coverage
+    * 50+ LOC
