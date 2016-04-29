@@ -276,4 +276,12 @@ public class SpeciesTests {
         s.eatTemp();
         assertEquals(expected, s.getTempFood());
     }
+
+    @Test
+    public void testResetTempFood(){
+        Species s = new Species();
+        int expected = 0;
+        s.resetEatenTempFood();
+        assertEquals(expected, s.getTempFood());
+    }
 }
