@@ -76,4 +76,19 @@ public class TestSpecies implements ISpecies {
     public boolean isFull() {
         return false;
     }
+
+    @Override
+    public int getTempFood() {
+        return 0;
+    }
+
+    @Override
+    public void eatTemp() {
+
+    }
+
+    @Override
+    public void resetEatenTempFood() {
+
+    }
 }

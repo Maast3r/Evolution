@@ -19,7 +19,7 @@ public class FatTissue extends CTrait {
             IllegalCardDirectionException, IllegalCardDiscardException,
             IllegalCardRemovalException, SpeciesPopulationException {
 
-
+//        this.game.getPlayerObjects().get(playerIndex[0])
     }
 
 }

@@ -120,18 +120,18 @@ public class Species implements ISpecies {
         return this.traits;
     }
 
-    /**
-     * Returns the number of temp food
-     * @return tempFood
-     */
+    @Override
     public int getTempFood() {
         return this.tempFood;
     }
 
-    /**
-     * Increment tempFood by 1
-     */
+    @Override
     public void eatTemp() {
-        this.tempFood++;
+        this.tempFood = this.bodySize;
+    }
+
+    @Override
+    public void resetEatenTempFood(){
+        this.tempFood = 0;
     }
 }
