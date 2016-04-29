@@ -400,4 +400,10 @@ public class WateringHoleTests {
         w.addTotalCardFood();
         assertEquals(39, w.getFoodCount());
     }
+
+    @Test(expected = InvalidWaterHoleFoodAddException.class)
+    public void testAddFoodTooNegative() {
+        WateringHole w = new WateringHole();
+        w.addFood(-1);
+    }
 }
