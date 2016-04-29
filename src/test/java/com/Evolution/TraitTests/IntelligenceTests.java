@@ -1,22 +1,14 @@
 package com.Evolution.TraitTests;
 
 
-import com.Evolution.abtracts.ATrait;
-import com.Evolution.abtracts.CTrait;
+import com.Evolution.abstracts.CTrait;
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
-import com.Evolution.interfaces.IPlayer;
-import com.Evolution.interfaces.ISpecies;
 import com.Evolution.logic.Card;
 import com.Evolution.logic.Game;
-import com.Evolution.logic.Player;
-import com.Evolution.logic.Species;
 import com.Evolution.traits.Intelligence;
 import org.easymock.EasyMock;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 

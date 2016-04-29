@@ -2,7 +2,7 @@ package com.Evolution.TraitTests;
 
 
 import com.Evolution.exceptions.*;
-import com.Evolution.abtracts.ATrait;
+import com.Evolution.abstracts.ATrait;
 import com.Evolution.logic.Game;
 import com.Evolution.traits.Cooperation;
 import org.easymock.EasyMock;

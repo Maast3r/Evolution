@@ -4,7 +4,7 @@ import com.Evolution.exceptions.IllegalSpeciesIndexException;
 import com.Evolution.exceptions.InvalidPlayerSelectException;
 import com.Evolution.exceptions.SpeciesFullException;
 import com.Evolution.exceptions.WateringHoleEmptyException;
-import com.Evolution.abtracts.ATrait;
+import com.Evolution.abstracts.ATrait;
 import com.Evolution.logic.Game;
 
 public class Cooperation extends ATrait {

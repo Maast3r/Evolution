@@ -1,13 +1,9 @@
 package com.Evolution.traits;
 
-import com.Evolution.abtracts.ATrait;
-import com.Evolution.abtracts.CTrait;
+import com.Evolution.abstracts.CTrait;
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
-import com.Evolution.logic.Card;
 import com.Evolution.logic.Game;
-
-import java.util.ArrayList;
 
 
 public class Intelligence extends CTrait {

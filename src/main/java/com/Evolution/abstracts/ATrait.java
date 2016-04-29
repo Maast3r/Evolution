@@ -1,4 +1,4 @@
-package com.Evolution.abtracts;
+package com.Evolution.abstracts;
 
 import com.Evolution.exceptions.*;
 import com.Evolution.logic.Game;
