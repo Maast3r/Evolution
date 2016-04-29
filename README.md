@@ -151,3 +151,13 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Increase population/body size
     * Add species left/right
     * 50+ LOC
+
+#Sprint 6
+* Jeremiah Goist
+    * Added Mutation Testing as part of gradle
+    * Determined how to generate JaCoCo coverage reports
+    * Began implementation of Trait actions
+    * Refactored for input validation
+    * Performed code reviews
+    * Wrote Basic Phase 4 Logic
+    * 50+ LOC
