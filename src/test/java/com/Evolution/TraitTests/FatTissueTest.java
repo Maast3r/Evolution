@@ -14,6 +14,9 @@ import com.Evolution.traits.Intelligence;
 import org.easymock.EasyMock;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.Assert.assertEquals;
 
 public class FatTissueTest {
@@ -34,8 +37,10 @@ public class FatTissueTest {
         Game g = EasyMock.niceMock(Game.class);
         IPlayer p = EasyMock.niceMock(Player.class);
         ISpecies s = EasyMock.niceMock(Species.class);
-        g.getPlayerObjects();
-        p.getSpecies();
+        EasyMock.expect(g.getPlayerObjects()).andReturn(
+                new ArrayList<>(Arrays.asList(p)));
+        EasyMock.expect(p.getSpecies()).andReturn(
+                new ArrayList<>(Arrays.asList(s)));
         s.eatTemp();
         EasyMock.replay(g, p, s);
         CTrait t = new FatTissue(g);

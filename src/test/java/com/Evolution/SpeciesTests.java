@@ -265,6 +265,14 @@ public class SpeciesTests {
     @Test
     public void testGetTempFood() {
         Species s = new Species();
+        int expected = 0;
+        assertEquals(0, s.getTempFood());
+    }
+
+    @Test
+    public void testGetTempFood2() {
+        Species s = new Species();
+        s.eatTemp();
         assertEquals(s.getBodySize(), s.getTempFood());
     }
 
