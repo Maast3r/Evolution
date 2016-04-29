@@ -23,6 +23,7 @@ public class Species implements ISpecies {
         this.bodySize = 1;
         this.population = 1;
         this.eatenFood = 0;
+
     }
 
     @Override
