@@ -169,3 +169,10 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Wrote tests for branch coverage
     * Performed code reviews
     * 50+ LOC
+* Trevor Burch
+* Andrew Ma
+    * Fixed remove cards backend
+    * Designed trait handling with Jeremiah
+    * All traits and their interactions with game and species
+    * Wrote tests for branch coverage
+    * 50+ LOC
