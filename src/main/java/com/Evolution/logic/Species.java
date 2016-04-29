@@ -120,5 +120,7 @@ public class Species implements ISpecies {
     }
 
 
-
+    public int getTempFood() {
+        return 0;
+    }
 }

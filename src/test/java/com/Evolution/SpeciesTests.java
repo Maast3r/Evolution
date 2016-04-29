@@ -268,4 +268,12 @@ public class SpeciesTests {
         int expected = 0;
         assertEquals(expected, s.getTempFood());
     }
+
+    @Test
+    public void testGetTempFood2() {
+        Species s = new Species();
+        int expected = 1;
+        s.eatTemp();
+        assertEquals(expected, s.getTempFood());
+    }
 }
