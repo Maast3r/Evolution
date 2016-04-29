@@ -27,7 +27,7 @@ public class FertileTests {
             IllegalCardRemovalException, WateringHoleEmptyException,
             IllegalSpeciesIndexException, IllegalCardDirectionException,
             IllegalCardFoodException, NullGameObjectException,
-            IllegalCardDiscardException {
+            IllegalCardDiscardException, FoodBankEmptyException {
         Game g = EasyMock.niceMock(Game.class);
         ATrait t = new Fertile(g);
         g.increasePopulation(0, 0);

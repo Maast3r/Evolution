@@ -27,7 +27,7 @@ public class LongNeckTests {
             WateringHoleEmptyException, IllegalCardFoodException,
             IllegalCardDirectionException, NullGameObjectException,
             IllegalCardRemovalException, IllegalCardDiscardException,
-            SpeciesPopulationException {
+            SpeciesPopulationException, FoodBankEmptyException {
         Game g = EasyMock.niceMock(Game.class);
         ATrait t = new LongNeck(g);
         g.feedPlayerSpeciesFromBank(0, 0);
