@@ -33,7 +33,7 @@ public class FatTissueTest {
             WateringHoleEmptyException, SpeciesPopulationException,
             IllegalSpeciesIndexException, IllegalCardDirectionException,
             IllegalCardFoodException, NullGameObjectException,
-            IllegalCardDiscardException {
+            IllegalCardDiscardException, FoodBankEmptyException {
         Game g = EasyMock.niceMock(Game.class);
         IPlayer p = EasyMock.niceMock(Player.class);
         ISpecies s = EasyMock.niceMock(Species.class);

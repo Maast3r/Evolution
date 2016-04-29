@@ -18,7 +18,8 @@ public abstract class ATrait {
         this.game = game;
     }
 
-    public abstract void executeTrait(int[] playerIndex, int[] speciesIndex) throws IllegalSpeciesIndexException, InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException, NullGameObjectException, IllegalCardFoodException, IllegalCardDirectionException, IllegalCardDiscardException, IllegalCardRemovalException, SpeciesPopulationException;
+    public abstract void executeTrait(int[] playerIndex, int[] speciesIndex) throws IllegalSpeciesIndexException,
+            InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException, SpeciesPopulationException, FoodBankEmptyException;
 
     /**
      * Returns the Game currently associated with this Trait executor

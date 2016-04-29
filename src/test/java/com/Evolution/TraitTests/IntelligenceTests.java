@@ -26,7 +26,7 @@ public class IntelligenceTests {
             InvalidPlayerSelectException, NullGameObjectException,
             IllegalCardDiscardException, IllegalSpeciesIndexException,
             SpeciesFullException, WateringHoleEmptyException, SpeciesPopulationException,
-            IllegalCardFoodException, IllegalCardDirectionException {
+            IllegalCardFoodException, IllegalCardDirectionException, FoodBankEmptyException {
         Game g = EasyMock.niceMock(Game.class);
         ICard c = EasyMock.niceMock(Card.class);
         g.discardFromPlayer(0, c);

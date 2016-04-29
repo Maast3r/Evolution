@@ -1,10 +1,7 @@
 package com.Evolution.traits;
 
-import com.Evolution.exceptions.IllegalSpeciesIndexException;
-import com.Evolution.exceptions.InvalidPlayerSelectException;
-import com.Evolution.exceptions.SpeciesFullException;
-import com.Evolution.exceptions.WateringHoleEmptyException;
 import com.Evolution.abstracts.ATrait;
+import com.Evolution.exceptions.*;
 import com.Evolution.logic.Game;
 
 public class Cooperation extends ATrait {
@@ -23,11 +20,14 @@ public class Cooperation extends ATrait {
      * @throws InvalidPlayerSelectException propagated from {@link Game#feedPlayerSpecies(int, int)}
      * @throws SpeciesFullException         propagated from {@link Game#feedPlayerSpecies(int, int)}
      * @throws WateringHoleEmptyException   propagated from {@link Game#feedPlayerSpecies(int, int)}
+     * @throws SpeciesPopulationException   propagated from {@link Game#feedPlayerSpecies(int, int)}
+     * @throws FoodBankEmptyException       propagated from {@link Game#feedPlayerSpecies(int, int)}
      */
     @Override
     public void executeTrait(int[] playerIndex, int[] speciesIndex)
             throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
-            SpeciesFullException, WateringHoleEmptyException {
+            SpeciesFullException, WateringHoleEmptyException, FoodBankEmptyException,
+            SpeciesPopulationException {
 
         this.game.feedPlayerSpecies(playerIndex[0], speciesIndex[0] + 1);
     }

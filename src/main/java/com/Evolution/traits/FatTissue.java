@@ -11,13 +11,22 @@ public class FatTissue extends CTrait {
         super(g);
     }
 
+    /**
+     * Stores food up to the body tissue on the species.
+     *
+     * @param playerIndex
+     * @param speciesIndex
+     * @param c
+     * * @throws IllegalSpeciesIndexException propagated from {@link Game#feedPlayerSpecies(int, int)}
+     * @throws InvalidPlayerSelectException propagated from {@link Game#getPlayerObjects()} (int, int)}
+     * @throws WateringHoleEmptyException   propagated from {@link Game#feedPlayerSpecies(int, int)}
+     * @throws SpeciesPopulationException   propagated from {@link Game#feedPlayerSpecies(int, int)}
+     * @throws IllegalSpeciesIndexException propagated from ({@link Game#feedPlayerSpecies(int, int)}
+     */
     @Override
     public void executeTrait(int[] playerIndex, int[] speciesIndex, ICard c)
             throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
-            SpeciesFullException, WateringHoleEmptyException,
-            NullGameObjectException, IllegalCardFoodException,
-            IllegalCardDirectionException, IllegalCardDiscardException,
-            IllegalCardRemovalException, SpeciesPopulationException {
+            WateringHoleEmptyException, SpeciesPopulationException {
 
         this.game.getPlayerObjects().get(playerIndex[0]).getSpecies()
                 .get(speciesIndex[0]).eatTemp();
