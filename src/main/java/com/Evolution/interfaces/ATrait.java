@@ -19,7 +19,7 @@ public abstract class ATrait {
     }
 
     public abstract void executeTrait(int[] playerIndex, int[] speciesIndex) throws IllegalSpeciesIndexException,
-            InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException, SpeciesPopulationException;
+            InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException, SpeciesPopulationException, FoodBankEmptyException;
 
     /**
      * Returns the Game currently associated with this Trait executor

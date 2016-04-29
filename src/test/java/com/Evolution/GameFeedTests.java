@@ -95,7 +95,7 @@ public class GameFeedTests {
     public void testFeedPlayer() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
-            SpeciesFullException, WateringHoleEmptyException {
+            SpeciesFullException, WateringHoleEmptyException, SpeciesPopulationException, FoodBankEmptyException {
         Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile,
                 this.discardPile);
         int expected = g.getPlayerObjects().get(this.playerIndex).getSpecies().get(0).getEatenFood() + 1;
@@ -111,7 +111,7 @@ public class GameFeedTests {
     public void testFeedPlayer3() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
-            SpeciesFullException, WateringHoleEmptyException {
+            SpeciesFullException, WateringHoleEmptyException, SpeciesPopulationException, FoodBankEmptyException {
         Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile,
                 this.discardPile);
         g.getWateringHole().addFood();
@@ -122,7 +122,7 @@ public class GameFeedTests {
     public void testFeedPlayer4() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
-            SpeciesFullException, WateringHoleEmptyException {
+            SpeciesFullException, WateringHoleEmptyException, SpeciesPopulationException, FoodBankEmptyException {
         ArrayList<IPlayer> p = generateNumRealPlayers(this.numPlayers);
         Game g = new Game(p, this.wateringHole, this.drawPile,
                 this.discardPile);
@@ -133,7 +133,7 @@ public class GameFeedTests {
     public void testFeedPlayer5() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
-            SpeciesFullException, WateringHoleEmptyException {
+            SpeciesFullException, WateringHoleEmptyException, SpeciesPopulationException, FoodBankEmptyException {
         ArrayList<IPlayer> p = generateNumRealPlayers(this.numPlayers);
         Game g = new Game(p, this.wateringHole, this.drawPile,
                 this.discardPile);
@@ -144,7 +144,7 @@ public class GameFeedTests {
     public void testFeedPlayer6() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
-            SpeciesFullException, WateringHoleEmptyException {
+            SpeciesFullException, WateringHoleEmptyException, SpeciesPopulationException, FoodBankEmptyException {
         ArrayList<IPlayer> p = generateNumRealPlayers(this.numPlayers);
         Game g = new Game(p, this.wateringHole, this.drawPile,
                 this.discardPile);
@@ -155,7 +155,7 @@ public class GameFeedTests {
     public void testFeedPlayer7() throws NullGameObjectException, IllegalCardFoodException,
             IllegalCardDirectionException, IllegalNumberOfPlayers,
             InvalidPlayerSelectException, IllegalSpeciesIndexException,
-            SpeciesFullException, WateringHoleEmptyException, IllegalCardRemovalException, SpeciesPopulationException, IllegalCardDiscardException {
+            SpeciesFullException, WateringHoleEmptyException, IllegalCardRemovalException, SpeciesPopulationException, IllegalCardDiscardException, FoodBankEmptyException {
         ArrayList<IPlayer> p = generateNumRealPlayers(5);
         Game g = new Game(p, this.wateringHole, this.drawPile,
                 this.discardPile);
@@ -166,7 +166,7 @@ public class GameFeedTests {
     public void testFeedPlayerCooperation() throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
             SpeciesFullException, WateringHoleEmptyException, IllegalNumberOfPlayers, NullGameObjectException,
             IllegalCardFoodException, IllegalCardDirectionException, SpeciesNumberTraitsException,
-            SpeciesDuplicateTraitException, IllegalCardRemovalException, SpeciesPopulationException, IllegalCardDiscardException {
+            SpeciesDuplicateTraitException, IllegalCardRemovalException, SpeciesPopulationException, IllegalCardDiscardException, FoodBankEmptyException {
         ArrayList<IPlayer> players = generateNumRealPlayers(this.numPlayers);
         ICard c = new Card("Cooperation", "Makes a species a cooperate", "./cooperation.jpg", 3, 2);
         for (IPlayer p : players) {
@@ -184,7 +184,7 @@ public class GameFeedTests {
     public void testFeedPlayerCardNotInHash() throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
             SpeciesFullException, WateringHoleEmptyException, IllegalNumberOfPlayers, NullGameObjectException,
             IllegalCardFoodException, IllegalCardDirectionException, SpeciesNumberTraitsException,
-            SpeciesDuplicateTraitException, IllegalCardRemovalException, SpeciesPopulationException, IllegalCardDiscardException {
+            SpeciesDuplicateTraitException, IllegalCardRemovalException, SpeciesPopulationException, IllegalCardDiscardException, FoodBankEmptyException {
         ArrayList<IPlayer> players = generateNumRealPlayers(this.numPlayers);
         ICard c = new Card("Carnivore", "Makes a species a carnivore", "./carnivore.jpg", 3, 0);
         for (IPlayer p : players) {

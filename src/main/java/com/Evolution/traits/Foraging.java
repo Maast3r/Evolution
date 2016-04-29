@@ -22,11 +22,12 @@ public class Foraging extends ATrait {
      * @throws SpeciesFullException         propagated from {@link Game#feedPlayerSpecies(int, int)}
      * @throws WateringHoleEmptyException   propagated from {@link Game#feedPlayerSpecies(int, int)}
      * @throws SpeciesPopulationException   propagated from {@link Game#feedPlayerSpecies(int, int)}
+     * @throws FoodBankEmptyException       propagated from {@link Game#feedPlayerSpecies(int, int)}
      */
     @Override
     public void executeTrait(int[] playerIndex, int[] speciesIndex)
             throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
-            SpeciesFullException, WateringHoleEmptyException, SpeciesPopulationException {
+            SpeciesFullException, WateringHoleEmptyException, SpeciesPopulationException, FoodBankEmptyException {
         this.game.feedPlayerSpecies(playerIndex[0], speciesIndex[0]);
     }
 
