@@ -161,3 +161,11 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Performed code reviews
     * Wrote Basic Phase 4 Logic
     * 50+ LOC
+* Brooke Brown
+    * Added eat to species
+    * Added moving food from all species boards to player's food bag
+    * Added trait card checks to feedPlayerSpecies in game
+    * Added getting the amount of eaten food for a specific species to game (for GUI)
+    * Wrote tests for branch coverage
+    * Performed code reviews
+    * 50+ LOC
