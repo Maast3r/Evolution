@@ -1,9 +1,22 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    configurations.maybeCreate("pitest")
+    dependencies {
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.9'
+        classpath 'com.github.samueltbrown:gradle-cucumber-plugin:0.9'
+        pitest 'com.github.alexvictoor:pitest-cucumber-plugin:0.3'
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'eclipse'
 apply plugin: 'info.solidsoft.pitest'
+apply plugin: "com.github.samueltbrown.cucumber"
 
-sourceCompatibility = 1.8
 version = '1.0'
 
 group = "edu.rosehulman.rosebuild"
@@ -11,6 +24,10 @@ group = "edu.rosehulman.rosebuild"
 repositories {
 	mavenCentral()
  }
+
+cucumber {
+    formats = ['pretty','junit:build/cucumber.xml']
+}
 
 jacoco {
     toolVersion = "0.7.5.+"
@@ -29,23 +46,13 @@ jacocoTestReport {
 }
 
 dependencies {
-    testCompile 'junit:junit:4.+', 'org.easymock:easymock:3.4'
+    testCompile 'junit:junit:4.+', 'org.easymock:easymock:3.4', 'info.cukes:cucumber-java:1.2.4'
+    cucumberRuntime 'info.cukes:cucumber-java:1.2.4'
 }
 
 test {
     jacoco {
         append = false
-    }
-}
-
-buildscript {
-    repositories {
-        mavenCentral()
-        //Needed only for SNAPSHOT versions
-        //maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
-    }
-    dependencies {
-        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.9'
     }
 }
 

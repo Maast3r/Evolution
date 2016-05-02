@@ -50,8 +50,8 @@ public class Phase3CardFoodToWH {
         }
     }
 
-    @When("^Phase(\\d+) ends$")
-    public void phaseEnds(int arg0) throws DeckEmptyException, IllegalCardDirectionException, NullGameObjectException, InvalidPlayerSelectException, InvalidWateringHoleCardCountException {
+    @When("^Phase3 ends$")
+    public void phaseEnds() throws DeckEmptyException, IllegalCardDirectionException, NullGameObjectException, InvalidPlayerSelectException, InvalidWateringHoleCardCountException {
         for(int i = 0; i < this.g.getPlayerObjects().size(); i++) {
             this.g.getPhase().execute();
         }
