@@ -42,13 +42,12 @@ class SpeciesBoard extends VBox {
     private int playerIndex;
     private int speciesNum;
     private ICard selectedCard;
-    private String traitSelection;
     private ICard[] traits = new ICard[3];
 
     private ChangeListener actionListener;
 
     private ObservableList<String> phase2Options = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
-            Actions.VIEW_CARDS.getName(), Actions.DISCARD_TO_WATERINGHOLE.getName());
+            Actions.VIEW_CARDS.getName(), Actions.DISCARD_TO_WATERING_HOLE.getName());
 
     private ObservableList<String> phase3Options = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
             Actions.VIEW_CARDS.getName(), Actions.ADD_TRAIT.getName(), Actions.REMOVE_TRAIT.getName(),
@@ -73,10 +72,10 @@ class SpeciesBoard extends VBox {
         ADD_SPECIES_RIGHT("Add Species (Right)"),
         INCREASE_POPULATION("Increase Population"),
         INCREASE_BODY_SIZE("Increase Body Size"),
-        FEED_SPECIES("Adds a Food to the Species"),
-        ATTACK_SPECIES("Attacks Another Species"),
+        FEED_SPECIES("Eat Food"),
+        ATTACK_SPECIES("Attack Another Species"),
         END_TURN("End Your Turn"),
-        DISCARD_TO_WATERINGHOLE("Discard to Watering Hole");
+        DISCARD_TO_WATERING_HOLE("Discard to Watering Hole");
 
         private String name;
 
@@ -297,8 +296,8 @@ class SpeciesBoard extends VBox {
                 this.gameController.changeChoiceBox();
                 this.selectedCard = null;
                 break;
-            case DISCARD_TO_WATERINGHOLE:
-                openCardWindow(Actions.DISCARD_TO_WATERINGHOLE);
+            case DISCARD_TO_WATERING_HOLE:
+                openCardWindow(Actions.DISCARD_TO_WATERING_HOLE);
                 if (this.selectedCard != null) {
                     try {
                         this.game.discardToWateringHole(this.playerIndex, this.selectedCard);
