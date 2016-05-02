@@ -1,9 +1,7 @@
 package com.Evolution.logic;
 
-import com.Evolution.exceptions.DeckEmptyException;
-import com.Evolution.exceptions.IllegalCardDirectionException;
-import com.Evolution.exceptions.InvalidPlayerSelectException;
-import com.Evolution.exceptions.NullGameObjectException;
+import com.Evolution.exceptions.*;
+import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.IPhases;
 
 /**
@@ -17,9 +15,14 @@ public class PhaseThree implements IPhases{
     }
 
     @Override
-    public void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
+    public void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException, InvalidWateringHoleCardCountException {
         this.game.nextTurn();
         if(this.game.getTurn() == 1){
+            this.game.getWateringHole().addTotalCardFood();
+            for(ICard c : this.game.getWateringHole().getCards()) {
+                this.game.getDiscardPile().discard(c);
+            }
+            this.game.getWateringHole().removeCards();
             this.game.setPhase(new PhaseFour(this.game));
         }
     }
