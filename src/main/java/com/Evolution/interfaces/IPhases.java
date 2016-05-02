@@ -1,9 +1,6 @@
 package com.Evolution.interfaces;
 
-import com.Evolution.exceptions.DeckEmptyException;
-import com.Evolution.exceptions.IllegalCardDirectionException;
-import com.Evolution.exceptions.InvalidPlayerSelectException;
-import com.Evolution.exceptions.NullGameObjectException;
+import com.Evolution.exceptions.*;
 
 /**
  * Interface for Phases
@@ -21,7 +18,7 @@ public interface IPhases {
      * @throws InvalidPlayerSelectException  propagated from {@link com.Evolution.logic.Game#dealToPlayer(int)}
      * @throws NullGameObjectException       propagated from {@link com.Evolution.logic.Game#dealToPlayer(int)}
      */
-    void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException;
+    void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException, InvalidWateringHoleCardCountException;
 
     /**
      * Returns the name of the current phase

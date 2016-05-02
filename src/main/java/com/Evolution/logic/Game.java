@@ -106,7 +106,7 @@ public class Game {
      * @throws InvalidPlayerSelectException  propagated from {@link IPhases#execute()}
      * @throws NullGameObjectException       propagated from {@link IPhases#execute()}
      */
-    public void startGame() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
+    public void startGame() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException, InvalidWateringHoleCardCountException {
         this.currentPhase.execute();
     }
 

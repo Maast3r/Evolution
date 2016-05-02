@@ -3,7 +3,7 @@ Feature: Phase3CardFoodToWH
 
 
   Scenario: CardFoodToWH
-    Given I have a new Game
+    Given I have a new Game with 4 players
     And it is currently Phase3
     And I have an empty Watering Hole
     And there are Cards on the Watering Hole
