@@ -584,7 +584,6 @@ public class Game {
 
     /**
      * Feeds species from the food bank instead of the watering hold
-     * TODO error handling
      *
      * @param playerIndex  the player index
      * @param speciesIndex the species index
