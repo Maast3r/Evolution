@@ -181,12 +181,7 @@ class SpeciesBoard extends VBox {
                         performAction(Actions.values()[val]);
                         break;
                 }
-            } catch (InvalidDiscardToWateringHoleException | InvalidAddToWateringHoleException |
-                    SpeciesPopulationException | IllegalSpeciesIndexException | IllegalCardDiscardException |
-                    SpeciesBodySizeException | DeckEmptyException | IllegalCardDirectionException |
-                    InvalidPlayerSelectException | SpeciesTraitNotFoundException | SpeciesNumberTraitsException |
-                    SpeciesDuplicateTraitException | NullGameObjectException | IllegalCardRemovalException |
-                    WateringHoleEmptyException | SpeciesFullException e) {
+            } catch (InvalidDiscardToWateringHoleException | InvalidAddToWateringHoleException | SpeciesPopulationException | IllegalSpeciesIndexException | IllegalCardDiscardException | SpeciesBodySizeException | DeckEmptyException | IllegalCardDirectionException | InvalidPlayerSelectException | SpeciesTraitNotFoundException | SpeciesNumberTraitsException | SpeciesDuplicateTraitException | NullGameObjectException | IllegalCardRemovalException | WateringHoleEmptyException | SpeciesFullException | FoodBankEmptyException e) {
                 e.printStackTrace();
             }
         };
@@ -202,7 +197,7 @@ class SpeciesBoard extends VBox {
             IllegalSpeciesIndexException, IllegalCardDiscardException, SpeciesBodySizeException,
             InvalidPlayerSelectException, IllegalCardDirectionException, DeckEmptyException,
             SpeciesTraitNotFoundException, NullGameObjectException, SpeciesNumberTraitsException,
-            SpeciesDuplicateTraitException, IllegalCardRemovalException, WateringHoleEmptyException, SpeciesFullException {
+            SpeciesDuplicateTraitException, IllegalCardRemovalException, WateringHoleEmptyException, SpeciesFullException, FoodBankEmptyException {
         // perform selected action
         switch (action) {
             case ACTIONS:

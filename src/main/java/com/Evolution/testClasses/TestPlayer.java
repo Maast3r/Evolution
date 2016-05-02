@@ -60,4 +60,9 @@ public class TestPlayer implements IPlayer {
     public int getFoodBag() {
         return 0;
     }
+
+    @Override
+    public boolean allSpeciesFull() {
+        return false;
+    }
 }

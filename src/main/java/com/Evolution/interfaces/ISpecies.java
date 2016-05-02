@@ -101,4 +101,20 @@ public interface ISpecies {
      * @return if the species is full
      */
     boolean isFull();
+
+    /**
+     * Returns the number of temp food
+     * @return tempFood
+     */
+    int getTempFood();
+
+    /**
+     * Increment tempFood by 1
+     */
+    void eatTemp();
+
+    /**
+     * Resets tempFood to 0
+     */
+    void resetEatenTempFood();
 }
