@@ -1,7 +1,6 @@
 package com.Evolution.gui;
 
-import com.Evolution.exceptions.IllegalSpeciesIndexException;
-import com.Evolution.exceptions.InvalidPlayerSelectException;
+import com.Evolution.exceptions.*;
 import com.Evolution.logic.Game;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -43,7 +42,8 @@ class MyHBox extends HBox {
      *
      * @return the pane created for this player
      */
-    HBox createBox() throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
+    HBox createBox() throws InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            InvalidWateringHoleCardCountException, FoodBankEmptyException {
         this.firstPlayerMarker = (this.playerIndex == 0) ? new ImageView("/images/first_player_marker.png") :
                 new ImageView("/images/empty.png");
 
@@ -63,32 +63,13 @@ class MyHBox extends HBox {
     }
 
     /**
-     * Gets the amount of food in this player's food bag
-     *
-     * @return amount of food
-     */
-    public int getFoodAmount() {
-        String[] text = this.foodLabel.getText().split(": ");
-        return Integer.parseInt(text[1]);
-    }
-
-    /**
-     * Sets the amount of food in this players food bag to the foodAmt
-     *
-     * @param foodAmt value to show on Food Bag label
-     */
-    public void setFoodLabel(int foodAmt) {
-        this.foodLabel.setText("Food Bag: " + foodAmt);
-    }
-
-    /**
      * Sets the first player marker image to be empty if this player
      * is not the first player for this round, or to the first player
      * marker if they are
      *
      * @param firstPlayer true if this is the first player for this round, flase otherwise
      */
-    public void setFirstPlayerMarker(boolean firstPlayer) {
+    private void setFirstPlayerMarker(boolean firstPlayer) {
         if (firstPlayer) {
             this.firstPlayerMarker.setImage(new Image("/images/first_player_marker.png"));
         } else {
@@ -97,23 +78,14 @@ class MyHBox extends HBox {
     }
 
     /**
-     * Get the list of species boards for this player
-     *
-     * @return ArrayList of species boards
-     */
-    public ArrayList<SpeciesBoard> getPlayerSpecies() {
-        return this.playerSpeciesBoards;
-    }
-
-    /**
      * Adds a species to this player on the given side
      *
      * @param side "left" or "right" - the side to add the new species to
      */
-    void addSpecies(int side) throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
+    void addSpecies(int side) throws InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            InvalidWateringHoleCardCountException, FoodBankEmptyException {
         int numSpecies = this.game.getPlayerObjects().get(this.playerIndex).getSpecies().size();
         if (side == 0) {
-            // TODO add species to player through game
             for (int i = 0; i < numSpecies; i++) {
                 int oldNum = this.playerSpeciesBoards.get(i).getSpeciesNum();
                 this.playerSpeciesBoards.get(i).setSpeciesNum(oldNum + 1);
@@ -123,7 +95,6 @@ class MyHBox extends HBox {
             this.playerSpeciesBoards.add(0, speciesBoard);
             this.playerPane.getChildren().add(1, speciesPane);
         } else {
-            // TODO add species to player through game
             SpeciesBoard speciesBoard = new SpeciesBoard(this.playerIndex,
                     this.playerSpeciesBoards.size(), this, this.game, this.gameScreen);
             VBox speciesPane = speciesBoard.createSpeciesBoard();
@@ -137,6 +108,8 @@ class MyHBox extends HBox {
      */
     void updateGameScreen() {
         this.gameScreen.staticElementsUpdate();
+        this.foodLabel.setText("Food Bag: " + this.game.getPlayerObjects().get(this.playerIndex).getFoodBag());
+        this.setFirstPlayerMarker(this.game.getFirstPlayer() == (this.playerIndex + 1));
     }
 
     /**
@@ -144,16 +117,32 @@ class MyHBox extends HBox {
      *
      * @param active whether or not this player's ChoiceBoxes are enables
      */
-    void setChoicesActive(boolean active) {
+    int setChoicesActive(boolean active) throws DeckEmptyException, InvalidWateringHoleCardCountException,
+            IllegalCardDirectionException, NullGameObjectException, InvalidPlayerSelectException {
+        if (this.game.getPhase().getNumber() == 4) {
+            /** use this check once attack logic is added (checks full or carnivore can't attack)
+            if ((this.game.getPlayerObjects().get(this.playerIndex).allSpeciesFull() ||
+                    this.game.getPlayerObjects().get(this.playerIndex).unableToAttack())
+                    && this.game.getTurn() == this.playerIndex + 1) { **/
+            if (this.game.getPlayerObjects().get(this.playerIndex).allSpeciesFull()
+                    && this.game.getTurn() == this.playerIndex + 1) {
+                this.game.getPhase().execute();
+                this.gameScreen.toggleChoiceBox();
+                this.gameScreen.changeChoiceBox();
+                return -1;
+            }
+        }
         for (SpeciesBoard board : this.playerSpeciesBoards) {
             board.setChoiceBoxViewable(active);
         }
+        return 0;
     }
 
     /**
      * Commands each of this HBox's nested SpeciesBoards to update what their ChoiceBoxes are showing
      */
-    void updateChoices() throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
+    void updateChoices() throws InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            InvalidWateringHoleCardCountException, FoodBankEmptyException {
         int phase = this.game.getPhase().getNumber();
         for (SpeciesBoard board : this.playerSpeciesBoards) {
             board.setChoiceBoxPhase(phase);

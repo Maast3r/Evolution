@@ -120,7 +120,7 @@ class CardPopupController implements Initializable {
                                                                                               newValue)
                                     -> {
                                 if (newValue.intValue() > 0) {
-                                    if(this.board.getTraits()[newValue.intValue()] != null) {
+                                    if(this.board.getTraits()[newValue.intValue() - 1] != null) {
                                         try {
                                             this.board.overwriteTrait(newValue.intValue());
                                         } catch (IllegalSpeciesIndexException | InvalidPlayerSelectException
@@ -151,7 +151,7 @@ class CardPopupController implements Initializable {
                                                                                   newValue)
                         -> {
                     if (newValue.intValue() > 0) {
-                        this.board.removeTrait(newValue.intValue());
+                        this.board.removeTrait(newValue.intValue() - 1);
                         this.gridPane.getScene().getWindow().hide();
                         this.successfulAdd = true;
                     }
