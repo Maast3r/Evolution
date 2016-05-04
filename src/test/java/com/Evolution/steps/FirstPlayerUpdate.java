@@ -1,8 +1,6 @@
 package com.Evolution.steps;
 
-import com.Evolution.interfaces.IPlayer;
 import com.Evolution.logic.PhaseFour;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
