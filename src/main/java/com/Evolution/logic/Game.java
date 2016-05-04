@@ -615,4 +615,36 @@ public class Game {
         int firstPlayer = this.round % this.players.size();
         return firstPlayer == 0 ? this.players.size() : firstPlayer;
     }
+
+    /**
+     * Attacks another species
+     * @param playerIndex1 The index of the player attacking
+     * @param speciesIndex1 The index of the species attacking
+     * @param playerIndex2 The index of the player under attack
+     * @param speciesIndex2 The index of the species under attack
+     * @throws NonCarnivoreAttacking thrown if the species attacking is not a carnivore
+     * @throws BodySizeIllegalAttack thrown if the species attacking does not have a higher body size than the species under attack
+     * @throws SpeciesPopulationException propagated from {@link Species#decreasePopulation()}
+     * @throws FoodBankEmptyException propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
+     * @throws InvalidPlayerSelectException propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
+     * @throws SpeciesFullException propagated from {@link Species#eat()}
+     * @throws IllegalSpeciesIndexException propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
+     */
+    public void attackSpecies(int playerIndex1, int speciesIndex1, int playerIndex2, int speciesIndex2) throws NonCarnivoreAttacking, BodySizeIllegalAttack, SpeciesPopulationException, FoodBankEmptyException, InvalidPlayerSelectException, SpeciesFullException, IllegalSpeciesIndexException {
+        if(this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getTraits().stream().filter(c -> c.getName().equals("Carnivore")).count() < 1){
+            throw new NonCarnivoreAttacking("You must be a carnivore to attack");
+        } else if(this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getBodySize() <= this.getPlayerObjects().get(playerIndex2).getSpecies().get(speciesIndex2).getBodySize()){
+            throw new BodySizeIllegalAttack("You must have a higher body size than the species which you are attacking");
+        }
+        IPlayer player1 = this.getPlayerObjects().get(playerIndex1);
+        IPlayer player2 = this.getPlayerObjects().get(playerIndex2);
+        ISpecies species1 = player1.getSpecies().get(speciesIndex1);
+        ISpecies species2 = player2.getSpecies().get(speciesIndex2);
+        species2.decreasePopulation();
+        for(int i = 0; i < species2.getBodySize(); i++){
+            if(species1.getEatenFood() < species1.getPopulation()){
+                this.feedPlayerSpeciesFromBank(playerIndex1, speciesIndex1);
+            }
+        }
+    }
 }

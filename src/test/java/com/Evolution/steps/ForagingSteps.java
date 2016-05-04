@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 public class ForagingSteps {
 
-    private Game realGame;
+    public Game realGame;
 
     public ForagingSteps(Phase3CardFoodToWH phc) {
     }
