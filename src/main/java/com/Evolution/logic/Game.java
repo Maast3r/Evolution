@@ -24,7 +24,6 @@ public class Game {
     private int foodBank = 240;
     private IPhases currentPhase = new PhaseOne(this);
     private HashMap<String, ATrait> feedTraitActions = new HashMap<>();
-    private int firstPlayer = 1;
 
     //TODO: Add Null check for every single method that takes in an Object
 
@@ -609,6 +608,7 @@ public class Game {
     }
 
     public int getFirstPlayer() {
-        return this.firstPlayer;
+        int firstPlayer = this.round % this.players.size();
+        return firstPlayer == 0 ? this.players.size() : firstPlayer;
     }
 }

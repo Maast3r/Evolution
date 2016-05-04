@@ -26,6 +26,9 @@ public class FirstPlayerUpdate {
     public void itIsCurrentlyRoundRound(int round) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         this.initRound = round;
+        for(int i = 1; i< round;i++) {
+            this.phc.g.increaseRound();
+        }
         assertEquals(round, this.phc.g.getRound());
     }
 
