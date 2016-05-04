@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 
 public class ForagingSteps {
 
-    private Game realGame;
+    public Game realGame;
 
     public ForagingSteps(Phase3CardFoodToWH phc) {
     }
@@ -67,7 +67,7 @@ public class ForagingSteps {
 
     @Then("^the species eaten food should increase by (\\d+)$")
     public void theSpeciesEatenFoodShouldIncreaseBy(int arg0) throws Throwable {
-        int expected = 2;
+        int expected = arg0;
         assertEquals(expected, this.realGame.getPlayerObjects().get(0).getSpecies()
                 .get(0).getEatenFood());
         assertEquals(239, this.realGame.getFoodBankCount());
