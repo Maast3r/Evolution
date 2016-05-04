@@ -523,7 +523,7 @@ public class Game {
         }
 
         this.wateringHole.removeFood();
-        if (this.wateringHole.getFoodCount() == 0) this.over = true;
+        if (this.wateringHole.getFoodCount() == 0 && this.foodBank == 0) this.over = true;
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
         // TODO: loop through species traits, get trait from hashmap, and executing
         for (ICard c : this.players.get(playerIndex).getSpecies().get(speciesIndex).getTraits()) {
@@ -623,11 +623,11 @@ public class Game {
         return firstPlayer == 0 ? this.players.size() : firstPlayer;
     }
 
+    /**
+     * Returns the flag signaling whether or not the game is ready to end
+     * @return over flag
+     */
     public boolean isOver() {
         return this.over;
-    }
-
-    public void setOver() {
-        this.over = true;
     }
 }
