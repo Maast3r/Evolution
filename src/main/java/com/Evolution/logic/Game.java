@@ -607,6 +607,10 @@ public class Game {
         this.foodBank--;
     }
 
+    /**
+     * Computes and returns the player number for whoever the first player of a round is. One-indexed
+     * @return firstPlayer
+     */
     public int getFirstPlayer() {
         int firstPlayer = this.round % this.players.size();
         return firstPlayer == 0 ? this.players.size() : firstPlayer;
