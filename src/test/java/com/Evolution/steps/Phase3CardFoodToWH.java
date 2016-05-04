@@ -45,14 +45,15 @@ public class Phase3CardFoodToWH {
 
     @And("^there are Cards on the Watering Hole$")
     public void thereAreCardsOnTheWateringHole() throws NullGameObjectException, IllegalCardFoodException, IllegalCardDirectionException, InvalidAddToWateringHoleException {
-        for(int i = 0; i < this.g.getPlayerObjects().size(); i ++){
+        for (int i = 0; i < this.g.getPlayerObjects().size(); i++) {
             this.g.getWateringHole().addCard(new Card("", "", "", i, 0));
         }
     }
 
     @When("^Phase3 ends$")
-    public void phaseEnds() throws DeckEmptyException, IllegalCardDirectionException, NullGameObjectException, InvalidPlayerSelectException, InvalidWateringHoleCardCountException {
-        for(int i = 0; i < this.g.getPlayerObjects().size(); i++) {
+    public void phaseEnds() throws DeckEmptyException, IllegalCardDirectionException, NullGameObjectException,
+            InvalidPlayerSelectException, InvalidWateringHoleCardCountException, FoodBankEmptyException {
+        for (int i = 0; i < this.g.getPlayerObjects().size(); i++) {
             this.g.getPhase().execute();
         }
     }
@@ -60,7 +61,7 @@ public class Phase3CardFoodToWH {
     @Then("^the food on the Cards shall be added to the Watering Hole$")
     public void theFoodOnTheCardsShallBeAddedToTheWateringHole() {
         int food = 0;
-        for(int i = 0; i < this.g.getPlayerObjects().size(); i++){
+        for (int i = 0; i < this.g.getPlayerObjects().size(); i++) {
             food = food + i;
         }
         Assert.assertTrue(this.g.getWateringHole().getFoodCount() == food);

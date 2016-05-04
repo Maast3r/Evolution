@@ -101,12 +101,15 @@ public class Game {
      * Starts the game with Phase 1.
      * Calls currentPhase.execute()
      *
-     * @throws IllegalCardDirectionException propagated from {@link IPhases#execute()}
-     * @throws DeckEmptyException            propagated from {@link IPhases#execute()}
-     * @throws InvalidPlayerSelectException  propagated from {@link IPhases#execute()}
-     * @throws NullGameObjectException       propagated from {@link IPhases#execute()}
+     * @throws IllegalCardDirectionException         propagated from {@link IPhases#execute()}
+     * @throws DeckEmptyException                    propagated from {@link IPhases#execute()}
+     * @throws InvalidPlayerSelectException          propagated from {@link IPhases#execute()}
+     * @throws NullGameObjectException               propagated from {@link IPhases#execute()}
+     * @throws InvalidWateringHoleCardCountException propagated from {@link IPhases#execute()}
+     * @throws FoodBankEmptyException                propagated from {@link IPhases#execute()}
      */
-    public void startGame() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException, InvalidWateringHoleCardCountException {
+    public void startGame() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException,
+            NullGameObjectException, InvalidWateringHoleCardCountException, FoodBankEmptyException {
         this.currentPhase.execute();
     }
 
@@ -609,6 +612,7 @@ public class Game {
 
     /**
      * Computes and returns the player number for whoever the first player of a round is. One-indexed
+     *
      * @return firstPlayer
      */
     public int getFirstPlayer() {
