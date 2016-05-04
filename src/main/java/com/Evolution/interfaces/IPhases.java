@@ -18,7 +18,7 @@ public interface IPhases {
      * @throws InvalidPlayerSelectException  propagated from {@link com.Evolution.logic.Game#dealToPlayer(int)}
      * @throws NullGameObjectException       propagated from {@link com.Evolution.logic.Game#dealToPlayer(int)}
      */
-    void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException, InvalidWateringHoleCardCountException;
+    void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException, InvalidWateringHoleCardCountException, FoodBankEmptyException;
 
     /**
      * Returns the name of the current phase

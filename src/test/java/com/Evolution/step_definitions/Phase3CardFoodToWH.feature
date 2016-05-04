@@ -1,5 +1,7 @@
 # Created by goistjt at 5/2/2016
 Feature: Phase3CardFoodToWH
+  As a player, when Phase 3 of the Game ends, I want all cards currently on the watering hole to have their food
+  value added to the watering hole and the cards to be discarded to the discard pile.
 
 
   Scenario Outline: CardFoodToWH
@@ -11,7 +13,7 @@ Feature: Phase3CardFoodToWH
     Then the food on the Cards shall be added to the Watering Hole
     And the Cards shall be discarded
     Examples:
-      |Num Players  |
-      |3            |
-      |4            |
-      |5            |
+      | Num Players |
+      | 3           |
+      | 4           |
+      | 5           |

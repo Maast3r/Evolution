@@ -15,10 +15,10 @@ public class PhaseThree implements IPhases{
     }
 
     @Override
-    public void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException, InvalidWateringHoleCardCountException {
+    public void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException, InvalidWateringHoleCardCountException, FoodBankEmptyException {
         this.game.nextTurn();
-        if(this.game.getTurn() == 1){
-            this.game.getWateringHole().addTotalCardFood();
+        if(this.game.getTurn() == this.game.getFirstPlayer()){
+            this.game.moveFoodFromBankToHole(this.game.getWateringHole().getCardFoodCount());
             for(ICard c : this.game.getWateringHole().getCards()) {
                 this.game.getDiscardPile().discard(c);
             }
