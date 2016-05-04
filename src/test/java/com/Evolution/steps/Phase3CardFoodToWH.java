@@ -3,6 +3,7 @@ package com.Evolution.steps;
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.IPlayer;
 import com.Evolution.logic.*;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,10 +13,12 @@ import org.junit.Assert;
 
 import java.util.ArrayList;
 
-
+/**
+ * Created by goistjt on 5/2/2016.
+ */
 public class Phase3CardFoodToWH {
 
-    static ArrayList<IPlayer> generateNumPlayers(int num) {
+    private ArrayList<IPlayer> generateNumPlayers(int num) {
         ArrayList<IPlayer> players = new ArrayList<>();
         for (int i = 0; i < num; i++) {
             players.add(EasyMock.niceMock(Player.class));

@@ -1,5 +1,8 @@
 package com.Evolution.steps;
 
+import com.Evolution.exceptions.IllegalNumberOfPlayers;
+import com.Evolution.exceptions.NullGameObjectException;
+import com.Evolution.interfaces.IPlayer;
 import com.Evolution.interfaces.ISpecies;
 import com.Evolution.logic.*;
 import cucumber.api.PendingException;
@@ -20,10 +23,23 @@ public class GameOver {
 
     private Game g = null;
 
+    public GameOver() throws IllegalNumberOfPlayers, NullGameObjectException {
+        ArrayList<IPlayer> players = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            players.add(new Player(new Species()));
+        }
+        this.g = new Game(players, new WateringHole(), new Deck<>(), EasyMock.niceMock
+                (Deck.class));
+    }
+
     @Given("^I have a new Game with (\\d+) players with a real Draw Deck$")
     public void iHaveANewGameWithPlayersWithARealDrawDeck(int arg0) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        g = new Game(Phase3CardFoodToWH.generateNumPlayers(arg0), new WateringHole(), new Deck<>(), EasyMock.niceMock
+        ArrayList<IPlayer> players = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            players.add(new Player(EasyMock.niceMock(Species.class)));
+        }
+        g = new Game(players, new WateringHole(), new Deck<>(), EasyMock.niceMock
                 (Deck.class));
     }
 
@@ -60,16 +76,7 @@ public class GameOver {
     @When("^one of my species eats the last food from the Watering Hole$")
     public void oneOfMySpeciesEatsTheLastFoodFromTheWateringHole() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        ISpecies fakeSpecies = EasyMock.niceMock(Species.class);
-        EasyMock.expect(this.g.getPlayerObjects().get(0).getSpecies()).times(2).andReturn(new ArrayList<>(Arrays.asList
-                (fakeSpecies)));
-        fakeSpecies.eat();
-        EasyMock.expect(this.g.getPlayerObjects().get(0).getSpecies()).andReturn(new ArrayList<>(Arrays.asList
-                (fakeSpecies)));
-        EasyMock.expect(fakeSpecies.getTraits()).andReturn(new ArrayList<>());
-        EasyMock.replay(this.g.getPlayerObjects().get(0), fakeSpecies);
         this.g.feedPlayerSpecies(0, 0);
-        EasyMock.verify(this.g.getPlayerObjects().get(0), fakeSpecies);
     }
 
     @Then("^the Watering Hole now has zero food$")

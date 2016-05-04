@@ -24,6 +24,7 @@ public class Game {
     private int foodBank = 240;
     private IPhases currentPhase = new PhaseOne(this);
     private HashMap<String, ATrait> feedTraitActions = new HashMap<>();
+    private boolean over;
 
     //TODO: Add Null check for every single method that takes in an Object
 
@@ -202,6 +203,7 @@ public class Game {
         }
         ICard card = this.drawPile.draw();
         this.players.get(i).addCardToHand(card);
+        if (this.drawPile.getSize() == 0) this.over = true;
     }
 
     /**
@@ -521,6 +523,7 @@ public class Game {
         }
 
         this.wateringHole.removeFood();
+        if (this.wateringHole.getFoodCount() == 0) this.over = true;
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
         // TODO: loop through species traits, get trait from hashmap, and executing
         for (ICard c : this.players.get(playerIndex).getSpecies().get(speciesIndex).getTraits()) {
@@ -618,5 +621,13 @@ public class Game {
     public int getFirstPlayer() {
         int firstPlayer = this.round % this.players.size();
         return firstPlayer == 0 ? this.players.size() : firstPlayer;
+    }
+
+    public boolean isOver() {
+        return this.over;
+    }
+
+    public void setOver() {
+        this.over = true;
     }
 }
