@@ -120,6 +120,10 @@ class MyHBox extends HBox {
     int setChoicesActive(boolean active) throws DeckEmptyException, InvalidWateringHoleCardCountException,
             IllegalCardDirectionException, NullGameObjectException, InvalidPlayerSelectException {
         if (this.game.getPhase().getNumber() == 4) {
+            /** use this check once attack logic is added (checks full or carnivore can't attack)
+            if ((this.game.getPlayerObjects().get(this.playerIndex).allSpeciesFull() ||
+                    this.game.getPlayerObjects().get(this.playerIndex).unableToAttack())
+                    && this.game.getTurn() == this.playerIndex + 1) { **/
             if (this.game.getPlayerObjects().get(this.playerIndex).allSpeciesFull()
                     && this.game.getTurn() == this.playerIndex + 1) {
                 this.game.getPhase().execute();

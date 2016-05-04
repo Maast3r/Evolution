@@ -43,6 +43,7 @@ class SpeciesBoard extends VBox {
     private int speciesNum;
     private ICard selectedCard;
     private ICard[] traits = new ICard[3];
+    private boolean carnivore = false;
 
     private ChangeListener actionListener;
 
@@ -171,12 +172,18 @@ class SpeciesBoard extends VBox {
                         }
                         break;
                     case 4:
-                        if (val == 2) {
-                            performAction(Actions.values()[8]);
-                        } else if (val == 3) {
-                            performAction(Actions.values()[9]);
+                        if (carnivore) {
+                            if (val == 2) {
+                                performAction(Actions.values()[9]);
+                            } else {
+                                performAction(Actions.values()[val]);
+                            }
                         } else {
-                            performAction(Actions.values()[val]);
+                            if (val == 2) {
+                                performAction(Actions.values()[8]);
+                            } else {
+                                performAction(Actions.values()[val]);
+                            }
                         }
                         break;
                     default:
@@ -401,7 +408,6 @@ class SpeciesBoard extends VBox {
                 this.actionChoiceBox.setItems(this.phase3Options);
                 break;
             case 4:
-                boolean carnivore = false;
                 for (ICard trait : traits) {
                     if (trait == null) {
                         continue;
