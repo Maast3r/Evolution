@@ -106,7 +106,7 @@ public class Game {
      * @throws InvalidPlayerSelectException  propagated from {@link IPhases#execute()}
      * @throws NullGameObjectException       propagated from {@link IPhases#execute()}
      */
-    public void startGame() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
+    public void startGame() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException, InvalidWateringHoleCardCountException {
         this.currentPhase.execute();
     }
 
@@ -499,12 +499,12 @@ public class Game {
      *
      * @param playerIndex  Index of the player in the player list
      * @param speciesIndex Index of the species for the player
-     * @throws InvalidPlayerSelectException  if the player index is not in the valid range
-     * @throws IllegalSpeciesIndexException  if the species index is not in the valid range
-     * @throws SpeciesFullException if the species' eaten is equal to species' population
-     * @throws WateringHoleEmptyException if the food count in the watering hole is 0
-     * @throws SpeciesPopulationException propagates from {@link Fertile#executeTrait(int[], int[])}
-     * @throws FoodBankEmptyException propagates from {@link LongNeck#executeTrait(int[], int[])}
+     * @throws InvalidPlayerSelectException if the player index is not in the valid range
+     * @throws IllegalSpeciesIndexException if the species index is not in the valid range
+     * @throws SpeciesFullException         if the species' eaten is equal to species' population
+     * @throws WateringHoleEmptyException   if the food count in the watering hole is 0
+     * @throws SpeciesPopulationException   propagates from {@link Fertile#executeTrait(int[], int[])}
+     * @throws FoodBankEmptyException       propagates from {@link LongNeck#executeTrait(int[], int[])}
      */
     public void feedPlayerSpecies(int playerIndex, int speciesIndex) throws InvalidPlayerSelectException,
             IllegalSpeciesIndexException, WateringHoleEmptyException, SpeciesFullException, SpeciesPopulationException,
@@ -605,5 +605,14 @@ public class Game {
         }
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
         this.foodBank--;
+    }
+
+    /**
+     * Computes and returns the player number for whoever the first player of a round is. One-indexed
+     * @return firstPlayer
+     */
+    public int getFirstPlayer() {
+        int firstPlayer = this.round % this.players.size();
+        return firstPlayer == 0 ? this.players.size() : firstPlayer;
     }
 }

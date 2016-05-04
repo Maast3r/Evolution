@@ -1,16 +1,33 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    configurations.maybeCreate("pitest")
+    dependencies {
+        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.9'
+        classpath 'com.github.samueltbrown:gradle-cucumber-plugin:0.9'
+        pitest 'com.github.alexvictoor:pitest-cucumber-plugin:0.3'
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'jacoco'
 apply plugin: 'eclipse'
 apply plugin: 'info.solidsoft.pitest'
+apply plugin: "com.github.samueltbrown.cucumber"
 
-sourceCompatibility = 1.8
 version = '1.0'
 
 group = "edu.rosehulman.rosebuild"
 
 repositories {
-	mavenCentral()
- }
+    mavenCentral()
+}
+
+cucumber {
+    formats = ['pretty', 'junit:build/cucumber.xml']
+}
 
 jacoco {
     toolVersion = "0.7.5.+"
@@ -20,8 +37,8 @@ jacocoTestReport {
     group = "Reporting"
     description = "Generate Jacoco coverage reports after running tests."
     additionalSourceDirs = files(sourceSets.main.allJava.srcDirs)
-    
-	reports {
+
+    reports {
         xml.enabled true
         csv.enabled false
         html.enabled true
@@ -29,7 +46,9 @@ jacocoTestReport {
 }
 
 dependencies {
-    testCompile 'junit:junit:4.+', 'org.easymock:easymock:3.4'
+    testCompile 'junit:junit:4.+', 'org.easymock:easymock:3.4', 'info.cukes:cucumber-java:1.2.4', 'info' +
+            '.cukes:cucumber-picocontainer:1.2.4'
+    cucumberRuntime 'info.cukes:cucumber-java:1.2.4'
 }
 
 test {
@@ -38,45 +57,34 @@ test {
     }
 }
 
-buildscript {
-    repositories {
-        mavenCentral()
-        //Needed only for SNAPSHOT versions
-        //maven { url "http://oss.sonatype.org/content/repositories/snapshots/" }
-    }
-    dependencies {
-        classpath 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.9'
-    }
-}
-
 pitest
         {
             println sourceSets.main
             targetClasses = ['com.Evolution.logic.*']  //by default "${project.group}.*"
-            targetTests  = ['*Test*']
+            targetTests = ['*Test*']
         }
 
 test.finalizedBy(jacocoTestReport)
 
-task codeCoverageInfo (dependsOn: jacocoTestReport) {
+task codeCoverageInfo(dependsOn: jacocoTestReport) {
     ext.srcFile = file("${reportsDir}/jacoco/test/jacocoTestReport.xml")
     doLast {
         println "Transforming source file."
-		
-		def parser = new XmlParser()
-		parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false); 
-		parser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false); 
-		parser.setFeature("http://xml.org/sax/features/namespaces", false)
-		 		 
+
+        def parser = new XmlParser()
+        parser.setFeature("http://apache.org/xml/features/disallow-doctype-decl", false);
+        parser.setFeature("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+        parser.setFeature("http://xml.org/sax/features/namespaces", false)
+
         def reportNode = parser.parse(srcFile)
         reportNode.children().each {
-        	if(it.name() == 'counter') {
-        		String type = it.@type
-        		float missed = it.@missed as float
-        		float covered = it.@covered as float
-        		float percentage = covered / (missed + covered) * 100
-        		println "Code Coverage[$type]: $percentage%"
-        	}        	
+            if (it.name() == 'counter') {
+                String type = it.@type
+                float missed = it.@missed as float
+                float covered = it.@covered as float
+                float percentage = covered / (missed + covered) * 100
+                println "Code Coverage[$type]: $percentage%"
+            }
         }
     }
 }
@@ -86,14 +94,14 @@ jacocoTestReport.finalizedBy(codeCoverageInfo)
 jar {
     manifest {
         attributes 'Implementation-Title': 'Rose Hulman Build System Library',
-                   'Implementation-Version': '${version}'
+                'Implementation-Version': '${version}'
     }
 }
 
 uploadArchives {
     repositories {
-       flatDir {
-           dirs 'repos'
-       }
+        flatDir {
+            dirs 'repos'
+        }
     }
 }
