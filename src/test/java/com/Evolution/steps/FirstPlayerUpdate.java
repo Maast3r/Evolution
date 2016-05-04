@@ -26,7 +26,7 @@ public class FirstPlayerUpdate {
     public void itIsCurrentlyRoundRound(int round) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         this.initRound = round;
-        for(int i = 1; i< round;i++) {
+        for (int i = 1; i < round; i++) {
             this.phc.g.increaseRound();
         }
         assertEquals(round, this.phc.g.getRound());
@@ -61,8 +61,8 @@ public class FirstPlayerUpdate {
     }
 
     @And("^the First Player shall be Player (\\d+)$")
-    public void theFirstPlayerShallBePlayerFirst_player_result(int resultPlayuer) throws Throwable {
+    public void theFirstPlayerShallBePlayerFirst_player_result(int resultPlayer) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        assertEquals(resultPlayuer, this.phc.g.getFirstPlayer());
+        assertEquals(resultPlayer, this.phc.g.getFirstPlayer());
     }
 }
