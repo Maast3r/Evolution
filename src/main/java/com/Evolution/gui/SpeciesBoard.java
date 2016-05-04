@@ -56,7 +56,9 @@ class SpeciesBoard extends VBox {
             Actions.INCREASE_BODY_SIZE.getName(), Actions.END_TURN.getName());
 
     private ObservableList<String> phase4Options = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
-            Actions.VIEW_CARDS.getName(), Actions.FEED_SPECIES.getName(), Actions.ATTACK_SPECIES.getName());
+            Actions.VIEW_CARDS.getName(), Actions.FEED_SPECIES.getName());
+    private ObservableList<String> phase4CarnivoreOptions = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
+            Actions.VIEW_CARDS.getName(), Actions.ATTACK_SPECIES.getName());
 
 
     /**
@@ -115,7 +117,8 @@ class SpeciesBoard extends VBox {
      *
      * @return the species pane
      */
-    VBox createSpeciesBoard() throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
+    VBox createSpeciesBoard() throws InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            InvalidWateringHoleCardCountException, FoodBankEmptyException {
         VBox speciesBoard = new VBox();
 
         this.traitLabel1 = new Label("Trait 1: ");
@@ -153,7 +156,6 @@ class SpeciesBoard extends VBox {
             int val = ((int) newValue < 0) ? 0 : (int) newValue;
             try {
                 switch (this.game.getPhase().getNumber()) {
-                    // TODO: This block will need edited as future phases are implemented
                     case 2:
                         if (val == 2) {
                             performAction(Actions.values()[11]);
@@ -197,7 +199,8 @@ class SpeciesBoard extends VBox {
             IllegalSpeciesIndexException, IllegalCardDiscardException, SpeciesBodySizeException,
             InvalidPlayerSelectException, IllegalCardDirectionException, DeckEmptyException,
             SpeciesTraitNotFoundException, NullGameObjectException, SpeciesNumberTraitsException,
-            SpeciesDuplicateTraitException, IllegalCardRemovalException, WateringHoleEmptyException, SpeciesFullException, FoodBankEmptyException, InvalidWateringHoleCardCountException {
+            SpeciesDuplicateTraitException, IllegalCardRemovalException, WateringHoleEmptyException,
+            SpeciesFullException, FoodBankEmptyException, InvalidWateringHoleCardCountException {
         // perform selected action
         switch (action) {
             case ACTIONS:
@@ -226,7 +229,6 @@ class SpeciesBoard extends VBox {
             case ADD_SPECIES_LEFT:
                 openCardWindow(Actions.ADD_SPECIES_LEFT);
                 if (this.selectedCard != null) {
-                    this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
                     this.playerPane.updateGameScreen();
                     this.playerPane.addSpecies(0);
                     this.game.discardForLeftSpecies(this.playerIndex, this.selectedCard, new Species());
@@ -236,7 +238,6 @@ class SpeciesBoard extends VBox {
             case ADD_SPECIES_RIGHT:
                 openCardWindow(Actions.ADD_SPECIES_RIGHT);
                 if (this.selectedCard != null) {
-                    this.game.discardFromPlayer(this.playerIndex, this.selectedCard);
                     this.playerPane.updateGameScreen();
                     this.playerPane.addSpecies(1);
                     this.game.discardForRightSpecies(this.playerIndex, this.selectedCard, new Species());
@@ -275,6 +276,7 @@ class SpeciesBoard extends VBox {
                 break;
             case ATTACK_SPECIES:
                 //TODO FIX ME
+                //openAttackWindow(this.game.getAttackableSpecies(this.playerIndex, this.speciesNum);
                 //this.game.attackSpecies(this.playerIndex, this.speciesNum, otherIndex, otherNum);
                 this.game.getPhase().execute();
                 this.playerPane.updateGameScreen();
@@ -389,7 +391,8 @@ class SpeciesBoard extends VBox {
      *
      * @param phaseNum current phase
      */
-    void setChoiceBoxPhase(int phaseNum) throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
+    void setChoiceBoxPhase(int phaseNum) throws InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            InvalidWateringHoleCardCountException, FoodBankEmptyException {
         switch (phaseNum) {
             case 2:
                 this.actionChoiceBox.setItems(this.phase2Options);
@@ -398,7 +401,20 @@ class SpeciesBoard extends VBox {
                 this.actionChoiceBox.setItems(this.phase3Options);
                 break;
             case 4:
-                this.actionChoiceBox.setItems(this.phase4Options);
+                boolean carnivore = false;
+                for (ICard trait : traits) {
+                    if (trait == null) {
+                        continue;
+                    }
+                    if (trait.getName().equals("Carnivore")) {
+                        carnivore = true;
+                    }
+                }
+                if (carnivore) {
+                    this.actionChoiceBox.setItems(this.phase4CarnivoreOptions);
+                } else {
+                    this.actionChoiceBox.setItems(this.phase4Options);
+                }
                 this.gameController.staticElementsUpdate();
                 ArrayList<ICard> traits = this.game.getTraits(this.playerIndex, this.speciesNum);
                 setTraitLabel1(traits.size() >= 1 && traits.get(0) != null ? traits.get(0).getName() : "");
@@ -472,7 +488,6 @@ class SpeciesBoard extends VBox {
         }
     }
 
-
     /**
      * Sets the value of the population size label for this species
      *
@@ -481,7 +496,6 @@ class SpeciesBoard extends VBox {
     private void setPopulationSizeLabel(int amount) {
         this.populationSizeLabel.setText("Population: " + amount);
     }
-
 
     /**
      * Sets the values of the body size label for this species
@@ -508,7 +522,6 @@ class SpeciesBoard extends VBox {
      */
     private void setTraitLabel1(String trait) {
         // Set trait 1 for this species then update label
-        System.out.println(trait);
         this.traitLabel1.setText("Trait 1: " + trait);
     }
 
