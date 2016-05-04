@@ -152,7 +152,7 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Add species left/right
     * 50+ LOC
 
-#Sprint 6
+# Sprint 6
 * Jeremiah Goist
     * Added Mutation Testing as part of gradle
     * Determined how to generate JaCoCo coverage reports
