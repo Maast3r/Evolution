@@ -26,7 +26,7 @@ public class Phase3CardFoodToWH {
         return players;
     }
 
-    Game g = null;
+    protected Game g = null;
 
     @Given("^I have a new Game with (\\d+) players$")
     public void iHaveANewGame(int numPlayers) throws IllegalNumberOfPlayers, NullGameObjectException {

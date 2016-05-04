@@ -24,6 +24,7 @@ public class Game {
     private int foodBank = 240;
     private IPhases currentPhase = new PhaseOne(this);
     private HashMap<String, ATrait> feedTraitActions = new HashMap<>();
+    private int firstPlayer = 1;
 
     //TODO: Add Null check for every single method that takes in an Object
 
@@ -499,12 +500,12 @@ public class Game {
      *
      * @param playerIndex  Index of the player in the player list
      * @param speciesIndex Index of the species for the player
-     * @throws InvalidPlayerSelectException  if the player index is not in the valid range
-     * @throws IllegalSpeciesIndexException  if the species index is not in the valid range
-     * @throws SpeciesFullException if the species' eaten is equal to species' population
-     * @throws WateringHoleEmptyException if the food count in the watering hole is 0
-     * @throws SpeciesPopulationException propagates from {@link Fertile#executeTrait(int[], int[])}
-     * @throws FoodBankEmptyException propagates from {@link LongNeck#executeTrait(int[], int[])}
+     * @throws InvalidPlayerSelectException if the player index is not in the valid range
+     * @throws IllegalSpeciesIndexException if the species index is not in the valid range
+     * @throws SpeciesFullException         if the species' eaten is equal to species' population
+     * @throws WateringHoleEmptyException   if the food count in the watering hole is 0
+     * @throws SpeciesPopulationException   propagates from {@link Fertile#executeTrait(int[], int[])}
+     * @throws FoodBankEmptyException       propagates from {@link LongNeck#executeTrait(int[], int[])}
      */
     public void feedPlayerSpecies(int playerIndex, int speciesIndex) throws InvalidPlayerSelectException,
             IllegalSpeciesIndexException, WateringHoleEmptyException, SpeciesFullException, SpeciesPopulationException,
@@ -605,5 +606,9 @@ public class Game {
         }
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
         this.foodBank--;
+    }
+
+    public int getFirstPlayer() {
+        return this.firstPlayer;
     }
 }
