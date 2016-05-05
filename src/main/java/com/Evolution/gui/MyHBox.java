@@ -118,7 +118,7 @@ class MyHBox extends HBox {
      * @param active whether or not this player's ChoiceBoxes are enables
      */
     int setChoicesActive(boolean active) throws DeckEmptyException, InvalidWateringHoleCardCountException,
-            IllegalCardDirectionException, NullGameObjectException, InvalidPlayerSelectException {
+            IllegalCardDirectionException, NullGameObjectException, InvalidPlayerSelectException, SpeciesPopulationException, IllegalSpeciesIndexException, WateringHoleEmptyException, SpeciesFullException, FoodBankEmptyException {
         if (this.game.getPhase().getNumber() == 4) {
             /** use this check once attack logic is added (checks full or carnivore can't attack)
             if ((this.game.getPlayerObjects().get(this.playerIndex).allSpeciesFull() ||

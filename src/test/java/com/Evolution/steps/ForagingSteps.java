@@ -17,9 +17,7 @@ import static org.junit.Assert.*;
 public class ForagingSteps {
 
     public Game realGame;
-    
-    public ForagingSteps(Phase3CardFoodToWH phc) {
-    }
+
 
     private ArrayList<IPlayer> generateNumRealPlayers(int num) throws NullGameObjectException {
         ArrayList<IPlayer> players = new ArrayList<>();
