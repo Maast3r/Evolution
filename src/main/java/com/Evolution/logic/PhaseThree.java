@@ -33,7 +33,6 @@ public class PhaseThree implements IPhases{
             SpeciesPopulationException {
         this.game.nextTurn();
         if(this.game.getTurn() == 1){
-            System.out.println("EXITING +++++++++++++++++++++++++++++++");
             this.game.getWateringHole().addTotalCardFood();
             for(ICard c : this.game.getWateringHole().getCards()) {
                 this.game.getDiscardPile().discard(c);
