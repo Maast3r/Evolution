@@ -22,6 +22,7 @@ public class ForagingSteps {
         ArrayList<IPlayer> players = new ArrayList<>();
         for (int i = 0; i < num; i++) {
             players.add(new Player(new Species()));
+            players.get(i).addSpeciesRight(new Species());
         }
         return players;
     }

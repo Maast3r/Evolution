@@ -1,6 +1,6 @@
 Feature: LongNeck
-  During game play, when a given player feeds his species and his species owns the Foraging trait,
-  the species should eat twice. (Only happens in Phase 4)
+  During game play, when a given player feeds his species and his species owns the Cooperation trait,
+  the species should eat at the end of phase 3. (Only happens in Phase 4)
 
   Scenario Outline: Eat twice
     Given I have a new Game with <Num Players> real players
