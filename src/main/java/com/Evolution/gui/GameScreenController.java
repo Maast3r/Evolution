@@ -126,11 +126,17 @@ class GameScreenController implements Initializable {
             } else {
                 fivePlayerSetup();
             }
-        } catch (InvalidPlayerSelectException | IllegalSpeciesIndexException e) {
+        } catch (InvalidPlayerSelectException | IllegalSpeciesIndexException |
+                InvalidWateringHoleCardCountException | FoodBankEmptyException e) {
             e.printStackTrace();
         }
 
-        toggleChoiceBox();
+        try {
+            toggleChoiceBox();
+        } catch (DeckEmptyException | InvalidPlayerSelectException | IllegalCardDirectionException |
+                NullGameObjectException | InvalidWateringHoleCardCountException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -149,11 +155,15 @@ class GameScreenController implements Initializable {
     /**
      * De/Activates the ChoiceBoxes under each SpeciesBoard depending on which player's turn it currently is.
      */
-    void toggleChoiceBox() {
+    void toggleChoiceBox() throws DeckEmptyException, InvalidPlayerSelectException, IllegalCardDirectionException,
+            NullGameObjectException, InvalidWateringHoleCardCountException {
         int activeTurn = this.game.getTurn() - 1;
         for (int i = 0; i < this.players.size(); i++) {
             if (activeTurn == i) {
-                this.playerPanes.get(i).setChoicesActive(true);
+                int returnVal = this.playerPanes.get(i).setChoicesActive(true);
+                if (returnVal == -1) {
+                    break;
+                }
             } else {
                 this.playerPanes.get(i).setChoicesActive(false);
             }
@@ -167,7 +177,8 @@ class GameScreenController implements Initializable {
         this.playerPanes.forEach((myHBox) -> {
             try {
                 myHBox.updateChoices();
-            } catch (InvalidPlayerSelectException | IllegalSpeciesIndexException e) {
+            } catch (InvalidPlayerSelectException | IllegalSpeciesIndexException |
+                    InvalidWateringHoleCardCountException | FoodBankEmptyException e) {
                 e.printStackTrace();
             }
         });
@@ -177,7 +188,8 @@ class GameScreenController implements Initializable {
      * Set up the screen for three players
      * Each player gets assigned to a pane
      */
-    private void threePlayerSetup() throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
+    private void threePlayerSetup() throws InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            InvalidWateringHoleCardCountException, FoodBankEmptyException {
         startingPaneSetup(this.bottomPane, 0);
         startingPaneSetup(this.leftPane, 1);
         startingPaneSetup(this.topPane, 2);
@@ -187,7 +199,8 @@ class GameScreenController implements Initializable {
      * Set up the screen for four players
      * The bottom pane must be split to handle two players
      */
-    private void fourPlayerSetup() throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
+    private void fourPlayerSetup() throws InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            InvalidWateringHoleCardCountException, FoodBankEmptyException {
         HBox player1 = new HBox();
         player1.setAlignment(Pos.CENTER);
         HBox player2 = new HBox();
@@ -205,7 +218,8 @@ class GameScreenController implements Initializable {
      * Set up the screen for five players
      * The top and bottom panes must be split to handle two players each
      */
-    private void fivePlayerSetup() throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
+    private void fivePlayerSetup() throws InvalidPlayerSelectException, IllegalSpeciesIndexException,
+            InvalidWateringHoleCardCountException, FoodBankEmptyException {
         HBox player1 = new HBox();
         player1.setAlignment(Pos.CENTER);
         HBox player2 = new HBox();
@@ -231,7 +245,8 @@ class GameScreenController implements Initializable {
      * @param pane  player pane
      * @param index player index in the players array
      */
-    private void startingPaneSetup(HBox pane, int index) throws InvalidPlayerSelectException, IllegalSpeciesIndexException {
+    private void startingPaneSetup(HBox pane, int index) throws InvalidPlayerSelectException,
+            IllegalSpeciesIndexException, InvalidWateringHoleCardCountException, FoodBankEmptyException {
         MyHBox hBox = new MyHBox(index, this.game, this);
         HBox playerPane = hBox.createBox();
         pane.getChildren().addAll(playerPane);
