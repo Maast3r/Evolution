@@ -152,7 +152,7 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Add species left/right
     * 50+ LOC
 
-#Sprint 6
+# Sprint 6
 * Jeremiah Goist
     * Added Mutation Testing as part of gradle
     * Determined how to generate JaCoCo coverage reports
@@ -182,3 +182,12 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * All traits and their interactions with game and species
     * Wrote tests for branch coverage
     * 50+ LOC
+
+#Sprint 7
+* Jeremiah Goist
+* Brooke Brown
+    * Fixed bug with adding trait to species (index exception)
+    * Added logic for skipping a player if full (update boxes & call phase.execute)
+    * Add phase 4 choice box based on traits
+* Trevor Burch
+* Andrew Ma
