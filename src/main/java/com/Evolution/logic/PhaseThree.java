@@ -22,6 +22,7 @@ public class PhaseThree implements IPhases{
     public PhaseThree(Game g){
         this.game = g;
         this.feedTraitActions.put("Long Neck", new LongNeck(this.game));
+        this.feedTraitActions.put("Fertile", new Fertile(this.game));
     }
 
     @Override
