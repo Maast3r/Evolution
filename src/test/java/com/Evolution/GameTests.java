@@ -1038,4 +1038,12 @@ public class GameTests {
         g.increasePopulation(this.playerIndex, -1);
         EasyMock.verify(g.getPlayerObjects().get(this.playerIndex), fakeSpecies);
     }
+
+    @Test(expected = AttackingSelfException.class)
+    public void testAttackingSelf() throws IllegalNumberOfPlayers, NullGameObjectException, IllegalCardFoodException, IllegalCardDirectionException, SpeciesNumberTraitsException, SpeciesDuplicateTraitException, SpeciesFullException, BodySizeIllegalAttack, NonCarnivoreAttacking, SpeciesPopulationException, FoodBankEmptyException, IllegalSpeciesIndexException, InvalidPlayerSelectException {
+        Game g = new Game(generateNumPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.getPlayerObjects().get(0).addSpeciesLeft(new Species());
+        g.getPlayerObjects().get(0).getSpecies().get(0).addTrait(new Card("Carnivore", "", "", 0, 0));
+        g.attackSpecies(0, 0, 0, 0);
+    }
 }
