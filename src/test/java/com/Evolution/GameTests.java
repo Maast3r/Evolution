@@ -172,7 +172,7 @@ public class GameTests {
 
     @Test
     public void testStartPhase() throws IllegalNumberOfPlayers,
-            IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException, InvalidWateringHoleCardCountException {
+            IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException, InvalidWateringHoleCardCountException, IllegalSpeciesIndexException, SpeciesPopulationException, WateringHoleEmptyException, SpeciesFullException, FoodBankEmptyException {
         IPhases fakePhaseOne = EasyMock.niceMock(PhaseOne.class);
         fakePhaseOne.execute();
         EasyMock.replay(fakePhaseOne);

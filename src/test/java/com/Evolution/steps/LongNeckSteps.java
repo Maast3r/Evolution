@@ -27,8 +27,10 @@ public class LongNeckSteps {
     }
 
     @When("^Phase(\\d+) ends in real game$")
-    public void phaseEndsInRealGame(int arg0) throws Throwable {
+    public void phase3EndsInRealGame(int arg0) throws Throwable {
+        this.fs.realGame.setPhase(new PhaseThree(this.fs.realGame));
         for(int i = 0; i < this.fs.realGame.getPlayerObjects().size(); i++) {
+            System.out.println("i : " + i +"\n");
             this.fs.realGame.getPhase().execute();
         }
     }

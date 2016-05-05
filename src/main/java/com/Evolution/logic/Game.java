@@ -105,8 +105,18 @@ public class Game {
      * @throws DeckEmptyException            propagated from {@link IPhases#execute()}
      * @throws InvalidPlayerSelectException  propagated from {@link IPhases#execute()}
      * @throws NullGameObjectException       propagated from {@link IPhases#execute()}
+     * @throws InvalidWateringHoleCardCountException  propagated from {@link IPhases#execute()}
+     * @throws SpeciesPopulationException    propagated from {@link IPhases#execute()}
+     * @throws IllegalSpeciesIndexException  propagated from {@link IPhases#execute()}
+     * @throws WateringHoleEmptyException    propagated from {@link IPhases#execute()}
+     * @throws SpeciesFullException          propagated from {@link IPhases#execute()}
+     * @throws FoodBankEmptyException        propagated from {@link IPhases#execute()}
      */
-    public void startGame() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException, InvalidWateringHoleCardCountException {
+    public void startGame() throws IllegalCardDirectionException,
+            DeckEmptyException, InvalidPlayerSelectException,
+            NullGameObjectException, InvalidWateringHoleCardCountException,
+            SpeciesPopulationException, IllegalSpeciesIndexException,
+            WateringHoleEmptyException, SpeciesFullException, FoodBankEmptyException {
         this.currentPhase.execute();
     }
 

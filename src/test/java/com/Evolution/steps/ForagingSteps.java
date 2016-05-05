@@ -18,9 +18,6 @@ public class ForagingSteps {
 
     public Game realGame;
 
-    public ForagingSteps(Phase3CardFoodToWH phc) {
-    }
-
     private ArrayList<IPlayer> generateNumRealPlayers(int num) throws NullGameObjectException {
         ArrayList<IPlayer> players = new ArrayList<>();
         for (int i = 0; i < num; i++) {
