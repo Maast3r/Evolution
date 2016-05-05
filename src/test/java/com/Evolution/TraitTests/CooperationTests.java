@@ -28,7 +28,7 @@ public class CooperationTests {
             SpeciesPopulationException, FoodBankEmptyException {
         Game g = EasyMock.niceMock(Game.class);
         ATrait t = new Cooperation(g);
-        g.feedPlayerSpecies(0, 1);
+        g.feedPlayerSpeciesFromBank(0, 1);
         EasyMock.replay(g);
         t.executeTrait(new int[]{0, 0}, new int[]{0, 0});
         EasyMock.verify(g);
@@ -42,7 +42,7 @@ public class CooperationTests {
             IllegalCardDiscardException, SpeciesPopulationException, FoodBankEmptyException {
         Game g = EasyMock.niceMock(Game.class);
         ATrait t = new Cooperation(g);
-        g.feedPlayerSpecies(0, 2);
+        g.feedPlayerSpeciesFromBank(0, 2);
         EasyMock.replay(g);
         t.executeTrait(new int[]{0, 0}, new int[]{1, 0});
         EasyMock.verify(g);
