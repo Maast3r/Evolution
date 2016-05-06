@@ -683,9 +683,18 @@ public class Game {
      */
     public ArrayList<int[]> getAttackableSpecies(int attackingPlayer, int attackingSpecies) {
         /*
-        TODO: Add check to make sure the calling index is actually a carnivore.
         Can just return a null array rather than throw an error.
+        -climbing
+        -warning call -> ambush
+        -symbiosis
+        -hard shell
+        -defensive herding
         TODO: Implement check for prohibitive traits.
+            1. add a new method, 'canBeAttacked' to atraits.
+            2. each species has a 'canbeattacked' temp bool assigned to it. put this temp just inside the j loop
+            3. attackingSpecies body size > player i species j body size, then
+                - loop through all traits and run 'canBeAttacked' to them.
+                - if 'canBeAttacked' returns true, we add it to the list
          */
 
         ArrayList<int[]> attackable = new ArrayList<>();
