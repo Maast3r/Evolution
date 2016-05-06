@@ -43,7 +43,7 @@ public class AttackableSpecies {
                 .getName().equals("Carnivore")));
     }
 
-    private ArrayList<int[]> attackables = null;
+    public ArrayList<int[]> attackables = null;
 
     @When("^Player (\\d+) Species (\\d+) views the attackable Species$")
     public void playerAttacking_player_indexSpeciesAttacking_species_indexViewsTheAttackableSpecies(int player, int

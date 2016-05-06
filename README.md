@@ -206,3 +206,9 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Used BDD for attacking and attackable list changes
     * 50+ LOC
 * Andrew Ma
+    * Added integration tests for traits
+    * Added Polymorphism Factor metric
+    * Fixed java docs exceptions in game/phases
+    * Experimented with evosuite, not a great tool
+    * Used BDD everywhere
+    * 50+ LOC

@@ -99,7 +99,6 @@ public class Phase3CardFoodToWH {
         for(int i = 0; i < this.fs.realGame.getPlayerObjects().size(); i++){
             food += i;
         }
-        System.out.println(this.fs.realGame.getWateringHole().getFoodCount() + "\n");
         Assert.assertTrue(this.fs.realGame.getWateringHole().getFoodCount() == food);
     }
 

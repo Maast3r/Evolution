@@ -210,7 +210,12 @@ public class Game {
         }
         ICard card = this.drawPile.draw();
         this.players.get(i).addCardToHand(card);
-        if (this.drawPile.getSize() == 0) this.over = true;
+        if (this.drawPile.getSize() == 0){
+            this.over = true;
+            this.discardPile.shuffle();
+            this.drawPile = this.discardPile;
+            this.discardPile = new Deck<>();
+        }
     }
 
     /**
@@ -532,7 +537,6 @@ public class Game {
         this.wateringHole.removeFood();
         if (this.wateringHole.getFoodCount() == 0 && this.foodBank == 0) this.over = true;
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
-        // TODO: loop through species traits, get trait from hashmap, and executing
         for (ICard c : this.players.get(playerIndex).getSpecies().get(speciesIndex).getTraits()) {
             String name = c.getName();
             if (feedTraitActions.containsKey(name)) {
@@ -684,16 +688,33 @@ public class Game {
      */
     public ArrayList<int[]> getAttackableSpecies(int attackingPlayer, int attackingSpecies) {
         /*
-        TODO: Add check to make sure the calling index is actually a carnivore.
         Can just return a null array rather than throw an error.
+        -climbing
+        -warning call -> ambush
+        -symbiosis
+        -hard shell
+        -defensive herding
         TODO: Implement check for prohibitive traits.
+            1. add a new method, 'canBeAttacked' to atraits.
+            2. each species has a 'canbeattacked' temp bool assigned to it. put this temp just inside the j loop
+            3. attackingSpecies body size > player i species j body size, then
+                - loop through all traits and run 'canBeAttacked' to them.
+                - if 'canBeAttacked' returns true, we add it to the list
          */
+
         ArrayList<int[]> attackable = new ArrayList<>();
-        for (int i = 0; i < this.players.size(); i++) {
-            for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
-                if (i != attackingPlayer || j != attackingSpecies) {
-                    if(this.players.get(i).getSpecies().get(j).getBodySize() < this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getBodySize()){
-                        attackable.add(new int[]{i, j});
+        boolean hasCarnivore = false;
+        ArrayList<ICard> traits = this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getTraits();
+        for(ICard c : traits){
+            if(c.getName().equals("Carnivore"))hasCarnivore = true;
+        }
+        if(hasCarnivore) {
+            for (int i = 0; i < this.players.size(); i++) {
+                for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
+                    if (i != attackingPlayer || j != attackingSpecies) {
+                        if (this.players.get(i).getSpecies().get(j).getBodySize() < this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getBodySize()) {
+                            attackable.add(new int[]{i, j});
+                        }
                     }
                 }
             }

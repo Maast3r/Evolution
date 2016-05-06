@@ -13,7 +13,7 @@ public class Intelligence extends CTrait {
 
     /**
      * Discard Intelligence to eat twice from the food bank.
-     * TODO error handling
+     *
      * @param playerIndex  [0]: Player applying action
      *                     [1]: Player being affected
      * @param speciesIndex [0]: Species applying action
@@ -21,8 +21,11 @@ public class Intelligence extends CTrait {
      * @throws IllegalSpeciesIndexException propagated from {@link Game#feedPlayerSpecies(int, int)}
      * @throws InvalidPlayerSelectException propagated from {@link Game#feedPlayerSpecies(int, int)}
      * @throws SpeciesFullException         propagated from {@link Game#feedPlayerSpecies(int, int)}
+     * @throws NullGameObjectException      propagated from {@link Game#discardFromPlayer(int, ICard)}
      * @throws WateringHoleEmptyException   propagated from {@link Game#feedPlayerSpecies(int, int)}
      * @throws SpeciesPopulationException   propagated from {@link Game#feedPlayerSpecies(int, int)}
+     * @throws IllegalCardDiscardException      propagated from {@link Game#discardFromPlayer(int, ICard)}
+     * @throws IllegalCardRemovalException      propagated from {@link Game#discardFromPlayer(int, ICard)}
      * @throws FoodBankEmptyException       propagated from {@link Game#feedPlayerSpecies(int, int)}
      */
     @Override
@@ -30,7 +33,7 @@ public class Intelligence extends CTrait {
             throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
             SpeciesFullException, WateringHoleEmptyException,
             NullGameObjectException, IllegalCardFoodException,
-            IllegalCardDirectionException, IllegalCardDiscardException, IllegalCardRemovalException,
+            IllegalCardDiscardException, IllegalCardRemovalException,
             FoodBankEmptyException {
 
         this.game.discardFromPlayer(playerIndex[0], c);

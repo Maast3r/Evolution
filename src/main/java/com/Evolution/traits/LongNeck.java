@@ -1,9 +1,12 @@
 package com.Evolution.traits;
 
 
-import com.Evolution.exceptions.*;
 import com.Evolution.abstracts.ATrait;
+import com.Evolution.exceptions.*;
+import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Game;
+
+import java.util.ArrayList;
 
 /**
  * Created by goistjt on 4/27/2016.
@@ -26,9 +29,19 @@ public class LongNeck extends ATrait {
      * @throws SpeciesFullException         propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
      * @throws WateringHoleEmptyException   propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
      * @throws FoodBankEmptyException       propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
+     * @throws SpeciesPopulationException   propagated from {@link Game#feedPlayerSpecies(int, int)}
      */
     public void executeTrait(int[] playerIndex, int[] speciesIndex) throws IllegalSpeciesIndexException,
-            InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException,FoodBankEmptyException {
+            InvalidPlayerSelectException, SpeciesFullException, WateringHoleEmptyException,
+            FoodBankEmptyException, SpeciesPopulationException {
         this.game.feedPlayerSpeciesFromBank(playerIndex[0], speciesIndex[0]);
+        ArrayList<ICard> cards = this.game.getPlayerObjects().get(playerIndex[0])
+                .getSpecies().get(speciesIndex[0]).getTraits();
+        for(ICard c : cards){
+            if(c.getName().equals("Foraging")){
+                Foraging f = new Foraging(this.game);
+                f.executeTrait(playerIndex, speciesIndex);
+            }
+        }
     }
 }
