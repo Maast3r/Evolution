@@ -210,7 +210,13 @@ public class Game {
         }
         ICard card = this.drawPile.draw();
         this.players.get(i).addCardToHand(card);
-        if (this.drawPile.getSize() == 0) this.over = true;
+        if (this.drawPile.getSize() == 0){
+            this.over = true;
+            this.discardPile.shuffle();
+            this.drawPile = this.discardPile;
+            this.discardPile = new Deck<>();
+            System.out.println("+++++++" + this.discardPile.getSize() + "  \n");
+        }
     }
 
     /**

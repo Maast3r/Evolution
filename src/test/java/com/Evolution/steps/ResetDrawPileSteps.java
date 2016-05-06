@@ -24,7 +24,14 @@ public class ResetDrawPileSteps {
 
     @And("^the DrawPile has (\\d+) card$")
     public void theDrawPileHasCard(int arg0) throws Throwable {
-        this.fs.realGame.getDrawPile().discard(new Card("", "", "", 0 ,0));
+        this.fs.realGame.getDrawPile().discard(new Card("", "", "", 0, 0));
+    }
+
+    @And("^the DiscardPile has (\\d+) cards$")
+    public void theDiscardPileHasCards(int arg0) throws Throwable {
+        for(int i = 0; i < 20; i++){
+            this.fs.realGame.getDiscardPile().discard(new Card("", "", "", 0, 0));
+        }
     }
 
     @When("^I draw last card in real game$")
@@ -34,7 +41,9 @@ public class ResetDrawPileSteps {
 
     @Then("^the discard pile gets reshuffled into the draw pile$")
     public void theDiscardPileGetsReshuffledIntoTheDrawPile() throws Throwable {
-        Assert.assertEquals(1, this.fs.realGame.getDrawPile().getSize());
+        Assert.assertEquals(20, this.fs.realGame.getDrawPile().getSize());
         Assert.assertEquals(0, this.fs.realGame.getDiscardPile().getSize());
     }
+
+
 }

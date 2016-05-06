@@ -6,6 +6,7 @@ Feature: Foraging
     Given I have a new Game with <Num Players> real players
     And it is currently real Phase2
     And the DrawPile has 1 card
+    And the DiscardPile has 20 cards
     When I draw last card in real game
     Then the discard pile gets reshuffled into the draw pile
     Examples:
