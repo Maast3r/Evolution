@@ -200,4 +200,9 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Fixed screen update issues (fpm not moving, boards not updating when attacked, etc.)
     * 25+ LOC
 * Trevor Burch
+    * Modified base logic of showing attackable species to look at body size
+    * Added logic for attacking another person
+    * Worked with Jeremiah to configure cucumber for intelliJ
+    * Used BDD for attacking and attackable list changes
+    * 50+ LOC
 * Andrew Ma
