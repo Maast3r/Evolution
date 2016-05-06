@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -23,11 +24,13 @@ import java.util.ResourceBundle;
 class AttackPopupController implements Initializable {
 
     private SpeciesBoard board;
-    private ArrayList<ISpecies> speciesList;
+    private ArrayList<int[]> speciesList;
     private boolean successfulAttack = false;
 
     @FXML
     private Label infoLabel;
+    @FXML
+    private Label selectedLabel;
     @FXML
     private GridPane gridPane;
     @FXML
@@ -38,7 +41,7 @@ class AttackPopupController implements Initializable {
      *
      * @param board the SpeciesBoard to be able to call its public functions
      */
-    AttackPopupController(SpeciesBoard board, ArrayList<ISpecies> attackableSpecies) {
+    AttackPopupController(SpeciesBoard board, ArrayList<int[]> attackableSpecies) {
         this.board = board;
         this.speciesList = attackableSpecies;
     }
@@ -52,6 +55,7 @@ class AttackPopupController implements Initializable {
     public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
         assert this.gridPane != null : "fx:id=\"gridPane\" was not injected: check your FXML file 'attack_popup.fxml'.";
         assert this.infoLabel != null : "fx:id=\"infoLabel\" was not injected: check your FXML file 'attack_popup.fxml'.";
+        assert this.selectedLabel != null : "fx:id=\"selectedLabel\" was not injected: check your FXML file 'attack_popup.fxml'.";
         assert this.infoPane != null : "fx:id=\"infoPane\" was not injected: check your FXML file 'attack_popup.fxml'.";
         gridSetup();
         displaySpecies();
@@ -66,16 +70,26 @@ class AttackPopupController implements Initializable {
             this.infoLabel.setText("There are no species for you to attack!");
             return;
         }
-        for (ISpecies s : this.speciesList) {
+        for (int[] s : this.speciesList) {
+            this.infoLabel.setText("Left click to select which species to attack, right click and the selected species" +
+                    " will show here");
             VBox speciesPane = new VBox();
             speciesPane.setAlignment(Pos.CENTER);
-            //Label playerIndex = new Label("Player " + pIndex);
-            //Label speciesIndex = new Label("Species " + sIndex);
-            //speciesPane.getChildren().addAll(playerIndex, speciesIndex);
+            Label playerIndex = new Label("Player " + (s[0] + 1));
+            Label speciesIndex = new Label("Species " + (s[1] + 1));
+            speciesPane.getChildren().addAll(playerIndex, speciesIndex);
             addToGrid(speciesPane, index);
             index++;
+            speciesPane.setOnMouseClicked(event -> {
+                if (event.getButton() == MouseButton.SECONDARY) {
+                    this.selectedLabel.setText("Attack Player: " + (s[0] + 1) + " Species: " + (s[1] + 1));
+                } else {
+                    this.board.setSelectedSpeciesToAttack(s);
+                    this.gridPane.getScene().getWindow().hide();
+                }
+            });
         }
-        // TODO : add event listener
+
     }
 
     /**
@@ -83,7 +97,7 @@ class AttackPopupController implements Initializable {
      * based on the species index
      *
      * @param speciesPane the species to add
-     * @param num  the species index within the speciesList
+     * @param num         the species index within the speciesList
      */
     private void addToGrid(VBox speciesPane, int num) {
         int row = (int) Math.ceil(num / 3);
@@ -93,7 +107,6 @@ class AttackPopupController implements Initializable {
         } else {
             col = num % 3;
         }
-        ;
         this.gridPane.add(speciesPane, col, row);
     }
 

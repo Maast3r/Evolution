@@ -187,6 +187,10 @@ class GameScreenController implements Initializable {
         });
     }
 
+    void updatePlayerPanes() {
+        this.playerPanes.forEach(MyHBox::updateGameScreen);
+    }
+
     /**
      * Set up the screen for three players
      * Each player gets assigned to a pane
