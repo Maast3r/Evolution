@@ -1,7 +1,9 @@
 package com.Evolution.gui;
 
 import com.Evolution.exceptions.*;
+import com.Evolution.interfaces.ISpecies;
 import com.Evolution.logic.Game;
+import com.Evolution.logic.Species;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -109,6 +111,13 @@ class MyHBox extends HBox {
     void updateGameScreen() {
         this.gameScreen.staticElementsUpdate();
         this.foodLabel.setText("Food Bag: " + this.game.getPlayerObjects().get(this.playerIndex).getFoodBag());
+        for (SpeciesBoard b : this.playerSpeciesBoards) {
+            for (ISpecies s : this.game.getPlayerObjects().get(this.playerIndex).getSpecies()) {
+                b.setPopulationSizeLabel(s.getPopulation());
+                b.setBodySizeLabel(s.getBodySize());
+                b.setFoodLabel(s.getEatenFood());
+            }
+        }
         this.setFirstPlayerMarker(this.game.getFirstPlayer() == (this.playerIndex + 1));
     }
 
