@@ -215,7 +215,6 @@ public class Game {
             this.discardPile.shuffle();
             this.drawPile = this.discardPile;
             this.discardPile = new Deck<>();
-            System.out.println("+++++++" + this.discardPile.getSize() + "  \n");
         }
     }
 
