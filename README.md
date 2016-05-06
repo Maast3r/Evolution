@@ -196,5 +196,8 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Fixed bug with adding trait to species (index exception)
     * Added logic for skipping a player if full (update boxes & call phase.execute)
     * Add phase 4 choice box based on traits
+    * Added attack popup screen
+    * Fixed screen update issues (fpm not moving, boards not updating when attacked, etc.)
+    * 25+ LOC
 * Trevor Burch
 * Andrew Ma
