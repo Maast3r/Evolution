@@ -185,9 +185,30 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 
 #Sprint 7
 * Jeremiah Goist
+    * Partially added logic to signal that the game should end at the end of the current round.
+    * Added "first player" method/tracking so that GUI can move the token around and phase 3 will end on the correct
+    player
+    * Added basic logic to show attackable species given a player & species
+    * Fixed Phase 3 to add food to WH and remove from bank
+    * Worked with Trevor to configure cucumber for intelliJ
+    * Fixed Phase 4 end logic and added auto moving species food to players at P4 end.
 * Brooke Brown
     * Fixed bug with adding trait to species (index exception)
     * Added logic for skipping a player if full (update boxes & call phase.execute)
     * Add phase 4 choice box based on traits
+    * Added attack popup screen
+    * Fixed screen update issues (fpm not moving, boards not updating when attacked, etc.)
+    * 25+ LOC
 * Trevor Burch
+    * Modified base logic of showing attackable species to look at body size
+    * Added logic for attacking another person
+    * Worked with Jeremiah to configure cucumber for intelliJ
+    * Used BDD for attacking and attackable list changes
+    * 50+ LOC
 * Andrew Ma
+    * Added integration tests for traits
+    * Added Polymorphism Factor metric
+    * Fixed java docs exceptions in game/phases
+    * Experimented with evosuite, not a great tool
+    * Used BDD everywhere
+    * 50+ LOC

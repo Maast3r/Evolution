@@ -2,6 +2,7 @@ package com.Evolution.gui;
 
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
+import com.Evolution.interfaces.ISpecies;
 import com.Evolution.logic.Game;
 import com.Evolution.logic.Species;
 import javafx.beans.value.ChangeListener;
@@ -43,6 +44,7 @@ class SpeciesBoard extends VBox {
     private int speciesNum;
     private ICard selectedCard;
     private ICard[] traits = new ICard[3];
+    private int[] selectedSpeciesToAttack;
     private boolean carnivore = false;
 
     private ChangeListener actionListener;
@@ -190,7 +192,14 @@ class SpeciesBoard extends VBox {
                         performAction(Actions.values()[val]);
                         break;
                 }
-            } catch (InvalidDiscardToWateringHoleException | InvalidAddToWateringHoleException | SpeciesPopulationException | IllegalSpeciesIndexException | IllegalCardDiscardException | SpeciesBodySizeException | DeckEmptyException | IllegalCardDirectionException | InvalidPlayerSelectException | SpeciesTraitNotFoundException | SpeciesNumberTraitsException | SpeciesDuplicateTraitException | NullGameObjectException | IllegalCardRemovalException | WateringHoleEmptyException | SpeciesFullException | FoodBankEmptyException | InvalidWateringHoleCardCountException e) {
+            } catch (InvalidDiscardToWateringHoleException | InvalidAddToWateringHoleException |
+                    SpeciesPopulationException | IllegalSpeciesIndexException | IllegalCardDiscardException |
+                    SpeciesBodySizeException | DeckEmptyException | IllegalCardDirectionException |
+                    InvalidPlayerSelectException | SpeciesTraitNotFoundException | SpeciesNumberTraitsException |
+                    SpeciesDuplicateTraitException | NullGameObjectException | IllegalCardRemovalException |
+                    WateringHoleEmptyException | SpeciesFullException | FoodBankEmptyException |
+                    InvalidWateringHoleCardCountException | BodySizeIllegalAttack | NonCarnivoreAttacking |
+                    AttackingSelfException e) {
                 e.printStackTrace();
             }
         };
@@ -207,7 +216,8 @@ class SpeciesBoard extends VBox {
             InvalidPlayerSelectException, IllegalCardDirectionException, DeckEmptyException,
             SpeciesTraitNotFoundException, NullGameObjectException, SpeciesNumberTraitsException,
             SpeciesDuplicateTraitException, IllegalCardRemovalException, WateringHoleEmptyException,
-            SpeciesFullException, FoodBankEmptyException, InvalidWateringHoleCardCountException {
+            SpeciesFullException, FoodBankEmptyException, InvalidWateringHoleCardCountException, NonCarnivoreAttacking,
+            BodySizeIllegalAttack, AttackingSelfException {
         // perform selected action
         switch (action) {
             case ACTIONS:
@@ -274,24 +284,24 @@ class SpeciesBoard extends VBox {
             case FEED_SPECIES:
                 this.game.feedPlayerSpecies(this.playerIndex, this.speciesNum);
                 this.game.getPhase().execute();
-                this.playerPane.updateGameScreen();
+                this.gameController.updatePlayerPanes();
                 this.gameController.toggleChoiceBox();
                 this.gameController.changeChoiceBox();
                 this.gameController.staticElementsUpdate();
-                this.setFoodLabel(this.game.getSpeciesFood(this.playerIndex, this.speciesNum));
                 this.selectedCard = null;
                 break;
             case ATTACK_SPECIES:
-                //TODO FIX ME
-                //openAttackWindow(this.game.getAttackableSpecies(this.playerIndex, this.speciesNum);
-                //this.game.attackSpecies(this.playerIndex, this.speciesNum, otherIndex, otherNum);
-                this.game.getPhase().execute();
-                this.playerPane.updateGameScreen();
-                this.gameController.toggleChoiceBox();
-                this.gameController.changeChoiceBox();
-                this.gameController.staticElementsUpdate();
-                this.setFoodLabel(this.game.getSpeciesFood(this.playerIndex, this.speciesNum));
-                this.selectedCard = null;
+                openAttackWindow();
+                if (this.selectedSpeciesToAttack != null) {
+                    this.game.attackSpecies(this.playerIndex, this.speciesNum, this.selectedSpeciesToAttack[0],
+                            this.selectedSpeciesToAttack[1]);
+                    this.game.getPhase().execute();
+                    this.gameController.updatePlayerPanes();
+                    this.gameController.toggleChoiceBox();
+                    this.gameController.changeChoiceBox();
+                    this.gameController.staticElementsUpdate();
+                    this.selectedSpeciesToAttack = null;
+                }
                 break;
             case END_TURN:
                 this.game.getPhase().execute();
@@ -385,6 +395,34 @@ class SpeciesBoard extends VBox {
     }
 
     /**
+     * Opens up the attack window for the player to view the possible species to attack
+     */
+    private boolean openAttackWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/attack_popup.fxml"));
+            AttackPopupController controller =
+                    new AttackPopupController(this, this.game.getAttackableSpecies(this.playerIndex, this.speciesNum));
+            loader.setController(controller);
+            Parent p = loader.load();
+            Stage s = new Stage();
+            s.setTitle("Evolution!");
+            s.getIcons().add(new Image("/images/icon.png"));
+            s.setScene(new Scene(p, Color.BLACK));
+            s.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    s.hide();
+                    this.actionChoiceBox.getSelectionModel().selectFirst();
+                }
+            });
+            s.showAndWait();
+            return controller.getSuccessfulAttack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
      * Sets the ability to open this SpeciesBoard's ChoiceBox
      *
      * @param viewable whether or not it should be clickable
@@ -447,6 +485,10 @@ class SpeciesBoard extends VBox {
         this.selectedCard = c;
     }
 
+    void setSelectedSpeciesToAttack(int[] speciesToAttack) {
+        this.selectedSpeciesToAttack = speciesToAttack;
+    }
+
     /**
      * Sets the trait that the user selects from the card popup
      *
@@ -499,7 +541,7 @@ class SpeciesBoard extends VBox {
      *
      * @param amount the current population size
      */
-    private void setPopulationSizeLabel(int amount) {
+    void setPopulationSizeLabel(int amount) {
         this.populationSizeLabel.setText("Population: " + amount);
     }
 
@@ -508,7 +550,7 @@ class SpeciesBoard extends VBox {
      *
      * @param amount the current body size
      */
-    private void setBodySizeLabel(int amount) {
+    void setBodySizeLabel(int amount) {
         this.bodySizeLabel.setText("Body Size: " + amount);
     }
 
@@ -517,7 +559,7 @@ class SpeciesBoard extends VBox {
      *
      * @param amount amount of food on board
      */
-    public void setFoodLabel(int amount) {
+    void setFoodLabel(int amount) {
         this.foodLabel.setText("Food: " + amount);
     }
 
