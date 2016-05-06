@@ -689,10 +689,17 @@ public class Game {
          */
 
         ArrayList<int[]> attackable = new ArrayList<>();
-        for (int i = 0; i < this.players.size(); i++) {
-            for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
-                if (i != attackingPlayer || j != attackingSpecies) {
-                    attackable.add(new int[]{i, j});
+        boolean hasCarnivore = false;
+        ArrayList<ICard> traits = this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getTraits();
+        for(ICard c : traits){
+            if(c.getName().equals("Carnivore"))hasCarnivore = true;
+        }
+        if(hasCarnivore) {
+            for (int i = 0; i < this.players.size(); i++) {
+                for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
+                    if (i != attackingPlayer || j != attackingSpecies) {
+                        attackable.add(new int[]{i, j});
+                    }
                 }
             }
         }
