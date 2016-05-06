@@ -48,7 +48,9 @@ public class AttackableSpecies {
     @When("^Player (\\d+) Species (\\d+) views the attackable Species$")
     public void playerAttacking_player_indexSpeciesAttacking_species_indexViewsTheAttackableSpecies(int player, int
             species) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
+        for(int i = 0; i < 4; i++){
+            this.g.getPlayerObjects().get(player).getSpecies().get(species).increaseBodySize();
+        }
         attackables = g.getAttackableSpecies(player, species);
     }
 

@@ -692,7 +692,9 @@ public class Game {
         for (int i = 0; i < this.players.size(); i++) {
             for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
                 if (i != attackingPlayer || j != attackingSpecies) {
-                    attackable.add(new int[]{i, j});
+                    if(this.players.get(i).getSpecies().get(j).getBodySize() < this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getBodySize()){
+                        attackable.add(new int[]{i, j});
+                    }
                 }
             }
         }
