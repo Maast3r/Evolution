@@ -29,6 +29,6 @@ public class Cooperation extends ATrait {
             SpeciesFullException, WateringHoleEmptyException, FoodBankEmptyException,
             SpeciesPopulationException {
 
-        this.game.feedPlayerSpecies(playerIndex[0], speciesIndex[0] + 1);
+        this.game.feedPlayerSpeciesFromBank(playerIndex[0], speciesIndex[0] + 1);
     }
 }

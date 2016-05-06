@@ -31,7 +31,11 @@ public class PhaseThreeTests {
     }
 
     @Test
-    public void testNextPhase() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException, InvalidWateringHoleCardCountException, FoodBankEmptyException {
+    public void testNextPhase() throws IllegalCardDirectionException, IllegalNumberOfPlayers,
+            DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException,
+            InvalidWateringHoleCardCountException, SpeciesPopulationException,
+            IllegalSpeciesIndexException, WateringHoleEmptyException, SpeciesFullException,
+            FoodBankEmptyException {
         IDeck<ICard> drawPile = new Deck<>();
         IDeck<ICard> discardPile = new Deck<>();
         IWateringHole wh = new WateringHole();
@@ -52,7 +56,11 @@ public class PhaseThreeTests {
     }
 
     @Test
-    public void testNoNextPhase() throws IllegalCardDirectionException, IllegalNumberOfPlayers, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException, InvalidWateringHoleCardCountException, FoodBankEmptyException {
+    public void testNoNextPhase() throws IllegalCardDirectionException, IllegalNumberOfPlayers,
+            DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException,
+            InvalidWateringHoleCardCountException, SpeciesPopulationException,
+            IllegalSpeciesIndexException, WateringHoleEmptyException, SpeciesFullException,
+            FoodBankEmptyException {
         IDeck<ICard> drawPile = new Deck<>();
         IDeck<ICard> discardPile = new Deck<>();
         IWateringHole wh = new WateringHole();

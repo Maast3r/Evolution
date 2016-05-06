@@ -18,12 +18,18 @@ import java.util.ArrayList;
  */
 public class Phase3CardFoodToWH {
 
+    public ForagingSteps fs;
+
     private ArrayList<IPlayer> generateNumPlayers(int num) {
         ArrayList<IPlayer> players = new ArrayList<>();
         for (int i = 0; i < num; i++) {
             players.add(EasyMock.niceMock(Player.class));
         }
         return players;
+    }
+
+    public Phase3CardFoodToWH(ForagingSteps fs){
+        this.fs = fs;
     }
 
     protected Game g = null;
@@ -51,9 +57,12 @@ public class Phase3CardFoodToWH {
     }
 
     @When("^Phase3 ends$")
-    public void phaseEnds() throws DeckEmptyException, IllegalCardDirectionException, NullGameObjectException,
-            InvalidPlayerSelectException, InvalidWateringHoleCardCountException, FoodBankEmptyException {
-        for (int i = 0; i < this.g.getPlayerObjects().size(); i++) {
+    public void phaseEnds() throws DeckEmptyException, IllegalCardDirectionException,
+            NullGameObjectException, InvalidPlayerSelectException,
+            InvalidWateringHoleCardCountException, SpeciesPopulationException,
+            IllegalSpeciesIndexException, WateringHoleEmptyException, SpeciesFullException,
+            FoodBankEmptyException {
+        for(int i = 0; i < this.g.getPlayerObjects().size(); i++) {
             this.g.getPhase().execute();
         }
     }
@@ -70,5 +79,34 @@ public class Phase3CardFoodToWH {
     @And("^the Cards shall be discarded$")
     public void theCardsShallBeDiscarded() {
         Assert.assertTrue(this.g.getDiscardPile().getSize() == this.g.getPlayerObjects().size());
+    }
+
+    @And("^I have an empty Watering Hole in real game$")
+    public void iHaveAnEmptyWateringHoleInRealGame() throws Throwable {
+        Assert.assertEquals(0, this.fs.realGame.getWateringHole().getFoodCount());
+    }
+
+    @And("^there are Cards on the Watering Hole in real game$")
+    public void thereAreCardsOnTheWateringHoleInRealGame() throws Throwable {
+        for(int i = 0; i < this.fs.realGame.getPlayerObjects().size(); i ++){
+            this.fs.realGame.getWateringHole().addCard(new Card("", "", "", i, 0));
+        }
+    }
+
+    @Then("^the food on the Cards shall be added to the Watering Hole in real game$")
+    public void theFoodOnTheCardsShallBeAddedToTheWateringHoleInRealGame() throws Throwable {
+        int food = 0;
+        for(int i = 0; i < this.fs.realGame.getPlayerObjects().size(); i++){
+            food += i;
+        }
+        System.out.println(this.fs.realGame.getWateringHole().getFoodCount() + "\n");
+        Assert.assertTrue(this.fs.realGame.getWateringHole().getFoodCount() == food);
+    }
+
+    @And("^the Cards shall be discarded in real game$")
+    public void theCardsShallBeDiscardedInRealGame() throws Throwable {
+        Assert.assertTrue(this.fs.realGame.getDiscardPile().getSize()
+                == this.fs.realGame.getPlayerObjects().size());
+
     }
 }
