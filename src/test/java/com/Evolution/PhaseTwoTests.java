@@ -82,7 +82,11 @@ public class PhaseTwoTests {
     }
 
     @Test
-    public void testVerifyTurnIncrement() throws IllegalNumberOfPlayers, DeckEmptyException, IllegalCardDirectionException, NullGameObjectException, InvalidPlayerSelectException, InvalidWateringHoleCardCountException {
+    public void testVerifyTurnIncrement() throws IllegalNumberOfPlayers, DeckEmptyException,
+            IllegalCardDirectionException, NullGameObjectException, InvalidPlayerSelectException,
+            InvalidWateringHoleCardCountException, SpeciesPopulationException,
+            IllegalSpeciesIndexException, WateringHoleEmptyException, SpeciesFullException,
+            FoodBankEmptyException {
         IWateringHole wh = new WateringHole();
         for (int i = 0; i < 2; i++) {
             try {

@@ -106,7 +106,13 @@ class GameScreenController implements Initializable {
             this.game.startGame();
 
             System.out.println("game initialized");
-        } catch (IllegalNumberOfPlayers | IllegalCardDirectionException | IOException | WrongFileException | DeckEmptyException | InvalidPlayerSelectException | IllegalCardFoodException | NullGameObjectException | InvalidWateringHoleCardCountException exception) {
+        } catch (IllegalNumberOfPlayers | IllegalCardDirectionException
+                | IOException | WrongFileException | DeckEmptyException
+                | InvalidPlayerSelectException | IllegalCardFoodException
+                | NullGameObjectException | InvalidWateringHoleCardCountException
+                | SpeciesFullException | WateringHoleEmptyException
+                | SpeciesPopulationException | FoodBankEmptyException
+                | IllegalSpeciesIndexException exception) {
             exception.printStackTrace();
         }
 
@@ -127,8 +133,11 @@ class GameScreenController implements Initializable {
 
         try {
             toggleChoiceBox();
-        } catch (DeckEmptyException | InvalidPlayerSelectException | IllegalCardDirectionException |
-                NullGameObjectException | InvalidWateringHoleCardCountException e) {
+        } catch (DeckEmptyException | InvalidPlayerSelectException
+                | IllegalCardDirectionException | NullGameObjectException
+                | InvalidWateringHoleCardCountException | SpeciesFullException
+                | WateringHoleEmptyException | IllegalSpeciesIndexException
+                | FoodBankEmptyException | SpeciesPopulationException e) {
             e.printStackTrace();
         }
     }
@@ -150,7 +159,7 @@ class GameScreenController implements Initializable {
      * De/Activates the ChoiceBoxes under each SpeciesBoard depending on which player's turn it currently is.
      */
     void toggleChoiceBox() throws DeckEmptyException, InvalidPlayerSelectException, IllegalCardDirectionException,
-            NullGameObjectException, InvalidWateringHoleCardCountException {
+            NullGameObjectException, InvalidWateringHoleCardCountException, IllegalSpeciesIndexException, SpeciesPopulationException, WateringHoleEmptyException, SpeciesFullException, FoodBankEmptyException {
         int activeTurn = this.game.getTurn() - 1;
         for (int i = 0; i < this.players.size(); i++) {
             if (activeTurn == i) {
