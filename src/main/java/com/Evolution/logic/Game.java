@@ -686,6 +686,7 @@ public class Game {
         /*
         TODO: Add check to make sure the calling index is actually a carnivore.
         Can just return a null array rather than throw an error.
+        TODO: Implement check for prohibitive traits.
          */
         ArrayList<int[]> attackable = new ArrayList<>();
         for (int i = 0; i < this.players.size(); i++) {
