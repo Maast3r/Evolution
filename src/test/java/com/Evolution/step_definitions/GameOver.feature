@@ -1,6 +1,6 @@
 # Created by goistjt at 5/4/2016
 Feature: Game Over
-  As a player, when I draw the last card during phase 3, I want the Game to be signaled to end.
+  As a player, when I draw the last card during phase 1, I want the Game to be signaled to end.
   As a player, when one of my species eats the last food, I want the Game to be signaled to end.
 
 
