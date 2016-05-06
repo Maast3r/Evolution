@@ -21,9 +21,9 @@ public class LongNeck extends ATrait {
      * Makes the species executing this action feed a second time from the food bank
      *
      * @param playerIndex  [0]: Player applying action
-     *                     [1]: Player being affected
+     *                     [1]: Ignored
      * @param speciesIndex [0]: Species applying action
-     *                     [1]: Species being affected
+     *                     [1]: Ignored
      * @throws IllegalSpeciesIndexException propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
      * @throws InvalidPlayerSelectException propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
      * @throws SpeciesFullException         propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
