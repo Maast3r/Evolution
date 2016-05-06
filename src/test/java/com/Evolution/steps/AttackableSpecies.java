@@ -12,6 +12,7 @@ import org.easymock.EasyMock;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -19,7 +20,7 @@ import static org.junit.Assert.assertTrue;
  * Created by goistjt on 5/5/2016.
  */
 public class AttackableSpecies {
-    Game g = null;
+    private Game g = null;
 
     @Given("^I have a new Game with (\\d+) real players with real Species$")
     public void iHaveANewGameWithNumberRealPlayersWithRealSpecies(int num_players) throws Throwable {
@@ -42,7 +43,8 @@ public class AttackableSpecies {
                 .getName().equals("Carnivore")));
     }
 
-    ArrayList<int[]> attackables = null;
+    private ArrayList<int[]> attackables = null;
+
     @When("^Player (\\d+) Species (\\d+) views the attackable Species$")
     public void playerAttacking_player_indexSpeciesAttacking_species_indexViewsTheAttackableSpecies(int player, int
             species) throws Throwable {
@@ -53,6 +55,6 @@ public class AttackableSpecies {
     @Then("^every other valid player_index, species_index will now be shown$")
     public void everyOtherValidPlayer_indexSpecies_indexWillNowBeShown() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
-        assertEquals(attackables, new ArrayList<>(Arrays.asList(new int[]{1, 0}, new int[]{2,0})));
+        assertArrayEquals(attackables.toArray(), new ArrayList<>(Arrays.asList(new int[]{1, 0}, new int[]{2, 0})).toArray());
     }
 }

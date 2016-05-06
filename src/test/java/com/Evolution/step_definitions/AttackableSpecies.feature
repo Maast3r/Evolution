@@ -9,4 +9,4 @@ Feature: Attackable Species
     Then every other valid player_index, species_index will now be shown
     Examples:
       | number | attacking_player_index | attacking_species_index |
-      | 3      | 0                      | 0
+      | 3      | 0                      | 0                       |
