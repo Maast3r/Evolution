@@ -675,7 +675,18 @@ public class Game {
         return this.over;
     }
 
+    /**
+     * Retrieves indices of all species which can successfully be attacked by a Carnivore species.
+     *
+     * @param attackingPlayer  index of player that is searching for attackable species
+     * @param attackingSpecies index of species that will be attacking others
+     * @return list of attackable index pair
+     */
     public ArrayList<int[]> getAttackableSpecies(int attackingPlayer, int attackingSpecies) {
+        /*
+        TODO: Add check to make sure the calling index is actually a carnivore.
+        Can just return a null array rather than throw an error.
+         */
         ArrayList<int[]> attackable = new ArrayList<>();
         for (int i = 0; i < this.players.size(); i++) {
             for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
