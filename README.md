@@ -191,6 +191,7 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Added basic logic to show attackable species given a player & species
     * Fixed Phase 3 to add food to WH and remove from bank
     * Worked with Trevor to configure cucumber for intelliJ
+    * Fixed Phase 4 end logic and added auto moving species food to players at P4 end.
 * Brooke Brown
     * Fixed bug with adding trait to species (index exception)
     * Added logic for skipping a player if full (update boxes & call phase.execute)
