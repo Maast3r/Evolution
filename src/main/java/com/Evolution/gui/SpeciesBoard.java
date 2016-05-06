@@ -2,6 +2,7 @@ package com.Evolution.gui;
 
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
+import com.Evolution.interfaces.ISpecies;
 import com.Evolution.logic.Game;
 import com.Evolution.logic.Species;
 import javafx.beans.value.ChangeListener;
@@ -282,8 +283,8 @@ class SpeciesBoard extends VBox {
                 this.selectedCard = null;
                 break;
             case ATTACK_SPECIES:
-                //TODO FIX ME
-                //openAttackWindow(this.game.getAttackableSpecies(this.playerIndex, this.speciesNum);
+                // TODO : Finish Implementation
+                openAttackWindow();
                 //this.game.attackSpecies(this.playerIndex, this.speciesNum, otherIndex, otherNum);
                 this.game.getPhase().execute();
                 this.playerPane.updateGameScreen();
@@ -382,6 +383,36 @@ class SpeciesBoard extends VBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Opens up the attack window for the player to view the possible species to attack
+     */
+    private boolean openAttackWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/card_popup.fxml"));
+            // TODO: change this to make the correct call
+            //AttackPopupController controller =
+            //        new AttackPopupController(this, this.game.getAttackableSpecies(this.playerIndex, this.speciesNum));
+            AttackPopupController controller = new AttackPopupController(this, new ArrayList<>());
+            loader.setController(controller);
+            Parent p = loader.load();
+            Stage s = new Stage();
+            s.setTitle("Evolution!");
+            s.getIcons().add(new Image("/images/icon.png"));
+            s.setScene(new Scene(p, Color.BLACK));
+            s.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    s.hide();
+                    this.actionChoiceBox.getSelectionModel().selectFirst();
+                }
+            });
+            s.showAndWait();
+            return controller.getSuccessfulAttack();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     /**
