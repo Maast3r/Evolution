@@ -13,7 +13,7 @@ public class Intelligence extends CTrait {
 
     /**
      * Discard Intelligence to eat twice from the food bank.
-     * TODO error handling
+     *
      * @param playerIndex  [0]: Player applying action
      *                     [1]: Player being affected
      * @param speciesIndex [0]: Species applying action

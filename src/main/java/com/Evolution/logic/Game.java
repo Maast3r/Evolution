@@ -24,6 +24,7 @@ public class Game {
     private int foodBank = 240;
     private IPhases currentPhase = new PhaseOne(this);
     private HashMap<String, ATrait> feedTraitActions = new HashMap<>();
+    private boolean over;
 
     //TODO: Add Null check for every single method that takes in an Object
 
@@ -101,16 +102,16 @@ public class Game {
      * Starts the game with Phase 1.
      * Calls currentPhase.execute()
      *
-     * @throws IllegalCardDirectionException propagated from {@link IPhases#execute()}
-     * @throws DeckEmptyException            propagated from {@link IPhases#execute()}
-     * @throws InvalidPlayerSelectException  propagated from {@link IPhases#execute()}
-     * @throws NullGameObjectException       propagated from {@link IPhases#execute()}
-     * @throws InvalidWateringHoleCardCountException  propagated from {@link IPhases#execute()}
-     * @throws SpeciesPopulationException    propagated from {@link IPhases#execute()}
-     * @throws IllegalSpeciesIndexException  propagated from {@link IPhases#execute()}
-     * @throws WateringHoleEmptyException    propagated from {@link IPhases#execute()}
-     * @throws SpeciesFullException          propagated from {@link IPhases#execute()}
-     * @throws FoodBankEmptyException        propagated from {@link IPhases#execute()}
+     * @throws IllegalCardDirectionException         propagated from {@link IPhases#execute()}
+     * @throws DeckEmptyException                    propagated from {@link IPhases#execute()}
+     * @throws InvalidPlayerSelectException          propagated from {@link IPhases#execute()}
+     * @throws NullGameObjectException               propagated from {@link IPhases#execute()}
+     * @throws InvalidWateringHoleCardCountException propagated from {@link IPhases#execute()}
+     * @throws SpeciesPopulationException            propagated from {@link IPhases#execute()}
+     * @throws IllegalSpeciesIndexException          propagated from {@link IPhases#execute()}
+     * @throws WateringHoleEmptyException            propagated from {@link IPhases#execute()}
+     * @throws SpeciesFullException                  propagated from {@link IPhases#execute()}
+     * @throws FoodBankEmptyException                propagated from {@link IPhases#execute()}
      */
     public void startGame() throws IllegalCardDirectionException,
             DeckEmptyException, InvalidPlayerSelectException,
@@ -209,6 +210,7 @@ public class Game {
         }
         ICard card = this.drawPile.draw();
         this.players.get(i).addCardToHand(card);
+        if (this.drawPile.getSize() == 0) this.over = true;
     }
 
     /**
@@ -528,8 +530,8 @@ public class Game {
         }
 
         this.wateringHole.removeFood();
+        if (this.wateringHole.getFoodCount() == 0 && this.foodBank == 0) this.over = true;
         this.players.get(playerIndex).getSpecies().get(speciesIndex).eat();
-        // TODO: loop through species traits, get trait from hashmap, and executing
         for (ICard c : this.players.get(playerIndex).getSpecies().get(speciesIndex).getTraits()) {
             String name = c.getName();
             if (feedTraitActions.containsKey(name)) {
@@ -619,6 +621,7 @@ public class Game {
 
     /**
      * Computes and returns the player number for whoever the first player of a round is. One-indexed
+     *
      * @return firstPlayer
      */
     public int getFirstPlayer() {
@@ -628,25 +631,26 @@ public class Game {
 
     /**
      * Attacks another species
-     * @param playerIndex1 The index of the player attacking
+     *
+     * @param playerIndex1  The index of the player attacking
      * @param speciesIndex1 The index of the species attacking
-     * @param playerIndex2 The index of the player under attack
+     * @param playerIndex2  The index of the player under attack
      * @param speciesIndex2 The index of the species under attack
-     * @throws NonCarnivoreAttacking thrown if the species attacking is not a carnivore
-     * @throws BodySizeIllegalAttack thrown if the species attacking does not have a higher body size than the species under attack
-     * @throws AttackingSelfException thrown if the species attacking is attacking itself
-     * @throws SpeciesPopulationException propagated from {@link Species#decreasePopulation()}
-     * @throws FoodBankEmptyException propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
+     * @throws NonCarnivoreAttacking        thrown if the species attacking is not a carnivore
+     * @throws BodySizeIllegalAttack        thrown if the species attacking does not have a higher body size than the species under attack
+     * @throws AttackingSelfException       thrown if the species attacking is attacking itself
+     * @throws SpeciesPopulationException   propagated from {@link Species#decreasePopulation()}
+     * @throws FoodBankEmptyException       propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
      * @throws InvalidPlayerSelectException propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
-     * @throws SpeciesFullException propagated from {@link Species#eat()}
+     * @throws SpeciesFullException         propagated from {@link Species#eat()}
      * @throws IllegalSpeciesIndexException propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
      */
     public void attackSpecies(int playerIndex1, int speciesIndex1, int playerIndex2, int speciesIndex2) throws NonCarnivoreAttacking, BodySizeIllegalAttack, SpeciesPopulationException, FoodBankEmptyException, InvalidPlayerSelectException, SpeciesFullException, IllegalSpeciesIndexException, AttackingSelfException {
-        if(playerIndex1 == playerIndex2 && speciesIndex1 == speciesIndex2){
+        if (playerIndex1 == playerIndex2 && speciesIndex1 == speciesIndex2) {
             throw new AttackingSelfException("You can not attack yourself");
-        } else if(this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getTraits().stream().filter(c -> c.getName().equals("Carnivore")).count() < 1){
+        } else if (this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getTraits().stream().filter(c -> c.getName().equals("Carnivore")).count() < 1) {
             throw new NonCarnivoreAttacking("You must be a carnivore to attack");
-        } else if(this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getBodySize() <= this.getPlayerObjects().get(playerIndex2).getSpecies().get(speciesIndex2).getBodySize()){
+        } else if (this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getBodySize() <= this.getPlayerObjects().get(playerIndex2).getSpecies().get(speciesIndex2).getBodySize()) {
             throw new BodySizeIllegalAttack("You must have a higher body size than the species which you are attacking");
         }
         IPlayer player1 = this.getPlayerObjects().get(playerIndex1);
@@ -654,10 +658,44 @@ public class Game {
         ISpecies species1 = player1.getSpecies().get(speciesIndex1);
         ISpecies species2 = player2.getSpecies().get(speciesIndex2);
         species2.decreasePopulation();
-        for(int i = 0; i < species2.getBodySize(); i++){
-            if(species1.getEatenFood() < species1.getPopulation()){
+        for (int i = 0; i < species2.getBodySize(); i++) {
+            if (species1.getEatenFood() < species1.getPopulation()) {
                 this.feedPlayerSpeciesFromBank(playerIndex1, speciesIndex1);
             }
         }
+    }
+
+    /**
+     * Returns the flag signaling whether or not the game is ready to end
+     *
+     * @return over flag
+     */
+    public boolean isOver() {
+        return this.over;
+    }
+
+    /**
+     * Retrieves indices of all species which can successfully be attacked by a Carnivore species.
+     *
+     * @param attackingPlayer  index of player that is searching for attackable species
+     * @param attackingSpecies index of species that will be attacking others
+     * @return list of attackable index pair
+     */
+    public ArrayList<int[]> getAttackableSpecies(int attackingPlayer, int attackingSpecies) {
+        /*
+        TODO: Add check to make sure the calling index is actually a carnivore.
+        Can just return a null array rather than throw an error.
+        TODO: Implement check for prohibitive traits.
+         */
+
+        ArrayList<int[]> attackable = new ArrayList<>();
+        for (int i = 0; i < this.players.size(); i++) {
+            for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
+                if (i != attackingPlayer || j != attackingSpecies) {
+                    attackable.add(new int[]{i, j});
+                }
+            }
+        }
+        return attackable;
     }
 }
