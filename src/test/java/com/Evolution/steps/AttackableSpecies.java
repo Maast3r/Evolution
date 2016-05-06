@@ -57,4 +57,38 @@ public class AttackableSpecies {
         // Write code here that turns the phrase above into concrete actions
         assertArrayEquals(attackables.toArray(), new ArrayList<>(Arrays.asList(new int[]{1, 0}, new int[]{2, 0})).toArray());
     }
+
+    @And("^half of the species other than player (\\d+)'s species (\\d+) have a smaller body size$")
+    public void halfOfTheOtherSpeciesHaveASmallerBodySize(int playerIndex, int speciesIndex) throws Throwable {
+        int count = 0;
+        for(int i = 0; i < this.g.getPlayerObjects().size(); i++){
+            for(int j = 0; j < this.g.getPlayerObjects().get(i).getSpecies().size(); j++){
+                if(i == playerIndex && j == speciesIndex){
+                    continue;
+                }
+                if(count % 2 == 0){
+                    for(int l = 0; l < 4; l++){
+                        this.g.getPlayerObjects().get(i).getSpecies().get(j).increaseBodySize();
+                    }
+                } else {
+                    for(int l = 0; l < 2; l++){
+                        this.g.getPlayerObjects().get(i).getSpecies().get(j).increaseBodySize();
+                    }
+                }
+                count++;
+            }
+        }
+    }
+
+    @Then("^every other valid player_index, species_index will now be shown if they have a smaller body size$")
+    public void everyOtherValidPlayer_indexSpecies_indexWillNowBeShownIfTheyHaveASmallerBodySize() throws Throwable {
+        int count = 0;
+        for(int i = 0; i < this.g.getPlayerObjects().size(); i++){
+            for(int j = 0; j < this.g.getPlayerObjects().get(i).getSpecies().size(); j++){
+                count++;
+            }
+        }
+        count = count - 1;
+        assertTrue(attackables.size() == count / 2);
+    }
 }
