@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
  * Created by goistjt on 5/5/2016.
  */
 public class AttackableSpecies {
-    private Game g = null;
+    public Game g = null;
 
     @Given("^I have a new Game with (\\d+) real players with real Species$")
     public void iHaveANewGameWithNumberRealPlayersWithRealSpecies(int num_players) throws Throwable {

@@ -9,18 +9,18 @@ import com.Evolution.interfaces.IPhases;
 /**
  * Logic for the fourth phase of the game
  */
-public class PhaseFour implements IPhases{
+public class PhaseFour implements IPhases {
     private Game game;
 
-    public PhaseFour(Game g){
+    public PhaseFour(Game g) {
         this.game = g;
     }
 
     @Override
     public void execute() throws IllegalCardDirectionException, DeckEmptyException, InvalidPlayerSelectException, NullGameObjectException {
-        if(this.game.allFull()) {
+        if (this.game.allFull()) {
             this.game.increaseRound();
-            while(this.game.getTurn()!=this.game.getFirstPlayer()) {
+            while (this.game.getTurn() != this.game.getFirstPlayer()) {
                 this.game.nextTurn();
             }
             this.game.setPhase(new PhaseOne(this.game));
