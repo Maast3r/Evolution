@@ -185,6 +185,12 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
 
 #Sprint 7
 * Jeremiah Goist
+    * Partially added logic to signal that the game should end at the end of the current round.
+    * Added "first player" method/tracking so that GUI can move the token around and phase 3 will end on the correct
+    player
+    * Added basic logic to show attackable species given a player & species
+    * Fixed Phase 3 to add food to WH and remove from bank
+    * Worked with Trevor to configure cucumber for intelliJ
 * Brooke Brown
     * Fixed bug with adding trait to species (index exception)
     * Added logic for skipping a player if full (update boxes & call phase.execute)
