@@ -648,13 +648,19 @@ public class Game {
      * @throws SpeciesFullException         propagated from {@link Species#eat()}
      * @throws IllegalSpeciesIndexException propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
      */
-    public void attackSpecies(int playerIndex1, int speciesIndex1, int playerIndex2, int speciesIndex2) throws NonCarnivoreAttacking, BodySizeIllegalAttack, SpeciesPopulationException, FoodBankEmptyException, InvalidPlayerSelectException, SpeciesFullException, IllegalSpeciesIndexException, AttackingSelfException {
+    public void attackSpecies(int playerIndex1, int speciesIndex1, int playerIndex2, int speciesIndex2)
+            throws NonCarnivoreAttacking, BodySizeIllegalAttack, SpeciesPopulationException, FoodBankEmptyException,
+            InvalidPlayerSelectException, SpeciesFullException, IllegalSpeciesIndexException, AttackingSelfException,
+            InvalidAttackException {
         if (playerIndex1 == playerIndex2 && speciesIndex1 == speciesIndex2) {
             throw new AttackingSelfException("You can not attack yourself");
         } else if (this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getTraits().stream().filter(c -> c.getName().equals("Carnivore")).count() < 1) {
             throw new NonCarnivoreAttacking("You must be a carnivore to attack");
         } else if (this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getBodySize() <= this.getPlayerObjects().get(playerIndex2).getSpecies().get(speciesIndex2).getBodySize()) {
             throw new BodySizeIllegalAttack("You must have a higher body size than the species which you are attacking");
+        } else if (this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getTraits().stream().filter(c -> c.getName().equals("Climbing")).count() < 1
+                && this.getPlayerObjects().get(playerIndex2).getSpecies().get(speciesIndex2).getTraits().stream().filter(c -> c.getName().equals("Climbing")).count() > 0) {
+            throw new InvalidAttackException("You must have climbing to attack this species");
         }
         IPlayer player1 = this.getPlayerObjects().get(playerIndex1);
         IPlayer player2 = this.getPlayerObjects().get(playerIndex2);
