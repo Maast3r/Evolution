@@ -5,11 +5,13 @@ import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.ISpecies;
 import com.Evolution.logic.Game;
 import com.Evolution.logic.Species;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
@@ -367,9 +369,9 @@ class SpeciesBoard extends VBox {
     private void openTraitWindow() {
         try {
             ArrayList<ICard> traitCards = new ArrayList<>();
-            for (int i = 0; i < this.traits.length; i++) {
-                if (this.traits[i] != null) {
-                    traitCards.add(this.traits[i]);
+            for (ICard trait : this.traits) {
+                if (trait != null) {
+                    traitCards.add(trait);
                 }
             }
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/card_popup.fxml"));
@@ -440,6 +442,7 @@ class SpeciesBoard extends VBox {
             InvalidWateringHoleCardCountException, FoodBankEmptyException {
         switch (phaseNum) {
             case 2:
+                checkGameOver();
                 this.actionChoiceBox.setItems(this.phase2Options);
                 break;
             case 3:
@@ -474,6 +477,13 @@ class SpeciesBoard extends VBox {
                 break;
         }
         this.actionChoiceBox.getSelectionModel().selectFirst();
+    }
+
+    private void checkGameOver() {
+        if(!this.game.isOver() && this.game.getFirstPlayer() == this.playerIndex) {
+            this.gameController.openWinScreen();
+            System.out.println("OPEN THE DAMN WINDOW");
+        }
     }
 
     /**

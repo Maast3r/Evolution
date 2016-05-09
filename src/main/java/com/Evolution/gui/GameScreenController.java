@@ -7,11 +7,16 @@ import com.Evolution.interfaces.IPlayer;
 import com.Evolution.interfaces.IWateringHole;
 import com.Evolution.logic.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -260,4 +265,7 @@ class GameScreenController implements Initializable {
         this.playerPanes.add(hBox);
     }
 
+    void openWinScreen() {
+        // TODO: Open the stupid fucking window and close the main window
+    }
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0"
+      prefWidth="500.0" stylesheets="@../styles/start_screen.css" xmlns="http://javafx.com/javafx/8.0.71"
+      xmlns:fx="http://javafx.com/fxml/1">
+    <ImageView id="winImage" fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
+        <Image url="@../images/start_screen.jpg"/>
+    </ImageView>
+    <Label id="winLabel" alignment="CENTER" layoutX="207.0" layoutY="513.0" prefWidth="87.0"
+           stylesheets="@../styles/start_screen.css">
+        <font>
+            <Font size="22.0"/>
+        </font>
+    </Label>
+    <Button fx:id="newGameButton" layoutX="200.0" layoutY="574.0" mnemonicParsing="false"
+            stylesheets="@../styles/start_screen.css" text="Play Again!">
+        <font>
+            <Font size="16.0"/>
+        </font>
+    </Button>
+</Pane>
