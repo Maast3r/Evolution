@@ -45,7 +45,7 @@ public class FatTissueTest {
             WateringHoleEmptyException, SpeciesPopulationException,
             IllegalSpeciesIndexException, IllegalCardDirectionException,
             IllegalCardFoodException, NullGameObjectException,
-            IllegalCardDiscardException, FoodBankEmptyException {
+            IllegalCardDiscardException, FoodBankEmptyException, TempFoodMaxException {
         Game g = EasyMock.niceMock(Game.class);
         IPlayer p = EasyMock.niceMock(Player.class);
         ISpecies s = EasyMock.niceMock(Species.class);
@@ -53,6 +53,8 @@ public class FatTissueTest {
                 new ArrayList<>(Arrays.asList(p)));
         EasyMock.expect(p.getSpecies()).andReturn(
                 new ArrayList<>(Arrays.asList(s)));
+        EasyMock.expect(s.getBodySize()).andReturn(4);
+        EasyMock.expect(s.getTempFood()).andReturn(0);
         s.eatTemp();
         EasyMock.replay(g, p, s);
         CTrait t = new FatTissue(g);
@@ -61,7 +63,7 @@ public class FatTissueTest {
     }
 
     @Test
-    public void testFeedTempRealSpecies() throws SpeciesFullException, InvalidPlayerSelectException, IllegalCardRemovalException, WateringHoleEmptyException, SpeciesPopulationException, IllegalSpeciesIndexException, IllegalCardDirectionException, IllegalCardFoodException, NullGameObjectException, IllegalCardDiscardException, FoodBankEmptyException {
+    public void testFeedTempRealSpecies() throws SpeciesFullException, InvalidPlayerSelectException, IllegalCardRemovalException, WateringHoleEmptyException, SpeciesPopulationException, IllegalSpeciesIndexException, IllegalCardDirectionException, IllegalCardFoodException, NullGameObjectException, IllegalCardDiscardException, FoodBankEmptyException, TempFoodMaxException {
         Game g = EasyMock.niceMock(Game.class);
         IPlayer p = EasyMock.niceMock(Player.class);
         ISpecies s = new Species();
@@ -75,7 +77,7 @@ public class FatTissueTest {
     }
 
     @Test
-    public void testFeedTempRealPlayer() throws SpeciesFullException, InvalidPlayerSelectException, IllegalCardRemovalException, WateringHoleEmptyException, SpeciesPopulationException, IllegalSpeciesIndexException, IllegalCardDirectionException, IllegalCardFoodException, NullGameObjectException, IllegalCardDiscardException, FoodBankEmptyException {
+    public void testFeedTempRealPlayer() throws SpeciesFullException, InvalidPlayerSelectException, IllegalCardRemovalException, WateringHoleEmptyException, SpeciesPopulationException, IllegalSpeciesIndexException, IllegalCardDirectionException, IllegalCardFoodException, NullGameObjectException, IllegalCardDiscardException, FoodBankEmptyException, TempFoodMaxException {
         Game g = EasyMock.niceMock(Game.class);
         ISpecies s = new Species();
         IPlayer p = new Player(s);
@@ -88,10 +90,19 @@ public class FatTissueTest {
     }
 
     @Test
-    public void testFeedTempRealGame() throws SpeciesFullException, InvalidPlayerSelectException, IllegalCardRemovalException, WateringHoleEmptyException, SpeciesPopulationException, IllegalSpeciesIndexException, IllegalCardDirectionException, IllegalCardFoodException, NullGameObjectException, IllegalCardDiscardException, FoodBankEmptyException, IllegalNumberOfPlayers {
+    public void testFeedTempRealGame() throws SpeciesFullException, InvalidPlayerSelectException, IllegalCardRemovalException, WateringHoleEmptyException, SpeciesPopulationException, IllegalSpeciesIndexException, IllegalCardDirectionException, IllegalCardFoodException, NullGameObjectException, IllegalCardDiscardException, FoodBankEmptyException, IllegalNumberOfPlayers, TempFoodMaxException {
         Game g = new Game(generateNumRealPlayers(3), EasyMock.niceMock(IWateringHole.class), EasyMock.niceMock(IDeck.class), EasyMock.niceMock(IDeck.class));
         ISpecies s = g.getPlayerObjects().get(0).getSpecies().get(0);
         g.fatTissueEat(0, 0);
         assertTrue(s.getTempFood() == 1);
+    }
+
+    @Test(expected = TempFoodMaxException.class)
+    public void testFeedTempToMuch() throws SpeciesFullException, InvalidPlayerSelectException, IllegalCardRemovalException, WateringHoleEmptyException, SpeciesPopulationException, IllegalSpeciesIndexException, IllegalCardDirectionException, IllegalCardFoodException, NullGameObjectException, IllegalCardDiscardException, FoodBankEmptyException, IllegalNumberOfPlayers, TempFoodMaxException {
+        Game g = new Game(generateNumRealPlayers(3), EasyMock.niceMock(IWateringHole.class), EasyMock.niceMock(IDeck.class), EasyMock.niceMock(IDeck.class));
+        ISpecies s = g.getPlayerObjects().get(0).getSpecies().get(0);
+        for(int i = 0; i < 5; i++) {
+            g.fatTissueEat(0, 0);
+        }
     }
 }
