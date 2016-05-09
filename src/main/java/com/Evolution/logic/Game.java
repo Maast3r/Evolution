@@ -721,7 +721,9 @@ public class Game {
                                 ArrayList<ICard> attackeeTraitsL = this.players.get(i).getSpecies().get(j-1).getTraits();
                                 for(ICard c : attackeeTraitsL) {
                                     if(c.getName().equals("Warning Call")) {
-                                        canBeAttacked.add(false);
+                                        canBeAttacked.add(this.defendTraitActions.get(c.getName())
+                                                .canBeAttacked(new int[]{i, attackingPlayer},
+                                                        new int[]{j, attackingSpecies}));
                                     }
                                 }
                             }
@@ -729,7 +731,9 @@ public class Game {
                                 ArrayList<ICard> attackeeTraitsR = this.players.get(i).getSpecies().get(j+1).getTraits();
                                 for(ICard c : attackeeTraitsR) {
                                     if(c.getName().equals("Warning Call")) {
-                                        canBeAttacked.add(false);
+                                        canBeAttacked.add(this.defendTraitActions.get(c.getName())
+                                                .canBeAttacked(new int[]{i, attackingPlayer},
+                                                        new int[]{j, attackingSpecies}));
                                     }
                                 }
                             }
