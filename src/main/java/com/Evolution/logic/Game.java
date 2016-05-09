@@ -3,10 +3,7 @@ package com.Evolution.logic;
 import com.Evolution.abstracts.ATrait;
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.*;
-import com.Evolution.traits.Cooperation;
-import com.Evolution.traits.Fertile;
-import com.Evolution.traits.Foraging;
-import com.Evolution.traits.LongNeck;
+import com.Evolution.traits.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,6 +52,8 @@ public class Game {
         this.discardPile = discardPile;
         this.feedTraitActions.put("Cooperation", new Cooperation(this));
         this.feedTraitActions.put("Foraging", new Foraging(this));
+
+        this.defendTraitActions.put("Warning Call", new WarningCall(this));
     }
 
     /**
@@ -725,8 +724,9 @@ public class Game {
                                                     new int[]{j, attackingSpecies}));
                                 }
                             }
-                            if(!canBeAttacked.contains(false)
-                                    && canBeAttacked.size() > 0) attackable.add(new int[]{i, j});
+                            if(!canBeAttacked.contains(false) || canBeAttacked.size() == 0) {
+                                attackable.add(new int[]{i, j});
+                            }
                         }
                     }
                 }
