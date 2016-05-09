@@ -1,12 +1,10 @@
 package com.Evolution.logic;
 
 import com.Evolution.abstracts.ATrait;
+import com.Evolution.abstracts.CTrait;
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.*;
-import com.Evolution.traits.Cooperation;
-import com.Evolution.traits.Fertile;
-import com.Evolution.traits.Foraging;
-import com.Evolution.traits.LongNeck;
+import com.Evolution.traits.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -721,5 +719,24 @@ public class Game {
             }
         }
         return attackable;
+    }
+
+    /**
+     * @param playerIndex The index of the player that is eating onto fat tissue
+     * @param speciesIndex The index of the species that is eating onto fat tissue
+     * @throws InvalidPlayerSelectException if the player index is out of range
+     * @throws IllegalSpeciesIndexException if the species index is out of range
+     * @throws WateringHoleEmptyException propagated from {@link FatTissue#executeTrait(int[], int[], ICard)}
+     * @throws SpeciesPopulationException propagated from {@link FatTissue#executeTrait(int[], int[], ICard)}
+     * @throws TempFoodMaxException propagated from {@link FatTissue#executeTrait(int[], int[], ICard)}
+     */
+    public void fatTissueEat(int playerIndex, int speciesIndex) throws InvalidPlayerSelectException, IllegalSpeciesIndexException, WateringHoleEmptyException, SpeciesPopulationException, TempFoodMaxException {
+        if (this.players.size() <= playerIndex || playerIndex < 0) {
+            throw new InvalidPlayerSelectException("Player index is out of range!");
+        } else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
+            throw new IllegalSpeciesIndexException("Species index is out of range!");
+        }
+        FatTissue fatTissue = new FatTissue(this);
+        fatTissue.executeTrait(new int[]{playerIndex, playerIndex}, new int[]{speciesIndex, speciesIndex}, null);
     }
 }
