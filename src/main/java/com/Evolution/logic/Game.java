@@ -1,12 +1,10 @@
 package com.Evolution.logic;
 
 import com.Evolution.abstracts.ATrait;
+import com.Evolution.abstracts.CTrait;
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.*;
-import com.Evolution.traits.Cooperation;
-import com.Evolution.traits.Fertile;
-import com.Evolution.traits.Foraging;
-import com.Evolution.traits.LongNeck;
+import com.Evolution.traits.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -720,5 +718,10 @@ public class Game {
             }
         }
         return attackable;
+    }
+
+    public void fatTissueEat(int playerIndex, int speciesIndex) throws SpeciesFullException, InvalidPlayerSelectException, IllegalCardRemovalException, WateringHoleEmptyException, SpeciesPopulationException, IllegalSpeciesIndexException, IllegalCardDirectionException, IllegalCardFoodException, NullGameObjectException, IllegalCardDiscardException, FoodBankEmptyException {
+        CTrait fatTissue = new FatTissue(this);
+        fatTissue.executeTrait(new int[]{playerIndex, playerIndex}, new int[]{speciesIndex, speciesIndex}, null);
     }
 }
