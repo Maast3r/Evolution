@@ -32,4 +32,9 @@ public class Foraging extends ATrait {
         this.game.feedPlayerSpeciesFromBank(playerIndex[0], speciesIndex[0]);
     }
 
+    @Override
+    public boolean canBeAttacked(int[] ints, int[] ints1) {
+        return false;
+    }
+
 }

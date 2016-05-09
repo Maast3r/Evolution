@@ -44,4 +44,9 @@ public class LongNeck extends ATrait {
             }
         }
     }
+
+    @Override
+    public boolean canBeAttacked(int[] ints, int[] ints1) {
+        return false;
+    }
 }

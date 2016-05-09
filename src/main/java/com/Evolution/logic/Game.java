@@ -10,6 +10,7 @@ import com.Evolution.traits.LongNeck;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Game logic controller class. Handles most interaction between related game objects.
@@ -24,6 +25,7 @@ public class Game {
     private int foodBank = 240;
     private IPhases currentPhase = new PhaseOne(this);
     private HashMap<String, ATrait> feedTraitActions = new HashMap<>();
+    private HashMap<String, ATrait> defendTraitActions = new HashMap<>();
     private boolean over;
 
     //TODO: Add Null check for every single method that takes in an Object
@@ -711,9 +713,19 @@ public class Game {
         if(hasCarnivore) {
             for (int i = 0; i < this.players.size(); i++) {
                 for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
+                    HashSet<Boolean> canBeAttacked = new HashSet<>();
                     if (i != attackingPlayer || j != attackingSpecies) {
-                        if (this.players.get(i).getSpecies().get(j).getBodySize() < this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getBodySize()) {
-                            attackable.add(new int[]{i, j});
+                        if (this.players.get(i).getSpecies().get(j).getBodySize() < this.players.get(attackingPlayer)
+                                .getSpecies().get(attackingSpecies).getBodySize()) {
+                            ArrayList<ICard> attackeeTraits = this.players.get(i).getSpecies().get(j).getTraits();
+                            for(ICard c: attackeeTraits) {
+                                if(this.defendTraitActions.containsKey(c.getName())) {
+                                    canBeAttacked.add(this.defendTraitActions.get(c.getName())
+                                            .canBeAttacked(new int[]{i, attackingPlayer},
+                                                    new int[]{j, attackingSpecies}));
+                                }
+                            }
+                            if(!canBeAttacked.contains(false)) attackable.add(new int[]{i, j});
                         }
                     }
                 }
