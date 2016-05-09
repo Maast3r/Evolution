@@ -49,6 +49,7 @@ public class PhaseThree implements IPhases{
                     }
                     if(this.game.getPlayerObjects().get(i).getSpecies().get(j).getTempFood() > 0){
                         int tempFood = this.game.getPlayerObjects().get(i).getSpecies().get(j).getTempFood();
+                        this.game.getPlayerObjects().get(i).getSpecies().get(j).resetEatenTempFood();
                         for(int f = 0; f < tempFood; f++){
                             this.game.getPlayerObjects().get(i).getSpecies().get(j).eat();
                         }

@@ -720,8 +720,21 @@ public class Game {
         return attackable;
     }
 
-    public void fatTissueEat(int playerIndex, int speciesIndex) throws SpeciesFullException, InvalidPlayerSelectException, IllegalCardRemovalException, WateringHoleEmptyException, SpeciesPopulationException, IllegalSpeciesIndexException, IllegalCardDirectionException, IllegalCardFoodException, NullGameObjectException, IllegalCardDiscardException, FoodBankEmptyException {
-        CTrait fatTissue = new FatTissue(this);
+    /**
+     * @param playerIndex The index of the player that is eating onto fat tissue
+     * @param speciesIndex The index of the species that is eating onto fat tissue
+     * @throws InvalidPlayerSelectException if the player index is out of range
+     * @throws IllegalSpeciesIndexException if the species index is out of range
+     * @throws WateringHoleEmptyException propagated from {@link FatTissue#executeTrait(int[], int[], ICard)}
+     * @throws SpeciesPopulationException propagated from {@link FatTissue#executeTrait(int[], int[], ICard)}
+     */
+    public void fatTissueEat(int playerIndex, int speciesIndex) throws InvalidPlayerSelectException, IllegalSpeciesIndexException, WateringHoleEmptyException, SpeciesPopulationException {
+        if (this.players.size() <= playerIndex || playerIndex < 0) {
+            throw new InvalidPlayerSelectException("Player index is out of range!");
+        } else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
+            throw new IllegalSpeciesIndexException("Species index is out of range!");
+        }
+        FatTissue fatTissue = new FatTissue(this);
         fatTissue.executeTrait(new int[]{playerIndex, playerIndex}, new int[]{speciesIndex, speciesIndex}, null);
     }
 }
