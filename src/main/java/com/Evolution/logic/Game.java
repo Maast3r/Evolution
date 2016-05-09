@@ -717,6 +717,22 @@ public class Game {
                         if (this.players.get(i).getSpecies().get(j).getBodySize() < this.players.get(attackingPlayer)
                                 .getSpecies().get(attackingSpecies).getBodySize()) {
                             ArrayList<ICard> attackeeTraits = this.players.get(i).getSpecies().get(j).getTraits();
+                            if((j-1) >= 0 && (j-1) < this.players.get(i).getSpecies().size()){
+                                ArrayList<ICard> attackeeTraitsL = this.players.get(i).getSpecies().get(j-1).getTraits();
+                                for(ICard c : attackeeTraitsL) {
+                                    if(c.getName().equals("Warning Call")) {
+                                        canBeAttacked.add(false);
+                                    }
+                                }
+                            }
+                            if((j+1) >= 0 && (j+1) < this.players.get(i).getSpecies().size()){
+                                ArrayList<ICard> attackeeTraitsR = this.players.get(i).getSpecies().get(j+1).getTraits();
+                                for(ICard c : attackeeTraitsR) {
+                                    if(c.getName().equals("Warning Call")) {
+                                        canBeAttacked.add(false);
+                                    }
+                                }
+                            }
                             for(ICard c: attackeeTraits) {
                                 if(this.defendTraitActions.containsKey(c.getName())) {
                                     canBeAttacked.add(this.defendTraitActions.get(c.getName())
