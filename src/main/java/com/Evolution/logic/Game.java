@@ -725,7 +725,8 @@ public class Game {
                                                     new int[]{j, attackingSpecies}));
                                 }
                             }
-                            if(!canBeAttacked.contains(false)) attackable.add(new int[]{i, j});
+                            if(!canBeAttacked.contains(false)
+                                    && canBeAttacked.size() > 0) attackable.add(new int[]{i, j});
                         }
                     }
                 }
