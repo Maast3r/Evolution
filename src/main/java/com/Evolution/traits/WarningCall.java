@@ -23,9 +23,6 @@ public class WarningCall extends ATrait {
         ArrayList<ICard> attackerTraits = this.game.getPlayerObjects().get(players[1]).getSpecies()
                 .get(species[1]).getTraits();
 
-        for(ICard c : attackerTraits) {
-            if(c.getName().equals("Warning Call")) return true;
-        }
         return false;
     }
 }

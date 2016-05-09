@@ -6,6 +6,9 @@ import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
@@ -58,5 +61,19 @@ public class WarningCallSteps {
                 }
             }
         }
+    }
+
+    @And("^there is a species that has Carnivore and Ambush$")
+    public void thereIsASpeciesThatHasCarnivoreAndAmbush() throws Throwable {
+        this.fs.realGame.getPlayerObjects().get(0).getSpecies().get(0)
+                .addTrait(new Card("Carnivore", "", "", 0 , 0));
+        this.fs.realGame.getPlayerObjects().get(0).getSpecies().get(0)
+                .addTrait(new Card("Ambush", "", "", 0 , 0));
+    }
+
+    @Then("^the carnivore sees (\\d+) available species to attack$")
+    public void theCarnivoreSeesAvailableSpeciesToAttack(int arg0) throws Throwable {
+        assertArrayEquals(new ArrayList<>(Arrays.asList(new int[]{1, 0}, new int[]{1, 1})).toArray(),
+                this.fs.realGame.getAttackableSpecies(0, 0).toArray());
     }
 }
