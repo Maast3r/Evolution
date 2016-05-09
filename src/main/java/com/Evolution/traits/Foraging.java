@@ -3,6 +3,7 @@ package com.Evolution.traits;
 
 import com.Evolution.exceptions.*;
 import com.Evolution.abstracts.ATrait;
+import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Game;
 
 
@@ -30,6 +31,12 @@ public class Foraging extends ATrait {
             throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
             SpeciesFullException, WateringHoleEmptyException, SpeciesPopulationException, FoodBankEmptyException {
         this.game.feedPlayerSpeciesFromBank(playerIndex[0], speciesIndex[0]);
+        for(ICard c : this.game.getPlayerObjects().get(playerIndex[0]).getSpecies().get(speciesIndex[0]).getTraits()){
+            if(c.getName().equals("Cooperation")){
+                Cooperation coop = new Cooperation(this.game);
+                coop.executeTrait(playerIndex, speciesIndex);
+            }
+        }
     }
 
 }
