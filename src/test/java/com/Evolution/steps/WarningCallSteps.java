@@ -46,4 +46,17 @@ public class WarningCallSteps {
             }
         }
     }
+
+    @And("^all other species except the second player have a body size (\\d+)$")
+    public void allOtherSpeciesExceptTheSecondPlayerHaveABodySize(int arg0) throws Throwable {
+        for(int i=0; i< this.fs.realGame.getPlayerObjects().size(); i++){
+            for(int j=0; j <this.fs.realGame.getPlayerObjects().get(i).getSpecies().size(); j++){
+                if(i != 1) {
+                    for(int z=0; z< 5; z++){
+                        this.fs.realGame.getPlayerObjects().get(i).getSpecies().get(j).increaseBodySize();
+                    }
+                }
+            }
+        }
+    }
 }

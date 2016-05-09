@@ -12,3 +12,15 @@ Feature: Warning Call
     Examples:
       | Num Players | attacking_player_index | attacking_species_index |
       | 3      | 0                      | 0                       |
+
+
+  Scenario Outline: Warning call protect left and right
+    Given I have a new Game with <Num Players> real players
+    And it is currently Phase4 in real game
+    And there is a species that has Carnivore
+    And all other species except the second player have a body size 6
+    And there is another species that has Warning Call
+    Then the carnivore sees no available species to attack
+    Examples:
+      | Num Players | attacking_player_index | attacking_species_index |
+      | 3      | 0                      | 0                       |
