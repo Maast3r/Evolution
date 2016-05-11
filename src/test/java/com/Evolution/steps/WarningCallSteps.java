@@ -37,7 +37,7 @@ public class WarningCallSteps {
                 .addTrait(new Card("Warning Call", "", "", 0 , 0));
     }
 
-    @And("^all other species execpt the climbing have a body size (\\d+)$")
+    @And("^all other species except the one with Warning Call have a body size (\\d+)$")
     public void allOtherSpeciesExecptTheClimbingHaveABodySize(int arg0) throws Throwable {
         for(int i=0; i< this.fs.realGame.getPlayerObjects().size(); i++){
             for(int j=0; j <this.fs.realGame.getPlayerObjects().get(i).getSpecies().size(); j++){
