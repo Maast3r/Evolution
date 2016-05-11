@@ -8,6 +8,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -21,14 +22,23 @@ public class Burrowing {
         s = new Species();
     }
 
+    @And("^the Species is initially full$")
+    public void theSpeciesIsFull() throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        while(!s.isFull()) {
+            s.eat();
+        }
+        assertTrue(s.isFull());
+    }
+
     @And("^the Species is initially holding Burrowing$")
     public void theSpeciesIsInitiallyHoldingBurrowing() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         s.addTrait(new Card("Burrowing", "", "", 1, 0));
         assertTrue(s.getTraits().stream().anyMatch(c->c.getName().equals("Burrowing")));
     }
-
     int size;
+
     @When("^I get the Species body size$")
     public void iGetTheSpeciesBodySize() throws Throwable {
         // Write code here that turns the phrase above into concrete actions
@@ -39,5 +49,20 @@ public class Burrowing {
     public void theSpeciesBodySizeIsAtLeast(int arg0) throws Throwable {
         // Write code here that turns the phrase above into concrete actions
         assertTrue(size >= arg0);
+    }
+
+    @And("^the Species body size is initially (\\d+)$")
+    public void theSpeciesBodySizeIsInitially(int arg0) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        while(s.getBodySize() < arg0) {
+            s.increaseBodySize();
+        }
+        assertEquals(arg0, s.getBodySize());
+    }
+
+    @Then("^the Species body size is now (\\d+)$")
+    public void theSpeciesBodySizeIsNow(int arg0) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        assertEquals(arg0, s.getBodySize());
     }
 }
