@@ -31,4 +31,15 @@ public class Cooperation extends ATrait {
 
         this.game.feedPlayerSpeciesFromBank(playerIndex[0], speciesIndex[0] + 1);
     }
+
+    /**
+     * Empty method
+     * @param ints
+     * @param ints1
+     * @return
+     */
+    @Override
+    public boolean canBeAttacked(int[] ints, int[] ints1) {
+        return false;
+    }
 }
