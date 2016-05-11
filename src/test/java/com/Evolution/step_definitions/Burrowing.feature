@@ -8,7 +8,6 @@ Feature: Burrowing
     When I get the Species body size
     Then the Species body size is at least 13
 
-  @notfull
   Scenario: Burrowing Not Full
     Given I have a new Species
     And the Species body size is initially 1
