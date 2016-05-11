@@ -1046,4 +1046,14 @@ public class GameTests {
         g.getPlayerObjects().get(0).getSpecies().get(0).addTrait(new Card("Carnivore", "", "", 0, 0));
         g.attackSpecies(0, 0, 0, 0);
     }
+
+    @Test
+    public void testGetGameWinner() throws Throwable{
+        Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        for(int i=0; i<3; i++){
+            g.getPlayerObjects().get(0).getSpecies().get(0).increasePopulation();
+            g.getPlayerObjects().get(0).getSpecies().get(0).eat();
+        }
+        assertEquals(0, g.getWinner());
+    }
 }

@@ -47,7 +47,7 @@ public class Symbiosis extends ATrait{
                     .getSpecies().get(speciesIndex[0] + 1).getBodySize() <=
                     this.game.getPlayerObjects().get(playerIndex[0])
                             .getSpecies().get(speciesIndex[0]).getBodySize();
-        
+
         return true;
     }
 }
