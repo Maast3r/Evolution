@@ -144,7 +144,6 @@ public class LongNeckTests {
         s.addTrait(new Card("Cooperation", "", "", 0, 0));
         ATrait t = new LongNeck(g);
         t.executeTrait(new int[]{0, -1}, new int[]{0, -1});
-        System.out.println(s.getEatenFood());
         assertTrue(s.getEatenFood() == 2);
         assertTrue(g.getPlayerObjects().get(0).getSpecies().get(1).getEatenFood() == 2);
     }
