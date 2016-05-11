@@ -29,7 +29,7 @@ public class Species implements ISpecies {
 
     @Override
     public int getBodySize() {
-        return this.bodySize;
+        return this.traits.stream().anyMatch(c->c.getName().equals("Burrowing")) ? this.bodySize + 12 : this.bodySize;
     }
 
     @Override
