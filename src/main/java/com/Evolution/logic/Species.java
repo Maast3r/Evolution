@@ -29,8 +29,9 @@ public class Species implements ISpecies {
 
     @Override
     public int getBodySize() {
-        return this.traits.stream().anyMatch(c -> c.getName().equals("Burrowing")) && isFull() ?
-                this.bodySize + 12 : this.bodySize;
+        return this.traits.parallelStream().anyMatch(c -> c.getName().equals("Burrowing")) && isFull() ?
+                this.bodySize + 12 : this.traits.parallelStream().anyMatch(c -> c.getName().equals("Hard Shell")) ?
+                this.bodySize + 4 : this.bodySize;
     }
 
     @Override
