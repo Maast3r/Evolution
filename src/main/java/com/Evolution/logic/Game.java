@@ -782,4 +782,14 @@ public class Game {
         FatTissue fatTissue = new FatTissue(this);
         fatTissue.executeTrait(new int[]{playerIndex, playerIndex}, new int[]{speciesIndex, speciesIndex}, null);
     }
+
+    public int getWinner() {
+        int winner = 0;
+        for(int i=0; i<this.players.size(); i++){
+            if(this.players.get(i).getFoodBag() > winner) {
+                winner = i;
+            }
+        }
+        return winner;
+    }
 }

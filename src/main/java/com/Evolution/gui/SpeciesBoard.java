@@ -3,6 +3,7 @@ package com.Evolution.gui;
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.ISpecies;
+import com.Evolution.interfaces.InvalidAttackException;
 import com.Evolution.logic.Game;
 import com.Evolution.logic.Species;
 import javafx.beans.value.ChangeListener;
