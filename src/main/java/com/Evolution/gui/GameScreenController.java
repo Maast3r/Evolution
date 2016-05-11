@@ -14,9 +14,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -34,6 +34,7 @@ class GameScreenController implements Initializable {
     private ArrayList<IPlayer> players = new ArrayList<>();
     private ArrayList<MyHBox> playerPanes = new ArrayList<>();
     private Game game;
+    private Stage stage;
 
     @FXML
     private HBox topPane;
@@ -61,8 +62,9 @@ class GameScreenController implements Initializable {
      *
      * @param numPlayers the number of players selected on the start screen
      */
-    GameScreenController(int numPlayers) {
+    GameScreenController(int numPlayers, Stage s) {
         this.numPlayers = numPlayers;
+        this.stage = s;
     }
 
     /**
@@ -266,6 +268,17 @@ class GameScreenController implements Initializable {
     }
 
     void openWinScreen() {
-        // TODO: Open the stupid fucking window and close the main window
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/win_screen.fxml"));
+            WinScreenController controller = new WinScreenController(0, this.stage);
+            loader.setController(controller);
+            Parent p = loader.load();
+            this.stage.setScene(new Scene(p, Color.BLACK));
+            this.stage.show();
+            this.stage.sizeToScene();
+            this.stage.centerOnScreen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

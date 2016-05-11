@@ -480,9 +480,10 @@ class SpeciesBoard extends VBox {
     }
 
     private void checkGameOver() {
-        if(!this.game.isOver() && this.game.getFirstPlayer() == this.playerIndex) {
+        if(this.game.isOver()) {
+            //if(!this.game.isOver() && this.game.getTurn() == this.playerIndex) {
+            // TODO : use this for demo
             this.gameController.openWinScreen();
-            System.out.println("OPEN THE DAMN WINDOW");
         }
     }
 

@@ -14,15 +14,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class WinScreenController implements Initializable {
+class WinScreenController implements Initializable {
     private final int winner;
+    private Stage s;
     @FXML
     private Button newGameButton;
     @FXML
     private Label winLabel;
 
-    WinScreenController(int winner) {
+    WinScreenController(int winner, Stage stage) {
         this.winner = winner;
+        this.s = stage;
     }
 
     @Override
@@ -36,15 +38,11 @@ public class WinScreenController implements Initializable {
 
     private void goToStartScreen() {
         try {
-            // TODO: Make sure this shit works some how
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/game_screen.fxml"));
-            StartScreenController controller = new StartScreenController();
-            loader.setController(controller);
-            Parent p = loader.load();
-            Stage s = (Stage) this.newGameButton.getScene().getWindow();
-            s.setScene(new Scene(p, Color.BLACK));
-            s.show();
-            s.setMaximized(false);
+            Parent p = new FXMLLoader(getClass().getResource("/layouts/start_screen.fxml")).load();
+            this.s.setScene(new Scene(p, Color.BLACK));
+            this.s.sizeToScene();
+            this.s.centerOnScreen();
+            this.s.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
