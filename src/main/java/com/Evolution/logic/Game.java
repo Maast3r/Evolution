@@ -647,14 +647,21 @@ public class Game {
      * @throws InvalidPlayerSelectException propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
      * @throws SpeciesFullException         propagated from {@link Species#eat()}
      * @throws IllegalSpeciesIndexException propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
+     * @throws InvalidAttackException       thrown if the species attacking does not have climbing, but the species under attack does
      */
-    public void attackSpecies(int playerIndex1, int speciesIndex1, int playerIndex2, int speciesIndex2) throws NonCarnivoreAttacking, BodySizeIllegalAttack, SpeciesPopulationException, FoodBankEmptyException, InvalidPlayerSelectException, SpeciesFullException, IllegalSpeciesIndexException, AttackingSelfException {
+    public void attackSpecies(int playerIndex1, int speciesIndex1, int playerIndex2, int speciesIndex2)
+            throws NonCarnivoreAttacking, BodySizeIllegalAttack, SpeciesPopulationException, FoodBankEmptyException,
+            InvalidPlayerSelectException, SpeciesFullException, IllegalSpeciesIndexException, AttackingSelfException,
+            InvalidAttackException {
         if (playerIndex1 == playerIndex2 && speciesIndex1 == speciesIndex2) {
             throw new AttackingSelfException("You can not attack yourself");
         } else if (this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getTraits().stream().filter(c -> c.getName().equals("Carnivore")).count() < 1) {
             throw new NonCarnivoreAttacking("You must be a carnivore to attack");
         } else if (this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getBodySize() <= this.getPlayerObjects().get(playerIndex2).getSpecies().get(speciesIndex2).getBodySize()) {
             throw new BodySizeIllegalAttack("You must have a higher body size than the species which you are attacking");
+        } else if (!this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getTraits().stream().anyMatch(c -> c.getName().equals("Climbing"))
+                && this.getPlayerObjects().get(playerIndex2).getSpecies().get(speciesIndex2).getTraits().stream().anyMatch(c -> c.getName().equals("Climbing"))) {
+            throw new InvalidAttackException("You must have climbing to attack this species");
         }
         IPlayer player1 = this.getPlayerObjects().get(playerIndex1);
         IPlayer player2 = this.getPlayerObjects().get(playerIndex2);
@@ -710,7 +717,8 @@ public class Game {
             for (int i = 0; i < this.players.size(); i++) {
                 for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
                     if (i != attackingPlayer || j != attackingSpecies) {
-                        if (this.players.get(i).getSpecies().get(j).getBodySize() < this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getBodySize()) {
+                        if (this.players.get(i).getSpecies().get(j).getBodySize() <
+                                this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getBodySize()) {
                             attackable.add(new int[]{i, j});
                         }
                     }
