@@ -1,5 +1,6 @@
 package com.Evolution.steps;
 
+import com.Evolution.logic.Card;
 import com.Evolution.traits.Foraging;
 import com.Evolution.traits.WarningCall;
 import cucumber.api.PendingException;
@@ -49,5 +50,11 @@ public class PackHuntingSteps {
         assertArrayEquals(new ArrayList<>(Arrays.asList(new int[]{0, 1}, new int[]{1, 0}
                 , new int[]{1, 1}, new int[]{2, 1})).toArray(), this.fs.realGame
                 .getAttackableSpecies(0, 0).toArray());
+    }
+
+    @And("^the carnivore has Pack Hunting$")
+    public void theCarnivoreHasPackHunting() throws Throwable {
+        this.fs.realGame.getPlayerObjects().get(0).getSpecies().get(0)
+                .addTrait(new Card("Pack Hunting", "", "", 0 , 0));
     }
 }

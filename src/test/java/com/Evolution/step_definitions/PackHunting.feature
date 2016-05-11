@@ -6,6 +6,7 @@ Feature: Pack Hunting
     Given I have a new Game with <Num Players> real players
     And it is currently Phase4 in real game
     And there is a species that has Carnivore
+    And the carnivore has Pack Hunting
     And one species has a body size of 5
     And the next has a body size of 6
     And the carnivore has a body size of 3 and a population of 3
