@@ -131,4 +131,21 @@ public class LongNeckTests {
         t.executeTrait(new int[]{0, -1}, new int[]{0, -1});
         assertTrue(s.getEatenFood() == 2);
     }
+
+    @Test
+    public void callWithRealGameWithForagingAndCooperation() throws SpeciesFullException, SpeciesPopulationException, FoodBankEmptyException, InvalidPlayerSelectException, IllegalSpeciesIndexException, WateringHoleEmptyException, NullGameObjectException, IllegalCardFoodException, IllegalCardDirectionException, SpeciesNumberTraitsException, SpeciesDuplicateTraitException, IllegalNumberOfPlayers {
+        Game g = new Game(generateNumRealPlayers(3), EasyMock.niceMock(IWateringHole.class), EasyMock.niceMock(IDeck.class), EasyMock.niceMock(IDeck.class));
+        IPlayer p = g.getPlayerObjects().get(0);
+        ISpecies s = p.getSpecies().get(0);
+        s.increasePopulation();
+        p.addSpeciesRight(new Species());
+        p.getSpecies().get(1).increasePopulation();
+        s.addTrait(new Card("Foraging", "", "", 0, 0));
+        s.addTrait(new Card("Cooperation", "", "", 0, 0));
+        ATrait t = new LongNeck(g);
+        t.executeTrait(new int[]{0, -1}, new int[]{0, -1});
+        System.out.println(s.getEatenFood());
+        assertTrue(s.getEatenFood() == 2);
+        assertTrue(g.getPlayerObjects().get(0).getSpecies().get(1).getEatenFood() == 2);
+    }
 }
