@@ -714,17 +714,21 @@ public class Game {
 
         ArrayList<int[]> attackable = new ArrayList<>();
         boolean hasCarnivore = false;
+        int carnivoreAttackingBodySize = this.players.get(attackingPlayer).getSpecies().get(attackingSpecies)
+                .getBodySize();
         ArrayList<ICard> traits = this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getTraits();
         for(ICard c : traits){
             if(c.getName().equals("Carnivore"))hasCarnivore = true;
+            if(c.getName().equals("Pack Hunting"))
+                carnivoreAttackingBodySize += this.players.get(attackingPlayer).getSpecies().get(attackingSpecies)
+                        .getPopulation();
         }
         if(hasCarnivore) {
             for (int i = 0; i < this.players.size(); i++) {
                 for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
                     HashSet<Boolean> canBeAttacked = new HashSet<>();
                     if (i != attackingPlayer || j != attackingSpecies) {
-                        if (this.players.get(i).getSpecies().get(j).getBodySize() < this.players.get(attackingPlayer)
-                                .getSpecies().get(attackingSpecies).getBodySize()) {
+                        if (this.players.get(i).getSpecies().get(j).getBodySize() < carnivoreAttackingBodySize) {
                             ArrayList<ICard> attackeeTraits = this.players.get(i).getSpecies().get(j).getTraits();
                             if ((j - 1) >= 0 && (j - 1) < this.players.get(i).getSpecies().size()) {
                                 ArrayList<ICard> attackeeTraitsL = this.players.get(i).getSpecies().get(j - 1).getTraits();
@@ -781,5 +785,15 @@ public class Game {
         }
         FatTissue fatTissue = new FatTissue(this);
         fatTissue.executeTrait(new int[]{playerIndex, playerIndex}, new int[]{speciesIndex, speciesIndex}, null);
+    }
+
+    public int getWinner() {
+        int winner = 0;
+        for(int i=0; i<this.players.size(); i++){
+            if(this.players.get(i).getFoodBag() > winner) {
+                winner = i;
+            }
+        }
+        return winner;
     }
 }
