@@ -13,7 +13,7 @@ public class SymbiosisSteps {
 
     @And("^there is another species that has Symbiosis$")
     public void thereIsAnotherSpeciesThatHasSymbiosis() throws Throwable {
-        this.fs.realGame.getPlayerObjects().get(1).getSpecies().get(1)
+        this.fs.realGame.getPlayerObjects().get(1).getSpecies().get(0)
                 .addTrait(new Card("Symbiosis", "", "", 0 , 0));
     }
 
@@ -22,7 +22,7 @@ public class SymbiosisSteps {
         for(int i=0; i< this.fs.realGame.getPlayerObjects().size(); i++){
             for(int j=0; j <this.fs.realGame.getPlayerObjects().get(i).getSpecies().size(); j++){
                 if(i == 1 && j == 0) {
-                }else { 
+                }else {
                     for(int z=0; z< 5; z++){
                         this.fs.realGame.getPlayerObjects().get(i).getSpecies().get(j).increaseBodySize();
                     }

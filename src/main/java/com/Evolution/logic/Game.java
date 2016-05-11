@@ -54,6 +54,7 @@ public class Game {
         this.feedTraitActions.put("Foraging", new Foraging(this));
 
         this.defendTraitActions.put("Warning Call", new WarningCall(this));
+        this.defendTraitActions.put("Symbiosis", new Symbiosis(this));
     }
 
     /**
@@ -739,6 +740,7 @@ public class Game {
                             }
                             for(ICard c: attackeeTraits) {
                                 if(this.defendTraitActions.containsKey(c.getName())) {
+                                    System.out.println("A:LFJL:SDJFL:SDJFKL:SJDFKL:JFJL:SFJFJ\n");
                                     canBeAttacked.add(this.defendTraitActions.get(c.getName())
                                             .canBeAttacked(new int[]{i, attackingPlayer},
                                                     new int[]{j, attackingSpecies}));
