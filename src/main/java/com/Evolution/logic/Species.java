@@ -29,7 +29,8 @@ public class Species implements ISpecies {
 
     @Override
     public int getBodySize() {
-        return this.traits.stream().anyMatch(c->c.getName().equals("Burrowing")) ? this.bodySize + 12 : this.bodySize;
+        return this.traits.stream().anyMatch(c -> c.getName().equals("Burrowing")) && isFull() ?
+                this.bodySize + 12 : this.bodySize;
     }
 
     @Override
@@ -39,7 +40,7 @@ public class Species implements ISpecies {
 
     @Override
     public void increasePopulation() throws SpeciesPopulationException {
-        if(this.population == 6) {
+        if (this.population == 6) {
             throw new SpeciesPopulationException("Your species population is 6.\n");
         }
         this.population++;
@@ -47,7 +48,7 @@ public class Species implements ISpecies {
 
     @Override
     public void decreasePopulation() throws SpeciesPopulationException {
-        if(this.population == 0){
+        if (this.population == 0) {
             throw new SpeciesPopulationException("Your species population is 0.\n");
         }
         this.population--;
@@ -55,7 +56,7 @@ public class Species implements ISpecies {
 
     @Override
     public void increaseBodySize() throws SpeciesBodySizeException {
-        if(this.bodySize == 6){
+        if (this.bodySize == 6) {
             throw new SpeciesBodySizeException("Your species body size is 6.\n");
         }
         this.bodySize++;
@@ -68,12 +69,12 @@ public class Species implements ISpecies {
 
     @Override
     public void addTrait(ICard c) throws SpeciesNumberTraitsException, SpeciesDuplicateTraitException, NullGameObjectException {
-        if(c==null) {
+        if (c == null) {
             throw new NullGameObjectException("The provided ICard must not be null");
         }
-        if(this.getTraits().size() == 3){
+        if (this.getTraits().size() == 3) {
             throw new SpeciesNumberTraitsException("Too many traits");
-        } else if(this.getTraits().stream().filter(t -> t.getName().equals(c.getName())).count() > 0){
+        } else if (this.getTraits().stream().filter(t -> t.getName().equals(c.getName())).count() > 0) {
             throw new SpeciesDuplicateTraitException("Duplicate trait tried to be added");
         }
         this.traits.add(c);
@@ -81,10 +82,10 @@ public class Species implements ISpecies {
 
     @Override
     public ICard removeTrait(ICard c) throws SpeciesTraitNotFoundException, NullGameObjectException {
-        if(c==null) {
+        if (c == null) {
             throw new NullGameObjectException("Cannot remove a null Card from a species");
         }
-        if(!(this.getTraits().stream().filter(t -> t.getName().equals(c.getName())).count() > 0)){
+        if (!(this.getTraits().stream().filter(t -> t.getName().equals(c.getName())).count() > 0)) {
             throw new SpeciesTraitNotFoundException("The trait can't be removed as it is not a trait of the species");
         }
         ICard cardToRemove = this.traits.stream().filter(t -> t.getName().equals(c.getName())).iterator().next();
@@ -116,7 +117,7 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public ArrayList<ICard> getTraits(){
+    public ArrayList<ICard> getTraits() {
         return this.traits;
     }
 
@@ -131,7 +132,7 @@ public class Species implements ISpecies {
     }
 
     @Override
-    public void resetEatenTempFood(){
+    public void resetEatenTempFood() {
         this.tempFood = 0;
     }
 }
