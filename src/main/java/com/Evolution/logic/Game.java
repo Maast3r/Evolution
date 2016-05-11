@@ -1,15 +1,14 @@
 package com.Evolution.logic;
 
 import com.Evolution.abstracts.ATrait;
+import com.Evolution.abstracts.CTrait;
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.*;
-import com.Evolution.traits.Cooperation;
-import com.Evolution.traits.Fertile;
-import com.Evolution.traits.Foraging;
-import com.Evolution.traits.LongNeck;
+import com.Evolution.traits.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Game logic controller class. Handles most interaction between related game objects.
@@ -24,6 +23,7 @@ public class Game {
     private int foodBank = 240;
     private IPhases currentPhase = new PhaseOne(this);
     private HashMap<String, ATrait> feedTraitActions = new HashMap<>();
+    private HashMap<String, ATrait> defendTraitActions = new HashMap<>();
     private boolean over;
 
     //TODO: Add Null check for every single method that takes in an Object
@@ -53,6 +53,9 @@ public class Game {
         this.discardPile = discardPile;
         this.feedTraitActions.put("Cooperation", new Cooperation(this));
         this.feedTraitActions.put("Foraging", new Foraging(this));
+
+        this.defendTraitActions.put("Warning Call", new WarningCall(this));
+        this.defendTraitActions.put("Symbiosis", new Symbiosis(this));
     }
 
     /**
@@ -649,14 +652,21 @@ public class Game {
      * @throws InvalidPlayerSelectException propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
      * @throws SpeciesFullException         propagated from {@link Species#eat()}
      * @throws IllegalSpeciesIndexException propagated from {@link Game#feedPlayerSpeciesFromBank(int, int)}
+     * @throws InvalidAttackException       thrown if the species attacking does not have climbing, but the species under attack does
      */
-    public void attackSpecies(int playerIndex1, int speciesIndex1, int playerIndex2, int speciesIndex2) throws NonCarnivoreAttacking, BodySizeIllegalAttack, SpeciesPopulationException, FoodBankEmptyException, InvalidPlayerSelectException, SpeciesFullException, IllegalSpeciesIndexException, AttackingSelfException {
+    public void attackSpecies(int playerIndex1, int speciesIndex1, int playerIndex2, int speciesIndex2)
+            throws NonCarnivoreAttacking, BodySizeIllegalAttack, SpeciesPopulationException, FoodBankEmptyException,
+            InvalidPlayerSelectException, SpeciesFullException, IllegalSpeciesIndexException, AttackingSelfException,
+            InvalidAttackException {
         if (playerIndex1 == playerIndex2 && speciesIndex1 == speciesIndex2) {
             throw new AttackingSelfException("You can not attack yourself");
         } else if (this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getTraits().stream().filter(c -> c.getName().equals("Carnivore")).count() < 1) {
             throw new NonCarnivoreAttacking("You must be a carnivore to attack");
         } else if (this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getBodySize() <= this.getPlayerObjects().get(playerIndex2).getSpecies().get(speciesIndex2).getBodySize()) {
             throw new BodySizeIllegalAttack("You must have a higher body size than the species which you are attacking");
+        } else if (!this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getTraits().stream().anyMatch(c -> c.getName().equals("Climbing"))
+                && this.getPlayerObjects().get(playerIndex2).getSpecies().get(speciesIndex2).getTraits().stream().anyMatch(c -> c.getName().equals("Climbing"))) {
+            throw new InvalidAttackException("You must have climbing to attack this species");
         }
         IPlayer player1 = this.getPlayerObjects().get(playerIndex1);
         IPlayer player2 = this.getPlayerObjects().get(playerIndex2);
@@ -711,14 +721,65 @@ public class Game {
         if(hasCarnivore) {
             for (int i = 0; i < this.players.size(); i++) {
                 for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
+                    HashSet<Boolean> canBeAttacked = new HashSet<>();
                     if (i != attackingPlayer || j != attackingSpecies) {
-                        if (this.players.get(i).getSpecies().get(j).getBodySize() < this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getBodySize()) {
-                            attackable.add(new int[]{i, j});
+                        if (this.players.get(i).getSpecies().get(j).getBodySize() < this.players.get(attackingPlayer)
+                                .getSpecies().get(attackingSpecies).getBodySize()) {
+                            ArrayList<ICard> attackeeTraits = this.players.get(i).getSpecies().get(j).getTraits();
+                            if ((j - 1) >= 0 && (j - 1) < this.players.get(i).getSpecies().size()) {
+                                ArrayList<ICard> attackeeTraitsL = this.players.get(i).getSpecies().get(j - 1).getTraits();
+                                for (ICard c : attackeeTraitsL) {
+                                    if (c.getName().equals("Warning Call")) {
+                                        canBeAttacked.add(this.defendTraitActions.get(c.getName())
+                                                .canBeAttacked(new int[]{i, attackingPlayer},
+                                                        new int[]{j, attackingSpecies}));
+                                    }
+                                }
+                            }
+                            if ((j + 1) >= 0 && (j + 1) < this.players.get(i).getSpecies().size()) {
+                                ArrayList<ICard> attackeeTraitsR = this.players.get(i).getSpecies().get(j + 1).getTraits();
+                                for (ICard c : attackeeTraitsR) {
+                                    if (c.getName().equals("Warning Call")) {
+                                        canBeAttacked.add(this.defendTraitActions.get(c.getName())
+                                                .canBeAttacked(new int[]{i, attackingPlayer},
+                                                        new int[]{j, attackingSpecies}));
+                                    }
+                                }
+                            }
+                            for (ICard c : attackeeTraits) {
+                                if (this.defendTraitActions.containsKey(c.getName())) {
+                                    canBeAttacked.add(this.defendTraitActions.get(c.getName())
+                                            .canBeAttacked(new int[]{i, attackingPlayer},
+                                                    new int[]{j, attackingSpecies}));
+                                }
+                            }
+                            if (!canBeAttacked.contains(false) || canBeAttacked.size() == 0) {
+                                attackable.add(new int[]{i, j});
+                            }
                         }
                     }
                 }
             }
         }
         return attackable;
+    }
+
+    /**
+     * @param playerIndex The index of the player that is eating onto fat tissue
+     * @param speciesIndex The index of the species that is eating onto fat tissue
+     * @throws InvalidPlayerSelectException if the player index is out of range
+     * @throws IllegalSpeciesIndexException if the species index is out of range
+     * @throws WateringHoleEmptyException propagated from {@link FatTissue#executeTrait(int[], int[], ICard)}
+     * @throws SpeciesPopulationException propagated from {@link FatTissue#executeTrait(int[], int[], ICard)}
+     * @throws TempFoodMaxException propagated from {@link FatTissue#executeTrait(int[], int[], ICard)}
+     */
+    public void fatTissueEat(int playerIndex, int speciesIndex) throws InvalidPlayerSelectException, IllegalSpeciesIndexException, WateringHoleEmptyException, SpeciesPopulationException, TempFoodMaxException {
+        if (this.players.size() <= playerIndex || playerIndex < 0) {
+            throw new InvalidPlayerSelectException("Player index is out of range!");
+        } else if (speciesIndex < 0 || speciesIndex >= this.players.get(playerIndex).getSpecies().size()) {
+            throw new IllegalSpeciesIndexException("Species index is out of range!");
+        }
+        FatTissue fatTissue = new FatTissue(this);
+        fatTissue.executeTrait(new int[]{playerIndex, playerIndex}, new int[]{speciesIndex, speciesIndex}, null);
     }
 }

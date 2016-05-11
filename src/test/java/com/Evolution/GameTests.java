@@ -1040,10 +1040,29 @@ public class GameTests {
     }
 
     @Test(expected = AttackingSelfException.class)
-    public void testAttackingSelf() throws IllegalNumberOfPlayers, NullGameObjectException, IllegalCardFoodException, IllegalCardDirectionException, SpeciesNumberTraitsException, SpeciesDuplicateTraitException, SpeciesFullException, BodySizeIllegalAttack, NonCarnivoreAttacking, SpeciesPopulationException, FoodBankEmptyException, IllegalSpeciesIndexException, InvalidPlayerSelectException, AttackingSelfException {
+    public void testAttackingSelf() throws IllegalNumberOfPlayers, NullGameObjectException, IllegalCardFoodException, IllegalCardDirectionException, SpeciesNumberTraitsException, SpeciesDuplicateTraitException, SpeciesFullException, BodySizeIllegalAttack, NonCarnivoreAttacking, SpeciesPopulationException, FoodBankEmptyException, IllegalSpeciesIndexException, InvalidPlayerSelectException, AttackingSelfException, InvalidAttackException {
         Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
         g.getPlayerObjects().get(0).addSpeciesLeft(new Species());
         g.getPlayerObjects().get(0).getSpecies().get(0).addTrait(new Card("Carnivore", "", "", 0, 0));
         g.attackSpecies(0, 0, 0, 0);
+    }
+
+//    @Test
+//    public void testGetGameWinner() throws Throwable {
+//        Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+//        for (int i = 0; i < 3; i++) {
+//            g.getPlayerObjects().get(0).getSpecies().get(0).increasePopulation();
+//            g.getPlayerObjects().get(0).getSpecies().get(0).eat();
+//        }
+//        assertEquals(0, g.getWinner());
+//    }
+
+    @Test (expected = InvalidAttackException.class)
+    public void testAttackingNoClimbing() throws IllegalNumberOfPlayers, NullGameObjectException, IllegalCardFoodException, IllegalCardDirectionException, SpeciesNumberTraitsException, SpeciesDuplicateTraitException, SpeciesFullException, BodySizeIllegalAttack, NonCarnivoreAttacking, SpeciesPopulationException, FoodBankEmptyException, IllegalSpeciesIndexException, InvalidPlayerSelectException, AttackingSelfException, SpeciesBodySizeException, InvalidAttackException {
+        Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+        g.getPlayerObjects().get(0).getSpecies().get(0).addTrait(new Card("Carnivore", "", "", 0, 0));
+        g.getPlayerObjects().get(1).getSpecies().get(0).addTrait(new Card("Climbing", "", "", 0, 0));
+        g.getPlayerObjects().get(0).getSpecies().get(0).increaseBodySize();
+        g.attackSpecies(0, 0, 1, 0);
     }
 }

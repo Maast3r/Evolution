@@ -3,6 +3,7 @@ package com.Evolution.gui;
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.ISpecies;
+import com.Evolution.interfaces.InvalidAttackException;
 import com.Evolution.logic.Game;
 import com.Evolution.logic.Species;
 import javafx.application.Platform;
@@ -201,7 +202,7 @@ class SpeciesBoard extends VBox {
                     SpeciesDuplicateTraitException | NullGameObjectException | IllegalCardRemovalException |
                     WateringHoleEmptyException | SpeciesFullException | FoodBankEmptyException |
                     InvalidWateringHoleCardCountException | BodySizeIllegalAttack | NonCarnivoreAttacking |
-                    AttackingSelfException e) {
+                    AttackingSelfException | InvalidAttackException e) {
                 e.printStackTrace();
             }
         };
@@ -219,7 +220,7 @@ class SpeciesBoard extends VBox {
             SpeciesTraitNotFoundException, NullGameObjectException, SpeciesNumberTraitsException,
             SpeciesDuplicateTraitException, IllegalCardRemovalException, WateringHoleEmptyException,
             SpeciesFullException, FoodBankEmptyException, InvalidWateringHoleCardCountException, NonCarnivoreAttacking,
-            BodySizeIllegalAttack, AttackingSelfException {
+            BodySizeIllegalAttack, AttackingSelfException, InvalidAttackException {
         // perform selected action
         switch (action) {
             case ACTIONS:

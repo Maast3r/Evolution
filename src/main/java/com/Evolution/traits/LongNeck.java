@@ -41,7 +41,21 @@ public class LongNeck extends ATrait {
             if(c.getName().equals("Foraging")){
                 Foraging f = new Foraging(this.game);
                 f.executeTrait(playerIndex, speciesIndex);
+            } else if(c.getName().equals("Cooperation")){
+                Cooperation coop = new Cooperation(this.game);
+                coop.executeTrait(playerIndex, speciesIndex);
             }
         }
+    }
+
+    /**
+     * Empty method
+     * @param ints
+     * @param ints1
+     * @return
+     */
+    @Override
+    public boolean canBeAttacked(int[] ints, int[] ints1) {
+        return false;
     }
 }
