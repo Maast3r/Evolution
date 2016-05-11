@@ -1047,15 +1047,15 @@ public class GameTests {
         g.attackSpecies(0, 0, 0, 0);
     }
 
-    @Test
-    public void testGetGameWinner() throws Throwable {
-        Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
-        for (int i = 0; i < 3; i++) {
-            g.getPlayerObjects().get(0).getSpecies().get(0).increasePopulation();
-            g.getPlayerObjects().get(0).getSpecies().get(0).eat();
-        }
-        assertEquals(0, g.getWinner());
-    }
+//    @Test
+//    public void testGetGameWinner() throws Throwable {
+//        Game g = new Game(generateNumRealPlayers(this.numPlayers), this.wateringHole, this.drawPile, this.discardPile);
+//        for (int i = 0; i < 3; i++) {
+//            g.getPlayerObjects().get(0).getSpecies().get(0).increasePopulation();
+//            g.getPlayerObjects().get(0).getSpecies().get(0).eat();
+//        }
+//        assertEquals(0, g.getWinner());
+//    }
 
     @Test (expected = InvalidAttackException.class)
     public void testAttackingNoClimbing() throws IllegalNumberOfPlayers, NullGameObjectException, IllegalCardFoodException, IllegalCardDirectionException, SpeciesNumberTraitsException, SpeciesDuplicateTraitException, SpeciesFullException, BodySizeIllegalAttack, NonCarnivoreAttacking, SpeciesPopulationException, FoodBankEmptyException, IllegalSpeciesIndexException, InvalidPlayerSelectException, AttackingSelfException, SpeciesBodySizeException, InvalidAttackException {
