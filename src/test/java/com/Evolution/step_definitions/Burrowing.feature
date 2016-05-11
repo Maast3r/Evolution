@@ -1,5 +1,6 @@
 # Created by brownba1 at 5/11/2016
 Feature: Burrowing
+  During gameplay, when a Species is full, then its body size should increase to at least 13.
 
   Scenario: Burrowing Body Size Increase
     Given I have a new Species
