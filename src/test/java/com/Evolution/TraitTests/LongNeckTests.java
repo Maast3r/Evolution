@@ -41,10 +41,10 @@ public class LongNeckTests {
 
         ATrait t = new LongNeck(g);
         g.feedPlayerSpeciesFromBank(0, 0);
-        EasyMock.expect(g.getPlayerObjects()).andReturn(new ArrayList<>(Arrays.asList(p)));
-        EasyMock.expect(p.getSpecies()).andReturn(new ArrayList<>(Arrays.asList(s)));
-        EasyMock.expect(s.getTraits()).andReturn(new ArrayList<>(Arrays.asList(c)));
-        EasyMock.expect(c.getName()).andReturn("Foraging");
+        EasyMock.expect(g.getPlayerObjects()).andReturn(new ArrayList<>(Arrays.asList(p))).times(2);
+        EasyMock.expect(p.getSpecies()).andReturn(new ArrayList<>(Arrays.asList(s))).times(2);
+        EasyMock.expect(s.getTraits()).andReturn(new ArrayList<>(Arrays.asList(c))).times(2);
+        EasyMock.expect(c.getName()).andReturn("Foraging").times(2);
         EasyMock.replay(g, p, s, c);
         t.executeTrait(new int[]{0, -1}, new int[]{0, -1});
         EasyMock.verify(g, p, s, c);
