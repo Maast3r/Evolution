@@ -714,7 +714,6 @@ public class Game {
                 - loop through all traits and run 'canBeAttacked' to them.
                 - if 'canBeAttacked' returns true, we add it to the list
          */
-
         ArrayList<int[]> attackable = new ArrayList<>();
         boolean hasCarnivore = false;
         ArrayList<ICard> traits = this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getTraits();
