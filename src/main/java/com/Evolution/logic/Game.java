@@ -8,6 +8,7 @@ import com.Evolution.traits.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Game logic controller class. Handles most interaction between related game objects.
@@ -22,6 +23,7 @@ public class Game {
     private int foodBank = 240;
     private IPhases currentPhase = new PhaseOne(this);
     private HashMap<String, ATrait> feedTraitActions = new HashMap<>();
+    private HashMap<String, ATrait> defendTraitActions = new HashMap<>();
     private boolean over;
 
     //TODO: Add Null check for every single method that takes in an Object
@@ -51,6 +53,9 @@ public class Game {
         this.discardPile = discardPile;
         this.feedTraitActions.put("Cooperation", new Cooperation(this));
         this.feedTraitActions.put("Foraging", new Foraging(this));
+
+        this.defendTraitActions.put("Warning Call", new WarningCall(this));
+        this.defendTraitActions.put("Symbiosis", new Symbiosis(this));
     }
 
     /**
@@ -716,13 +721,21 @@ public class Game {
          */
         ArrayList<int[]> attackable = new ArrayList<>();
         boolean hasCarnivore = false;
+        int carnivoreAttackingBodySize = this.players.get(attackingPlayer).getSpecies().get(attackingSpecies)
+                .getBodySize();
         ArrayList<ICard> traits = this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getTraits();
         for (ICard c : traits) {
             if (c.getName().equals("Carnivore")) hasCarnivore = true;
+        for(ICard c : traits){
+            if(c.getName().equals("Carnivore"))hasCarnivore = true;
+            if(c.getName().equals("Pack Hunting"))
+                carnivoreAttackingBodySize += this.players.get(attackingPlayer).getSpecies().get(attackingSpecies)
+                        .getPopulation();
         }
         if (hasCarnivore) {
             for (int i = 0; i < this.players.size(); i++) {
                 for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
+                    HashSet<Boolean> canBeAttacked = new HashSet<>();
                     if (i != attackingPlayer || j != attackingSpecies) {
                         if (this.players.get(i).getSpecies().get(j).getBodySize() <
                                 this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getBodySize()
@@ -731,6 +744,38 @@ public class Game {
                                 && this.getPlayerObjects().get(i).getSpecies().get(j).getTraits().stream()
                                 .anyMatch(c -> c.getName().equals("Climbing")))) {
                             attackable.add(new int[]{i, j});
+                        if (this.players.get(i).getSpecies().get(j).getBodySize() < carnivoreAttackingBodySize) {
+                            ArrayList<ICard> attackeeTraits = this.players.get(i).getSpecies().get(j).getTraits();
+                            if ((j - 1) >= 0 && (j - 1) < this.players.get(i).getSpecies().size()) {
+                                ArrayList<ICard> attackeeTraitsL = this.players.get(i).getSpecies().get(j - 1).getTraits();
+                                for (ICard c : attackeeTraitsL) {
+                                    if (c.getName().equals("Warning Call")) {
+                                        canBeAttacked.add(this.defendTraitActions.get(c.getName())
+                                                .canBeAttacked(new int[]{i, attackingPlayer},
+                                                        new int[]{j, attackingSpecies}));
+                                    }
+                                }
+                            }
+                            if ((j + 1) >= 0 && (j + 1) < this.players.get(i).getSpecies().size()) {
+                                ArrayList<ICard> attackeeTraitsR = this.players.get(i).getSpecies().get(j + 1).getTraits();
+                                for (ICard c : attackeeTraitsR) {
+                                    if (c.getName().equals("Warning Call")) {
+                                        canBeAttacked.add(this.defendTraitActions.get(c.getName())
+                                                .canBeAttacked(new int[]{i, attackingPlayer},
+                                                        new int[]{j, attackingSpecies}));
+                                    }
+                                }
+                            }
+                            for (ICard c : attackeeTraits) {
+                                if (this.defendTraitActions.containsKey(c.getName())) {
+                                    canBeAttacked.add(this.defendTraitActions.get(c.getName())
+                                            .canBeAttacked(new int[]{i, attackingPlayer},
+                                                    new int[]{j, attackingSpecies}));
+                                }
+                            }
+                            if (!canBeAttacked.contains(false) || canBeAttacked.size() == 0) {
+                                attackable.add(new int[]{i, j});
+                            }
                         }
                     }
                 }
@@ -756,5 +801,15 @@ public class Game {
         }
         FatTissue fatTissue = new FatTissue(this);
         fatTissue.executeTrait(new int[]{playerIndex, playerIndex}, new int[]{speciesIndex, speciesIndex}, null);
+    }
+
+    public int getWinner() {
+        int winner = 0;
+        for(int i=0; i<this.players.size(); i++){
+            if(this.players.get(i).getFoodBag() > winner) {
+                winner = i;
+            }
+        }
+        return winner;
     }
 }

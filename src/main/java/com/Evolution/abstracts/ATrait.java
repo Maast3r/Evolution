@@ -29,4 +29,5 @@ public abstract class ATrait {
         return this.game;
     }
 
+    public abstract boolean canBeAttacked(int[] ints, int[] ints1);
 }
