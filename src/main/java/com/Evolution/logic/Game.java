@@ -725,7 +725,11 @@ public class Game {
                 for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
                     if (i != attackingPlayer || j != attackingSpecies) {
                         if (this.players.get(i).getSpecies().get(j).getBodySize() <
-                                this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getBodySize()) {
+                                this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getBodySize()
+                                && !(!this.getPlayerObjects().get(attackingPlayer).getSpecies().get(attackingSpecies)
+                                .getTraits().stream().anyMatch(c -> c.getName().equals("Climbing"))
+                                && this.getPlayerObjects().get(i).getSpecies().get(j).getTraits().stream()
+                                .anyMatch(c -> c.getName().equals("Climbing")))) {
                             attackable.add(new int[]{i, j});
                         }
                     }
