@@ -33,8 +33,8 @@ public class Card implements ICard {
      */
     public Card(String name, String desc, String imgPath, int food, int direction) throws
             IllegalCardDirectionException, IllegalCardFoodException, NullGameObjectException {
-        if (name == null) {
-            throw new NullGameObjectException("The Card name must not be NULL");
+        if (name == null || desc == null) {
+            throw new NullGameObjectException("The Card name & description must not be NULL");
         }
         if (desc == null) {
             throw new NullGameObjectException("The Card description must not be NULL");

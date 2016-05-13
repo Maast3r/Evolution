@@ -226,3 +226,11 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Performed code reviews
     * Worked with Jeremiah to solve GUI bug
     * 50+ LOC
+* Trevor Burch
+    * Implemented interactions between Long Neck, Foraging, and Cooperation traits
+    * Added functionality for Fat Tissue to move food from fat tissue to regular food
+    * Implemented bottom-up testing for Long Neck
+    * Implemented bottom-up testing for Fat Tissue
+    * Went through other traits and made sure they were integration tested
+    * Added new metric
+    * 25+ LOC

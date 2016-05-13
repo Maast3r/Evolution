@@ -9,6 +9,7 @@
         - Must have lack of cohesion of methods <= 5 [Class Metric: Lack of Cohesion of Methods]
         - Must have at least 1 JavaDoc line per method + Another Line for each Parameter, Return, and Thrown Exception
         - Must have 90% Polymorphism Factor (http://www.aivosto.com/project/help/pm-oo-mood.html the higher the better)
+        - Must not have more then 3 nested loops
     4. Action Plan - refactor if method doesn't meet requirements
     5. Collect Data - Use Intellij Metrics Reloaded Plugin
     6. Validate Proxy - http://programmers.stackexchange.com/questions/133404/what-is-the-ideal-length-of-a-method-for-you
