@@ -22,6 +22,7 @@ import java.util.Collection;
 
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.getEasyMockProperty;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -1064,5 +1065,20 @@ public class GameTests {
         g.getPlayerObjects().get(1).getSpecies().get(0).addTrait(new Card("Climbing", "", "", 0, 0));
         g.getPlayerObjects().get(0).getSpecies().get(0).increaseBodySize();
         g.attackSpecies(0, 0, 1, 0);
+    }
+
+    @Test
+    public void testAttackingNoClimbing2() throws IllegalNumberOfPlayers, NullGameObjectException, IllegalCardFoodException, IllegalCardDirectionException, SpeciesNumberTraitsException, SpeciesDuplicateTraitException, SpeciesFullException, BodySizeIllegalAttack, NonCarnivoreAttacking, SpeciesPopulationException, FoodBankEmptyException, IllegalSpeciesIndexException, InvalidPlayerSelectException, AttackingSelfException, SpeciesBodySizeException, InvalidAttackException {
+        Game g = new Game(generateNumRealPlayers(3), this.wateringHole, this.drawPile, this.discardPile);
+        g.getPlayerObjects().get(0).getSpecies().get(0).addTrait(new Card("Carnivore", "", "", 0, 0));
+        g.getPlayerObjects().get(1).getSpecies().get(0).addTrait(new Card("Climbing", "", "", 0, 0));
+        g.getPlayerObjects().get(0).getSpecies().get(0).increaseBodySize();
+        ArrayList<int[]> arr = new ArrayList<>();
+        int[] intarr = {2, 0};
+        arr.add(intarr);
+        ArrayList<int[]> result = g.getAttackableSpecies(0, 0);
+        for (int i = 0; i < result.size(); i++) {
+            assertArrayEquals(arr.get(i), result.get(i));
+        }
     }
 }

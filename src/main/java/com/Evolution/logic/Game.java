@@ -213,7 +213,7 @@ public class Game {
         }
         ICard card = this.drawPile.draw();
         this.players.get(i).addCardToHand(card);
-        if (this.drawPile.getSize() == 0){
+        if (this.drawPile.getSize() == 0) {
             this.over = true;
             this.discardPile.shuffle();
             this.drawPile = this.discardPile;
@@ -678,6 +678,14 @@ public class Game {
                 this.feedPlayerSpeciesFromBank(playerIndex1, speciesIndex1);
             }
         }
+        for (int i = 0; i < this.players.size(); i++) {
+            for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
+                if (this.players.get(i).getSpecies().get(j).getTraits().parallelStream().anyMatch(c ->
+                        c.getName().equals("Scavenger"))) {
+                    feedPlayerSpeciesFromBank(i, j);
+                }
+            }
+        }
     }
 
     /**
@@ -711,24 +719,28 @@ public class Game {
                 - loop through all traits and run 'canBeAttacked' to them.
                 - if 'canBeAttacked' returns true, we add it to the list
          */
-
         ArrayList<int[]> attackable = new ArrayList<>();
         boolean hasCarnivore = false;
         int carnivoreAttackingBodySize = this.players.get(attackingPlayer).getSpecies().get(attackingSpecies)
                 .getBodySize();
         ArrayList<ICard> traits = this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getTraits();
-        for(ICard c : traits){
-            if(c.getName().equals("Carnivore"))hasCarnivore = true;
-            if(c.getName().equals("Pack Hunting"))
+        for (ICard c : traits) {
+            if (c.getName().equals("Carnivore")) hasCarnivore = true;
+            if (c.getName().equals("Pack Hunting"))
                 carnivoreAttackingBodySize += this.players.get(attackingPlayer).getSpecies().get(attackingSpecies)
                         .getPopulation();
         }
-        if(hasCarnivore) {
+        if (hasCarnivore) {
             for (int i = 0; i < this.players.size(); i++) {
                 for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
                     HashSet<Boolean> canBeAttacked = new HashSet<>();
                     if (i != attackingPlayer || j != attackingSpecies) {
-                        if (this.players.get(i).getSpecies().get(j).getBodySize() < carnivoreAttackingBodySize) {
+                        if (this.players.get(i).getSpecies().get(j).getBodySize() <
+                                carnivoreAttackingBodySize
+                                && !(!this.getPlayerObjects().get(attackingPlayer).getSpecies().get(attackingSpecies)
+                                .getTraits().stream().anyMatch(c -> c.getName().equals("Climbing"))
+                                && this.getPlayerObjects().get(i).getSpecies().get(j).getTraits().stream()
+                                .anyMatch(c -> c.getName().equals("Climbing")))) {
                             ArrayList<ICard> attackeeTraits = this.players.get(i).getSpecies().get(j).getTraits();
                             if ((j - 1) >= 0 && (j - 1) < this.players.get(i).getSpecies().size()) {
                                 ArrayList<ICard> attackeeTraitsL = this.players.get(i).getSpecies().get(j - 1).getTraits();
@@ -760,6 +772,7 @@ public class Game {
                             if (!canBeAttacked.contains(false) || canBeAttacked.size() == 0) {
                                 attackable.add(new int[]{i, j});
                             }
+
                         }
                     }
                 }
@@ -769,13 +782,13 @@ public class Game {
     }
 
     /**
-     * @param playerIndex The index of the player that is eating onto fat tissue
+     * @param playerIndex  The index of the player that is eating onto fat tissue
      * @param speciesIndex The index of the species that is eating onto fat tissue
      * @throws InvalidPlayerSelectException if the player index is out of range
      * @throws IllegalSpeciesIndexException if the species index is out of range
-     * @throws WateringHoleEmptyException propagated from {@link FatTissue#executeTrait(int[], int[], ICard)}
-     * @throws SpeciesPopulationException propagated from {@link FatTissue#executeTrait(int[], int[], ICard)}
-     * @throws TempFoodMaxException propagated from {@link FatTissue#executeTrait(int[], int[], ICard)}
+     * @throws WateringHoleEmptyException   propagated from {@link FatTissue#executeTrait(int[], int[], ICard)}
+     * @throws SpeciesPopulationException   propagated from {@link FatTissue#executeTrait(int[], int[], ICard)}
+     * @throws TempFoodMaxException         propagated from {@link FatTissue#executeTrait(int[], int[], ICard)}
      */
     public void fatTissueEat(int playerIndex, int speciesIndex) throws InvalidPlayerSelectException, IllegalSpeciesIndexException, WateringHoleEmptyException, SpeciesPopulationException, TempFoodMaxException {
         if (this.players.size() <= playerIndex || playerIndex < 0) {
