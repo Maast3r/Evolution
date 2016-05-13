@@ -1,4 +1,5 @@
-package com.Evolution.fuzz;
+import java.util.Random;
+/*package com.Evolution.fuzz;
 
 
 import com.Evolution.exceptions.NullGameObjectException;
@@ -10,13 +11,12 @@ import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class GameFuzzTests {
 
     private Game g;
     private Random rn = new Random();
-    /*
+
     private ArrayList<IPlayer> createPlayers() throws Throwable{
         ArrayList<IPlayer> players = new ArrayList<>();
         int j = 3 + (int)(Math.random() * ((5 - 3) + 1));
@@ -49,5 +49,6 @@ public class GameFuzzTests {
             m[i].invoke(rn.nextInt(), rn.nextInt(), rn.nextInt(), rn.nextInt(), rn.nextInt());
         }
     }
-    */
+
 }
+*/
