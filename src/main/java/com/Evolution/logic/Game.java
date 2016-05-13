@@ -741,7 +741,6 @@ public class Game {
                                 .getTraits().stream().anyMatch(c -> c.getName().equals("Climbing"))
                                 && this.getPlayerObjects().get(i).getSpecies().get(j).getTraits().stream()
                                 .anyMatch(c -> c.getName().equals("Climbing")))) {
-                                System.out.println("asdf i " + i + " j " + j + " \n");
                             ArrayList<ICard> attackeeTraits = this.players.get(i).getSpecies().get(j).getTraits();
                             if ((j - 1) >= 0 && (j - 1) < this.players.get(i).getSpecies().size()) {
                                 ArrayList<ICard> attackeeTraitsL = this.players.get(i).getSpecies().get(j - 1).getTraits();
