@@ -51,14 +51,14 @@ public class StartScreenController implements Initializable {
     private void goToGameScene() {
         int players = this.numPlayersChoiceBox.getValue();
         try {
+            Stage s = (Stage) this.numPlayersChoiceBox.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/game_screen.fxml"));
-            GameScreenController controller = new GameScreenController(players);
+            GameScreenController controller = new GameScreenController(players, s);
             loader.setController(controller);
             Parent p = loader.load();
-            Stage s = (Stage) this.numPlayersChoiceBox.getScene().getWindow();
             s.setScene(new Scene(p, Color.BLACK));
-            s.show();
             s.setMaximized(true);
+            s.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

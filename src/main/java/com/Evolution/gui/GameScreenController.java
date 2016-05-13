@@ -7,10 +7,15 @@ import com.Evolution.interfaces.IPlayer;
 import com.Evolution.interfaces.IWateringHole;
 import com.Evolution.logic.*;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +34,7 @@ class GameScreenController implements Initializable {
     private ArrayList<IPlayer> players = new ArrayList<>();
     private ArrayList<MyHBox> playerPanes = new ArrayList<>();
     private Game game;
+    private Stage stage;
 
     @FXML
     private HBox topPane;
@@ -56,8 +62,9 @@ class GameScreenController implements Initializable {
      *
      * @param numPlayers the number of players selected on the start screen
      */
-    GameScreenController(int numPlayers) {
+    GameScreenController(int numPlayers, Stage s) {
         this.numPlayers = numPlayers;
+        this.stage = s;
     }
 
     /**
@@ -260,4 +267,19 @@ class GameScreenController implements Initializable {
         this.playerPanes.add(hBox);
     }
 
+    void openWinScreen() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/win_screen.fxml"));
+            // TODO: Init WinScreen with this.game.getWinner()
+            WinScreenController controller = new WinScreenController(0, this.stage);
+            loader.setController(controller);
+            Parent p = loader.load();
+            this.stage.setScene(new Scene(p, Color.BLACK));
+            this.stage.show();
+            this.stage.sizeToScene();
+            this.stage.centerOnScreen();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

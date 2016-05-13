@@ -207,7 +207,7 @@ class CardPopupController implements Initializable {
      * Returns whether or not the add was successful
      * @return successfulAdd
      */
-    public boolean getSuccessfulAdd() {
+    boolean getSuccessfulAdd() {
         return this.successfulAdd;
     }
 

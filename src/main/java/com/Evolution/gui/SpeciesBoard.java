@@ -2,7 +2,6 @@ package com.Evolution.gui;
 
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
-import com.Evolution.interfaces.ISpecies;
 import com.Evolution.interfaces.InvalidAttackException;
 import com.Evolution.logic.Game;
 import com.Evolution.logic.Species;
@@ -158,50 +157,39 @@ class SpeciesBoard extends VBox {
     private void initChangeListener() {
         this.actionListener = (ObservableValue observable, Object oldValue, Object newValue) -> {
             int val = ((int) newValue < 0) ? 0 : (int) newValue;
-            try {
-                switch (this.game.getPhase().getNumber()) {
-                    case 2:
-                        if (val == 2) {
-                            performAction(Actions.values()[11]);
-                        } else {
-                            performAction(Actions.values()[val]);
-                        }
-                        break;
-                    case 3:
-                        if (val == 8) {
-                            performAction(Actions.values()[10]);
-                        } else {
-                            performAction(Actions.values()[val]);
-                        }
-                        break;
-                    case 4:
-                        if (carnivore) {
-                            if (val == 2) {
-                                performAction(Actions.values()[9]);
-                            } else {
-                                performAction(Actions.values()[val]);
-                            }
-                        } else {
-                            if (val == 2) {
-                                performAction(Actions.values()[8]);
-                            } else {
-                                performAction(Actions.values()[val]);
-                            }
-                        }
-                        break;
-                    default:
+            switch (this.game.getPhase().getNumber()) {
+                case 2:
+                    if (val == 2) {
+                        performAction(Actions.values()[11]);
+                    } else {
                         performAction(Actions.values()[val]);
-                        break;
-                }
-            } catch (InvalidDiscardToWateringHoleException | InvalidAddToWateringHoleException |
-                    SpeciesPopulationException | IllegalSpeciesIndexException | IllegalCardDiscardException |
-                    SpeciesBodySizeException | DeckEmptyException | IllegalCardDirectionException |
-                    InvalidPlayerSelectException | SpeciesTraitNotFoundException | SpeciesNumberTraitsException |
-                    SpeciesDuplicateTraitException | NullGameObjectException | IllegalCardRemovalException |
-                    WateringHoleEmptyException | SpeciesFullException | FoodBankEmptyException |
-                    InvalidWateringHoleCardCountException | BodySizeIllegalAttack | NonCarnivoreAttacking |
-                    AttackingSelfException | InvalidAttackException e) {
-                e.printStackTrace();
+                    }
+                    break;
+                case 3:
+                    if (val == 8) {
+                        performAction(Actions.values()[10]);
+                    } else {
+                        performAction(Actions.values()[val]);
+                    }
+                    break;
+                case 4:
+                    if (carnivore) {
+                        if (val == 2) {
+                            performAction(Actions.values()[9]);
+                        } else {
+                            performAction(Actions.values()[val]);
+                        }
+                    } else {
+                        if (val == 2) {
+                            performAction(Actions.values()[8]);
+                        } else {
+                            performAction(Actions.values()[val]);
+                        }
+                    }
+                    break;
+                default:
+                    performAction(Actions.values()[val]);
+                    break;
             }
         };
     }
@@ -211,14 +199,7 @@ class SpeciesBoard extends VBox {
      *
      * @param action the selected action
      */
-    private void performAction(Actions action) throws InvalidDiscardToWateringHoleException,
-            InvalidAddToWateringHoleException, SpeciesPopulationException,
-            IllegalSpeciesIndexException, IllegalCardDiscardException, SpeciesBodySizeException,
-            InvalidPlayerSelectException, IllegalCardDirectionException, DeckEmptyException,
-            SpeciesTraitNotFoundException, NullGameObjectException, SpeciesNumberTraitsException,
-            SpeciesDuplicateTraitException, IllegalCardRemovalException, WateringHoleEmptyException,
-            SpeciesFullException, FoodBankEmptyException, InvalidWateringHoleCardCountException, NonCarnivoreAttacking,
-            BodySizeIllegalAttack, AttackingSelfException, InvalidAttackException {
+    private void performAction(Actions action) {
         // perform selected action
         switch (action) {
             case ACTIONS:
@@ -229,102 +210,170 @@ class SpeciesBoard extends VBox {
                 this.selectedCard = null;
                 break;
             case ADD_TRAIT:
-                boolean add = openCardWindow(Actions.ADD_TRAIT);
-                 if (this.selectedCard != null && add) {
-                    this.game.addTraitToSpecies(this.playerIndex, this.speciesNum, this.selectedCard);
-                    this.playerPane.updateGameScreen();
-                    this.selectedCard = null;
+                try {
+                    boolean add = openCardWindow(Actions.ADD_TRAIT);
+                    if (this.selectedCard != null && add) {
+                        this.game.addTraitToSpecies(this.playerIndex, this.speciesNum, this.selectedCard);
+                        this.playerPane.updateGameScreen();
+                        this.selectedCard = null;
+                    }
+                } catch (SpeciesDuplicateTraitException | InvalidPlayerSelectException | IllegalSpeciesIndexException
+                        | IllegalCardRemovalException | NullGameObjectException | SpeciesNumberTraitsException e) {
+                    openExceptionPopup(e);
+                    e.printStackTrace();
                 }
                 break;
             case REMOVE_TRAIT:
-                openTraitWindow();
-                if (this.selectedCard != null) {
-                    this.game.removeTraitFromSpecies(this.playerIndex, this.speciesNum, this.selectedCard);
-                    this.playerPane.updateGameScreen();
-                    this.selectedCard = null;
+                try {
+                    openTraitWindow();
+                    if (this.selectedCard != null) {
+                        this.game.removeTraitFromSpecies(this.playerIndex, this.speciesNum, this.selectedCard);
+                        this.playerPane.updateGameScreen();
+                        this.selectedCard = null;
+                    }
+                } catch (SpeciesTraitNotFoundException | NullGameObjectException | IllegalSpeciesIndexException
+                        | InvalidPlayerSelectException e) {
+                    openExceptionPopup(e);
+                    e.printStackTrace();
                 }
                 break;
             case ADD_SPECIES_LEFT:
-                openCardWindow(Actions.ADD_SPECIES_LEFT);
-                if (this.selectedCard != null) {
-                    this.playerPane.updateGameScreen();
-                    this.playerPane.addSpecies(0);
-                    this.game.discardForLeftSpecies(this.playerIndex, this.selectedCard, new Species());
-                    this.selectedCard = null;
+                try {
+                    openCardWindow(Actions.ADD_SPECIES_LEFT);
+                    if (this.selectedCard != null) {
+                        this.playerPane.updateGameScreen();
+                        this.playerPane.addSpecies(0);
+                        this.game.discardForLeftSpecies(this.playerIndex, this.selectedCard, new Species());
+                        this.selectedCard = null;
+                    }
+                } catch (InvalidPlayerSelectException | IllegalCardRemovalException |
+                        InvalidWateringHoleCardCountException | NullGameObjectException |
+                        IllegalCardDiscardException | FoodBankEmptyException | IllegalSpeciesIndexException e) {
+                    openExceptionPopup(e);
+                    e.printStackTrace();
                 }
                 break;
             case ADD_SPECIES_RIGHT:
-                openCardWindow(Actions.ADD_SPECIES_RIGHT);
-                if (this.selectedCard != null) {
-                    this.playerPane.updateGameScreen();
-                    this.playerPane.addSpecies(1);
-                    this.game.discardForRightSpecies(this.playerIndex, this.selectedCard, new Species());
-                    this.selectedCard = null;
+                try {
+                    openCardWindow(Actions.ADD_SPECIES_RIGHT);
+                    if (this.selectedCard != null) {
+                        this.playerPane.updateGameScreen();
+                        this.playerPane.addSpecies(1);
+                        this.game.discardForRightSpecies(this.playerIndex, this.selectedCard, new Species());
+                        this.selectedCard = null;
+                    }
+                } catch (InvalidPlayerSelectException | IllegalCardRemovalException |
+                        InvalidWateringHoleCardCountException | NullGameObjectException |
+                        IllegalCardDiscardException | FoodBankEmptyException | IllegalSpeciesIndexException e) {
+                    openExceptionPopup(e);
+                    e.printStackTrace();
                 }
                 break;
             case INCREASE_POPULATION:
-                openCardWindow(Actions.INCREASE_POPULATION);
-                if (this.selectedCard != null) {
-                    this.game.increasePopulation(this.playerIndex, this.speciesNum, this.selectedCard);
-                    this.playerPane.updateGameScreen();
-                    setPopulationSizeLabel(this.game.getPlayerObjects()
-                            .get(this.playerIndex).getSpecies().get(this.speciesNum).getPopulation());
-                    this.selectedCard = null;
+                try {
+                    openCardWindow(Actions.INCREASE_POPULATION);
+                    if (this.selectedCard != null) {
+                        this.game.increasePopulation(this.playerIndex, this.speciesNum, this.selectedCard);
+                        this.playerPane.updateGameScreen();
+                        setPopulationSizeLabel(this.game.getPlayerObjects()
+                                .get(this.playerIndex).getSpecies().get(this.speciesNum).getPopulation());
+                        this.selectedCard = null;
+                    }
+                } catch (InvalidPlayerSelectException | SpeciesPopulationException | IllegalCardRemovalException |
+                        NullGameObjectException | IllegalCardDiscardException | IllegalSpeciesIndexException e) {
+                    openExceptionPopup(e);
+                    e.printStackTrace();
                 }
                 break;
             case INCREASE_BODY_SIZE:
-                openCardWindow(Actions.INCREASE_BODY_SIZE);
-                if (this.selectedCard != null) {
-                    this.game.increaseBodySize(this.playerIndex, this.speciesNum, this.selectedCard);
-                    this.playerPane.updateGameScreen();
-                    setBodySizeLabel(this.game.getPlayerObjects()
-                            .get(this.playerIndex).getSpecies().get(this.speciesNum).getBodySize());
-                    this.selectedCard = null;
+                try {
+                    openCardWindow(Actions.INCREASE_BODY_SIZE);
+                    if (this.selectedCard != null) {
+                        this.game.increaseBodySize(this.playerIndex, this.speciesNum, this.selectedCard);
+                        this.playerPane.updateGameScreen();
+                        setBodySizeLabel(this.game.getPlayerObjects()
+                                .get(this.playerIndex).getSpecies().get(this.speciesNum).getBodySize());
+                        this.selectedCard = null;
+                    }
+                } catch (InvalidPlayerSelectException | IllegalCardDiscardException | IllegalSpeciesIndexException |
+                        NullGameObjectException | SpeciesBodySizeException | IllegalCardRemovalException e) {
+                    openExceptionPopup(e);
+                    e.printStackTrace();
                 }
                 break;
             case FEED_SPECIES:
-                this.game.feedPlayerSpecies(this.playerIndex, this.speciesNum);
-                this.game.getPhase().execute();
-                this.gameController.updatePlayerPanes();
-                this.gameController.toggleChoiceBox();
-                this.gameController.changeChoiceBox();
-                this.gameController.staticElementsUpdate();
-                this.selectedCard = null;
-                break;
-            case ATTACK_SPECIES:
-                openAttackWindow();
-                if (this.selectedSpeciesToAttack != null) {
-                    this.game.attackSpecies(this.playerIndex, this.speciesNum, this.selectedSpeciesToAttack[0],
-                            this.selectedSpeciesToAttack[1]);
+                try {
+                    this.game.feedPlayerSpecies(this.playerIndex, this.speciesNum);
                     this.game.getPhase().execute();
                     this.gameController.updatePlayerPanes();
                     this.gameController.toggleChoiceBox();
                     this.gameController.changeChoiceBox();
                     this.gameController.staticElementsUpdate();
-                    this.selectedSpeciesToAttack = null;
+                } catch (SpeciesFullException | IllegalSpeciesIndexException | IllegalCardDirectionException |
+                        SpeciesPopulationException | InvalidWateringHoleCardCountException | FoodBankEmptyException |
+                        InvalidPlayerSelectException | WateringHoleEmptyException | NullGameObjectException |
+                        DeckEmptyException e) {
+                    openExceptionPopup(e);
+                    e.printStackTrace();
+                }
+                break;
+            case ATTACK_SPECIES:
+                try {
+                    openAttackWindow();
+                    if (this.selectedSpeciesToAttack != null) {
+                        this.game.attackSpecies(this.playerIndex, this.speciesNum, this.selectedSpeciesToAttack[0],
+                                this.selectedSpeciesToAttack[1]);
+                        this.game.getPhase().execute();
+                        this.gameController.updatePlayerPanes();
+                        this.gameController.toggleChoiceBox();
+                        this.gameController.changeChoiceBox();
+                        this.gameController.staticElementsUpdate();
+                        this.selectedSpeciesToAttack = null;
+                    }
+                } catch (SpeciesFullException | InvalidPlayerSelectException | BodySizeIllegalAttack |
+                        InvalidWateringHoleCardCountException | AttackingSelfException | InvalidAttackException |
+                        IllegalSpeciesIndexException | DeckEmptyException | FoodBankEmptyException |
+                        SpeciesPopulationException | NonCarnivoreAttacking | NullGameObjectException |
+                        WateringHoleEmptyException | IllegalCardDirectionException e) {
+                    openExceptionPopup(e);
+                    e.printStackTrace();
                 }
                 break;
             case END_TURN:
-                this.game.getPhase().execute();
-                this.playerPane.updateGameScreen();
-                this.gameController.toggleChoiceBox();
-                this.gameController.changeChoiceBox();
-                this.selectedCard = null;
+                try {
+                    this.game.getPhase().execute();
+                    this.playerPane.updateGameScreen();
+                    this.gameController.toggleChoiceBox();
+                    this.gameController.changeChoiceBox();
+                    this.selectedCard = null;
+                } catch (SpeciesFullException | NullGameObjectException | IllegalCardDirectionException |
+                        SpeciesPopulationException | InvalidWateringHoleCardCountException |
+                        InvalidPlayerSelectException | IllegalSpeciesIndexException | FoodBankEmptyException |
+                        WateringHoleEmptyException | DeckEmptyException e) {
+                    openExceptionPopup(e);
+                    e.printStackTrace();
+                }
                 break;
             case DISCARD_TO_WATERING_HOLE:
-                openCardWindow(Actions.DISCARD_TO_WATERING_HOLE);
-                if (this.selectedCard != null) {
-                    try {
+
+                try {
+                    openCardWindow(Actions.DISCARD_TO_WATERING_HOLE);
+                    if (this.selectedCard != null) {
                         this.game.discardToWateringHole(this.playerIndex, this.selectedCard);
                         this.game.getPhase().execute();
-                    } catch (IllegalCardDirectionException | InvalidPlayerSelectException | DeckEmptyException
-                            | IllegalCardRemovalException e) {
-                        e.printStackTrace();
+                        this.playerPane.updateGameScreen();
+                        this.gameController.changeChoiceBox();
+                        this.gameController.toggleChoiceBox();
+                        this.selectedCard = null;
                     }
-                    this.playerPane.updateGameScreen();
-                    this.gameController.changeChoiceBox();
-                    this.gameController.toggleChoiceBox();
-                    this.selectedCard = null;
+                } catch (IllegalCardDirectionException | InvalidPlayerSelectException | DeckEmptyException |
+                        IllegalCardRemovalException | InvalidWateringHoleCardCountException |
+                        FoodBankEmptyException | WateringHoleEmptyException | SpeciesPopulationException |
+                        NullGameObjectException | IllegalCardDiscardException | IllegalSpeciesIndexException |
+                        InvalidDiscardToWateringHoleException | InvalidAddToWateringHoleException |
+                        SpeciesFullException e) {
+                    openExceptionPopup(e);
+                    e.printStackTrace();
                 }
                 break;
         }
@@ -368,9 +417,9 @@ class SpeciesBoard extends VBox {
     private void openTraitWindow() {
         try {
             ArrayList<ICard> traitCards = new ArrayList<>();
-            for (int i = 0; i < this.traits.length; i++) {
-                if (this.traits[i] != null) {
-                    traitCards.add(this.traits[i]);
+            for (ICard trait : this.traits) {
+                if (trait != null) {
+                    traitCards.add(trait);
                 }
             }
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/card_popup.fxml"));
@@ -424,6 +473,34 @@ class SpeciesBoard extends VBox {
     }
 
     /**
+     * Opens up the exception window for the player to view any possible exceptions that arise
+     *
+     * @param e
+     */
+    private void openExceptionPopup(Throwable e) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/exception_popup.fxml"));
+            ExceptionPopupController controller =
+                    new ExceptionPopupController(e);
+            loader.setController(controller);
+            Parent p = loader.load();
+            Stage s = new Stage();
+            s.setTitle("Evolution!");
+            s.getIcons().add(new Image("/images/icon.png"));
+            s.setScene(new Scene(p, Color.BLACK));
+            s.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue) {
+                    s.hide();
+                    this.actionChoiceBox.getSelectionModel().selectFirst();
+                }
+            });
+            s.showAndWait();
+        } catch (IOException exp) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Sets the ability to open this SpeciesBoard's ChoiceBox
      *
      * @param viewable whether or not it should be clickable
@@ -441,6 +518,7 @@ class SpeciesBoard extends VBox {
             InvalidWateringHoleCardCountException, FoodBankEmptyException {
         switch (phaseNum) {
             case 2:
+                checkGameOver();
                 this.actionChoiceBox.setItems(this.phase2Options);
                 break;
             case 3:
@@ -475,6 +553,14 @@ class SpeciesBoard extends VBox {
                 break;
         }
         this.actionChoiceBox.getSelectionModel().selectFirst();
+    }
+
+    private void checkGameOver() {
+        if (this.game.isOver()) {
+            //if(!this.game.isOver() && this.game.getTurn() == this.playerIndex) {
+            // TODO : use this ^^ for demo
+            this.gameController.openWinScreen();
+        }
     }
 
     /**
