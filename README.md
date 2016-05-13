@@ -220,3 +220,9 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Created screen to show any user friendly messages from exceptions that may be thrown during gameplay
     * Added calls to open the exception screen from performAction (player initiated exceptions)
     * 50+ LOC
+* Brooke Brown
+    * Implemented climbing, burrowing, hard shell, and scavenger using bdd
+    * Added new exception and throws documentation
+    * Performed code reviews
+    * Worked with Jeremiah to solve GUI bug
+    * 50+ LOC
