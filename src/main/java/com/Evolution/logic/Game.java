@@ -736,44 +736,44 @@ public class Game {
                     HashSet<Boolean> canBeAttacked = new HashSet<>();
                     if (i != attackingPlayer || j != attackingSpecies) {
                         if (this.players.get(i).getSpecies().get(j).getBodySize() <
-                                this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getBodySize()
+                                carnivoreAttackingBodySize
                                 && !(!this.getPlayerObjects().get(attackingPlayer).getSpecies().get(attackingSpecies)
                                 .getTraits().stream().anyMatch(c -> c.getName().equals("Climbing"))
                                 && this.getPlayerObjects().get(i).getSpecies().get(j).getTraits().stream()
                                 .anyMatch(c -> c.getName().equals("Climbing")))) {
-                            if (this.players.get(i).getSpecies().get(j).getBodySize() < carnivoreAttackingBodySize) {
-                                ArrayList<ICard> attackeeTraits = this.players.get(i).getSpecies().get(j).getTraits();
-                                if ((j - 1) >= 0 && (j - 1) < this.players.get(i).getSpecies().size()) {
-                                    ArrayList<ICard> attackeeTraitsL = this.players.get(i).getSpecies().get(j - 1).getTraits();
-                                    for (ICard c : attackeeTraitsL) {
-                                        if (c.getName().equals("Warning Call")) {
-                                            canBeAttacked.add(this.defendTraitActions.get(c.getName())
-                                                    .canBeAttacked(new int[]{i, attackingPlayer},
-                                                            new int[]{j, attackingSpecies}));
-                                        }
-                                    }
-                                }
-                                if ((j + 1) >= 0 && (j + 1) < this.players.get(i).getSpecies().size()) {
-                                    ArrayList<ICard> attackeeTraitsR = this.players.get(i).getSpecies().get(j + 1).getTraits();
-                                    for (ICard c : attackeeTraitsR) {
-                                        if (c.getName().equals("Warning Call")) {
-                                            canBeAttacked.add(this.defendTraitActions.get(c.getName())
-                                                    .canBeAttacked(new int[]{i, attackingPlayer},
-                                                            new int[]{j, attackingSpecies}));
-                                        }
-                                    }
-                                }
-                                for (ICard c : attackeeTraits) {
-                                    if (this.defendTraitActions.containsKey(c.getName())) {
+                                System.out.println("asdf i " + i + " j " + j + " \n");
+                            ArrayList<ICard> attackeeTraits = this.players.get(i).getSpecies().get(j).getTraits();
+                            if ((j - 1) >= 0 && (j - 1) < this.players.get(i).getSpecies().size()) {
+                                ArrayList<ICard> attackeeTraitsL = this.players.get(i).getSpecies().get(j - 1).getTraits();
+                                for (ICard c : attackeeTraitsL) {
+                                    if (c.getName().equals("Warning Call")) {
                                         canBeAttacked.add(this.defendTraitActions.get(c.getName())
                                                 .canBeAttacked(new int[]{i, attackingPlayer},
                                                         new int[]{j, attackingSpecies}));
                                     }
                                 }
-                                if (!canBeAttacked.contains(false) || canBeAttacked.size() == 0) {
-                                    attackable.add(new int[]{i, j});
+                            }
+                            if ((j + 1) >= 0 && (j + 1) < this.players.get(i).getSpecies().size()) {
+                                ArrayList<ICard> attackeeTraitsR = this.players.get(i).getSpecies().get(j + 1).getTraits();
+                                for (ICard c : attackeeTraitsR) {
+                                    if (c.getName().equals("Warning Call")) {
+                                        canBeAttacked.add(this.defendTraitActions.get(c.getName())
+                                                .canBeAttacked(new int[]{i, attackingPlayer},
+                                                        new int[]{j, attackingSpecies}));
+                                    }
                                 }
                             }
+                            for (ICard c : attackeeTraits) {
+                                if (this.defendTraitActions.containsKey(c.getName())) {
+                                    canBeAttacked.add(this.defendTraitActions.get(c.getName())
+                                            .canBeAttacked(new int[]{i, attackingPlayer},
+                                                    new int[]{j, attackingSpecies}));
+                                }
+                            }
+                            if (!canBeAttacked.contains(false) || canBeAttacked.size() == 0) {
+                                attackable.add(new int[]{i, j});
+                            }
+
                         }
                     }
                 }
