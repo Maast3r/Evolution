@@ -212,3 +212,11 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Experimented with evosuite, not a great tool
     * Used BDD everywhere
     * 50+ LOC
+
+#Sprint 8
+* Jeremiah Goist
+    * Implemented screen to pop up when the game is determined to be over at the beginning of Phase 1
+        * Game Over Screen can route to start game screen to play again
+    * Created screen to show any user friendly messages from exceptions that may be thrown during gameplay
+    * Added calls to open the exception screen from performAction (player initiated exceptions)
+    * 50+ LOC

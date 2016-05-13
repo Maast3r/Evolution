@@ -270,6 +270,7 @@ class GameScreenController implements Initializable {
     void openWinScreen() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/win_screen.fxml"));
+            // TODO: Init WinScreen with this.game.getWinner()
             WinScreenController controller = new WinScreenController(0, this.stage);
             loader.setController(controller);
             Parent p = loader.load();
