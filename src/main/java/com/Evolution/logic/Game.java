@@ -800,6 +800,11 @@ public class Game {
         fatTissue.executeTrait(new int[]{playerIndex, playerIndex}, new int[]{speciesIndex, speciesIndex}, null);
     }
 
+    /**
+     * Returns the first person who has the most food in their food bag.
+     *
+     * @return playerIndex
+     */
     public int getWinner() {
         int winner = 0;
         for(int i=0; i<this.players.size(); i++){

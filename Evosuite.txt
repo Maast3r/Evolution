@@ -1,0 +1,10 @@
+How to use EvoSuite (IntelliJ)
+
+EvoSuite is an automatic test suite genrator for java projects.
+
+1. Go to http://www.evosuite.org/downloads/ and download the evosuite-1.0.3.jar.
+2. Add the jar file to your project.
+3. Install the Evosuite Plugin for IntelliJ.
+4. Right click your project and select "Run EvoSuite" at the very bottom.
+5. Make sure that "EvoSuite location" and "JAVA_HOME" are not empty and filled with the proper paths.
+6. Click Ok. (If you don't see any buttons, expand the window.)
