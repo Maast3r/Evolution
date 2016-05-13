@@ -226,3 +226,9 @@ To build the project in Eclipse, right-click on the project -> Run As -> Gradle 
     * Performed code reviews
     * Worked with Jeremiah to solve GUI bug
     * 50+ LOC
+* Andrew Ma
+    * Implemented Warning Call, Ambush, Symbiosis, Pack Hunting using BDD
+    * game getWinner
+    * JavaFuzz
+    * Attemped own fuzz testing
+    * 50+ LOC
