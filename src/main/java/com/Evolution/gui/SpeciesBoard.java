@@ -305,6 +305,9 @@ class SpeciesBoard extends VBox {
                 try {
                     this.game.feedPlayerSpecies(this.playerIndex, this.speciesNum);
                     this.game.getPhase().execute();
+                    if(this.game.getPhase().getNumber() == 1) {
+                        this.game.getPhase().execute();
+                    }
                     this.gameController.updatePlayerPanes();
                     this.gameController.toggleChoiceBox();
                     this.gameController.changeChoiceBox();
