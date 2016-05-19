@@ -32,7 +32,6 @@ public class Foraging extends ATrait {
     public void executeTrait(int[] playerIndex, int[] speciesIndex)
             throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
             SpeciesFullException, WateringHoleEmptyException, SpeciesPopulationException, FoodBankEmptyException {
-        if (!this.game.getPlayerObjects().get(playerIndex[0]).getSpecies().get(speciesIndex[0]).isFull()) {
             this.game.feedPlayerSpeciesFromBank(playerIndex[0], speciesIndex[0]);
             ArrayList<ICard> traits = this.game.getPlayerObjects().get(playerIndex[0]).getSpecies().get(speciesIndex[0]).getTraits();
             for (ICard c : traits) {
@@ -41,7 +40,6 @@ public class Foraging extends ATrait {
                     coop.executeTrait(playerIndex, speciesIndex);
                 }
             }
-        }
     }
 
     /**
