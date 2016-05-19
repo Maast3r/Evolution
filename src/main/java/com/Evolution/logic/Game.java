@@ -673,6 +673,9 @@ public class Game {
         ISpecies species1 = player1.getSpecies().get(speciesIndex1);
         ISpecies species2 = player2.getSpecies().get(speciesIndex2);
         species2.decreasePopulation();
+        if(species2.getTraits().parallelStream().anyMatch(c -> c.getName().equals("Horns"))){
+            species1.decreasePopulation();
+        }
         for (int i = 0; i < species2.getBodySize(); i++) {
             if (species1.getEatenFood() < species1.getPopulation()) {
                 this.feedPlayerSpeciesFromBank(playerIndex1, speciesIndex1);
