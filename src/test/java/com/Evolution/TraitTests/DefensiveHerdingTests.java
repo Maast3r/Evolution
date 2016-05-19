@@ -52,8 +52,6 @@ public class DefensiveHerdingTests {
         g.getPlayerObjects().get(0).getSpecies().get(0).increasePopulation();
         g.getPlayerObjects().get(0).getSpecies().get(0).addTrait(new Card("Carnivore", "", "", 0, 0));
         g.getPlayerObjects().get(1).getSpecies().get(0).addTrait(new Card("Defensive Herding", "", "", 0, 0));
-        System.out.println(g.getPlayerObjects().get(0).getSpecies().get(0).getPopulation());
-        System.out.println(g.getPlayerObjects().get(1).getSpecies().get(0).getPopulation());
         assertTrue(g.getAttackableSpecies(0, 0).stream().anyMatch(array -> Arrays.equals(array, new int[]{1, 0})));
     }
 
