@@ -32,18 +32,21 @@ public class Foraging extends ATrait {
     public void executeTrait(int[] playerIndex, int[] speciesIndex)
             throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
             SpeciesFullException, WateringHoleEmptyException, SpeciesPopulationException, FoodBankEmptyException {
-        this.game.feedPlayerSpeciesFromBank(playerIndex[0], speciesIndex[0]);
-        ArrayList<ICard> traits = this.game.getPlayerObjects().get(playerIndex[0]).getSpecies().get(speciesIndex[0]).getTraits();
-        for(ICard c : traits){
-            if(c.getName().equals("Cooperation")){
-                Cooperation coop = new Cooperation(this.game);
-                coop.executeTrait(playerIndex, speciesIndex);
+        if (!this.game.getPlayerObjects().get(playerIndex[0]).getSpecies().get(speciesIndex[0]).isFull()) {
+            this.game.feedPlayerSpeciesFromBank(playerIndex[0], speciesIndex[0]);
+            ArrayList<ICard> traits = this.game.getPlayerObjects().get(playerIndex[0]).getSpecies().get(speciesIndex[0]).getTraits();
+            for (ICard c : traits) {
+                if (c.getName().equals("Cooperation")) {
+                    Cooperation coop = new Cooperation(this.game);
+                    coop.executeTrait(playerIndex, speciesIndex);
+                }
             }
         }
     }
 
     /**
      * Empty method
+     *
      * @param ints
      * @param ints1
      * @return
