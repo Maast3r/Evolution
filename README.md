@@ -302,6 +302,11 @@ Phase 4 Features - Feeding
     * Worked with Jeremiah on i18n
         * Translated existing strings and files to German
         * Initial setup of the ResourceBundle
+*Trevor Burch
+	* Added Defensive Herding
+	* Added Horns
+	* Helped look at possible bug in Foraging
+	* 50+ LOC
 * Andrew Ma
     * Added Fat Tissue GUI side
     * Modified phase 4 dropdown actions
