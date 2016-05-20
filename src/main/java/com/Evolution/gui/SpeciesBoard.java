@@ -22,7 +22,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
+
+import static com.Evolution.Main.resourceBundle;
 
 /**
  * Created by brownba1 on 3/28/2016.
@@ -64,8 +65,6 @@ class SpeciesBoard extends VBox {
             Actions.VIEW_CARDS.getName(), Actions.FEED_SPECIES.getName());
     private ObservableList<String> phase4CarnivoreOptions = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
             Actions.VIEW_CARDS.getName(), Actions.ATTACK_SPECIES.getName());
-
-    static ResourceBundle resourceBundle = ResourceBundle.getBundle("cardInformation");
 
 
     /**

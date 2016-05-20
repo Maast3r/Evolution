@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.scene.control.DialogPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.text.Font?>
-
-
 <DialogPane xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
    <content>
       <Label fx:id="exceptionLabel" alignment="CENTER" contentDisplay="CENTER" minHeight="100.0" minWidth="300.0"
              prefHeight="100.0"
-             prefWidth="300.0" text="Label" textAlignment="CENTER" wrapText="true">
+             prefWidth="300.0" text="%label" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="22.0" />
          </font>

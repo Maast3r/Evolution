@@ -13,7 +13,11 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.ResourceBundle;
+
 public class Main extends Application {
+
+    public static ResourceBundle resourceBundle = ResourceBundle.getBundle("cardInformation");
 
     /**
      * Opens the application by loading the start screen from xml
@@ -24,8 +28,8 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/layouts/start_screen.fxml"));
-        stage.setTitle("Evolution!");
+        Parent root = FXMLLoader.load(getClass().getResource("/layouts/start_screen.fxml"), resourceBundle);
+        stage.setTitle(resourceBundle.getString("evolution"));
         stage.getIcons().add(new Image("/images/icon.png"));
         stage.setScene(new Scene(root, Color.BLACK));
 

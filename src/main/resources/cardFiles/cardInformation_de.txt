@@ -1,0 +1,129 @@
+Hörner;Ein Fleischfresser muss zuerst verlieren 1 Bevölkerung um diese Art anzugreifen;horns.png;3;0
+Hörner;Ein Fleischfresser muss zuerst verlieren 1 Bevölkerung um diese Art anzugreifen;horns.png;1;0
+Hörner;Ein Fleischfresser muss zuerst verlieren 1 Bevölkerung um diese Art anzugreifen;horns.png;4;0
+Hörner;Ein Fleischfresser muss zuerst verlieren 1 Bevölkerung um diese Art anzugreifen;horns.png;4;0
+Hörner;Ein Fleischfresser muss zuerst verlieren 1 Bevölkerung um diese Art anzugreifen;horns.png;5;0
+Hörner;Ein Fleischfresser muss zuerst verlieren 1 Bevölkerung um diese Art anzugreifen;horns.png;2;0
+Hörner;Ein Fleischfresser muss zuerst verlieren 1 Bevölkerung um diese Art anzugreifen;horns.png;3;0
+Fertile;Bevor die Lebensmittelkarten aufgedeckt werden, erhält diese Art 1 Bevölkerung, wenn es Essen auf dem Wasserloch ist.;fertile.png;3;0
+Fertile;Bevor die Lebensmittelkarten aufgedeckt werden, erhält diese Art 1 Bevölkerung, wenn es Essen auf dem Wasserloch ist.;fertile.png;7;0
+Fertile;Bevor die Lebensmittelkarten aufgedeckt werden, erhält diese Art 1 Bevölkerung, wenn es Essen auf dem Wasserloch ist.;fertile.png;5;0
+Fertile;Bevor die Lebensmittelkarten aufgedeckt werden, erhält diese Art 1 Bevölkerung, wenn es Essen auf dem Wasserloch ist.;fertile.png;2;0
+Fertile;Bevor die Lebensmittelkarten aufgedeckt werden, erhält diese Art 1 Bevölkerung, wenn es Essen auf dem Wasserloch ist.;fertile.png;4;0
+Fertile;Bevor die Lebensmittelkarten aufgedeckt werden, erhält diese Art 1 Bevölkerung, wenn es Essen auf dem Wasserloch ist.;fertile.png;6;0
+Fertile;Bevor die Lebensmittelkarten aufgedeckt werden, erhält diese Art 1 Bevölkerung, wenn es Essen auf dem Wasserloch ist.;fertile.png;6;0
+Bohrung;Diese Spezies kann nicht angegriffen werden, wenn sie Nahrung gleich seiner Bevölkerung hat.;burrowing.png;4;0
+Bohrung;Diese Spezies kann nicht angegriffen werden, wenn sie Nahrung gleich seiner Bevölkerung hat.;burrowing.png;1;0
+Bohrung;Diese Spezies kann nicht angegriffen werden, wenn sie Nahrung gleich seiner Bevölkerung hat.;burrowing.png;3;0
+Bohrung;Diese Spezies kann nicht angegriffen werden, wenn sie Nahrung gleich seiner Bevölkerung hat.;burrowing.png;4;0
+Bohrung;Diese Spezies kann nicht angegriffen werden, wenn sie Nahrung gleich seiner Bevölkerung hat.;burrowing.png;5;0
+Bohrung;Diese Spezies kann nicht angegriffen werden, wenn sie Nahrung gleich seiner Bevölkerung hat.;burrowing.png;2;0
+Bohrung;Diese Spezies kann nicht angegriffen werden, wenn sie Nahrung gleich seiner Bevölkerung hat.;burrowing.png;3;0
+Fettgewebe;Lebensmittel lagern auf dieser Karte bis zu seiner Körpergröße kann. Wenn die Lebensmittelkarten aufgedeckt werden, bewegen sich diese Nahrung für die Art Brett;fatTissue.png;3;0
+Fettgewebe;Lebensmittel lagern auf dieser Karte bis zu seiner Körpergröße kann. Wenn die Lebensmittelkarten aufgedeckt werden, bewegen sich diese Nahrung für die Art Brett;fatTissue.png;5;0
+Fettgewebe;Lebensmittel lagern auf dieser Karte bis zu seiner Körpergröße kann. Wenn die Lebensmittelkarten aufgedeckt werden, bewegen sich diese Nahrung für die Art Brett;fatTissue.png;4;0
+Fettgewebe;Lebensmittel lagern auf dieser Karte bis zu seiner Körpergröße kann. Wenn die Lebensmittelkarten aufgedeckt werden, bewegen sich diese Nahrung für die Art Brett;fatTissue.png;5;0
+Fettgewebe;Lebensmittel lagern auf dieser Karte bis zu seiner Körpergröße kann. Wenn die Lebensmittelkarten aufgedeckt werden, bewegen sich diese Nahrung für die Art Brett;fatTissue.png;-1;0
+Fettgewebe;Lebensmittel lagern auf dieser Karte bis zu seiner Körpergröße kann. Wenn die Lebensmittelkarten aufgedeckt werden, bewegen sich diese Nahrung für die Art Brett;fatTissue.png;0;0
+Fettgewebe;Lebensmittel lagern auf dieser Karte bis zu seiner Körpergröße kann. Wenn die Lebensmittelkarten aufgedeckt werden, bewegen sich diese Nahrung für die Art Brett;fatTissue.png;4;0
+Schnitzeljagden;Nehmen Sie 1 Fleisch Lebensmittel aus der Nahrungsmittelbank, wenn ein Fleischfresser erfolgreich eine Arten angreift.;scavenger.png;4;0
+Schnitzeljagden;Nehmen Sie 1 Fleisch Lebensmittel aus der Nahrungsmittelbank, wenn ein Fleischfresser erfolgreich eine Arten angreift.;scavenger.png;2;0
+Schnitzeljagden;Nehmen Sie 1 Fleisch Lebensmittel aus der Nahrungsmittelbank, wenn ein Fleischfresser erfolgreich eine Arten angreift.;scavenger.png;7;0
+Schnitzeljagden;Nehmen Sie 1 Fleisch Lebensmittel aus der Nahrungsmittelbank, wenn ein Fleischfresser erfolgreich eine Arten angreift.;scavenger.png;6;0
+Schnitzeljagden;Nehmen Sie 1 Fleisch Lebensmittel aus der Nahrungsmittelbank, wenn ein Fleischfresser erfolgreich eine Arten angreift.;scavenger.png;6;0
+Schnitzeljagden;Nehmen Sie 1 Fleisch Lebensmittel aus der Nahrungsmittelbank, wenn ein Fleischfresser erfolgreich eine Arten angreift.;scavenger.png;5;0
+Schnitzeljagden;Nehmen Sie 1 Fleisch Lebensmittel aus der Nahrungsmittelbank, wenn ein Fleischfresser erfolgreich eine Arten angreift.;scavenger.png;3;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;1;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;6;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;6;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;3;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;2;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;2;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;3;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;3;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;5;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;4;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;5;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;1;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;0;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;4;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;2;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;4;0
+Fleischfresser;Angreifen und essen andere Arten. Kann nie Pflanzennahrung essen.;carnivore.png;0;0
+Hüten;Ein Fleischfresser muss größer Bevölkerung haben, um diese Spezies zu attackieren.;defensiveHerding.png;8;0
+Hüten;Ein Fleischfresser muss größer Bevölkerung haben, um diese Spezies zu attackieren.;defensiveHerding.png;6;0
+Hüten;Ein Fleischfresser muss größer Bevölkerung haben, um diese Spezies zu attackieren.;defensiveHerding.png;2;0
+Hüten;Ein Fleischfresser muss größer Bevölkerung haben, um diese Spezies zu attackieren.;defensiveHerding.png;4;0
+Hüten;Ein Fleischfresser muss größer Bevölkerung haben, um diese Spezies zu attackieren.;defensiveHerding.png;5;0
+Hüten;Ein Fleischfresser muss größer Bevölkerung haben, um diese Spezies zu attackieren.;defensiveHerding.png;3;0
+Hüten;Ein Fleischfresser muss größer Bevölkerung haben, um diese Spezies zu attackieren.;defensiveHerding.png;7;0
+Warnanruf;Ein Fleischfresser muss Ambush Ihre Art angreifen, die zu dieser Spezies benachbart sind.;warningCall.png;5;1
+Warnanruf;Ein Fleischfresser muss Ambush Ihre Art angreifen, die zu dieser Spezies benachbart sind.;warningCall.png;3;1
+Warnanruf;Ein Fleischfresser muss Ambush Ihre Art angreifen, die zu dieser Spezies benachbart sind.;warningCall.png;3;1
+Warnanruf;Ein Fleischfresser muss Ambush Ihre Art angreifen, die zu dieser Spezies benachbart sind.;warningCall.png;2;1
+Warnanruf;Ein Fleischfresser muss Ambush Ihre Art angreifen, die zu dieser Spezies benachbart sind.;warningCall.png;4;1
+Warnanruf;Ein Fleischfresser muss Ambush Ihre Art angreifen, die zu dieser Spezies benachbart sind.;warningCall.png;1;1
+Warnanruf;Ein Fleischfresser muss Ambush Ihre Art angreifen, die zu dieser Spezies benachbart sind.;warningCall.png;4;1
+Jagdgruppe;Diese Art Körpergröße ist auf seine Bevölkerung + Körpergröße gleich bei der Bestimmung, ob es eine andere Spezies angreifen kann.;packHunting.png;-1;0
+Jagdgruppe;Diese Art Körpergröße ist auf seine Bevölkerung + Körpergröße gleich bei der Bestimmung, ob es eine andere Spezies angreifen kann.;packHunting.png;3;0
+Jagdgruppe;Diese Art Körpergröße ist auf seine Bevölkerung + Körpergröße gleich bei der Bestimmung, ob es eine andere Spezies angreifen kann.;packHunting.png;2;0
+Jagdgruppe;Diese Art Körpergröße ist auf seine Bevölkerung + Körpergröße gleich bei der Bestimmung, ob es eine andere Spezies angreifen kann.;packHunting.png;0;0
+Jagdgruppe;Diese Art Körpergröße ist auf seine Bevölkerung + Körpergröße gleich bei der Bestimmung, ob es eine andere Spezies angreifen kann.;packHunting.png;1;0
+Jagdgruppe;Diese Art Körpergröße ist auf seine Bevölkerung + Körpergröße gleich bei der Bestimmung, ob es eine andere Spezies angreifen kann.;packHunting.png;-3;0
+Jagdgruppe;Diese Art Körpergröße ist auf seine Bevölkerung + Körpergröße gleich bei der Bestimmung, ob es eine andere Spezies angreifen kann.;packHunting.png;-2;0
+Futtersuche;Immer diese Art isst Pflanzennahrung, nehmen Sie 1 zusätzliche Pflanzennahrung aus der gleichen Quelle.;foraging.png;7;0
+Futtersuche;Immer diese Art isst Pflanzennahrung, nehmen Sie 1 zusätzliche Pflanzennahrung aus der gleichen Quelle.;foraging.png;6;0
+Futtersuche;Immer diese Art isst Pflanzennahrung, nehmen Sie 1 zusätzliche Pflanzennahrung aus der gleichen Quelle.;foraging.png;4;0
+Futtersuche;Immer diese Art isst Pflanzennahrung, nehmen Sie 1 zusätzliche Pflanzennahrung aus der gleichen Quelle.;foraging.png;3;0
+Futtersuche;Immer diese Art isst Pflanzennahrung, nehmen Sie 1 zusätzliche Pflanzennahrung aus der gleichen Quelle.;foraging.png;6;0
+Futtersuche;Immer diese Art isst Pflanzennahrung, nehmen Sie 1 zusätzliche Pflanzennahrung aus der gleichen Quelle.;foraging.png;2;0
+Futtersuche;Immer diese Art isst Pflanzennahrung, nehmen Sie 1 zusätzliche Pflanzennahrung aus der gleichen Quelle.;foraging.png;5;0
+Hartschale;4 Körper-Größe bei der Bestimmung, ob diese Art kann angegriffen werden.;hardShell.png;3;0
+Hartschale;4 Körper-Größe bei der Bestimmung, ob diese Art kann angegriffen werden.;hardShell.png;2;0
+Hartschale;4 Körper-Größe bei der Bestimmung, ob diese Art kann angegriffen werden.;hardShell.png;1;0
+Hartschale;4 Körper-Größe bei der Bestimmung, ob diese Art kann angegriffen werden.;hardShell.png;5;0
+Hartschale;4 Körper-Größe bei der Bestimmung, ob diese Art kann angegriffen werden.;hardShell.png;3;0
+Hartschale;4 Körper-Größe bei der Bestimmung, ob diese Art kann angegriffen werden.;hardShell.png;4;0
+Hartschale;4 Körper-Größe bei der Bestimmung, ob diese Art kann angegriffen werden.;hardShell.png;4;0
+Langen Hals;Bevor die Lebensmittelkarten aufgedeckt werden, nehmen Sie 1 Pflanzennahrung aus der Nahrungsmittelbank;longNeck.png;5;0
+Langen Hals;Bevor die Lebensmittelkarten aufgedeckt werden, nehmen Sie 1 Pflanzennahrung aus der Nahrungsmittelbank;longNeck.png;6;0
+Langen Hals;Bevor die Lebensmittelkarten aufgedeckt werden, nehmen Sie 1 Pflanzennahrung aus der Nahrungsmittelbank;longNeck.png;7;0
+Langen Hals;Bevor die Lebensmittelkarten aufgedeckt werden, nehmen Sie 1 Pflanzennahrung aus der Nahrungsmittelbank;longNeck.png;3;0
+Langen Hals;Bevor die Lebensmittelkarten aufgedeckt werden, nehmen Sie 1 Pflanzennahrung aus der Nahrungsmittelbank;longNeck.png;9;0
+Langen Hals;Bevor die Lebensmittelkarten aufgedeckt werden, nehmen Sie 1 Pflanzennahrung aus der Nahrungsmittelbank;longNeck.png;4;0
+Langen Hals;Bevor die Lebensmittelkarten aufgedeckt werden, nehmen Sie 1 Pflanzennahrung aus der Nahrungsmittelbank;longNeck.png;8;0
+Intelligenz;Wirf eine Karte (n) aus der Hand während einer Ihrer Fütterung dreht: Fleischfresser - Negiere ein Merkmal für diesen nächsten Angriff Arten. Nicht-Fleischfresser - Nimm 2 Lebensmittel aus der Nahrungsmittelbank.;intelligence.png;6;0
+Intelligenz;Wirf eine Karte (n) aus der Hand während einer Ihrer Fütterung dreht: Fleischfresser - Negiere ein Merkmal für diesen nächsten Angriff Arten. Nicht-Fleischfresser - Nimm 2 Lebensmittel aus der Nahrungsmittelbank.;intelligence.png;-1;0
+Intelligenz;Wirf eine Karte (n) aus der Hand während einer Ihrer Fütterung dreht: Fleischfresser - Negiere ein Merkmal für diesen nächsten Angriff Arten. Nicht-Fleischfresser - Nimm 2 Lebensmittel aus der Nahrungsmittelbank.;intelligence.png;5;0
+Intelligenz;Wirf eine Karte (n) aus der Hand während einer Ihrer Fütterung dreht: Fleischfresser - Negiere ein Merkmal für diesen nächsten Angriff Arten. Nicht-Fleischfresser - Nimm 2 Lebensmittel aus der Nahrungsmittelbank.;intelligence.png;7;0
+Intelligenz;Wirf eine Karte (n) aus der Hand während einer Ihrer Fütterung dreht: Fleischfresser - Negiere ein Merkmal für diesen nächsten Angriff Arten. Nicht-Fleischfresser - Nimm 2 Lebensmittel aus der Nahrungsmittelbank.;intelligence.png;0;0
+Intelligenz;Wirf eine Karte (n) aus der Hand während einer Ihrer Fütterung dreht: Fleischfresser - Negiere ein Merkmal für diesen nächsten Angriff Arten. Nicht-Fleischfresser - Nimm 2 Lebensmittel aus der Nahrungsmittelbank.;intelligence.png;4;0
+Intelligenz;Wirf eine Karte (n) aus der Hand während einer Ihrer Fütterung dreht: Fleischfresser - Negiere ein Merkmal für diesen nächsten Angriff Arten. Nicht-Fleischfresser - Nimm 2 Lebensmittel aus der Nahrungsmittelbank.;intelligence.png;-2;0
+Hinterhalt;Wehrt Warnanruf beim Angriff.;ambush.png;0;0
+Hinterhalt;Wehrt Warnanruf beim Angriff.;ambush.png;-3;0
+Hinterhalt;Wehrt Warnanruf beim Angriff.;ambush.png;-2;0
+Hinterhalt;Wehrt Warnanruf beim Angriff.;ambush.png;1;0
+Hinterhalt;Wehrt Warnanruf beim Angriff.;ambush.png;2;0
+Hinterhalt;Wehrt Warnanruf beim Angriff.;ambush.png;3;0
+Hinterhalt;Wehrt Warnanruf beim Angriff.;ambush.png;-1;0
+Symbiose;Diese Spezies kann nicht angegriffen werden, wenn Ihre Spezies auf der rechten Seite eine größere Körpergröße als dieser Art hat.;symbiosis.png;4;2
+Symbiose;Diese Spezies kann nicht angegriffen werden, wenn Ihre Spezies auf der rechten Seite eine größere Körpergröße als dieser Art hat.;symbiosis.png;5;2
+Symbiose;Diese Spezies kann nicht angegriffen werden, wenn Ihre Spezies auf der rechten Seite eine größere Körpergröße als dieser Art hat.;symbiosis.png;4;2
+Symbiose;Diese Spezies kann nicht angegriffen werden, wenn Ihre Spezies auf der rechten Seite eine größere Körpergröße als dieser Art hat.;symbiosis.png;3;2
+Symbiose;Diese Spezies kann nicht angegriffen werden, wenn Ihre Spezies auf der rechten Seite eine größere Körpergröße als dieser Art hat.;symbiosis.png;3;2
+Symbiose;Diese Spezies kann nicht angegriffen werden, wenn Ihre Spezies auf der rechten Seite eine größere Körpergröße als dieser Art hat.;symbiosis.png;1;2
+Symbiose;Diese Spezies kann nicht angegriffen werden, wenn Ihre Spezies auf der rechten Seite eine größere Körpergröße als dieser Art hat.;symbiosis.png;2;2
+Zusammenarbeit;Wenn diese Art Nahrung zu sich nimmt, Ihre Spezies nach rechts nimmt 1 Lebensmittel aus der gleichen Quelle.;cooperation.png;4;2
+Zusammenarbeit;Wenn diese Art Nahrung zu sich nimmt, Ihre Spezies nach rechts nimmt 1 Lebensmittel aus der gleichen Quelle.;cooperation.png;5;2
+Zusammenarbeit;Wenn diese Art Nahrung zu sich nimmt, Ihre Spezies nach rechts nimmt 1 Lebensmittel aus der gleichen Quelle.;cooperation.png;4;2
+Zusammenarbeit;Wenn diese Art Nahrung zu sich nimmt, Ihre Spezies nach rechts nimmt 1 Lebensmittel aus der gleichen Quelle.;cooperation.png;3;2
+Zusammenarbeit;Wenn diese Art Nahrung zu sich nimmt, Ihre Spezies nach rechts nimmt 1 Lebensmittel aus der gleichen Quelle.;cooperation.png;3;2
+Zusammenarbeit;Wenn diese Art Nahrung zu sich nimmt, Ihre Spezies nach rechts nimmt 1 Lebensmittel aus der gleichen Quelle.;cooperation.png;5;2
+Zusammenarbeit;Wenn diese Art Nahrung zu sich nimmt, Ihre Spezies nach rechts nimmt 1 Lebensmittel aus der gleichen Quelle.;cooperation.png;0;2
+Klettern;Ein Fleischfresser muss Klettern, um diese Spezies zu attackieren.;climbing.png;4;0
+Klettern;Ein Fleischfresser muss Klettern, um diese Spezies zu attackieren.;climbing.png;5;0
+Klettern;Ein Fleischfresser muss Klettern, um diese Spezies zu attackieren.;climbing.png;4;0
+Klettern;Ein Fleischfresser muss Klettern, um diese Spezies zu attackieren.;climbing.png;2;0
+Klettern;Ein Fleischfresser muss Klettern, um diese Spezies zu attackieren.;climbing.png;3;0
+Klettern;Ein Fleischfresser muss Klettern, um diese Spezies zu attackieren.;climbing.png;3;0
+Klettern;Ein Fleischfresser muss Klettern, um diese Spezies zu attackieren.;climbing.png;1;0

@@ -15,7 +15,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static com.Evolution.gui.SpeciesBoard.resourceBundle;
+import static com.Evolution.Main.resourceBundle;
 
 /**
  * Controller for the attack selection popup

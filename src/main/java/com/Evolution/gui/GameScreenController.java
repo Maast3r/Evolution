@@ -23,9 +23,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
-import static com.Evolution.gui.SpeciesBoard.resourceBundle;
+import static com.Evolution.Main.resourceBundle;
 
 /**
  * Created by brownba1 on 3/22/2016.
@@ -107,8 +108,16 @@ class GameScreenController implements Initializable {
         try {
             IWateringHole wateringHole = new WateringHole();
             DeckFactory df = new DeckFactory();
-            IDeck<ICard> drawPile = df.generateDrawPile(new FileInputStream(
-                    new File("src/main/resources/cardFiles/cardInformation.txt")));
+            IDeck<ICard> drawPile;
+            if (Locale.getDefault().getLanguage().equals("en")) {
+                drawPile = df.generateDrawPile(new FileInputStream(
+                        new File("src/main/resources/cardFiles/cardInformation_en.txt")));
+                System.out.println("Initializing with english cards");
+            } else {
+                drawPile = df.generateDrawPile(new FileInputStream(
+                        new File("src/main/resources/cardFiles/cardInformation_de.txt")));
+                System.out.println("Initializing with german cards");
+            }
             drawPile.shuffle();
             IDeck<ICard> discardPile = df.generateDiscardPile();
 

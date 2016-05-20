@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.Evolution.Main.resourceBundle;
+
 /**
  * Controller for the start screen
  * Created by brownba1 on 3/21/2016.
@@ -53,6 +55,7 @@ public class StartScreenController implements Initializable {
         try {
             Stage s = (Stage) this.numPlayersChoiceBox.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/layouts/game_screen.fxml"));
+            loader.setResources(resourceBundle);
             GameScreenController controller = new GameScreenController(players, s);
             loader.setController(controller);
             Parent p = loader.load();

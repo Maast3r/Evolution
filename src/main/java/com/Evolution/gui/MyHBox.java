@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
-import static com.Evolution.gui.SpeciesBoard.resourceBundle;
+import static com.Evolution.Main.resourceBundle;
 
 /**
  * Created by brownba1 on 3/28/2016.
