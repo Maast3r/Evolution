@@ -89,8 +89,8 @@ class SpeciesBoard extends VBox {
         ATTACK_SPECIES(resourceBundle.getString("attackAnotherSpecies")),
         END_TURN(resourceBundle.getString("endTurn")),
         DISCARD_TO_WATERING_HOLE(resourceBundle.getString("discardToWH")),
-        FAT_TISSUE("Add Fat Tissue food"),
-        STARVE("Carnivore loses 1 food");
+        FAT_TISSUE(resourceBundle.getString("add.fat.tissue.food")),
+        STARVE(resourceBundle.getString("carnivore.loses.1.food"));
 
         private String name;
 
@@ -417,12 +417,7 @@ class SpeciesBoard extends VBox {
                     this.gameController.toggleChoiceBox();
                     this.gameController.changeChoiceBox();
                     this.gameController.staticElementsUpdate();
-                } catch (InvalidPlayerSelectException | IllegalSpeciesIndexException | SpeciesPopulationException
-                        | TempFoodMaxException | WateringHoleEmptyException e) {
-                    openExceptionPopup(e);
-                    e.printStackTrace();
-                } catch (SpeciesFullException | DeckEmptyException | InvalidWateringHoleCardCountException
-                        | NullGameObjectException | FoodBankEmptyException | IllegalCardDirectionException e) {
+                } catch (InvalidPlayerSelectException | IllegalSpeciesIndexException | SpeciesPopulationException | TempFoodMaxException | WateringHoleEmptyException | SpeciesFullException | DeckEmptyException | InvalidWateringHoleCardCountException | NullGameObjectException | FoodBankEmptyException | IllegalCardDirectionException e) {
                     openExceptionPopup(e);
                     e.printStackTrace();
                 }
@@ -741,7 +736,7 @@ class SpeciesBoard extends VBox {
      */
     private void setTraitLabel1(String trait) {
         // Set trait 1 for this species then update label
-        this.traitLabel1.setText("Trait 1: " + trait);
+        this.traitLabel1.setText(MessageFormat.format(resourceBundle.getString("trait.1.0"), trait));
     }
 
     /**
@@ -751,7 +746,7 @@ class SpeciesBoard extends VBox {
      */
     private void setTraitLabel2(String trait) {
         // Set trait 2 for this species then update label
-        this.traitLabel2.setText("Trait 2: " + trait);
+        this.traitLabel2.setText(MessageFormat.format(resourceBundle.getString("trait.2.0"), trait));
     }
 
     /**
@@ -761,7 +756,7 @@ class SpeciesBoard extends VBox {
      */
     private void setTraitLabel3(String trait) {
         // Set trait 3 for this species then update label
-        this.traitLabel3.setText("Trait 3: " + trait);
+        this.traitLabel3.setText(MessageFormat.format(resourceBundle.getString("trait.3.0"), trait));
     }
 
     /**
