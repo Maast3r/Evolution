@@ -733,7 +733,7 @@ public class Game {
         ArrayList<ICard> traits = this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getTraits();
         for (ICard c : traits) {
             if (c.getName().equals(resourceBundle.getString("Carnivore"))) hasCarnivore = true;
-            if (c.getName().equals(resourceBundle.getString("Pack Hunting")))
+            if (c.getName().equals(resourceBundle.getString("PackHunting")))
                 carnivoreAttackingBodySize += this.players.get(attackingPlayer).getSpecies().get(attackingSpecies)
                         .getPopulation();
         }
@@ -748,8 +748,10 @@ public class Game {
                                 .getTraits().stream().anyMatch(c -> c.getName().equals(resourceBundle.getString
                                         ("Climbing")))
                                 && this.getPlayerObjects().get(i).getSpecies().get(j).getTraits().stream()
-                                .anyMatch(c -> c.getName().equals("Climbing"))) && (!this.getPlayerObjects().get(i).getSpecies().get(j).getTraits().stream()
-                                .anyMatch(c -> c.getName().equals("Defensive Herding")) ||
+                                .anyMatch(c -> c.getName().equals(resourceBundle.getString("Climbing")))) && (!this
+                                .getPlayerObjects().get(i)
+                                .getSpecies().get(j).getTraits().stream()
+                                .anyMatch(c -> c.getName().equals(resourceBundle.getString("DefensiveHerding"))) ||
                                 this.getPlayerObjects().get(i).getSpecies().get(j).getPopulation() <
                                         this.getPlayerObjects().get(attackingPlayer).getSpecies().get(attackingSpecies).getPopulation())
                                 ) {
@@ -767,7 +769,7 @@ public class Game {
                             if ((j + 1) >= 0 && (j + 1) < this.players.get(i).getSpecies().size()) {
                                 ArrayList<ICard> attackeeTraitsR = this.players.get(i).getSpecies().get(j + 1).getTraits();
                                 for (ICard c : attackeeTraitsR) {
-                                    if (c.getName().equals("Warning Call")) {
+                                    if (c.getName().equals(resourceBundle.getString("WarningCall"))) {
                                         canBeAttacked.add(this.defendTraitActions.get(c.getName())
                                                 .canBeAttacked(new int[]{i, attackingPlayer},
                                                         new int[]{j, attackingSpecies}));
