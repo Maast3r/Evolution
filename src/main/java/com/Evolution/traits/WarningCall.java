@@ -6,6 +6,7 @@ import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Game;
 
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 
 public class WarningCall extends ATrait {
@@ -48,7 +49,7 @@ public class WarningCall extends ATrait {
                 .get(speciesIndex[1]).getTraits();
 
         for(ICard c : attackerTraits) {
-            if(c.getName().equals("Ambush")) return true;
+            if(c.getName().equals(ResourceBundle.getBundle("cardInformation").getString("Ambush"))) return true;
         }
         return false;
     }

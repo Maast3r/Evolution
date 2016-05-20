@@ -8,6 +8,8 @@ import com.Evolution.logic.Game;
 
 import java.util.ArrayList;
 
+import static com.Evolution.Main.resourceBundle;
+
 /**
  * Created by goistjt on 4/27/2016.
  */
@@ -38,10 +40,10 @@ public class LongNeck extends ATrait {
         ArrayList<ICard> cards = this.game.getPlayerObjects().get(playerIndex[0])
                 .getSpecies().get(speciesIndex[0]).getTraits();
         for(ICard c : cards){
-            if(c.getName().equals("Foraging")){
+            if(c.getName().equals(resourceBundle.getString("Foraging"))){
                 Foraging f = new Foraging(this.game);
                 f.executeTrait(playerIndex, speciesIndex);
-            } else if(c.getName().equals("Cooperation")){
+            } else if(c.getName().equals(resourceBundle.getString("Cooperation"))){
                 Cooperation coop = new Cooperation(this.game);
                 coop.executeTrait(playerIndex, speciesIndex);
             }

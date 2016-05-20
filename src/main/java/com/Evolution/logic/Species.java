@@ -5,6 +5,7 @@ import com.Evolution.interfaces.ICard;
 import com.Evolution.interfaces.ISpecies;
 
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * Logic class for handling the logic behind Species during gameplay
@@ -16,6 +17,7 @@ public class Species implements ISpecies {
     private ArrayList<ICard> traits = new ArrayList<>();
     private int eatenFood;
     private int tempFood;
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("cardInformation");
 
     /**
      * Creates a species defaulted with body size and population equal to 0.
@@ -29,8 +31,10 @@ public class Species implements ISpecies {
 
     @Override
     public int getBodySize() {
-        return isFull() && this.traits.parallelStream().anyMatch(c -> c.getName().equals("Burrowing"))?
-                this.bodySize + 12 : this.traits.parallelStream().anyMatch(c -> c.getName().equals("Hard Shell")) ?
+        return isFull() && this.traits.parallelStream().anyMatch(c -> c.getName().equals(resourceBundle.getString
+                ("Burrowing")))?
+                this.bodySize + 12 : this.traits.parallelStream().anyMatch(c -> c.getName().equals(resourceBundle
+                .getString("HardShell"))) ?
                 this.bodySize + 4 : this.bodySize;
     }
 

@@ -1,12 +1,14 @@
 package com.Evolution.traits;
 
 
-import com.Evolution.exceptions.*;
 import com.Evolution.abstracts.ATrait;
+import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ICard;
 import com.Evolution.logic.Game;
 
 import java.util.ArrayList;
+
+import static com.Evolution.Main.resourceBundle;
 
 
 public class Foraging extends ATrait {
@@ -35,7 +37,7 @@ public class Foraging extends ATrait {
         this.game.feedPlayerSpeciesFromBank(playerIndex[0], speciesIndex[0]);
         ArrayList<ICard> traits = this.game.getPlayerObjects().get(playerIndex[0]).getSpecies().get(speciesIndex[0]).getTraits();
         for(ICard c : traits){
-            if(c.getName().equals("Cooperation")){
+            if(c.getName().equals(resourceBundle.getString("Cooperation"))){
                 Cooperation coop = new Cooperation(this.game);
                 coop.executeTrait(playerIndex, speciesIndex);
             }

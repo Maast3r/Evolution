@@ -1,7 +1,6 @@
 package com.Evolution.logic;
 
 import com.Evolution.abstracts.ATrait;
-import com.Evolution.abstracts.CTrait;
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.*;
 import com.Evolution.traits.*;
@@ -9,6 +8,7 @@ import com.Evolution.traits.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.ResourceBundle;
 
 /**
  * Game logic controller class. Handles most interaction between related game objects.
@@ -25,6 +25,7 @@ public class Game {
     private HashMap<String, ATrait> feedTraitActions = new HashMap<>();
     private HashMap<String, ATrait> defendTraitActions = new HashMap<>();
     private boolean over;
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("cardInformation");
 
     //TODO: Add Null check for every single method that takes in an Object
 
@@ -51,11 +52,11 @@ public class Game {
 
         this.drawPile = drawPile;
         this.discardPile = discardPile;
-        this.feedTraitActions.put("Cooperation", new Cooperation(this));
-        this.feedTraitActions.put("Foraging", new Foraging(this));
+        this.feedTraitActions.put(resourceBundle.getString("Cooperation"), new Cooperation(this));
+        this.feedTraitActions.put(resourceBundle.getString("Foraging"), new Foraging(this));
 
-        this.defendTraitActions.put("Warning Call", new WarningCall(this));
-        this.defendTraitActions.put("Symbiosis", new Symbiosis(this));
+        this.defendTraitActions.put(resourceBundle.getString("WarningCall"), new WarningCall(this));
+        this.defendTraitActions.put(resourceBundle.getString("Symbiosis"), new Symbiosis(this));
     }
 
     /**
@@ -660,12 +661,15 @@ public class Game {
             InvalidAttackException {
         if (playerIndex1 == playerIndex2 && speciesIndex1 == speciesIndex2) {
             throw new AttackingSelfException("You can not attack yourself");
-        } else if (this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getTraits().stream().filter(c -> c.getName().equals("Carnivore")).count() < 1) {
+        } else if (this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getTraits().stream()
+                .filter(c -> c.getName().equals(resourceBundle.getString("Carnivore"))).count() < 1) {
             throw new NonCarnivoreAttacking("You must be a carnivore to attack");
         } else if (this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getBodySize() <= this.getPlayerObjects().get(playerIndex2).getSpecies().get(speciesIndex2).getBodySize()) {
             throw new BodySizeIllegalAttack("You must have a higher body size than the species which you are attacking");
-        } else if (!this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getTraits().stream().anyMatch(c -> c.getName().equals("Climbing"))
-                && this.getPlayerObjects().get(playerIndex2).getSpecies().get(speciesIndex2).getTraits().stream().anyMatch(c -> c.getName().equals("Climbing"))) {
+        } else if (!this.getPlayerObjects().get(playerIndex1).getSpecies().get(speciesIndex1).getTraits().stream()
+                .anyMatch(c -> c.getName().equals(resourceBundle.getString("Climbing")))
+                && this.getPlayerObjects().get(playerIndex2).getSpecies().get(speciesIndex2).getTraits().stream()
+                .anyMatch(c -> c.getName().equals(resourceBundle.getString("Climbing")))) {
             throw new InvalidAttackException("You must have climbing to attack this species");
         }
         IPlayer player1 = this.getPlayerObjects().get(playerIndex1);
@@ -681,7 +685,7 @@ public class Game {
         for (int i = 0; i < this.players.size(); i++) {
             for (int j = 0; j < this.players.get(i).getSpecies().size(); j++) {
                 if (this.players.get(i).getSpecies().get(j).getTraits().parallelStream().anyMatch(c ->
-                        c.getName().equals("Scavenger"))) {
+                        c.getName().equals(resourceBundle.getString("Scavenger")))) {
                     feedPlayerSpeciesFromBank(i, j);
                 }
             }
@@ -725,8 +729,8 @@ public class Game {
                 .getBodySize();
         ArrayList<ICard> traits = this.players.get(attackingPlayer).getSpecies().get(attackingSpecies).getTraits();
         for (ICard c : traits) {
-            if (c.getName().equals("Carnivore")) hasCarnivore = true;
-            if (c.getName().equals("Pack Hunting"))
+            if (c.getName().equals(resourceBundle.getString("Carnivore"))) hasCarnivore = true;
+            if (c.getName().equals(resourceBundle.getString("Pack Hunting")))
                 carnivoreAttackingBodySize += this.players.get(attackingPlayer).getSpecies().get(attackingSpecies)
                         .getPopulation();
         }
@@ -738,14 +742,15 @@ public class Game {
                         if (this.players.get(i).getSpecies().get(j).getBodySize() <
                                 carnivoreAttackingBodySize
                                 && !(!this.getPlayerObjects().get(attackingPlayer).getSpecies().get(attackingSpecies)
-                                .getTraits().stream().anyMatch(c -> c.getName().equals("Climbing"))
+                                .getTraits().stream().anyMatch(c -> c.getName().equals(resourceBundle.getString
+                                        ("Climbing")))
                                 && this.getPlayerObjects().get(i).getSpecies().get(j).getTraits().stream()
-                                .anyMatch(c -> c.getName().equals("Climbing")))) {
+                                .anyMatch(c -> c.getName().equals(resourceBundle.getString("Climbing"))))) {
                             ArrayList<ICard> attackeeTraits = this.players.get(i).getSpecies().get(j).getTraits();
                             if ((j - 1) >= 0 && (j - 1) < this.players.get(i).getSpecies().size()) {
                                 ArrayList<ICard> attackeeTraitsL = this.players.get(i).getSpecies().get(j - 1).getTraits();
                                 for (ICard c : attackeeTraitsL) {
-                                    if (c.getName().equals("Warning Call")) {
+                                    if (c.getName().equals(resourceBundle.getString("WarningCall"))) {
                                         canBeAttacked.add(this.defendTraitActions.get(c.getName())
                                                 .canBeAttacked(new int[]{i, attackingPlayer},
                                                         new int[]{j, attackingSpecies}));
@@ -755,7 +760,7 @@ public class Game {
                             if ((j + 1) >= 0 && (j + 1) < this.players.get(i).getSpecies().size()) {
                                 ArrayList<ICard> attackeeTraitsR = this.players.get(i).getSpecies().get(j + 1).getTraits();
                                 for (ICard c : attackeeTraitsR) {
-                                    if (c.getName().equals("Warning Call")) {
+                                    if (c.getName().equals(resourceBundle.getString("Warning Call"))) {
                                         canBeAttacked.add(this.defendTraitActions.get(c.getName())
                                                 .canBeAttacked(new int[]{i, attackingPlayer},
                                                         new int[]{j, attackingSpecies}));

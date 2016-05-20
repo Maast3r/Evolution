@@ -532,7 +532,7 @@ class SpeciesBoard extends VBox {
                     if (trait == null) {
                         continue;
                     }
-                    if (trait.getName().equals("Carnivore")) {
+                    if (trait.getName().equals(resourceBundle.getString("Carnivore"))) {
                         carnivore = true;
                     }
                 }
