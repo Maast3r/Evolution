@@ -33,13 +33,8 @@ public class PhaseThree implements IPhases{
             SpeciesPopulationException {
         this.game.nextTurn();
         if(this.game.getTurn() == this.game.getFirstPlayer()){
-            this.game.moveFoodFromBankToHole(this.game.getWateringHole().getCardFoodCount());
-            for(ICard c : this.game.getWateringHole().getCards()) {
-                this.game.getDiscardPile().discard(c);
-            }
-            this.game.getWateringHole().removeCards();
-            for(int i=0; i<this.game.getPlayerObjects().size(); i++){
-                for(int j=0; j<this.game.getPlayerObjects().get(i).getSpecies().size(); j++){
+            for (int i = 0; i < this.game.getPlayerObjects().size(); i++) {
+                for (int j = 0; j < this.game.getPlayerObjects().get(i).getSpecies().size(); j++) {
                     for (ICard c : this.game.getPlayerObjects().get(i).getSpecies().get(j)
                             .getTraits()) {
                         String name = c.getName();
@@ -47,15 +42,20 @@ public class PhaseThree implements IPhases{
                             feedTraitActions.get(name).executeTrait(new int[]{i, 0}, new int[]{j, 0});
                         }
                     }
-                    if(this.game.getPlayerObjects().get(i).getSpecies().get(j).getTempFood() > 0){
+                    if (this.game.getPlayerObjects().get(i).getSpecies().get(j).getTempFood() > 0) {
                         int tempFood = this.game.getPlayerObjects().get(i).getSpecies().get(j).getTempFood();
                         this.game.getPlayerObjects().get(i).getSpecies().get(j).resetEatenTempFood();
-                        for(int f = 0; f < tempFood; f++){
+                        for (int f = 0; f < tempFood; f++) {
                             this.game.getPlayerObjects().get(i).getSpecies().get(j).eat();
                         }
                     }
                 }
             }
+            this.game.moveFoodFromBankToHole(this.game.getWateringHole().getCardFoodCount());
+            for(ICard c : this.game.getWateringHole().getCards()) {
+                this.game.getDiscardPile().discard(c);
+            }
+            this.game.getWateringHole().removeCards();
             this.game.setPhase(new PhaseFour(this.game));
         }
     }

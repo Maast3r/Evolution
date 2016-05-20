@@ -673,6 +673,9 @@ public class Game {
         ISpecies species1 = player1.getSpecies().get(speciesIndex1);
         ISpecies species2 = player2.getSpecies().get(speciesIndex2);
         species2.decreasePopulation();
+        if(species2.getTraits().parallelStream().anyMatch(c -> c.getName().equals("Horns"))){
+            species1.decreasePopulation();
+        }
         for (int i = 0; i < species2.getBodySize(); i++) {
             if (species1.getEatenFood() < species1.getPopulation()) {
                 this.feedPlayerSpeciesFromBank(playerIndex1, speciesIndex1);
@@ -740,7 +743,12 @@ public class Game {
                                 && !(!this.getPlayerObjects().get(attackingPlayer).getSpecies().get(attackingSpecies)
                                 .getTraits().stream().anyMatch(c -> c.getName().equals("Climbing"))
                                 && this.getPlayerObjects().get(i).getSpecies().get(j).getTraits().stream()
-                                .anyMatch(c -> c.getName().equals("Climbing")))) {
+                                .anyMatch(c -> c.getName().equals("Climbing")))
+                                && (!this.getPlayerObjects().get(i).getSpecies().get(j).getTraits().stream()
+                                .anyMatch(c -> c.getName().equals("Defensive Herding")) ||
+                                this.getPlayerObjects().get(i).getSpecies().get(j).getPopulation() <
+                                this.getPlayerObjects().get(attackingPlayer).getSpecies().get(attackingSpecies).getPopulation())
+                                ) {
                             ArrayList<ICard> attackeeTraits = this.players.get(i).getSpecies().get(j).getTraits();
                             if ((j - 1) >= 0 && (j - 1) < this.players.get(i).getSpecies().size()) {
                                 ArrayList<ICard> attackeeTraitsL = this.players.get(i).getSpecies().get(j - 1).getTraits();
