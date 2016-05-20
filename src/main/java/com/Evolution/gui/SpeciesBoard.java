@@ -46,6 +46,7 @@ class SpeciesBoard extends VBox {
     private ICard[] traits = new ICard[3];
     private int[] selectedSpeciesToAttack;
     private boolean carnivore = false;
+    private boolean fatTissue = false;
 
     private ChangeListener actionListener;
 
@@ -62,6 +63,10 @@ class SpeciesBoard extends VBox {
             Actions.VIEW_CARDS.getName(), Actions.FEED_SPECIES.getName());
     private ObservableList<String> phase4CarnivoreOptions = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
             Actions.VIEW_CARDS.getName(), Actions.ATTACK_SPECIES.getName());
+    private ObservableList<String> phase4NoAttackOptions = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
+            Actions.VIEW_CARDS.getName(), Actions.END_TURN.getName());
+    private ObservableList<String> phase4FatTissue = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
+            Actions.VIEW_CARDS.getName(), Actions.FEED_SPECIES.getName(), Actions.FAT_TISSUE.getName());
 
 
     /**
@@ -80,7 +85,9 @@ class SpeciesBoard extends VBox {
         FEED_SPECIES("Eat Food"),
         ATTACK_SPECIES("Attack Another Species"),
         END_TURN("End Your Turn"),
-        DISCARD_TO_WATERING_HOLE("Discard to Watering Hole");
+        DISCARD_TO_WATERING_HOLE("Discard to Watering Hole"),
+        FAT_TISSUE("Add Fat Tissue food"),
+        STARVE("Carnivore loses 1 food");
 
         private String name;
 
@@ -174,8 +181,25 @@ class SpeciesBoard extends VBox {
                     break;
                 case 4:
                     if (carnivore) {
+                        if(this.game.getAttackableSpecies(this.playerIndex, this.speciesNum).size() == 0){
+                            this.actionChoiceBox.setItems(this.phase4NoAttackOptions);
+                            if(val == 2){
+                                performAction(Actions.values()[13]);
+                            } else {
+                                performAction(Actions.values()[val]);
+                            }
+                            break;
+                        }
                         if (val == 2) {
                             performAction(Actions.values()[9]);
+                        } else {
+                            performAction(Actions.values()[val]);
+                        }
+                    } else if(fatTissue){
+                        if (val == 2) {
+                            performAction(Actions.values()[8]);
+                        } else if (val == 3) {
+                            performAction(Actions.values()[12]);
                         } else {
                             performAction(Actions.values()[val]);
                         }
@@ -379,6 +403,56 @@ class SpeciesBoard extends VBox {
                     e.printStackTrace();
                 }
                 break;
+            case FAT_TISSUE:
+                try {
+                    this.game.fatTissueEat(this.playerIndex, this.speciesNum);
+                    this.game.getPhase().execute();
+                    if(this.game.getPhase().getNumber() == 1) {
+                        this.game.getPhase().execute();
+                    }
+                    this.gameController.updatePlayerPanes();
+                    this.gameController.toggleChoiceBox();
+                    this.gameController.changeChoiceBox();
+                    this.gameController.staticElementsUpdate();
+                } catch (InvalidPlayerSelectException | IllegalSpeciesIndexException | SpeciesPopulationException
+                        | TempFoodMaxException | WateringHoleEmptyException e) {
+                    openExceptionPopup(e);
+                    e.printStackTrace();
+                } catch (SpeciesFullException | DeckEmptyException | InvalidWateringHoleCardCountException
+                        | NullGameObjectException | FoodBankEmptyException | IllegalCardDirectionException e) {
+                    openExceptionPopup(e);
+                    e.printStackTrace();
+                }
+                break;
+            case STARVE:
+                System.out.println("im starving");
+//                this.game.starve(this.playerIndex, this.speciesNum);
+                try {
+                    this.game.getPhase().execute();
+                    if(this.game.getPhase().getNumber() == 1) {
+                        this.game.getPhase().execute();
+                    }
+                } catch (IllegalCardDirectionException | DeckEmptyException | NullGameObjectException
+                        | InvalidPlayerSelectException | IllegalSpeciesIndexException | WateringHoleEmptyException
+                        | InvalidWateringHoleCardCountException | FoodBankEmptyException | SpeciesFullException
+                        | SpeciesPopulationException e) {
+                    openExceptionPopup(e);
+                    e.printStackTrace();
+                }
+                this.gameController.updatePlayerPanes();
+                try {
+                    this.gameController.toggleChoiceBox();
+                } catch (DeckEmptyException | InvalidPlayerSelectException | NullGameObjectException
+                        | InvalidWateringHoleCardCountException | IllegalCardDirectionException
+                        | SpeciesPopulationException | WateringHoleEmptyException | IllegalSpeciesIndexException
+                        | FoodBankEmptyException | SpeciesFullException e) {
+                    openExceptionPopup(e);
+                    e.printStackTrace();
+                }
+                this.gameController.changeChoiceBox();
+                this.gameController.staticElementsUpdate();
+                break;
+
         }
     }
 
@@ -535,9 +609,13 @@ class SpeciesBoard extends VBox {
                     if (trait.getName().equals("Carnivore")) {
                         carnivore = true;
                     }
+                    if(trait.getName().equals("Fat Tissue"))
+                        fatTissue = true;
                 }
                 if (carnivore) {
                     this.actionChoiceBox.setItems(this.phase4CarnivoreOptions);
+                } else if(fatTissue){
+                    this.actionChoiceBox.setItems(this.phase4FatTissue);
                 } else {
                     this.actionChoiceBox.setItems(this.phase4Options);
                 }

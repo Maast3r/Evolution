@@ -1,0 +1,17 @@
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;1;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;6;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;6;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;3;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;2;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;2;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;3;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;3;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;5;0
+Carnivore;May attack and eat other species. Can never eat Plant Food.;carnivore.png;4;0
+Climbing;A Carnivore must have Climbing to attack this species.;climbing.png;4;0
+Climbing;A Carnivore must have Climbing to attack this species.;climbing.png;5;0
+Climbing;A Carnivore must have Climbing to attack this species.;climbing.png;4;0
+Climbing;A Carnivore must have Climbing to attack this species.;climbing.png;2;0
+Climbing;A Carnivore must have Climbing to attack this species.;climbing.png;3;0
+Climbing;A Carnivore must have Climbing to attack this species.;climbing.png;3;0
+Climbing;A Carnivore must have Climbing to attack this species.;climbing.png;1;0

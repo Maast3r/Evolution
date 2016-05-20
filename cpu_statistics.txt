@@ -1,0 +1,8 @@
+JavaFX dominates the processes.
+
+Looking at just Evolution classes (all at 0%)
+- Select Card
+    - gui.SpeciesBoard.openCardWindow 19,741 us
+- Game Screen
+    - gui.GameScreenController.initialize took up 27,967 us
+    - gui.StartScreenController.gotTOGameScene took up 26,895

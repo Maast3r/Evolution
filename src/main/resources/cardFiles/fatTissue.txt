@@ -1,0 +1,21 @@
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;3;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;5;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;4;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;5;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;-1;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;0;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;4;0
+Scavenger;Take 1 Meat Food from the Food Bank when a Carnivore successfully attacks any species.;scavenger.png;2;0
+Scavenger;Take 1 Meat Food from the Food Bank when a Carnivore successfully attacks any species.;scavenger.png;4;0
+Scavenger;Take 1 Meat Food from the Food Bank when a Carnivore successfully attacks any species.;scavenger.png;7;0
+Scavenger;Take 1 Meat Food from the Food Bank when a Carnivore successfully attacks any species.;scavenger.png;6;0
+Scavenger;Take 1 Meat Food from the Food Bank when a Carnivore successfully attacks any species.;scavenger.png;6;0
+Scavenger;Take 1 Meat Food from the Food Bank when a Carnivore successfully attacks any species.;scavenger.png;5;0
+Scavenger;Take 1 Meat Food from the Food Bank when a Carnivore successfully attacks any species.;scavenger.png;3;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;3;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;5;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;4;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;5;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;-1;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;0;0
+Fat Tissue;May store food on this card up to its Body Size. When the Food Cards are revealed, move this food to the Species Board;fatTissue.png;4;0

@@ -105,7 +105,7 @@ class GameScreenController implements Initializable {
             IWateringHole wateringHole = new WateringHole();
             DeckFactory df = new DeckFactory();
             IDeck<ICard> drawPile = df.generateDrawPile(new FileInputStream(
-                    new File("src/main/resources/cardFiles/cardInformation.txt")));
+                    new File("src/main/resources/cardFiles/carnivoreNoAttackable.txt")));
             drawPile.shuffle();
             IDeck<ICard> discardPile = df.generateDiscardPile();
 
