@@ -62,11 +62,12 @@ Phase 4 Features - Feeding
 - Intelligence trait card
 - Play with 6-8 players
 - Starvation
-
+- No text for Fat Tissue food
 
 ## Known Issues
 - Game window does not scale well
-- No text for Fat Tissue food
+- Duplicate species introduces some bugs
+- Phase4 doesn't end if carnivore can't attack
 
 # Sprint 2
 * Jeremiah Goist
@@ -307,5 +308,5 @@ Phase 4 Features - Feeding
     * Modified phase 4 dropdown actions
     * JavaFuzz
     * Looked at game performance
-    * Complete/incomplete features and knowon issues    
+    * Complete/incomplete features and knowon issues
     * 25+ LOC

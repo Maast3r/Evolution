@@ -90,7 +90,7 @@ class SpeciesBoard extends VBox {
         END_TURN(resourceBundle.getString("endTurn")),
         DISCARD_TO_WATERING_HOLE(resourceBundle.getString("discardToWH")),
         FAT_TISSUE(resourceBundle.getString("add.fat.tissue.food")),
-        STARVE(resourceBundle.getString("carnivore.loses.1.food"));
+        STARVE(resourceBundle.getString("carnivore.loses.1.pop"));
 
         private String name;
 
