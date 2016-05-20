@@ -5,8 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -32,7 +32,8 @@ class WinScreenController implements Initializable {
         assert this.newGameButton != null : "fx:id=\"newGameButton\" was not injected: check your FXML file " +
                 "'win_screen.fxml'.";
         assert this.winLabel != null : "fx:id=\"winLabel\" was not injected: check your FXML file 'win_screen.fxml'.";
-        this.winLabel.setText(String.format("Player %d Wins!", winner));
+        this.winLabel.setText(String.format(resources.getString("player.d.wins"), winner));
+        this.newGameButton.setText(resources.getString("play.again"));
         this.newGameButton.setOnMouseClicked(event->goToStartScreen());
     }
 

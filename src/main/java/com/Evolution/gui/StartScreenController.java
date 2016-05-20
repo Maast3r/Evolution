@@ -41,7 +41,7 @@ public class StartScreenController implements Initializable {
 
         this.numPlayersChoiceBox.setItems(FXCollections.observableArrayList(3, 4, 5));
         this.numPlayersChoiceBox.getSelectionModel().selectFirst();
-
+        this.playGameButton.setText(resources.getString("play.game"));
         this.playGameButton.setOnMouseClicked(event -> goToGameScene());
     }
 

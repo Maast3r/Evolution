@@ -20,7 +20,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * Created by brownba1 on 3/28/2016.
@@ -63,24 +65,26 @@ class SpeciesBoard extends VBox {
     private ObservableList<String> phase4CarnivoreOptions = FXCollections.observableArrayList(Actions.ACTIONS.getName(),
             Actions.VIEW_CARDS.getName(), Actions.ATTACK_SPECIES.getName());
 
+    static ResourceBundle resourceBundle = ResourceBundle.getBundle("cardInformation");
+
 
     /**
      * Enum for the actions in the choiceBox
      * Name is the string to show in drop down
      */
     private enum Actions {
-        ACTIONS("Actions"),
-        VIEW_CARDS("View Cards"),
-        ADD_TRAIT("Add Trait"),
-        REMOVE_TRAIT("Remove Trait"),
-        ADD_SPECIES_LEFT("Add Species (Left)"),
-        ADD_SPECIES_RIGHT("Add Species (Right)"),
-        INCREASE_POPULATION("Increase Population"),
-        INCREASE_BODY_SIZE("Increase Body Size"),
-        FEED_SPECIES("Eat Food"),
-        ATTACK_SPECIES("Attack Another Species"),
-        END_TURN("End Your Turn"),
-        DISCARD_TO_WATERING_HOLE("Discard to Watering Hole");
+        ACTIONS(resourceBundle.getString("actions")),
+        VIEW_CARDS(resourceBundle.getString("viewCards")),
+        ADD_TRAIT(resourceBundle.getString("addTrait")),
+        REMOVE_TRAIT(resourceBundle.getString("removeTrait")),
+        ADD_SPECIES_LEFT(resourceBundle.getString("addSpecies.left")),
+        ADD_SPECIES_RIGHT(resourceBundle.getString("addSpecies.right")),
+        INCREASE_POPULATION(resourceBundle.getString("increasePopulation")),
+        INCREASE_BODY_SIZE(resourceBundle.getString("increaseBodySize")),
+        FEED_SPECIES(resourceBundle.getString("eatFood")),
+        ATTACK_SPECIES(resourceBundle.getString("attackAnotherSpecies")),
+        END_TURN(resourceBundle.getString("endTurn")),
+        DISCARD_TO_WATERING_HOLE(resourceBundle.getString("discardToWH"));
 
         private String name;
 
@@ -124,15 +128,15 @@ class SpeciesBoard extends VBox {
             InvalidWateringHoleCardCountException, FoodBankEmptyException {
         VBox speciesBoard = new VBox();
 
-        this.traitLabel1 = new Label("Trait 1: ");
-        this.traitLabel2 = new Label("Trait 2: ");
-        this.traitLabel3 = new Label("Trait 3: ");
+        this.traitLabel1 = new Label(resourceBundle.getString("trait.1"));
+        this.traitLabel2 = new Label(resourceBundle.getString("trait.2"));
+        this.traitLabel3 = new Label(resourceBundle.getString("trait.3"));
 
-        this.populationSizeLabel = new Label("Population: " + 1);
+        this.populationSizeLabel = new Label(MessageFormat.format(resourceBundle.getString("population.0"), 1));
         this.populationSizeLabel.setStyle("-fx-text-fill: black;");
-        this.bodySizeLabel = new Label("Body Size: " + 1);
+        this.bodySizeLabel = new Label(MessageFormat.format(resourceBundle.getString("body.size.0"), 1));
         this.bodySizeLabel.setStyle("-fx-text-fill: black;");
-        this.foodLabel = new Label("Food: " + 0);
+        this.foodLabel = new Label(MessageFormat.format(resourceBundle.getString("food.0"), 0));
         this.foodLabel.setStyle("-fx-text-fill: black;");
 
         speciesBoard.getChildren().addAll(this.populationSizeLabel, this.bodySizeLabel, this.foodLabel);
@@ -393,7 +397,7 @@ class SpeciesBoard extends VBox {
             loader.setController(controller);
             Parent p = loader.load();
             Stage s = new Stage();
-            s.setTitle("Evolution!");
+            s.setTitle(resourceBundle.getString("evolution"));
             s.getIcons().add(new Image("/images/icon.png"));
             s.setScene(new Scene(p, Color.BLACK));
             s.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -429,7 +433,7 @@ class SpeciesBoard extends VBox {
             loader.setController(controller);
             Parent p = loader.load();
             Stage s = new Stage();
-            s.setTitle("Evolution!");
+            s.setTitle(resourceBundle.getString("evolution"));
             s.getIcons().add(new Image("/images/icon.png"));
             s.setScene(new Scene(p, Color.BLACK));
             s.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -455,7 +459,7 @@ class SpeciesBoard extends VBox {
             loader.setController(controller);
             Parent p = loader.load();
             Stage s = new Stage();
-            s.setTitle("Evolution!");
+            s.setTitle(resourceBundle.getString("evolution"));
             s.getIcons().add(new Image("/images/icon.png"));
             s.setScene(new Scene(p, Color.BLACK));
             s.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -485,7 +489,7 @@ class SpeciesBoard extends VBox {
             loader.setController(controller);
             Parent p = loader.load();
             Stage s = new Stage();
-            s.setTitle("Evolution!");
+            s.setTitle(resourceBundle.getString("evolution"));
             s.getIcons().add(new Image("/images/icon.png"));
             s.setScene(new Scene(p, Color.BLACK));
             s.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -629,7 +633,7 @@ class SpeciesBoard extends VBox {
      * @param amount the current population size
      */
     void setPopulationSizeLabel(int amount) {
-        this.populationSizeLabel.setText("Population: " + amount);
+        this.populationSizeLabel.setText(MessageFormat.format(resourceBundle.getString("population.0"), amount));
     }
 
     /**
@@ -638,7 +642,7 @@ class SpeciesBoard extends VBox {
      * @param amount the current body size
      */
     void setBodySizeLabel(int amount) {
-        this.bodySizeLabel.setText("Body Size: " + amount);
+        this.bodySizeLabel.setText(MessageFormat.format(resourceBundle.getString("body.size.0"), amount));
     }
 
     /**
@@ -647,7 +651,7 @@ class SpeciesBoard extends VBox {
      * @param amount amount of food on board
      */
     void setFoodLabel(int amount) {
-        this.foodLabel.setText("Food: " + amount);
+        this.foodLabel.setText(MessageFormat.format(resourceBundle.getString("food.0"), amount));
     }
 
     /**
@@ -710,7 +714,7 @@ class SpeciesBoard extends VBox {
     /**
      * Overwrites trait at index i
      */
-    public void overwriteTrait(int i) throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
+    void overwriteTrait(int i) throws IllegalSpeciesIndexException, InvalidPlayerSelectException,
             NullGameObjectException, SpeciesTraitNotFoundException {
         this.game.removeTraitFromSpecies(this.playerIndex, this.speciesNum, this.traits[i]);
     }

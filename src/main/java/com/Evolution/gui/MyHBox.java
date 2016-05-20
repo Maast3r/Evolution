@@ -3,7 +3,6 @@ package com.Evolution.gui;
 import com.Evolution.exceptions.*;
 import com.Evolution.interfaces.ISpecies;
 import com.Evolution.logic.Game;
-import com.Evolution.logic.Species;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -11,7 +10,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
+
+import static com.Evolution.gui.SpeciesBoard.resourceBundle;
 
 /**
  * Created by brownba1 on 3/28/2016.
@@ -49,8 +51,8 @@ class MyHBox extends HBox {
         this.firstPlayerMarker = (this.playerIndex == 0) ? new ImageView("/images/first_player_marker.png") :
                 new ImageView("/images/empty.png");
 
-        this.foodLabel = new Label("Food bag: " + 0);
-        Label playerNumLabel = new Label("Player " + (this.playerIndex + 1));
+        this.foodLabel = new Label(MessageFormat.format(resourceBundle.getString("food.bag.0"), 0));
+        Label playerNumLabel = new Label(MessageFormat.format(resourceBundle.getString("player.0"), this.playerIndex + 1));
 
         VBox playerInfo = new VBox();
         playerInfo.setAlignment(Pos.CENTER);
@@ -110,7 +112,7 @@ class MyHBox extends HBox {
      */
     void updateGameScreen() {
         this.gameScreen.staticElementsUpdate();
-        this.foodLabel.setText("Food Bag: " + this.game.getPlayerObjects().get(this.playerIndex).getFoodBag());
+        this.foodLabel.setText(MessageFormat.format(resourceBundle.getString("food.bag.0"), this.game.getPlayerObjects().get(this.playerIndex).getFoodBag()));
         for (SpeciesBoard b : this.playerSpeciesBoards) {
             for (ISpecies s : this.game.getPlayerObjects().get(this.playerIndex).getSpecies()) {
                 b.setPopulationSizeLabel(s.getPopulation());

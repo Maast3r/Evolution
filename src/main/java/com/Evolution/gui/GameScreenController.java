@@ -21,8 +21,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static com.Evolution.gui.SpeciesBoard.resourceBundle;
 
 /**
  * Created by brownba1 on 3/22/2016.
@@ -111,8 +114,6 @@ class GameScreenController implements Initializable {
 
             this.game = new Game(this.players, wateringHole, drawPile, discardPile);
             this.game.startGame();
-
-            System.out.println("game initialized");
         } catch (IllegalNumberOfPlayers | IllegalCardDirectionException
                 | IOException | WrongFileException | DeckEmptyException
                 | InvalidPlayerSelectException | IllegalCardFoodException
@@ -153,13 +154,13 @@ class GameScreenController implements Initializable {
      * Set up the 'static' elements on the screen (i.e. watering hole, cards, etc.)
      */
     void staticElementsUpdate() {
-        this.drawLabel.setText("Draw Pile:\n" + this.game.getDrawPile().getSize() + " cards");
-        this.discardLabel.setText("Discard Pile:\n" + this.game.getDiscardPile().getSize() + " cards");
-        this.wateringHoleLabel.setText("Food: " + this.game.getWateringHole().getFoodCount() + " pieces");
-        this.wateringHoleCardLabel.setText("Cards: " + this.game.getWateringHole().getCards().size());
-        this.phaseLabel.setText("Phase: " + this.game.getPhase().getName());
-        this.playerTurnLabel.setText("Player " + this.game.getTurn() + " Turn");
-        this.foodBankLabel.setText("Food Bank: " + this.game.getFoodBankCount() + " pieces left");
+        this.drawLabel.setText(MessageFormat.format(resourceBundle.getString("draw.pile.n.0.cards"), this.game.getDrawPile().getSize()));
+        this.discardLabel.setText(MessageFormat.format(resourceBundle.getString("discard.pile.n.0.cards"), this.game.getDiscardPile().getSize()));
+        this.wateringHoleLabel.setText(MessageFormat.format(resourceBundle.getString("food.0.pieces"), this.game.getWateringHole().getFoodCount()));
+        this.wateringHoleCardLabel.setText(MessageFormat.format(resourceBundle.getString("cards.0"), this.game.getWateringHole().getCards().size()));
+        this.phaseLabel.setText(MessageFormat.format(resourceBundle.getString("phase.0"), this.game.getPhase().getName()));
+        this.playerTurnLabel.setText(MessageFormat.format(resourceBundle.getString("player.0.turn"), this.game.getTurn()));
+        this.foodBankLabel.setText(MessageFormat.format(resourceBundle.getString("food.bank.0.pieces.left"), this.game.getFoodBankCount()));
     }
 
     /**

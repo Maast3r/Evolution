@@ -6,11 +6,9 @@ import com.Evolution.exceptions.NullGameObjectException;
 import com.Evolution.exceptions.SpeciesTraitNotFoundException;
 import com.Evolution.interfaces.ICard;
 import javafx.collections.FXCollections;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -20,12 +18,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.ResourceBundle;
+
+import static com.Evolution.gui.SpeciesBoard.resourceBundle;
 
 /**
  * Controller for the card selection popup
@@ -98,12 +96,12 @@ class CardPopupController implements Initializable {
     private void displayCards() {
         int index = 0;
         if (this.hand.size() == 0) {
-            this.infoLabel.setText("No cards in your hand");
+            this.infoLabel.setText(resourceBundle.getString("no.cards.in.your.hand"));
             return;
         }
         for (ICard card : this.hand) {
             ImageView cardView = new ImageView("/images/card_images/" + (card.getImgPath()));
-            Label cardFoodLabel = new Label("Food value: " + card.getFood());
+            Label cardFoodLabel = new Label(MessageFormat.format(resourceBundle.getString("food.value.0"), card.getFood()));
             if(!this.removeTrait) {
                 cardView.setOnMouseClicked(event -> {
                     if (event.getButton() == MouseButton.SECONDARY) {
@@ -111,10 +109,10 @@ class CardPopupController implements Initializable {
                     } else {
                         this.board.setSelectedCard(card);
                         if (this.addTrait) {
-                            ChoiceBox traitBox = new ChoiceBox(FXCollections.observableArrayList("Please select one",
-                                    "Trait 1",
-                                    "Trait 2",
-                                    "Trait 3"));
+                            ChoiceBox traitBox = new ChoiceBox(FXCollections.observableArrayList(resourceBundle.getString("please.select.one"),
+                                    resourceBundle.getString("trait.11"),
+                                    resourceBundle.getString("trait.21"),
+                                    resourceBundle.getString("trait.31")));
                             traitBox.getSelectionModel().selectFirst();
                             traitBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue,
                                                                                               newValue)
@@ -142,10 +140,10 @@ class CardPopupController implements Initializable {
                     }
                 });
             } else {
-                ChoiceBox traitBox = new ChoiceBox(FXCollections.observableArrayList("Please select one",
-                        "Trait 1",
-                        "Trait 2",
-                        "Trait 3"));
+                ChoiceBox traitBox = new ChoiceBox(FXCollections.observableArrayList(resourceBundle.getString("please.select.one"),
+                        resourceBundle.getString("trait.11"),
+                        resourceBundle.getString("trait.21"),
+                        resourceBundle.getString("trait.31")));
                 traitBox.getSelectionModel().selectFirst();
                 traitBox.getSelectionModel().selectedIndexProperty().addListener((observable, oldValue,
                                                                                   newValue)

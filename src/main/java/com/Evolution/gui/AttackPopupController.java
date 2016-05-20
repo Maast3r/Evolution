@@ -1,21 +1,21 @@
 package com.Evolution.gui;
 
-import com.Evolution.interfaces.ISpecies;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static com.Evolution.gui.SpeciesBoard.resourceBundle;
 
 /**
  * Controller for the attack selection popup
@@ -67,22 +67,21 @@ class AttackPopupController implements Initializable {
     private void displaySpecies() {
         int index = 0;
         if (this.speciesList.size() == 0) {
-            this.infoLabel.setText("There are no species for you to attack!");
+            this.infoLabel.setText(resourceBundle.getString("there.are.no.species.for.you.to.attack"));
             return;
         }
         for (int[] s : this.speciesList) {
-            this.infoLabel.setText("Left click to select which species to attack, right click and the selected species" +
-                    " will show here");
+            this.infoLabel.setText(resourceBundle.getString("left.click.to.select.which.species.to.attack.right.click.and.the.selected.species.will.show.here"));
             VBox speciesPane = new VBox();
             speciesPane.setAlignment(Pos.CENTER);
-            Label playerIndex = new Label("Player " + (s[0] + 1));
-            Label speciesIndex = new Label("Species " + (s[1] + 1));
+            Label playerIndex = new Label(MessageFormat.format(resourceBundle.getString("player.0"), s[0] + 1));
+            Label speciesIndex = new Label(MessageFormat.format(resourceBundle.getString("species.0"), s[1] + 1));
             speciesPane.getChildren().addAll(playerIndex, speciesIndex);
             addToGrid(speciesPane, index);
             index++;
             speciesPane.setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.SECONDARY) {
-                    this.selectedLabel.setText("Attack Player: " + (s[0] + 1) + " Species: " + (s[1] + 1));
+                    this.selectedLabel.setText(MessageFormat.format(resourceBundle.getString("attack.player.0.species.1"), s[0] + 1, s[1] + 1));
                 } else {
                     this.board.setSelectedSpeciesToAttack(s);
                     this.gridPane.getScene().getWindow().hide();
@@ -132,7 +131,7 @@ class AttackPopupController implements Initializable {
      *
      * @return successfulAttack
      */
-    public boolean getSuccessfulAttack() {
+    boolean getSuccessfulAttack() {
         return this.successfulAttack;
     }
 
