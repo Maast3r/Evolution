@@ -306,4 +306,6 @@ Phase 4 Features - Feeding
     * Added Fat Tissue GUI side
     * Modified phase 4 dropdown actions
     * JavaFuzz
+    * Looked at game performance
+    * Complete/incomplete features and knowon issues    
     * 25+ LOC
