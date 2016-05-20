@@ -1,6 +1,10 @@
-# Rose Build Library 
+# Evolution
+Brooke Brown, Trevor Burch, Jeremiah Goist, and Andrew Ma
 
-At present the project is seeded with sample code, test cases for the sample code, gradle build file, gitlab-ci config file, and JaCoco coverage tool setup. The build process also retrieves the code coverage metrics and shows it in the build window of GitLab.
+This board game was developed for CSSE 376 (Software Quality Assurance) at Rose-Hulman Institute of Technology.
+
+Each milestone, roles (2x Software Engineer, Software Engineer in Test, Test Engineer) were swapped between team
+members.
 
 The following resources were used to setup the project:
 * [Gradle JaCoco Plugin](https://docs.gradle.org/current/userguide/jacoco_plugin.html)
@@ -11,11 +15,56 @@ The following resources were used to setup the project:
 
 Please see the **build.gradle** and **.gitlab-ci.yml** for more detials.
 
-## Eclipse Setup Instruction
+## Implemented Features
+Components
+-	First player marker
+-	Food bank
+-	Watering Hole
+-	Food token bags
+-	Species boards
+-	Trait card deck
 
-The project was setup using Eclipse (Mars 1 - Java Developer). It can be downloaded from the [On-Campus AFS Server](http://www.rose-hulman.edu/class/csse/binaries/Eclipse/mars/). You will also need to install Gradle plugin from [Eclipse Marketplace](https://marketplace.eclipse.org/content/gradle-integration-eclipse-0). After that, the project can be built within Eclipse IDE.
+Phase 0 Features - Setup
+-	Table setup is done automatically with start screen
 
-To build the project in Eclipse, right-click on the project -> Run As -> Gradle Build ... -> Under Gradle task box, enter **build** -> Apply -> Run. Your build should start. Note that you must **install JDK 8 (not JRE)** for all of these to work.
+Phase 1 Features - Deal Cards
+-	Deal cards to players
+
+Phase 2 Features - Select Food
+-	Choose Trait Card to become Food Card
+-	Place card face down
+
+Phase 3 Features - Play Cards
+-	Rotate turns
+-	Play trait cards face down
+-	Discard trait cards from hand
+-	Create new species
+-	Increase body size
+-	Increase population
+-	Flip trait cards face-up
+
+Phase 4 Features - Feeding
+-	Flip cards to reveal food
+-	Remove cards (discard)
+-	Add plant food from food bank/watering hole
+-	Remove plant food from food bank/watering hole
+-	Rotate turns clockwise
+-	Pass first player marker
+-	Feed hungry species
+-	Attack other species
+-	Defend against attack
+-	Go extinct
+-	Remove species board
+-	Add food to Food Bag
+-	Decrease population
+
+## Unimplemented Features
+- Intelligence trait card
+- Play with 6-8 players
+
+
+## Known Issues
+- Game window does not scale well
 
 # Sprint 2
 * Jeremiah Goist
