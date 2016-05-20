@@ -46,6 +46,7 @@ public class Foraging extends ATrait {
 
     /**
      * Empty method
+     *
      * @param ints
      * @param ints1
      * @return
