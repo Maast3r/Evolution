@@ -289,9 +289,14 @@ Phase 4 Features - Feeding
     * JavaFuzz
     * Attemped own fuzz testing
     * 50+ LOC
+
 # Sprint 9
 * Jeremiah Goist
     * Worked with Brooke on i18n
         * Translated existing strings and files to German
         * Changed usages of strings to instead use ResourceBundle
     * Located bugs in GUI/Logic
+* Brooke Brown
+    * Worked with Jeremiah on i18n
+        * Translated existing strings and files to German
+        * Initial setup of the ResourceBundle
