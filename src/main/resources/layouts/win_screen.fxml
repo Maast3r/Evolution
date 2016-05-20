@@ -7,19 +7,22 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane id="pane"  maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0"
-      prefWidth="500.0" stylesheets="@../styles/start_screen.css" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+<Pane id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0"
+      prefWidth="500.0" stylesheets="@../styles/start_screen.css" xmlns="http://javafx.com/javafx/null"
+      xmlns:fx="http://javafx.com/fxml/1">
     <ImageView id="winImage" fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true">
-        <Image url="@../images/start_screen.jpg" />
+        <Image url="@../images/start_screen.jpg"/>
     </ImageView>
-    <Label fx:id="winLabel" alignment="CENTER" layoutX="150.0" layoutY="500.0" prefWidth="200.0" stylesheets="@../styles/start_screen.css" textAlignment="CENTER">
+    <Label fx:id="winLabel" alignment="CENTER" layoutX="150.0" layoutY="500.0" prefWidth="200.0"
+           stylesheets="@../styles/start_screen.css" textAlignment="CENTER">
         <font>
-            <Font size="22.0" />
+            <Font size="22.0"/>
         </font>
     </Label>
-    <Button fx:id="newGameButton" layoutX="200.0" layoutY="574.0" mnemonicParsing="false" stylesheets="@../styles/start_screen.css" text="Play Again!">
+    <Button fx:id="newGameButton" layoutX="200.0" layoutY="574.0" mnemonicParsing="false"
+            stylesheets="@../styles/start_screen.css" text="%PlayAgain">
         <font>
-            <Font size="16.0" />
+            <Font size="16.0"/>
         </font>
     </Button>
 </Pane>
