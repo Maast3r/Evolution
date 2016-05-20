@@ -61,10 +61,12 @@ Phase 4 Features - Feeding
 ## Unimplemented Features
 - Intelligence trait card
 - Play with 6-8 players
+- Starvation
 
 
 ## Known Issues
 - Game window does not scale well
+- No text for Fat Tissue food
 
 # Sprint 2
 * Jeremiah Goist
@@ -300,3 +302,8 @@ Phase 4 Features - Feeding
     * Worked with Jeremiah on i18n
         * Translated existing strings and files to German
         * Initial setup of the ResourceBundle
+* Andrew Ma
+    * Added Fat Tissue GUI side
+    * Modified phase 4 dropdown actions
+    * JavaFuzz
+    * 25+ LOC
